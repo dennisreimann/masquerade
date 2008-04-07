@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   helper_method :identifier, :extract_login_from_identifier, :checkid_request
-  
+  helper_method :identifier, :endpoint_url, :protocol_scheme
   protected
   
   # before_filter for every account-based controller
@@ -27,6 +27,10 @@ class ApplicationController < ActionController::Base
   
   def render_500
     render :file => "#{RAILS_ROOT}/public/500.html", :status => 500
+  end
+  
+  def endpoint_url
+    server_url(:protocol => protocol_scheme)
   end
   
   # Returns the OpenID identifier for an account
