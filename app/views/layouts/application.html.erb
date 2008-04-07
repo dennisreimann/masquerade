@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title><%=h page_title %></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<% if identity_page? %>
+		<meta http-equiv="X-XRDS-Location" content="<%= formatted_identity_path(@account, :xrds) %>" />
+		<link rel="openid.server openid2.provider" href="<%= formatted_server_path(:xrds) %>" />
+		<% end %>
+		<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+		<link rel="icon" href="/favicon.ico" type="image/ico" />
+		<%= stylesheet_link_tag 'application' %>
+	</head>
+	<body>
+		<div id="head">
+      <div class="wrap">
+				<h1><%= link_to APP_CONFIG['name'], home_path %></h1>
+				<ul id="navi">
+				<% if logged_in? %>
+					<% unless checkid_request %>
+					<%= nav 'my identity', identity_path(current_account), 'accounts' => ['show'] %>
+					<%= nav 'my profile', edit_account_path, 'accounts' => ['edit', 'update'] %>
+					<%= nav 'my personas', account_personas_path, 'personas' => [] %>
+					<%= nav 'my trusted sites', account_sites_path, 'sites' => [] %>
+					<%= nav 'logout', logout_path %>
+					<% else %>
+					<%= nav 'current verification request', proceed_path, 'server' => [] %>
+					<% end %>
+				<% else %>
+					<%= nav 'login', login_path, 'sessions' => ['new', 'create'] %>
+					<%= nav 'signup', new_account_path, 'accounts' => ['new', 'create'] %>
+					<%= nav 'help', help_path, 'info' => ['help'] %>
+				<% end %>
+				</ul>
+			</div>
+		</div>
+		<div id="main">
+			<div class="wrap">
+    		<% if flash[:notice] %><p class="notice"><%=h flash[:notice] %></p><% end %>
+    		<% if flash[:error] %><p class="error"><%=h flash[:error] %></p><% end %>
+				<%= yield %>
+			</div>
+		</div>
+		<div id="foot">
+			<div class="wrap">
+				<span class="note">
+					powered by <%= link_to 'masquerade', 'http://dennisbloete.de/projects/masquerade/' %> 
+					and <%= link_to "#{image_tag('openid_symbol.png')} OpenID", 'http://openid.net/' %> | 
+					<%= link_to 'get help', help_path %>
+				</span>
+			</div>
+		</div>
+	</body>
+</html>

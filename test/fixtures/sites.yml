@@ -1,0 +1,9 @@
+venteria:
+  account: standard
+  persona: public
+  url: http://venteria.com/
+
+blog:
+  account: standard
+  persona: private
+  url: http://blog.dopefreshtight.de/

@@ -1,0 +1,24 @@
+public:
+  account: standard
+  title: public
+  nickname: dbloete
+  email: mail@dennisbloete.de
+  fullname: Dennis Blöte
+  postcode: 28199
+  country: DE
+  language: DE
+  timezone: Europe/Berlin
+  gender: M
+  
+private:
+  account: standard
+  title: private
+  nickname: Dennis
+  email: dennis@dopefreshtight.de
+  fullname: Dennis Blöte
+  postcode: 28199
+  country: DE
+  language: DE
+  timezone: Europe/Berlin
+  gender: M
+  dob: 1982-01-10

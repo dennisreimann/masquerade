@@ -1,0 +1,7 @@
+venteria_nickname:
+  site: venteria
+  property: nickname
+
+venteria_email:
+  site: venteria
+  property: email

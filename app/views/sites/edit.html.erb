@@ -1,0 +1,40 @@
+<h2>Your release policy for <%=h extract_host(@site.url)%></h2>
+
+<%= error_messages_for 'site' %>
+
+<% form_for @site, :url => account_site_path(@site), :method => :put do |f| %>
+	
+	<div class="row space">
+		<%= f.label :persona_id, "Persona" %>
+		<%= f.select :persona_id, current_account.personas.find(:all).collect { |p| [ p.title, p.id ] } %>
+		<%= submit_tag "choose persona" %>
+	</div>
+	
+	<h3>
+		<%=h @site.persona.title %>
+		<span class="note">
+			<%= link_to "edit this persona", edit_account_persona_path(@site.persona, :return => url_for(:persona_id => params[:persona_id])) %> or
+			<%= link_to "create a new persona", new_account_persona_path(:return => url_for) %>
+		</span>
+	</h3>
+	
+	<table cellspacing="0">
+    	<tr>
+			<th>property</th>
+			<th>value</th>
+			<th>released?</th>
+		</tr>
+		<% Persona.properties.each do |property| %>
+		<tr>
+			<td><%= label_tag "site_properties_#{property}", property_label_text(property) %></td>
+			<td><%= label_tag "site_properties_#{property}", @site.persona[property] unless @site.persona[property].blank? %></td>
+			<td><%= check_box_tag "site[properties][#{property}]", @site.persona[property], @site.release_policies.find_by_property(property), :id => "site_properties_#{property}" %></td>
+		</tr>
+		<% end %>
+	</table>
+	
+	<div>
+		<%= submit_tag "update release policy" %>
+	</div>
+	
+<% end %>

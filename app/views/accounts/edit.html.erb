@@ -1,0 +1,44 @@
+<h2>My profile</h2>
+<%= error_messages_for :account %>
+ 
+<% form_for :account, :url => account_path, :html => { :method => :put } do |f| %>
+	<div class="row">
+		<%= f.label :email %>
+  	<%= f.text_field :email %>
+	</div>
+	<div>
+  	<%= f.submit 'update' %>
+  </div>
+<% end %>
+
+<h2>My password</h2>
+<% form_tag change_password_account_path, :method => :put do %>
+	<div class="row">
+		<%= label_tag :old_password %>
+  	<%= password_field_tag :old_password %>
+	</div>
+	<div class="row">
+  	<%= label_tag :password, 'New password <span class="note">(minimum length is 6 characters)</span>' %>
+		<%= password_field_tag :password %>
+	</div>
+	<div class="row">
+		<%= label_tag :password_confirmation, 'Password confirmation' %>
+		<%= password_field_tag :password_confirmation %>
+	</div>
+	<div>
+		<%= submit_tag 'update' %>
+	</div>
+<% end %>
+
+<h2>Disable my account</h2>
+<% form_tag account_path, :method => :delete do %>
+	<p>Please consider that it won't be possible to reclaim
+	your current OpenID identifier <%= identifier(current_account) %></p>
+	<div class="row">
+		<%= label_tag :confirmation_password, 'Confirm this step by entering your password' %>
+  	<%= password_field_tag :confirmation_password, '' %>
+	</div>
+	<div>
+		<%= submit_tag 'delete my account and all my data' %>
+	</div>
+<% end %>

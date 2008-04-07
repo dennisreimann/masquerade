@@ -1,0 +1,26 @@
+<% if flash[:sreg_results] %><div class='alert'><%= flash[:sreg_results] %></div><% end %>
+<% if flash[:pape_results] %><div class='alert'><%= flash[:pape_results] %></div><% end %>
+
+<% form_tag consumer_start_path do %>
+	<div class="row">
+		<%= label_tag :openid_identifier, 'Identifier:', :class => 'check' %>
+		<%= text_field_tag :openid_identifier %>
+		<%= submit_tag 'Verify' %>
+	</div>
+	<div class="row">
+		<%= check_box_tag :immediate %>
+		<%= label_tag :immediate, 'Use immediate mode', :class => 'check' %>
+	</div>
+    <div class="row">
+		<%= check_box_tag :use_sreg %>
+		<%= label_tag :use_sreg, 'Request registration data', :class => 'check' %>
+	</div>
+	<div class="row">
+		<%= check_box_tag :use_pape %>
+		<%= label_tag :use_pape, 'Request phishing-resistent auth policy (PAPE)', :class => 'check' %>
+	</div>
+	<div class="row">
+		<%= check_box_tag :force_post %>
+		<%= label_tag :force_post, 'Force the transaction to use POST by adding 2K of extra data', :class => 'check' %>
+	</div>
+<% end %>

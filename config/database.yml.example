@@ -1,0 +1,23 @@
+development:
+  adapter: mysql
+  host: localhost
+  database: masquerade_development
+  username: masquerade
+  password: 
+  encoding: utf8
+  
+test:
+  adapter: mysql
+  host: localhost
+  database: masquerade_test
+  username: masquerade
+  password: 
+  encoding: utf8
+
+production:
+  adapter: mysql
+  host: localhost
+  database: masquerade_production
+  username: masquerade
+  password: 
+  encoding: utf8

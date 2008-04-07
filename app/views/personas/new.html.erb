@@ -1,0 +1,10 @@
+<h2>Create a new persona</h2>
+
+<%= error_messages_for :persona %>
+
+<% form_for @persona, :url => account_persona_path(@persona) do |persona| %>
+	<%= render :partial => "personas/form", :object => persona %>
+	<div>
+		<%= persona.submit "create" %>
+	</div>
+<% end %>

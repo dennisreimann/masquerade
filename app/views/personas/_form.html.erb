@@ -1,0 +1,43 @@
+	<div class="row space">
+		<%= form.label :title %>
+		<%= form.text_field :title %>
+	</div>
+	
+	<h3>Properties</h3>
+	<div class="row">
+		<%= form.label :nickname %>
+  	<%= form.text_field :nickname %>
+	</div>
+	<div class="row">
+		<%= form.label :fullname %>
+  	<%= form.text_field :fullname %>
+	</div>
+	<div class="row">
+		<%= form.label :email %>
+  	<%= form.text_field :email %>
+	</div>
+	<div class="row">
+		<%= form.label :postcode %>
+  	<%= form.text_field :postcode %>
+	</div>
+	<div class="row">
+		<%= form.label :country %>
+  	<%= form.select :country, Country.find(:all).map { |l| [ l.name, l.code ] }, { :include_blank => true } %>
+	</div>
+	<div class="row">
+		<%= form.label :language %>
+  	<%= form.select :language, Language.find(:all).map { |l| [ l.name, l.code ] }, { :include_blank => true } %>
+	</div>
+	<div class="row">
+		<%= form.label :timezone %>
+  	<%= form.select :timezone, Timezone.find(:all).map { |l| [ l.name, l.name ] }, { :include_blank => true } %>
+	</div>
+	<div class="row">
+		<%= form.label :gender %>
+  	<%= form.select :gender, [['Male', 'M'], ['Female', 'F']], { :include_blank => true } %>
+	</div>
+	<div class="row">
+		<%= form.label :dob_3i, property_label_text(:dob) %>
+  	<%= form.date_select :dob, :order => [:day, :month, :year], :start_year => 1950, :end_year => Date.today.year, :include_blank => true %>
+	</div>
+

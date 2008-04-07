@@ -1,0 +1,11 @@
+<h2>Forgot password</h2>
+
+<% form_tag password_path do %>
+	<div class="row">
+		<%= content_tag :label, 'Please enter your email address', :for => 'email' %>
+  	<%= text_field_tag :email, params[:email] %>
+	</div>
+  <div>
+		<%= submit_tag 'send' %>
+	</div>
+<% end %>

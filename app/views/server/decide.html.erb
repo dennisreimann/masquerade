@@ -1,0 +1,61 @@
+<h2>Identity request from <%=h extract_host(@site.url) %></h2>
+<p>The realm for this request is <strong><%=h checkid_request.trust_root %></strong></p>
+
+<% form_tag decide_path, :method => :get do %>
+
+	<h3>Choose a persona</h3>
+	<p><%=h extract_host(@site.url) %> requests your registration data
+	(<%= required_sreg_fields.to_sentence(:connector => ",", :skip_last_comma => true) %>).<br />
+	Please select a persona to choose this data from.</p>
+
+	<div class="row">
+		<%= content_tag :label, 'Persona', :for => 'persona_id' %>
+		<select id="persona_id" name="persona_id">
+			<%= options_from_collection_for_select(current_account.personas, :id, :title, @site.persona.id) %>
+		</select>
+	</div>
+	<div>
+		<%= submit_tag "choose persona" %> or
+		<%= link_to "create new persona", new_account_persona_path(:return => decide_path) %>
+	</div>
+	
+<% end if sreg_request %>
+
+<% form_for @site, :url => complete_path do |f| %>
+
+	<% if sreg_request %>
+		<h3><%=h @site.persona.title %> <span class="note"><%= link_to "edit persona", edit_account_persona_path(@site.persona, :return => decide_path(:persona_id => @site.persona.id)) %></span></h3>
+		<p>Please choose the data that you would like to pass on.
+		<%= link_to "#{h extract_host(@site.url)} privacy policy", sreg_request.policy_url unless sreg_request.policy_url.blank? %></p>
+		
+		<table cellspacing="0">
+	    <tr>
+				<th>property</th>
+				<th>value</th>
+				<th>requirement</th>
+				<th>release</th>
+			</tr>
+			<% (required_sreg_fields + optional_sreg_fields).each do |property| %>
+			<tr>
+				<td><%= label_tag "site_properties_#{property}", property.humanize %></td>
+				<td><%= label_tag "site_properties_#{property}", @site.persona[property] %></td>
+				<td><%= label_tag "site_properties_#{property}", sreg_request_for_field(property) %></td>
+				<td><%= check_box_tag "site[properties][#{property}]", @site.persona[property], false, :id => "site_properties_#{property}" %></td>
+			</tr>
+			<% end %>
+		</table>
+	<% end %>
+	
+	<div>
+		<% if sreg_request %>
+		<%= f.hidden_field :persona_id %>
+		<%= f.hidden_field :url %>
+		<%= submit_tag 'Always trust this site', :name => 'always', :class => 'space' %>
+		<%= submit_tag 'Trust this site only this time', :name => 'temporary', :class => 'space' %>
+		<% else %>
+		<%= submit_tag 'Approve this request', :name => 'temporary', :class => 'space' %>
+		<% end %>
+		<%= submit_tag 'Cancel this request', :name => 'cancel' %>
+	</div>
+	
+<% end %>

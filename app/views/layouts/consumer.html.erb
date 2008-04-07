@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>OpenID Consumer Testsuite</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<%= stylesheet_link_tag 'application' %>
+		<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
+		<link rel="icon" href="/favicon.ico" type="image/ico" />
+	</head>
+	<body>
+		<div id="head">
+    		<h1>Relying Party</h1>
+		</div>
+		<div id="main">
+			<div class="wrap">
+  				<h2>OpenID consumer testsuite</h2>
+	    		<% if flash[:notice] %><p class="notice"><%=h flash[:notice] %></p><% end %>
+	    		<% if flash[:error] %><p class="error"><%=h flash[:error] %></p><% end %>
+				<%= yield %>
+			</div>
+		</div>
+		<div id="foot">
+			<div class="wrap">
+				<span class="note">
+					powered by <%= link_to "masquerade", 'http://dennisbloete.de/projects/masquerade/' %>
+					and <%= link_to "#{image_tag('openid_symbol.png')} OpenID", 'http://openid.net/' %>
+				</span>
+			</div>
+		</div>
+	</body>
+</html>

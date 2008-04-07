@@ -1,0 +1,20 @@
+<h2>My trusted sites</h2>
+
+<p>Identity request from the following sites are answered directly without further interaction.<br />
+You can alter the release policies for these sites here.</p>
+
+<% unless @sites.empty? %>
+<ul>
+  <% @sites.each do |site| %> 
+	<li>    
+    <h3><%=h extract_host(site.url) %> <span class="note">(<%=h site.persona.title %>)</span></h3>
+		<div class="options">
+       <%= link_to 'edit', edit_account_site_path(site) %>
+       <%= link_to 'delete', account_site_path(site), :confirm => "Do you really want to delete the trust for #{h extract_host(site.url)}?", :method => :delete %>
+    </div>
+	</li>
+  <% end %>
+</ul>
+<% else %>
+<p>There are no entries, yet.</p>
+<% end %>
