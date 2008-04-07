@@ -23,6 +23,7 @@ module ApplicationHelper
   # Custom label names for request properties (like SReg data)
   def property_label_text(property)
     case property.to_sym
+    when :fullname then 'Full name'
     when :dob then 'Date of birth'
     else property.to_s.humanize
     end
