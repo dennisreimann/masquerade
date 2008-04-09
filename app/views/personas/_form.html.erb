@@ -5,35 +5,35 @@
 	
 	<h3>Properties</h3>
 	<div class="row">
-		<%= form.label :nickname %>
+		<%= form.label :nickname, property_label_text(:nickname) %>
   	<%= form.text_field :nickname %>
 	</div>
 	<div class="row">
-		<%= form.label :fullname %>
+		<%= form.label :fullname, property_label_text(:fullname) %>
   	<%= form.text_field :fullname %>
 	</div>
 	<div class="row">
-		<%= form.label :email %>
+		<%= form.label :email, property_label_text(:email) %>
   	<%= form.text_field :email %>
 	</div>
 	<div class="row">
-		<%= form.label :postcode %>
+		<%= form.label :postcode, property_label_text(:postcode) %>
   	<%= form.text_field :postcode %>
 	</div>
 	<div class="row">
-		<%= form.label :country %>
+		<%= form.label :country, property_label_text(:country) %>
   	<%= form.select :country, Country.find(:all).map { |l| [ l.name, l.code ] }, { :include_blank => true } %>
 	</div>
 	<div class="row">
-		<%= form.label :language %>
+		<%= form.label :language, property_label_text(:language) %>
   	<%= form.select :language, Language.find(:all).map { |l| [ l.name, l.code ] }, { :include_blank => true } %>
 	</div>
 	<div class="row">
-		<%= form.label :timezone %>
+		<%= form.label :timezone, property_label_text(:timezone) %>
   	<%= form.select :timezone, Timezone.find(:all).map { |l| [ l.name, l.name ] }, { :include_blank => true } %>
 	</div>
 	<div class="row">
-		<%= form.label :gender %>
+		<%= form.label :gender, property_label_text(:gender) %>
   	<%= form.select :gender, [['Male', 'M'], ['Female', 'F']], { :include_blank => true } %>
 	</div>
 	<div class="row">

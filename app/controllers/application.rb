@@ -4,16 +4,16 @@ class ApplicationController < ActionController::Base
   include OpenidServerSystem
   include AuthenticatedSystem
   
-  rescue_from(
-    ActiveRecord::RecordNotFound,
-    ActionController::RoutingError,
-    ActionController::UnknownAction, :with => :render_404)
-  rescue_from OpenID::Server::ProtocolError, :with => :render_500
-  
   protect_from_forgery
   
-  helper_method :identifier, :extract_login_from_identifier, :checkid_request
-  helper_method :identifier, :endpoint_url, :protocol_scheme
+  rescue_from(
+    ActiveRecord::RecordNotFound,
+    ActionController::UnknownAction, :with => :render_404)
+  rescue_from ActionController::InvalidAuthenticityToken, :with => :render_422
+  rescue_from OpenID::Server::ProtocolError, :with => :render_500
+  
+  helper_method :extract_login_from_identifier, :checkid_request, :identifier, :endpoint_url, :scheme
+  
   protected
   
   # before_filter for every account-based controller
@@ -21,21 +21,13 @@ class ApplicationController < ActionController::Base
     @account = current_account
   end
   
-  def render_404(exception)
-    render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
-  end
-  
-  def render_500
-    render :file => "#{RAILS_ROOT}/public/500.html", :status => 500
-  end
-  
   def endpoint_url
-    server_url(:protocol => protocol_scheme)
+    server_url(:protocol => scheme)
   end
   
   # Returns the OpenID identifier for an account
   def identifier(account)
-    identity_url(:account => account, :protocol => protocol_scheme)
+    identity_url(:account => account, :protocol => scheme)
   end
   
   def extract_login_from_identifier(openid_url)
@@ -52,9 +44,25 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def render_404
+    render_error(404)
+  end
+  
+  def render_422
+    render_error(422)
+  end
+  
+  def render_500
+    render_error(500)
+  end
+  
+  def render_error(status_code)
+    render :file => "#{RAILS_ROOT}/public/#{status_code}.html", :status => status_code
+  end
+  
   private
   
-  def protocol_scheme
+  def scheme
     APP_CONFIG['use_ssl'] ? 'https' : 'http'
   end
   
