@@ -5,7 +5,7 @@
 
 	<h3>Choose a persona</h3>
 	<p><%=h extract_host(@site.url) %> requests your registration data
-	(<%= required_sreg_fields.to_sentence(:connector => ",", :skip_last_comma => true) %>).<br />
+	(<%= required_sreg_fields.to_sentence(:skip_last_comma => true) %>).<br />
 	Please select a persona to choose this data from.</p>
 
 	<div class="row">
@@ -37,7 +37,7 @@
 			</tr>
 			<% (required_sreg_fields + optional_sreg_fields).each do |property| %>
 			<tr>
-				<td><%= label_tag "site_properties_#{property}", property.humanize %></td>
+				<td><%= label_tag "site_properties_#{property}", property_label_text(property) %></td>
 				<td><%= label_tag "site_properties_#{property}", @site.persona[property] %></td>
 				<td><%= label_tag "site_properties_#{property}", sreg_request_for_field(property) %></td>
 				<td><%= check_box_tag "site[properties][#{property}]", @site.persona[property], false, :id => "site_properties_#{property}" %></td>

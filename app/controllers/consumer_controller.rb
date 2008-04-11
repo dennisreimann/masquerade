@@ -13,8 +13,8 @@ class ConsumerController < ApplicationController
     if params[:use_sreg]
       sregreq = OpenID::SReg::Request.new
       sregreq.policy_url = "http://www.policy-url.com"
-      sregreq.request_fields(['nickname'], true) # required fields
-      sregreq.request_fields(['email'], false)   # optional fields
+      sregreq.request_fields(['nickname', 'email'], true) # required fields
+      sregreq.request_fields(['fullname', 'dob'], false)   # optional fields
       oidreq.add_extension(sregreq)
       oidreq.return_to_args['did_sreg'] = 'y'
     end
