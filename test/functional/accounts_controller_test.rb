@@ -45,4 +45,10 @@ class AccountsControllerTest < ActionController::TestCase
     assert_redirected_to edit_account_url
   end
   
+  def test_should_set_yadis_header_on_identity_page
+    account = accounts(:standard).login
+    get :show, :account => account
+    assert_match formatted_identity_url(account, :xrds), @response.headers['X-XRDS-Location']
+  end
+  
 end

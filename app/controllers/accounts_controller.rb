@@ -8,7 +8,7 @@ class AccountsController < ApplicationController
     
     respond_to do |format|
       format.html do
-        response.headers['X-XRDS-Location'] = formatted_identity_path(@account, :xrds)
+        response.headers['X-XRDS-Location'] = formatted_identity_url(:account => @account, :format => :xrds, :protocol => scheme)
       end
       format.xrds do
         @types = [ OpenID::OPENID_2_0_TYPE, OpenID::OPENID_1_0_TYPE, OpenID::SREG_URI ]
