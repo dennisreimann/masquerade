@@ -27,7 +27,7 @@ class ServerController < ApplicationController
           render :text => 'This is an OpenID server endpoint, not a human readable resource.'
         end
       end
-      format.xrds { @types = [ OpenID::OPENID_IDP_2_0_TYPE ] }
+      format.xrds
     end
   end
   
