@@ -36,8 +36,8 @@
 		</div>
 		<div id="main">
 			<div class="wrap">
-    		<% if flash[:notice] %><p class="notice"><%=h flash[:notice] %></p><% end %>
-    		<% if flash[:error] %><p class="error"><%=h flash[:error] %></p><% end %>
+    		<% if flash[:notice] %><div class="notice"><%=simple_format h(flash[:notice]) %></div><% end %>
+    		<% if flash[:error] %><div class="error"><%=simple_format h(flash[:error]) %></div><% end %>
 				<%= yield %>
 			</div>
 		</div>

@@ -1,6 +1,3 @@
-<% if flash[:sreg_results] %><div class='alert'><%= flash[:sreg_results] %></div><% end %>
-<% if flash[:pape_results] %><div class='alert'><%= flash[:pape_results] %></div><% end %>
-
 <% form_tag consumer_start_path do %>
 	<div class="row">
 		<%= label_tag :openid_identifier, 'Identifier:', :class => 'check' %>
@@ -11,9 +8,13 @@
 		<%= check_box_tag :immediate %>
 		<%= label_tag :immediate, 'Use immediate mode', :class => 'check' %>
 	</div>
-    <div class="row">
+  <div class="row">
 		<%= check_box_tag :use_sreg %>
 		<%= label_tag :use_sreg, 'Request registration data', :class => 'check' %>
+	</div>
+	<div class="row">
+		<%= check_box_tag :use_ax %>
+		<%= label_tag :use_ax, 'Request attribute exchange data', :class => 'check' %>
 	</div>
 	<div class="row">
 		<%= check_box_tag :use_pape %>

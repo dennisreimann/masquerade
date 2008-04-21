@@ -19,16 +19,20 @@
 	</h3>
 	
 	<table cellspacing="0">
-    	<tr>
+    <tr>
 			<th>property</th>
 			<th>value</th>
 			<th>released?</th>
 		</tr>
-		<% Persona.properties.each do |property| %>
+		<% @site.release_policies.each do |release_policy| %>
+		<% property, type, value = release_policy.property, release_policy.type_identifier, @site.persona.property(release_policy.type_identifier) %>
 		<tr>
 			<td><%= label_tag "site_properties_#{property}", property_label_text(property) %></td>
-			<td><%= label_tag "site_properties_#{property}", @site.persona[property] unless @site.persona[property].blank? %></td>
-			<td><%= check_box_tag "site[properties][#{property}]", @site.persona[property], @site.release_policies.find_by_property(property), :id => "site_properties_#{property}" %></td>
+			<td><%= label_tag "site_properties_#{property}", value unless value.blank? %></td>
+			<td>
+				<%= check_box_tag "site[properties][#{property}][value]", value, true, :id => "site_properties_#{property}" %>
+				<%= hidden_field_tag "site[properties][#{property}][type]", type, :id => "site_properties_type_#{property}" %>
+			</td>
 		</tr>
 		<% end %>
 	</table>

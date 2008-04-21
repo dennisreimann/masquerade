@@ -8,6 +8,7 @@ xml.xrds(:XRDS,
       xml.Type OpenID::OPENID_2_0_TYPE
       xml.Type OpenID::SReg::NS_URI_1_1
       xml.Type OpenID::SReg::NS_URI_1_0
+      xml.Type OpenID::AX::AXMessage::NS_URI
   		xml.URI endpoint_url
   		xml.LocalID identity_url(:account => @account, :protocol => scheme)
     end
@@ -15,6 +16,7 @@ xml.xrds(:XRDS,
       xml.Type OpenID::OPENID_1_1_TYPE
       xml.Type OpenID::SReg::NS_URI_1_1
       xml.Type OpenID::SReg::NS_URI_1_0
+      xml.Type OpenID::AX::AXMessage::NS_URI
   		xml.URI endpoint_url
   		xml.tag!('openid:Delegate', identity_url(:account => @account, :protocol => scheme))
     end
@@ -22,6 +24,7 @@ xml.xrds(:XRDS,
       xml.Type OpenID::OPENID_1_0_TYPE
       xml.Type OpenID::SReg::NS_URI_1_1
       xml.Type OpenID::SReg::NS_URI_1_0
+      xml.Type OpenID::AX::AXMessage::NS_URI
   		xml.URI endpoint_url
   		xml.tag!('openid:Delegate', identity_url(:account => @account, :protocol => scheme))
     end

@@ -44,7 +44,7 @@ class SitesControllerTest < ActionController::TestCase
     @site = sites(:venteria)
     put :update, :id => @site.id,
       :site => valid_site_attributes.merge(:properties => valid_properties)
-    assert_equal valid_properties.size, @site.release_policies.size
+    assert_equal 6, @site.release_policies.size
   end
 
   def test_should_require_login_for_destroy

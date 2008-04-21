@@ -48,10 +48,12 @@ class Test::Unit::TestCase
   end
   
   def valid_properties
-    { :nickname => 'dbloete',
-      :email => 'mail@dennisbloete.de',
-      :gender => 'M',
-      :dob => '1982-01-10' }
+    { 'nickname' => { 'value' => 'dbloete', 'type' => 'nickname' },
+      'email' => { 'value' => 'mail@dennisbloete.de', 'type' => 'email' },
+      'gender' => { 'value' => 'M', 'type' => 'gender' },
+      'dob' => { 'value' => '1982-01-10', 'type' => 'dob' },
+      'login' => { 'value' => 'dbloete', 'type'=> 'http://axschema.org/namePerson/friendly' },
+      'email_address' => { 'value' => 'mail@dennisbloete.de', 'type' => 'http://axschema.org/contact/email' } }
   end
   
   def valid_site_attributes
@@ -79,20 +81,41 @@ class Test::Unit::TestCase
       'openid.claimed_id' => 'http://dennisbloete.de/',
       'openid.identity' => 'http://openid.innovated.de/dbloete' }
   end
-  
-  def sreg_request_params
-    { 'openid.ns.sreg' => OpenID::SReg::NS_URI_1_1,
-      'openid.sreg.required' => 'nickname,email',
-      'openid.sreg.optional' => 'fullname,dob',
-      'openid.sreg.policy_url' => 'http://test.com/policy.html' }
-  end
-  
+
   def associate_request_params
     { 'openid.ns' => OpenID::OPENID2_NS,
       'openid.mode' => 'associate',
       'openid.assoc_type' => 'HMAC-SHA1',
       'openid.session_type' => 'DH-SHA1',
       'openid.dh_consumer_public' => 'MgKzyEozjQH6uDumfyCGfDGWW2RM5QRfLi+Yu+h7SuW7l+jxk54/s9mWG+0ZR2J4LmhUO9Cw/sPqynxwqWGQLnxr0wYHxSsBIctUgxp67L/6qB+9GKM6URpv1mPkifv5k1M8hIJTQhzYXxHe+/7MM8BD47vBp0nihjaDr0XAe6w=' }
+  end
+    
+  def sreg_request_params
+    { 'openid.ns.sreg' => OpenID::SReg::NS_URI,
+      'openid.sreg.required' => 'nickname,email',
+      'openid.sreg.optional' => 'fullname,dob',
+      'openid.sreg.policy_url' => 'http://test.com/policy.html' }
+  end
+  
+  def ax_fetch_request_params
+    { 'openid.ns.ax' => OpenID::AX::AXMessage::NS_URI,
+      'openid.ax.mode' => 'fetch_request',
+      'openid.ax.type.fullname' => 'http://axschema.org/namePerson',
+      'openid.ax.type.gender' => 'http://axschema.org/person/gender',
+      'openid.ax.required' => 'fullname',
+      'openid.ax.if_available' => 'gender',
+      'openid.ax.update_url' => 'http://test.com/update' }
+  end
+  
+  def ax_store_request_params
+    { 'openid.ns.ax' => OpenID::AX::AXMessage::NS_URI,
+      'openid.ax.mode' => 'store_request',
+      'openid.ax.type.fullname' => 'http://axschema.org/namePerson',
+      'openid.ax.value.fullname' => 'Bob Smith',
+      'openid.ax.type.email' => 'http://axschema.org/contact/email',
+      'openid.ax.count.email' => '2',
+      'openid.ax.value.email.1' => 'mail@mydomain.com',
+      'openid.ax.value.email.2' => 'info@mydomain.com' }
   end
   
   def assert_invalid(object, attribute, message = nil)

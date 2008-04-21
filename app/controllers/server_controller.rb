@@ -7,9 +7,9 @@ class ServerController < ApplicationController
   before_filter :login_required, :except => [:index, :cancel]
   before_filter :ensure_valid_checkid_request, :except => [:index, :cancel]
   before_filter :clear_checkid_request, :only => [:index]
-  after_filter :clear_checkid_request, :only => [:cancel]
+  after_filter :clear_checkid_request, :only => [:cancel, :complete]
   # These methods are used to display information about the request to the user
-  helper_method :sreg_request, :required_sreg_fields, :optional_sreg_fields
+  helper_method :sreg_request, :ax_fetch_request
   
   # This is the server endpoint which handles all incoming OpenID requests.
   # Associate and CheckAuth requests are answered directly - functionality
@@ -44,10 +44,11 @@ class ServerController < ApplicationController
     identity = identifier(current_account)
     if @site = current_account.sites.find_by_url(checkid_request.trust_root)
       resp = checkid_request.answer(true, nil, identity)
-      resp = add_sreg(checkid_request, resp, @site.properties) if sreg_request
-      resp = add_pape(checkid_request, resp)
+      resp = add_sreg(resp, @site.sreg_properties) if sreg_request
+      resp = add_ax(resp, @site.ax_properties) if ax_fetch_request
+      resp = add_pape(resp)
       render_response(resp)
-    elsif checkid_request.immediate && sreg_request
+    elsif checkid_request.immediate && (sreg_request || ax_fetch_request)
       render_response(checkid_request.answer(false))
     elsif checkid_request.immediate
       render_response(checkid_request.answer(true, nil, identity))
@@ -60,7 +61,7 @@ class ServerController < ApplicationController
   # choose which data should be transfered to the relying party.
   def decide
     @site = current_account.sites.find_or_initialize_by_url(checkid_request.trust_root)
-    @site.persona = current_account.personas.find(params[:persona_id] || :first) if sreg_request
+    @site.persona = current_account.personas.find(params[:persona_id] || :first) if sreg_request || ax_fetch_request
   end
   
   # This action is called by submitting the decision form, the information entered by
@@ -75,8 +76,9 @@ class ServerController < ApplicationController
         @site.update_attributes(params[:site])
       end
       resp = checkid_request.answer(true, nil, identifier(current_account))
-      resp = add_pape(checkid_request, resp)
-      resp = add_sreg(checkid_request, resp, params[:site][:properties]) if sreg_request && params[:site][:properties]
+      resp = add_pape(resp)
+      resp = add_sreg(resp, params[:site][:sreg]) if sreg_request && params[:site][:sreg]
+      resp = add_ax(resp, transform_ax_data(params[:site][:ax])) if ax_fetch_request && params[:site][:ax]
       render_response(resp)
     end
   end
@@ -149,6 +151,18 @@ class ServerController < ApplicationController
   def render_response(resp)
     clear_checkid_request
     render_openid_response(resp)
+  end
+  
+  # Transforms the parameters from the form to valid AX response values
+  def transform_ax_data(parameters)
+    data = {}
+    parameters.each_pair do |key, details|
+      if details['value']
+        data["type.#{key}"] = details['type']
+        data["value.#{key}"] = details['value']
+      end
+    end
+    data
   end
   
 end

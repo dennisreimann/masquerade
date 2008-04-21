@@ -24,7 +24,7 @@ module ApplicationHelper
   def property_label_text(property)
     case property.to_sym
     when :fullname then 'Full name'
-    when :dob then 'Date of birth'
+    when :dob then 'Birth date'
     else property.to_s.humanize
     end
   end

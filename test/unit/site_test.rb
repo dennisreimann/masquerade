@@ -37,15 +37,7 @@ class SiteTest < ActiveSupport::TestCase
   
   def test_should_set_release_policies_from_given_properties
     @site.properties = valid_properties
-    assert_equal valid_properties.size, @site.release_policies.size
-  end
-  
-  def test_should_return_properties_reflecting_the_release_policies
-    @site.properties = valid_properties
-    assert_equal valid_properties.size, @site.properties.size
-    valid_properties.each_pair do |key, value|
-      assert @site.properties.has_key?(key)
-    end
+    assert_equal 6, @site.release_policies.size
   end
   
 end

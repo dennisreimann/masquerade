@@ -12,11 +12,27 @@ class ConsumerController < ApplicationController
     end
     if params[:use_sreg]
       sregreq = OpenID::SReg::Request.new
-      sregreq.policy_url = "http://www.policy-url.com"
-      sregreq.request_fields(['nickname', 'email'], true) # required fields
-      sregreq.request_fields(['fullname', 'dob'], false)   # optional fields
+      sregreq.policy_url = 'http://www.policy-url.com'
+      sregreq.request_fields(['nickname', 'email'], true) # required
+      sregreq.request_fields(['fullname', 'dob'], false) # optional
       oidreq.add_extension(sregreq)
       oidreq.return_to_args['did_sreg'] = 'y'
+    end
+    if params[:use_ax]
+      axreq = OpenID::AX::FetchRequest.new
+      requested_attrs = [['http://axschema.org/namePerson/friendly', 'nickname', true],
+                         ['http://axschema.org/contact/email', 'email', true],
+                         ['http://axschema.org/namePerson', 'fullname'],
+                         ['http://axschema.org/contact/web/default', 'website', false, 2],
+                         ['http://axschema.org/contact/postalCode/home', 'postcode'],
+                         ['http://axschema.org/person/gender', 'gender'],
+                         ['http://axschema.org/birthDate', 'birth_date'],
+                         ['http://axschema.org/contact/country/home', 'country'],
+                         ['http://axschema.org/pref/language', 'language'],
+                         ['http://axschema.org/pref/timezone', 'timezone']]
+      requested_attrs.each { |a| axreq.add(OpenID::AX::AttrInfo.new(a[0], a[1], a[2] || false, a[3] || 1)) }
+      oidreq.add_extension(axreq)
+      oidreq.return_to_args['did_ax'] = 'y'
     end
     if params[:use_pape]
       papereq = OpenID::PAPE::Request.new
@@ -28,7 +44,6 @@ class ConsumerController < ApplicationController
     if params[:force_post]
       oidreq.return_to_args['force_post'] = 'x' * 2048
     end
-    
     if oidreq.send_redirect?(consumer_url, consumer_complete_url, params[:immediate])
       redirect_to oidreq.redirect_url(consumer_url, consumer_complete_url, params[:immediate])
     else
@@ -40,47 +55,57 @@ class ConsumerController < ApplicationController
     parameters = params.reject{ |k,v| request.path_parameters[k] }
     oidresp = openid_consumer.complete(parameters, url_for({}))
     case oidresp.status
+    when OpenID::Consumer::SETUP_NEEDED
+      flash[:error] = "Immediate request failed - setup needed"
+    when OpenID::Consumer::CANCEL
+      flash[:error] = "OpenID transaction cancelled."
     when OpenID::Consumer::FAILURE
       flash[:error] = oidresp.display_identifier ?
         "Verification of #{oidresp.display_identifier} failed: #{oidresp.message}" :
         "Verification failed: #{oidresp.message}"
     when OpenID::Consumer::SUCCESS
-      flash[:notice] = ("Verification of #{oidresp.display_identifier} succeeded.")
+      flash[:notice] = "Verification of #{oidresp.display_identifier} succeeded."
       if params[:did_sreg]
         sreg_resp = OpenID::SReg::Response.from_success_response(oidresp)
-        sreg_message = "Simple Registration data was requested"
+        sreg_message = "\n\nSimple Registration data was requested"
         if sreg_resp.empty?
           sreg_message << ", but none was returned."
         else
-          sreg_message << ". The following data were sent:"
-          sreg_resp.data.each { |k,v| sreg_message << "<br/><b>#{k}</b>: #{v}" }
+          sreg_message << ". The following data were sent:\n"
+          sreg_resp.data.each { |k,v| sreg_message << "#{k}: #{v}\n" }
         end
-        flash[:sreg_results] = sreg_message
+        flash[:notice] += sreg_message
+      end
+      if params[:did_ax]
+        ax_resp = OpenID::AX::FetchResponse.from_success_response(oidresp)
+        ax_message = "\n\nAttribute Exchange data was requested"
+        unless ax_resp
+          ax_message << ", but none was returned."
+        else
+          ax_message << ". The following data were sent:\n"
+          ax_resp.data.each { |k,v| ax_message << "#{k}: #{v}\n" }
+        end
+        flash[:notice] += ax_message
       end
       if params[:did_pape]
         pape_resp = OpenID::PAPE::Response.from_success_response(oidresp)
-        pape_message = "A phishing resistant authentication method was requested"
+        pape_message = "\n\nA phishing resistant authentication method was requested"
         if pape_resp.auth_policies.member? OpenID::PAPE::AUTH_PHISHING_RESISTANT
           pape_message << ", and the server reported one."
         else
           pape_message << ", but the server did not report one."
         end
-        pape_message << "<br><b>Authentication age:</b> #{pape_resp.auth_age} seconds" if pape_resp.auth_age
-        pape_message << "<br><b>NIST Auth Level:</b> #{pape_resp.nist_auth_level}" if pape_resp.nist_auth_level
-        flash[:pape_results] = pape_message
+        pape_message << "\nAuthentication age: #{pape_resp.auth_age} seconds" if pape_resp.auth_age
+        pape_message << "\nNIST Auth Level: #{pape_resp.nist_auth_level}" if pape_resp.nist_auth_level
+        flash[:notice] += pape_message
       end
-    when OpenID::Consumer::SETUP_NEEDED
-      flash[:error] = "Immediate request failed - Setup Needed"
-    when OpenID::Consumer::CANCEL
-      flash[:error] = "OpenID transaction cancelled."
     end
     redirect_to :action => 'index'
   end
   
   private
   
-  # OpenID-Consumer Singleton Accessor, wird für Zugriffe
-  # auf den Consumer im Controller verwendet 
+  # OpenID consumer reader, used to access the consumer functionality
   def openid_consumer
     @openid_consumer ||= OpenID::Consumer.new(session, ActiveRecordStore.new)
   end

@@ -1,7 +1,9 @@
 venteria_nickname:
   site: venteria
   property: nickname
+  type_identifier: nickname
 
 venteria_email:
   site: venteria
   property: email
+  type_identifier: email

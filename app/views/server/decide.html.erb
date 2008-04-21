@@ -4,8 +4,7 @@
 <% form_tag decide_path, :method => :get do %>
 
 	<h3>Choose a persona</h3>
-	<p><%=h extract_host(@site.url) %> requests your registration data
-	(<%= required_sreg_fields.to_sentence(:skip_last_comma => true) %>).<br />
+	<p><%=h extract_host(@site.url) %> requests your data.<br />
 	Please select a persona to choose this data from.</p>
 
 	<div class="row">
@@ -19,14 +18,14 @@
 		<%= link_to "create new persona", new_account_persona_path(:return => decide_path) %>
 	</div>
 	
-<% end if sreg_request %>
+<% end if sreg_request || ax_fetch_request %>
 
 <% form_for @site, :url => complete_path do |f| %>
 
-	<% if sreg_request %>
+	<% if sreg_request || ax_fetch_request %>
 		<h3><%=h @site.persona.title %> <span class="note"><%= link_to "edit persona", edit_account_persona_path(@site.persona, :return => decide_path(:persona_id => @site.persona.id)) %></span></h3>
 		<p>Please choose the data that you would like to pass on.
-		<%= link_to "#{h extract_host(@site.url)} privacy policy", sreg_request.policy_url unless sreg_request.policy_url.blank? %></p>
+		<%= link_to "#{h extract_host(@site.url)} privacy policy", sreg_request.policy_url unless !sreg_request || sreg_request.policy_url.blank? %></p>
 		
 		<table cellspacing="0">
 	    <tr>
@@ -35,19 +34,30 @@
 				<th>requirement</th>
 				<th>release</th>
 			</tr>
-			<% (required_sreg_fields + optional_sreg_fields).each do |property| %>
+			<% (sreg_request.required + sreg_request.optional).each do |property| %>
 			<tr>
-				<td><%= label_tag "site_properties_#{property}", property_label_text(property) %></td>
-				<td><%= label_tag "site_properties_#{property}", @site.persona[property] %></td>
-				<td><%= label_tag "site_properties_#{property}", sreg_request_for_field(property) %></td>
-				<td><%= check_box_tag "site[properties][#{property}]", @site.persona[property], false, :id => "site_properties_#{property}" %></td>
+				<td><%= label_tag "site_sreg_#{property}", property_label_text(property) %></td>
+				<td><%= label_tag "site_sreg_#{property}", @site.persona.property(property) %></td>
+				<td><%= label_tag "site_sreg_#{property}", sreg_request_for_field(property) %></td>
+				<td><%= check_box_tag "site[sreg][#{property}]", @site.persona.property(property), false, :id => "site_sreg_#{property}", :class => sreg_request_for_field(property) %></td>
 			</tr>
-			<% end %>
+			<% end if sreg_request %>
+			<% ax_fetch_request.attributes.each do |property| %>
+			<tr>
+				<td><%= label_tag "site_ax_#{property.ns_alias}", property_label_text(property.ns_alias) %></td>
+				<td><%= label_tag "site_ax_#{property.ns_alias}", @site.persona.property(property.type_uri) %></td>
+				<td><%= label_tag "site_ax_#{property.ns_alias}", ax_request_for_field(property) %></td>
+				<td>
+					<%= check_box_tag "site[ax][#{property.ns_alias}][value]", @site.persona.property(property.type_uri), false, :id => "site_ax_#{property.ns_alias}", :class => ax_request_for_field(property) %>
+					<%= hidden_field_tag "site[ax][#{property.ns_alias}][type]", property.type_uri, :id => "site_ax_type_#{property.ns_alias}" %>
+				</td>
+			</tr>
+			<% end if ax_fetch_request %>
 		</table>
 	<% end %>
 	
 	<div>
-		<% if sreg_request %>
+		<% if sreg_request || ax_fetch_request %>
 		<%= f.hidden_field :persona_id %>
 		<%= f.hidden_field :url %>
 		<%= submit_tag 'Always trust this site', :name => 'always', :class => 'space' %>
