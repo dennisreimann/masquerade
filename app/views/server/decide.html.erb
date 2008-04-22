@@ -27,33 +27,43 @@
 		<p>Please choose the data that you would like to pass on.
 		<%= link_to "#{h extract_host(@site.url)} privacy policy", sreg_request.policy_url unless !sreg_request || sreg_request.policy_url.blank? %></p>
 		
+		<% if sreg_request %>
 		<table cellspacing="0">
 	    <tr>
-				<th>property</th>
-				<th>value</th>
-				<th>requirement</th>
-				<th>release</th>
+				<th colspan="2"><h4>Simple Registration data</h4></th>
+				<th>disclosure</th>
 			</tr>
 			<% (sreg_request.required + sreg_request.optional).each do |property| %>
 			<tr>
 				<td><%= label_tag "site_sreg_#{property}", property_label_text(property) %></td>
 				<td><%= label_tag "site_sreg_#{property}", @site.persona.property(property) %></td>
-				<td><%= label_tag "site_sreg_#{property}", sreg_request_for_field(property) %></td>
-				<td><%= check_box_tag "site[sreg][#{property}]", @site.persona.property(property), false, :id => "site_sreg_#{property}", :class => sreg_request_for_field(property) %></td>
+				<td>
+					<%= check_box_tag "site[sreg][#{property}]", @site.persona.property(property), sreg_request_for_field(property) == 'required', :id => "site_sreg_#{property}", :class => sreg_request_for_field(property) %>
+					<%= label_tag "site_sreg_#{property}", sreg_request_for_field(property), :class => 'note' %>
+				</td>
 			</tr>
-			<% end if sreg_request %>
+			<% end %>
+		</table>
+		<% end %>
+		<% if ax_fetch_request %>
+		<table cellspacing="0">
+	    <tr>
+				<th colspan="2"><h4>Attribute Exchange</h4></th>
+				<th>disclosure</th>
+			</tr>
 			<% ax_fetch_request.attributes.each do |property| %>
 			<tr>
 				<td><%= label_tag "site_ax_#{property.ns_alias}", property_label_text(property.ns_alias) %></td>
 				<td><%= label_tag "site_ax_#{property.ns_alias}", @site.persona.property(property.type_uri) %></td>
-				<td><%= label_tag "site_ax_#{property.ns_alias}", ax_request_for_field(property) %></td>
 				<td>
-					<%= check_box_tag "site[ax][#{property.ns_alias}][value]", @site.persona.property(property.type_uri), false, :id => "site_ax_#{property.ns_alias}", :class => ax_request_for_field(property) %>
+					<%= check_box_tag "site[ax][#{property.ns_alias}][value]", @site.persona.property(property.type_uri), ax_request_for_field(property) == 'required', :id => "site_ax_#{property.ns_alias}", :class => ax_request_for_field(property) %>
 					<%= hidden_field_tag "site[ax][#{property.ns_alias}][type]", property.type_uri, :id => "site_ax_type_#{property.ns_alias}" %>
+					<%= label_tag "site_ax_#{property.ns_alias}", ax_request_for_field(property), :class => 'note' %>
 				</td>
 			</tr>
-			<% end if ax_fetch_request %>
+			<% end %>
 		</table>
+		<% end %>
 	<% end %>
 	
 	<div>

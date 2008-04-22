@@ -43,6 +43,7 @@ div.row                 { margin: 0 0 0.7em 0; }
 div.space               { margin: 0 0 1.7em 0; }
 label                   { display: block; }
 label.check             { display: inline; margin: 0 2em 0 0.2em; }
+label.note              { display: inline; margin: 0 0 0 0.4em; }
 .options a              { margin-right: 0.7em; }
 .note                   { font-size: 0.9em; color: #AAA; font-weight: normal; }
 .note a,

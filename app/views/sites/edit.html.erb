@@ -22,7 +22,7 @@
     <tr>
 			<th>property</th>
 			<th>value</th>
-			<th>released?</th>
+			<th>disclosure</th>
 		</tr>
 		<% @site.release_policies.each do |release_policy| %>
 		<% property, type, value = release_policy.property, release_policy.type_identifier, @site.persona.property(release_policy.type_identifier) %>
