@@ -14,7 +14,7 @@ module OpenidServerSystem
   # OpenID server reader, use this to access the server 
   # functionality from inside your server controller
   def openid_server
-    @openid_server ||= OpenID::Server::Server.new(openid_store, server_url)
+    @openid_server ||= OpenID::Server::Server.new(openid_store, endpoint_url)
   end
   
   # OpenID parameter reader, use this to access only OpenID 
