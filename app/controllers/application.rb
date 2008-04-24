@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
     ActiveRecord::RecordNotFound,
     ActionController::UnknownAction, :with => :render_404)
   rescue_from ActionController::InvalidAuthenticityToken, :with => :render_422
-  rescue_from OpenID::Server::ProtocolError, :with => :render_500
   
   helper_method :extract_login_from_identifier, :checkid_request, :identifier, :endpoint_url, :scheme
   

@@ -3,6 +3,8 @@ class ServerController < ApplicationController
   # CSRF-protection must be skipped, because incoming
   # OpenID requests lack an authenticity token
   skip_before_filter :verify_authenticity_token
+  # Error handling
+  rescue_from OpenID::Server::ProtocolError, :with => :render_openid_error
   # Actions other than index require a logged in user
   before_filter :login_required, :except => [:index, :cancel]
   before_filter :ensure_valid_checkid_request, :except => [:index, :cancel]
@@ -163,6 +165,15 @@ class ServerController < ApplicationController
       end
     end
     data
+  end
+  
+  # Renders the exception message as text output
+  def render_openid_error(exception)
+    error = case exception
+    when OpenID::Server::MalformedTrustRoot: "Malformed trust root '#{exception.to_s}'"
+    else exception.to_s
+    end
+    render :text => "Invalid OpenID request: #{error}", :status => 500
   end
   
 end
