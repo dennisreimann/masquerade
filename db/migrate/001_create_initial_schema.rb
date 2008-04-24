@@ -19,7 +19,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       t.string :nickname, :email, :fullname, :postcode, :country, :language, :timezone
       t.string :gender, :limit => 1
       t.date :dob
-      t.boolean :deletable, :null => false, :default => 1
+      t.boolean :deletable, :null => false, :default => true
       t.timestamps
     end
     
