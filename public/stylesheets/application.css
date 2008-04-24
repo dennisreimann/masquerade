@@ -39,11 +39,13 @@ input.space             { margin-right: 0.7em; }
 select#persona_dob_1i   { width: 6em; }
 select#persona_dob_2i   { width: 13em; }
 select#persona_dob_3i   { width: 5em; }
-div.row                 { margin: 0 0 0.7em 0; }
+div.row                 { margin: 0 0 0.7em 0; clear: both; }
 div.space               { margin: 0 0 1.7em 0; }
 label                   { display: block; }
 label.check             { display: inline; margin: 0 2em 0 0.2em; }
 label.note              { display: inline; margin: 0 0 0 0.4em; }
+div.inline label        { float: left; width: 8.5em; }
+.labelspace             { margin-left: 10.5em; }
 .options a              { margin-right: 0.7em; }
 .note                   { font-size: 0.9em; color: #AAA; font-weight: normal; }
 .note a,

@@ -3,8 +3,8 @@
 <%= error_messages_for :persona %>
 
 <% form_for @persona, :url => account_persona_path(@persona) do |persona| %>
-	<%= render :partial => "personas/form", :object => persona %>
+	<%= render :partial => 'personas/form', :object => persona %>
 	<div>
-		<%= persona.submit "create" %>
+		<%= persona.submit 'create', :class => 'labelspace' %>
 	</div>
 <% end %>

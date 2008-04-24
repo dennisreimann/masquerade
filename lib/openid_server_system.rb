@@ -61,8 +61,6 @@ module OpenidServerSystem
     ax_resp = OpenID::AX::FetchResponse.new
     ax_args = data.reverse_merge('mode' => 'fetch_response')
     ax_resp.parse_extension_args(ax_args)
-    ax_args = ax_resp.get_extension_args(ax_fetch_request)
-    ax_resp.parse_extension_args(ax_args)
     resp.add_extension(ax_resp)
     resp
   end

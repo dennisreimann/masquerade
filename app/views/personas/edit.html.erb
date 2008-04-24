@@ -2,8 +2,8 @@
 <%= error_messages_for :persona %>
 
 <% form_for @persona, :url => account_persona_path(@persona) do |persona| %>
-	<%= render :partial => "personas/form", :object => persona %>
+	<%= render :partial => 'personas/form', :object => persona %>
 	<div>
-		<%= persona.submit "update" %>
+		<%= persona.submit 'update', :class => 'labelspace' %>
 	</div>
 <% end %>

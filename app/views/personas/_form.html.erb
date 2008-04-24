@@ -1,43 +1,154 @@
-	<div class="row space">
+	<div class="row inline space">
 		<%= form.label :title %>
 		<%= form.text_field :title %>
 	</div>
 	
-	<h3>Properties</h3>
-	<div class="row">
+	<h3>Personal information</h3>
+	<div class="row inline">
 		<%= form.label :nickname, property_label_text(:nickname) %>
   	<%= form.text_field :nickname %>
 	</div>
-	<div class="row">
+	<div class="row inline">
 		<%= form.label :fullname, property_label_text(:fullname) %>
   	<%= form.text_field :fullname %>
 	</div>
-	<div class="row">
+	<div class="row inline">
 		<%= form.label :email, property_label_text(:email) %>
   	<%= form.text_field :email %>
 	</div>
-	<div class="row">
+	<div class="row inline">
+		<%= form.label :address, property_label_text(:address) %>
+  	<%= form.text_field :address %>
+	</div>
+	<div class="row inline">
+		<%= form.label :address_additional, property_label_text(:address_additional) %>
+  	<%= form.text_field :address_additional %>
+	</div>
+	<div class="row inline">
 		<%= form.label :postcode, property_label_text(:postcode) %>
   	<%= form.text_field :postcode %>
 	</div>
-	<div class="row">
+	<div class="row inline">
+		<%= form.label :city, property_label_text(:city) %>
+  	<%= form.text_field :city %>
+	</div>
+	<div class="row inline">
+		<%= form.label :state, property_label_text(:state) %>
+  	<%= form.text_field :state %>
+	</div>
+	<div class="row inline">
 		<%= form.label :country, property_label_text(:country) %>
   	<%= form.select :country, Country.find(:all).map { |l| [ l.name, l.code ] }, { :include_blank => true } %>
 	</div>
-	<div class="row">
+	<div class="row inline">
 		<%= form.label :language, property_label_text(:language) %>
   	<%= form.select :language, Language.find(:all).map { |l| [ l.name, l.code ] }, { :include_blank => true } %>
 	</div>
-	<div class="row">
+	<div class="row inline">
 		<%= form.label :timezone, property_label_text(:timezone) %>
   	<%= form.select :timezone, Timezone.find(:all).map { |l| [ l.name, l.name ] }, { :include_blank => true } %>
 	</div>
-	<div class="row">
+	<div class="row inline">
 		<%= form.label :gender, property_label_text(:gender) %>
   	<%= form.select :gender, [['Male', 'M'], ['Female', 'F']], { :include_blank => true } %>
 	</div>
-	<div class="row">
+	<div class="row inline space">
 		<%= form.label :dob_3i, property_label_text(:dob) %>
   	<%= form.date_select :dob, :order => [:day, :month, :year], :start_year => 1950, :end_year => Date.today.year, :include_blank => true %>
 	</div>
 
+	<h3>Professional information</h3>
+	<div class="row inline">
+		<%= form.label :company_name, property_label_text(:company_name) %>
+  	<%= form.text_field :company_name %>
+	</div>
+	<div class="row inline">
+		<%= form.label :job_title, property_label_text(:job_title) %>
+  	<%= form.text_field :job_title %>
+	</div>
+	<div class="row inline">
+		<%= form.label :address_business, property_label_text(:address_business) %>
+  	<%= form.text_field :address_business %>
+	</div>
+	<div class="row inline">
+		<%= form.label :address_additional_business, property_label_text(:address_additional_business) %>
+  	<%= form.text_field :address_additional_business %>
+	</div>
+	<div class="row inline">
+		<%= form.label :postcode_business, property_label_text(:postcode_business) %>
+  	<%= form.text_field :postcode_business %>
+	</div>
+	<div class="row inline">
+		<%= form.label :city_business, property_label_text(:city_business) %>
+  	<%= form.text_field :city_business %>
+	</div>
+	<div class="row inline">
+		<%= form.label :state_business, property_label_text(:state_business) %>
+  	<%= form.text_field :state_business %>
+	</div>
+	<div class="row inline space">
+		<%= form.label :country_business, property_label_text(:country_business) %>
+  	<%= form.select :country_business, Country.find(:all).map { |l| [ l.name, l.code ] }, { :include_blank => true } %>
+	</div>
+	
+	<h3>Phone</h3>
+	<div class="row inline">
+		<%= form.label :phone_home, property_label_text(:phone_home) %>
+  	<%= form.text_field :phone_home %>
+	</div>
+	<div class="row inline">
+		<%= form.label :phone_mobile, property_label_text(:phone_mobile) %>
+  	<%= form.text_field :phone_mobile %>
+	</div>
+	<div class="row inline">
+		<%= form.label :phone_fax, property_label_text(:phone_fax) %>
+  	<%= form.text_field :phone_fax %>
+	</div>
+	<div class="row inline space">
+		<%= form.label :phone_work, property_label_text(:phone_work) %>
+  	<%= form.text_field :phone_work %>
+	</div>
+	
+	<h3>Instant Messaging</h3>
+	<div class="row inline">
+		<%= form.label :im_aim, property_label_text(:im_aim) %>
+  	<%= form.text_field :im_aim %>
+	</div>
+	<div class="row inline">
+		<%= form.label :im_icq, property_label_text(:im_icq) %>
+  	<%= form.text_field :im_icq %>
+	</div>
+	<div class="row inline">
+		<%= form.label :im_msn, property_label_text(:im_msn) %>
+  	<%= form.text_field :im_msn %>
+	</div>
+	<div class="row inline">
+		<%= form.label :im_yahoo, property_label_text(:im_yahoo) %>
+  	<%= form.text_field :im_yahoo %>
+	</div>
+	<div class="row inline">
+		<%= form.label :im_jabber, property_label_text(:im_jabber) %>
+  	<%= form.text_field :im_jabber %>
+	</div>
+	<div class="row inline space">
+		<%= form.label :im_skype, property_label_text(:im_skype) %>
+  	<%= form.text_field :im_skype %>
+	</div>
+
+	<h3>Other information</h3>
+	<div class="row inline">
+		<%= form.label :biography, property_label_text(:biography) %>
+  	<%= form.text_field :biography %>
+	</div>
+	<div class="row inline">
+		<%= form.label :image_default, property_label_text(:image_default) %>
+  	<%= form.text_field :image_default %>
+	</div>
+	<div class="row inline">
+		<%= form.label :web_default, property_label_text(:web_default) %>
+  	<%= form.text_field :web_default %>
+	</div>
+	<div class="row inline">
+		<%= form.label :web_blog, property_label_text(:web_blog) %>
+  	<%= form.text_field :web_blog %>
+	</div>
