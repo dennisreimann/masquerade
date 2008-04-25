@@ -60,8 +60,8 @@ class CreateInitialSchema < ActiveRecord::Migration
     add_index :open_id_requests, :token, :unique => true
     
     create_table :countries, :force => true do |t|
-      t.string :name, :null => false, :limit => 40
-      t.string :code, :null => false, :limit => 2
+      t.string :name, :null => false, :limit => 60
+      t.string :code, :null => false, :limit => 5
     end
     
     add_index :countries, :code, :unique => true
@@ -308,7 +308,7 @@ class CreateInitialSchema < ActiveRecord::Migration
       { :name => 'Zimbabwe', :code => 'ZW' }])
     
     create_table :timezones do |t|
-      t.string :name, :null => false, :limit => 40
+      t.string :name, :null => false, :limit => 60
     end
     
     add_index :timezones, :name, :unique => true
@@ -702,8 +702,8 @@ class CreateInitialSchema < ActiveRecord::Migration
       { :name => 'Pacific/Wallis' }])
       
     create_table :languages do |t|
-      t.string :name, :null => false, :limit => 40
-      t.string :code, :null => false, :limit => 2
+      t.string :name, :null => false, :limit => 60
+      t.string :code, :null => false, :limit => 5
     end
 
     Language.create([
