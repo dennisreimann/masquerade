@@ -1,4 +1,6 @@
 .DS_Store
+.loadpath
+.project
 Thumbs.db
 log/*.log
 Capfile
