@@ -4,10 +4,10 @@
 		<title><%=h page_title %></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<% if identity_page? %>
-		<meta http-equiv="X-XRDS-Location" content="<%= formatted_identity_path(@account, :xrds) %>" />
-		<link rel="openid.server openid2.provider" href="<%= formatted_server_path(:xrds) %>" />
+		<meta http-equiv="X-XRDS-Location" content="<%= formatted_identity_url(:account => @account, :format => :xrds, :protocol => scheme) %>" />
+		<link rel="openid.server openid2.provider" href="<%= formatted_server_url(:format => :xrds, :protocol => scheme) %>" />
 		<% end %>
-		<link rel="seatbelt.config" type="application/xml" href="<%= formatted_seatbelt_config_url(:xml) %>" />
+		<link rel="seatbelt.config" type="application/xml" href="<%= formatted_seatbelt_config_url(:format => :xml, :protocol => scheme) %>" />
 		<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
 		<link rel="icon" href="/favicon.ico" type="image/ico" />
 		<%= stylesheet_link_tag 'application' %>
