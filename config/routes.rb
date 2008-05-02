@@ -30,6 +30,8 @@ ActionController::Routing::Routes.draw do |map|
     server.proceed 'server/proceed', :action => 'proceed'
     server.complete 'server/complete', :action => 'complete'
     server.cancel 'server/cancel', :action => 'cancel'
+    server.formatted_seatbelt_config 'server/seatbelt/config.:format', :action => 'seatbelt_config'
+    server.formatted_seatbelt_state 'server/seatbelt/state.:format', :action => 'seatbelt_login_state'
   end
 
   map.with_options :controller => 'consumer' do |consumer|

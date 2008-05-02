@@ -6,8 +6,8 @@ class ServerController < ApplicationController
   # Error handling
   rescue_from OpenID::Server::ProtocolError, :with => :render_openid_error
   # Actions other than index require a logged in user
-  before_filter :login_required, :except => [:index, :cancel]
-  before_filter :ensure_valid_checkid_request, :except => [:index, :cancel]
+  before_filter :login_required, :except => [:index, :cancel, :seatbelt_config, :seatbelt_login_state]
+  before_filter :ensure_valid_checkid_request, :except => [:index, :cancel, :seatbelt_config, :seatbelt_login_state]
   before_filter :clear_checkid_request, :only => [:index]
   after_filter :clear_checkid_request, :only => [:cancel, :complete]
   # These methods are used to display information about the request to the user

@@ -21,3 +21,5 @@ test:
 production:
   <<: *default
   use_ssl: true
+  ssl_certificate_common_name: your.domain.com
+  ssl_certificate_sha1: D2:1B:D8:C4:39:B7:EE:10:DA:E2:4E:0A:65:98:8E:27:C9:32:4B:F0
