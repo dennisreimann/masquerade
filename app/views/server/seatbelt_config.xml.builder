@@ -9,4 +9,13 @@ xml.opConfig(:version => '1.0') do
 	xml.loginUrl(login_url(:protocol => scheme))
 	xml.welcomeUrl(home_url(:protocol => scheme))
 	xml.loginStateUrl(formatted_seatbelt_state_url(:protocol => scheme, :format => :xml))
+	xml.toolbarGrayBackground('#e0e0e0')
+  xml.toolbarGrayBorder('#a0a0a0')
+  xml.toolbarGrayText('#505050')
+  xml.toolbarLoginBackground('#a7e0fb')
+  xml.toolbarLoginBorder('#a0a0a0')
+  xml.toolbarLoginText('#000000')
+  xml.toolbarHighBackground('#f2db8b')
+  xml.toolbarHighBorder('#22ab1b')
+  xml.toolbarHighText('#22ab1b')
 end
