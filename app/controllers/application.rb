@@ -35,8 +35,8 @@ class ApplicationController < ActionController::Base
   
   def checkid_request
     unless @checkid_request
-      req_params = OpenIdRequest.find_by_token(session[:request_token]).parameters if session[:request_token]
-      req = openid_server.decode_request(req_params) if req_params
+      oid_request = OpenIdRequest.find_by_token(session[:request_token]) if session[:request_token]
+      req = openid_server.decode_request(oid_request.parameters) if oid_request
       @checkid_request = req.is_a?(OpenID::Server::CheckIDRequest) ? req : false
     else
       @checkid_request
