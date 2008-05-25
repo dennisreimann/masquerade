@@ -17,7 +17,7 @@ module ApplicationHelper
   # Extracts the hostname from the given url, which is used to
   # display the name of the requesting website to the user
   def extract_host(u)
-    URI.parse(u).host
+    URI.split(u).compact[1]
   end
   
   # Custom label names for request properties (like SReg data)
