@@ -33,6 +33,18 @@ class ApplicationController < ActionController::Base
     openid_url.gsub(identifier(''), '')
   end
   
+  # Returns the first twelve chars from the Yubico OTP,
+  # which are used to identify a Yubikey
+  def extract_yubico_identity_from_otp(yubico_otp)
+    yubico_otp[0..11]
+  end
+  
+  # Utilizes the Yubico library to verify an one time password 
+  def verify_yubico_otp(otp)
+    yubico = Yubico.new(APP_CONFIG['yubico']['id'], APP_CONFIG['yubico']['api_key'])
+    yubico.verify(otp) == Yubico::E_OK
+  end
+  
   def checkid_request
     unless @checkid_request
       req_params = OpenIdRequest.find_by_token(session[:request_token]).parameters if session[:request_token]

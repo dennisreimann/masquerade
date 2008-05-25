@@ -32,5 +32,3 @@ Rails::Initializer.run do |config|
     :password => APP_CONFIG['mailer']['password'],
     :authentication => APP_CONFIG['mailer']['authentication'] }
 end
-
-ActionMailer::Base.raise_delivery_errors = true

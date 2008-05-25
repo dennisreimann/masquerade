@@ -8,6 +8,7 @@ ActionController::Routing::Routes.draw do |map|
     account.resources :sites do |sites|
       sites.resources :release_policies
     end
+    account.resource :yubikey_association
   end
   
   map.resource :session

@@ -57,7 +57,7 @@ class Account < ActiveRecord::Base
     @activated
   end
 
-  # Authenticates a user by their login name and unencrypted password.
+  # Authenticates a user by their login name and unencrypted password
   # Returns the user or nil.
   def self.authenticate(login, password)
     a = find :first, :conditions => ['login = ? and enabled = ? and activated_at IS NOT NULL', login, true] # need to get the salt

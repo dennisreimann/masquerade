@@ -11,13 +11,16 @@ default: &default
     address: localhost
     domain: your.domain.com
     from: info@your.domain.com
-
+  yubico:
+  	id: 99
+    api_key: youryubicoapikey
+    
 development:
   <<: *default
-  
+
 test:
   <<: *default
-      
+
 production:
   <<: *default
   use_ssl: true
