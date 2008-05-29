@@ -100,14 +100,13 @@ class ServerController < ApplicationController
   def handle_checkid_request
     if allow_verification?
       save_checkid_request
-      redirect_to proceed_path
+      redirect_to proceed_pathsafe_login
     elsif openid_request.immediate
       render_response(openid_request.answer(false))
     else
       save_checkid_request
-      flash[:notice]  = 'A website requests your identification, please log in to proceed.'
       session[:return_to] = proceed_path
-      redirect_to login_path
+      redirect_to safe_login_path
     end
   end
   

@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
     ActionController::UnknownAction, :with => :render_404)
   rescue_from ActionController::InvalidAuthenticityToken, :with => :render_422
   
-  helper_method :extract_login_from_identifier, :checkid_request, :identifier, :endpoint_url, :scheme
+  helper_method :extract_host, :extract_login_from_identifier, :checkid_request,
+    :identifier, :endpoint_url, :scheme
   
   protected
   
@@ -27,6 +28,12 @@ class ApplicationController < ActionController::Base
   # Returns the OpenID identifier for an account
   def identifier(account)
     identity_url(:account => account, :protocol => scheme)
+  end
+  
+  # Extracts the hostname from the given url, which is used to
+  # display the name of the requesting website to the user
+  def extract_host(u)
+    URI.split(u).compact[1]
   end
   
   def extract_login_from_identifier(openid_url)

@@ -44,6 +44,7 @@ ActionController::Routing::Routes.draw do |map|
   map.with_options :controller => 'info' do |info|
     info.home '', :action => 'index'
     info.help 'help', :action => 'help'
+    info.safe_login 'safe-login', :action => 'safe_login'
   end
   
   map.with_options :controller => 'accounts' do |account|
