@@ -15,11 +15,11 @@
 			<div class="wrap">
 				<h2>Please log in to proceed</h2>
 				<% if checkid_request %>
-    		<p><%= extract_host(checkid_request.trust_root) %> requests your identification.</p>
+    		<p><%= extract_host(checkid_request.trust_root) %> requests your identification and you need to log in to proceed.</p>
 				<% end %>
-				<p>To log in, please navigate to <strong><%= login_url %></strong>. The page your are currently viewing
-				is used to <strong>protect yourself from phishing and online identity theft</strong> and should contain 
-				no links.<br />If there are any links, please report to us, who sent you here.</p>
+				<p>To log in, please navigate to <strong><%= login_url(:protocol => scheme) %></strong>. The page your 
+				are currently viewing is used to <strong>protect yourself from phishing and online identity theft</strong>
+				and should contain no links.<br />If there are any links, please report to us, who sent you here.</p>
 			</div>
 		</div>
 	</body>
