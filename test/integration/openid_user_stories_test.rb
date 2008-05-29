@@ -11,7 +11,7 @@ class OpenidUserStoriesTest < ActionController::IntegrationTest
     # OpenID requests comes in
     post '/server', request_params 
     # User has to log in
-    assert_redirected_to login_url
+    assert_redirected_to safe_login_url
     post '/session', :login => 'quentin', :password => 'test'
     # User has to verify the request
     assert_redirected_to proceed_url
@@ -33,7 +33,7 @@ class OpenidUserStoriesTest < ActionController::IntegrationTest
     # OpenID requests comes in
     post '/server', request_params 
     # User has to log in
-    assert_redirected_to login_url
+    assert_redirected_to safe_login_url
     post '/session', :login => 'quentin', :password => 'test'
     # User has to verify the request
     assert_redirected_to proceed_url
@@ -107,7 +107,7 @@ class OpenidUserStoriesTest < ActionController::IntegrationTest
     # OpenID requests comes in
     post '/server', request_params 
     # User has to log in
-    assert_redirected_to login_url
+    assert_redirected_to safe_login_url
     post '/session', :login => 'quentin', :password => 'test'
     # User has to verify the request
     assert_redirected_to proceed_url

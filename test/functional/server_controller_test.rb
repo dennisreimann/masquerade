@@ -41,7 +41,7 @@ class ServerControllerTest < ActionController::TestCase
     login_as(:standard)
     id_url = "http://notmine.com"
     post :index, checkid_request_params.merge('openid.identity' => id_url, 'openid.claimed_id' => id_url)
-    assert_redirected_to login_url
+    assert_redirected_to safe_login_url
     assert_not_nil @request.session[:return_to]
     assert_not_nil @request.session[:request_token]
   end

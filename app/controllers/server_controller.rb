@@ -100,7 +100,7 @@ class ServerController < ApplicationController
   def handle_checkid_request
     if allow_verification?
       save_checkid_request
-      redirect_to proceed_pathsafe_login
+      redirect_to proceed_path
     elsif openid_request.immediate
       render_response(openid_request.answer(false))
     else
