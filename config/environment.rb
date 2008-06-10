@@ -1,5 +1,5 @@
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.0.2' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.1.0' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -31,4 +31,8 @@ Rails::Initializer.run do |config|
     :user_name => APP_CONFIG['mailer']['user_name'],
     :password => APP_CONFIG['mailer']['password'],
     :authentication => APP_CONFIG['mailer']['authentication'] }
+  
+  # Gems
+  config.gem 'ruby-openid', :lib => 'openid', :version => '2.0.4'
+  config.gem 'ruby-yadis', :lib => 'yadis' , :version => '0.3.4'
 end

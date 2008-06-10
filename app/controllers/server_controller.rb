@@ -8,7 +8,6 @@ class ServerController < ApplicationController
   # Actions other than index require a logged in user
   before_filter :login_required, :except => [:index, :cancel, :seatbelt_config, :seatbelt_login_state]
   before_filter :ensure_valid_checkid_request, :except => [:index, :cancel, :seatbelt_config, :seatbelt_login_state]
-  before_filter :clear_checkid_request, :only => [:index]
   after_filter :clear_checkid_request, :only => [:cancel, :complete]
   # These methods are used to display information about the request to the user
   helper_method :sreg_request, :ax_fetch_request
@@ -19,6 +18,7 @@ class ServerController < ApplicationController
   # dependents on the users login state (see handle_checkid_request).
   # Yadis requests return information about this endpoint.
   def index
+    clear_checkid_request
     respond_to do |format|
       format.html do
         if openid_request.is_a?(OpenID::Server::CheckIDRequest)
@@ -117,7 +117,6 @@ class ServerController < ApplicationController
   end
   
   # Deletes the old request when a new one comes in.
-  # Use this as before_filter for your server endpoint.
   def clear_checkid_request
     unless session[:request_token].blank?
       OpenIdRequest.destroy_all :token => session[:request_token]
