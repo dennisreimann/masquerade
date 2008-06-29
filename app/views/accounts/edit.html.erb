@@ -6,6 +6,12 @@
 		<%= f.label :email %>
   		<%= f.text_field :email %>
 	</div>
+	
+	<div class="row">
+		<%= f.label :public_persona_id %>
+  		<%= f.select :public_persona_id, @account.personas.map{ |p| [ p.title, p.id ]}, :include_blank => true %>
+	</div>
+	
 	<div>
   	<%= f.submit 'update' %>
   </div>

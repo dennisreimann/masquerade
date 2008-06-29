@@ -18,7 +18,7 @@ class Account < ActiveRecord::Base
   before_save   :encrypt_password
   before_create :make_activation_code
   
-  attr_accessible :login, :email, :password, :password_confirmation
+  attr_accessible :login, :email, :password, :password_confirmation, :public_persona_id
   attr_accessor :password
   
   class ActivationCodeNotFound < StandardError; end
