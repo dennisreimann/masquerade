@@ -100,9 +100,9 @@ class Test::Unit::TestCase
   def ax_fetch_request_params
     { 'openid.ns.ax' => OpenID::AX::AXMessage::NS_URI,
       'openid.ax.mode' => 'fetch_request',
-      'openid.ax.type.fullname' => 'http://axschema.org/namePerson',
+      'openid.ax.type.nickname' => 'http://axschema.org/namePerson/friendly',
       'openid.ax.type.gender' => 'http://axschema.org/person/gender',
-      'openid.ax.required' => 'fullname',
+      'openid.ax.required' => 'nickname',
       'openid.ax.if_available' => 'gender',
       'openid.ax.update_url' => 'http://test.com/update' }
   end

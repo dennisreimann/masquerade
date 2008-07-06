@@ -25,6 +25,8 @@ class OpenidUserStoriesTest < ActionController::IntegrationTest
   end
   
   def test_providing_sreg_data
+    @account = accounts(:standard)
+    @persona = @account.personas.first
     claimed_id = "http://www.example.com/quentin"
     request_params = checkid_request_params.merge(
       'openid.identity' => claimed_id,
@@ -34,18 +36,17 @@ class OpenidUserStoriesTest < ActionController::IntegrationTest
     post '/server', request_params 
     # User has to log in
     assert_redirected_to safe_login_url
-    post '/session', :login => 'quentin', :password => 'test'
+    post '/session', :login => @account.login, :password => 'test'
     # User has to verify the request
     assert_redirected_to proceed_url
     follow_redirect!
     assert_redirected_to decide_url
     follow_redirect!
     assert_template 'server/decide'
-    post 'server/complete', :temporary => 1, 
-      :site => { :sreg => { 'nickname' => 'Test' } }
+    post 'server/complete', :temporary => 1, :site => { :persona_id => @persona.id, :sreg => { 'nickname' => @persona.nickname } }
     assert @response.redirect_url_match?(checkid_request_params['openid.return_to'])
     assert @response.redirect_url_match?("openid.mode=id_res")
-    assert @response.redirect_url_match?("openid.sreg.nickname=Test"), "Response was expected to have SReg nickname"
+    assert @response.redirect_url_match?("openid.sreg.nickname=#{@persona.nickname}"), "Response was expected to have SReg nickname"
   end
 
   def test_responding_to_immidiate_requests_when_already_logged_in
@@ -99,6 +100,8 @@ class OpenidUserStoriesTest < ActionController::IntegrationTest
   end
   
   def test_providing_ax_data
+    @account = accounts(:standard)
+    @persona = @account.personas.first
     claimed_id = "http://www.example.com/quentin"
     request_params = checkid_request_params.merge(
       'openid.identity' => claimed_id,
@@ -115,15 +118,16 @@ class OpenidUserStoriesTest < ActionController::IntegrationTest
     assert_redirected_to decide_url
     follow_redirect!
     assert_template 'server/decide'
-    post 'server/complete', :temporary => 1, :site => { 
+    post 'server/complete', :temporary => 1, :site => {
+      :persona_id => @persona.id,
       :ax => { 
-        'fullname' => { 'type' => 'http://axschema.org/namePerson', 'value' => 'Testmann' },
-        'gender' => { 'type' => 'http://axschema.org/person/gender', 'value' => 'M' } } }
+        'nickname' => { 'type' => 'http://axschema.org/namePerson/friendly', 'value' => @persona.nickname },
+        'gender' => { 'type' => 'http://axschema.org/person/gender', 'value' => @persona.gender } } }
     assert @response.redirect_url_match?(checkid_request_params['openid.return_to'])
     assert @response.redirect_url_match?("openid.mode=id_res"), "Response mode was expected to be id_res"
     assert @response.redirect_url_match?("openid.ax.mode=fetch_response"), "AX mode was expected to be fetch_response"
-    assert @response.redirect_url_match?("Testmann"), "Response was expected to have AX fullname: #{@response.redirect_url}"
-    assert @response.redirect_url_match?("M"), "Response was expected to have AX gender: #{@response.redirect_url}"
+    assert @response.redirect_url_match?(@persona.nickname), "Response was expected to have AX nickname: #{@response.redirect_url}"
+    assert @response.redirect_url_match?(@persona.gender), "Response was expected to have AX gender: #{@response.redirect_url}"
   end
   
   def test_responding_to_pape_requests
@@ -144,7 +148,7 @@ class OpenidUserStoriesTest < ActionController::IntegrationTest
     follow_redirect!
     assert_template 'server/decide'
     post 'server/complete', :temporary => 1
-    assert @response.redirect_url_match?(checkid_request_params['openid.return_to'])
+    assert @response.redirect_url_match?(checkid_request_params['openid.return_to']), "Redirected to: #{@response.redirect_url}"
     assert @response.redirect_url_match?("openid.mode=id_res"), "Response mode was expected to be id_res"
     assert @response.redirect_url_match?("openid.pape.auth_policies=")
     assert @response.redirect_url_match?("openid.pape.auth_age="), "Response was expected to have PAPE Auth Age: #{@response.redirect_url}"

@@ -76,11 +76,14 @@ class ServerController < ApplicationController
       if params[:always]
         @site = current_account.sites.find_or_create_by_persona_id_and_url(params[:site][:persona_id], params[:site][:url])
         @site.update_attributes(params[:site])
+      elsif sreg_request || ax_fetch_request
+        @site = current_account.sites.find_or_initialize_by_persona_id_and_url(params[:site][:persona_id], params[:site][:url])
+        @site.attributes = params[:site]
       end
       resp = checkid_request.answer(true, nil, identifier(current_account))
-      resp = add_pape(resp, [], nist_auth_level, current_openid_request.created_at)
-      resp = add_sreg(resp, params[:site][:sreg]) if sreg_request && params[:site][:sreg]
-      resp = add_ax(resp, transform_ax_data(params[:site][:ax])) if ax_fetch_request && params[:site][:ax]
+      resp = add_pape(resp, [], 2, current_openid_request.created_at)
+      resp = add_sreg(resp, @site.sreg_properties) if sreg_request && @site.sreg_properties
+      resp = add_ax(resp, @site.ax_properties) if ax_fetch_request && @site.ax_properties
       render_response(resp)
     end
   end
