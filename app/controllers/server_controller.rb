@@ -48,7 +48,7 @@ class ServerController < ApplicationController
       resp = checkid_request.answer(true, nil, identity)
       resp = add_sreg(resp, @site.sreg_properties) if sreg_request
       resp = add_ax(resp, @site.ax_properties) if ax_fetch_request
-      resp = add_pape(resp)
+      resp = add_pape(resp, [], nist_auth_level, current_openid_request.created_at)
       render_response(resp)
     elsif checkid_request.immediate && (sreg_request || ax_fetch_request)
       render_response(checkid_request.answer(false))
@@ -78,7 +78,7 @@ class ServerController < ApplicationController
         @site.update_attributes(params[:site])
       end
       resp = checkid_request.answer(true, nil, identifier(current_account))
-      resp = add_pape(resp)
+      resp = add_pape(resp, [], nist_auth_level, current_openid_request.created_at)
       resp = add_sreg(resp, params[:site][:sreg]) if sreg_request && params[:site][:sreg]
       resp = add_ax(resp, transform_ax_data(params[:site][:ax])) if ax_fetch_request && params[:site][:ax]
       render_response(resp)
@@ -145,6 +145,12 @@ class ServerController < ApplicationController
   # has to be selected by the server (id_select)
   def allow_verification?
     logged_in? && (openid_request.identity == identifier(current_account) || openid_request.id_select)
+  end
+  
+  # The NIST Assurance Level, see:
+  # http://openid.net/specs/openid-provider-authentication-policy-extension-1_0-01.html#anchor12
+  def nist_auth_level
+    APP_CONFIG['use_ssl'] ? 2 : 0
   end
   
   # Clears the stored request and answers

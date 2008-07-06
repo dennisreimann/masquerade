@@ -125,4 +125,29 @@ class OpenidUserStoriesTest < ActionController::IntegrationTest
     assert @response.redirect_url_match?("Testmann"), "Response was expected to have AX fullname: #{@response.redirect_url}"
     assert @response.redirect_url_match?("M"), "Response was expected to have AX gender: #{@response.redirect_url}"
   end
+  
+  def test_responding_to_pape_requests
+    claimed_id = "http://www.example.com/quentin"
+    request_params = checkid_request_params.merge(
+      'openid.identity' => claimed_id,
+      'openid.claimed_id' => claimed_id).merge(
+      pape_request_params)
+    # OpenID requests comes in
+    post '/server', request_params 
+    # User has to log in
+    assert_redirected_to safe_login_url
+    post '/session', :login => 'quentin', :password => 'test'
+    # User has to verify the request
+    assert_redirected_to proceed_url
+    follow_redirect!
+    assert_redirected_to decide_url
+    follow_redirect!
+    assert_template 'server/decide'
+    post 'server/complete', :temporary => 1
+    assert @response.redirect_url_match?(checkid_request_params['openid.return_to'])
+    assert @response.redirect_url_match?("openid.mode=id_res"), "Response mode was expected to be id_res"
+    assert @response.redirect_url_match?("openid.pape.auth_policies=")
+    assert @response.redirect_url_match?("openid.pape.auth_age="), "Response was expected to have PAPE Auth Age: #{@response.redirect_url}"
+    assert @response.redirect_url_match?("openid.pape.nist_auth_level="), "Response was expected to have PAPE NIST Auth Level: #{@response.redirect_url}"
+  end
 end

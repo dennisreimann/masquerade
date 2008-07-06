@@ -118,6 +118,15 @@ class Test::Unit::TestCase
       'openid.ax.value.email.2' => 'info@mydomain.com' }
   end
   
+  def pape_request_params
+    { 'openid.ns.pape' => OpenID::PAPE::NS_URI,
+      'openid.pape.max_auth_age' => 'store_request',
+      'openid.pape.preferred_auth_policies' => [
+        OpenID::PAPE::AUTH_MULTI_FACTOR_PHYSICAL,
+        OpenID::PAPE::AUTH_MULTI_FACTOR,
+        OpenID::PAPE::AUTH_PHISHING_RESISTANT].join(' ') }
+  end
+  
   def assert_invalid(object, attribute, message = nil)
     assert_equal false, object.valid?
     assert object.errors.on(attribute), message

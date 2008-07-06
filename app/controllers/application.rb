@@ -56,12 +56,14 @@ class ApplicationController < ActionController::Base
   
   def checkid_request
     unless @checkid_request
-      oid_request = OpenIdRequest.find_by_token(session[:request_token]) if session[:request_token]
-      req = openid_server.decode_request(oid_request.parameters) if oid_request
+      req = openid_server.decode_request(current_openid_request.parameters) if current_openid_request
       @checkid_request = req.is_a?(OpenID::Server::CheckIDRequest) ? req : false
-    else
-      @checkid_request
     end
+    @checkid_request
+  end
+  
+  def current_openid_request
+    @current_openid_request ||= OpenIdRequest.find_by_token(session[:request_token]) if session[:request_token]
   end
   
   def render_404

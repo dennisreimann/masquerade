@@ -9,6 +9,7 @@ xml.xrds(:XRDS,
       xml.Type OpenID::SReg::NS_URI_1_1
       xml.Type OpenID::SReg::NS_URI_1_0
       xml.Type OpenID::AX::AXMessage::NS_URI
+      xml.Type OpenID::PAPE::NS_URI
   		xml.URI endpoint_url
     end
   end

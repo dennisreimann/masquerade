@@ -66,12 +66,12 @@ module OpenidServerSystem
   end
   
   # Adds PAPE information for your server to an OpenID response.
-  # Currently there is no auth level implemented.
-  # TODO: Implement PAPE
-  def add_pape(resp)
+  def add_pape(resp, policies = [], auth_level = 0, request_start_time = nil)
     if papereq = OpenID::PAPE::Request.from_openid_request(openid_request)
       paperesp = OpenID::PAPE::Response.new
-      paperesp.nist_auth_level = 0
+      policies.each { |p| paperesp.add_policy_uri(p) }
+      paperesp.nist_auth_level = auth_level
+      paperesp.auth_age = (Time.now - request_start_time).to_i if request_start_time
       resp.add_extension(paperesp)
     end
     resp
