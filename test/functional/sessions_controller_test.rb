@@ -75,7 +75,15 @@ class SessionsControllerTest < ActionController::TestCase
     get :new
     assert !@controller.send(:logged_in?)
   end
-
+  
+  def test_should_set_authentication_attributes_after_successful_login
+    @account = accounts(:standard)
+    post :create, :login => @account.login, :password => 'test'
+    @account.reload
+    assert_not_nil @account.last_authenticated_at
+    assert_not_nil @account.last_authenticated_with_yubikey
+  end
+  
   protected
   
   def auth_token(token)

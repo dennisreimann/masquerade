@@ -7,12 +7,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if password_is_yubico_otp?(params[:password]) && verify_yubico_otp(params[:password])
-      yi = extract_yubico_identity_from_otp(params[:password])
-      self.current_account = Account.find_by_login_and_yubico_identity(params[:login], yi)
-    else
-      self.current_account = Account.authenticate(params[:login], params[:password])
-    end
+    self.current_account = Account.authenticate(params[:login], params[:password])
     if logged_in?
       flash[:notice] = 'You are now logged in.'
       redirect_after_login
@@ -50,7 +45,4 @@ class SessionsController < ApplicationController
     end
   end
   
-  def password_is_yubico_otp?(password)
-    password.length == 44
-  end
 end

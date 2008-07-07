@@ -89,13 +89,14 @@ class ConsumerController < ApplicationController
       end
       if params[:did_pape]
         pape_resp = OpenID::PAPE::Response.from_success_response(oidresp)
-        pape_message = "\n\nA phishing resistant authentication method was requested"
-        if pape_resp.auth_policies.member? OpenID::PAPE::AUTH_PHISHING_RESISTANT
-          pape_message << ", and the server reported one."
+        pape_message = "\n\nAuthentication policies were requested"
+        unless pape_resp.auth_policies.empty?
+          pape_message << ", and the server reported the following:\n"
+          pape_resp.auth_policies.each { |p| pape_message << "#{p}\n" }
         else
           pape_message << ", but the server did not report one."
         end
-        pape_message << "\nAuthentication age: #{pape_resp.auth_age} seconds" if pape_resp.auth_age
+        pape_message << "\nAuthentication time: #{pape_resp.auth_time}" if pape_resp.auth_time
         pape_message << "\nNIST Auth Level: #{pape_resp.nist_auth_level}" if pape_resp.nist_auth_level
         flash[:notice] += pape_message
       end

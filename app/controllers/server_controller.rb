@@ -48,7 +48,7 @@ class ServerController < ApplicationController
       resp = checkid_request.answer(true, nil, identity)
       resp = add_sreg(resp, @site.sreg_properties) if sreg_request
       resp = add_ax(resp, @site.ax_properties) if ax_fetch_request
-      resp = add_pape(resp, [], nist_auth_level, current_openid_request.created_at)
+      resp = add_pape(resp, auth_policies, auth_level, auth_time)
       render_response(resp)
     elsif checkid_request.immediate && (sreg_request || ax_fetch_request)
       render_response(checkid_request.answer(false))
@@ -81,7 +81,7 @@ class ServerController < ApplicationController
         @site.attributes = params[:site]
       end
       resp = checkid_request.answer(true, nil, identifier(current_account))
-      resp = add_pape(resp, [], 2, current_openid_request.created_at)
+      resp = add_pape(resp, auth_policies, auth_level, auth_time)
       resp = add_sreg(resp, @site.sreg_properties) if sreg_request && @site.sreg_properties
       resp = add_ax(resp, @site.ax_properties) if ax_fetch_request && @site.ax_properties
       render_response(resp)
@@ -150,12 +150,6 @@ class ServerController < ApplicationController
     logged_in? && (openid_request.identity == identifier(current_account) || openid_request.id_select)
   end
   
-  # The NIST Assurance Level, see:
-  # http://openid.net/specs/openid-provider-authentication-policy-extension-1_0-01.html#anchor12
-  def nist_auth_level
-    APP_CONFIG['use_ssl'] ? 2 : 0
-  end
-  
   # Clears the stored request and answers
   def render_response(resp)
     clear_checkid_request
@@ -181,6 +175,28 @@ class ServerController < ApplicationController
     else exception.to_s
     end
     render :text => "Invalid OpenID request: #{error}", :status => 500
+  end
+  
+  private
+  
+  # The NIST Assurance Level, see:
+  # http://openid.net/specs/openid-provider-authentication-policy-extension-1_0-01.html#anchor12
+  def auth_level
+    if APP_CONFIG['use_ssl']
+      current_account.last_authenticated_with_yubikey? ? 3 : 2
+    else
+      0
+    end
+  end
+  
+  def auth_time
+    current_account.last_authenticated_at.utc.iso8601 if current_account.last_authenticated_at
+  end
+  
+  def auth_policies
+    current_account.last_authenticated_with_yubikey? ? 
+      [OpenID::PAPE::AUTH_MULTI_FACTOR, OpenID::PAPE::AUTH_PHISHING_RESISTANT] :
+      []
   end
   
 end

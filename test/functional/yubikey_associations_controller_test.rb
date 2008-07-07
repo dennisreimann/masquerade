@@ -1,7 +1,9 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class YubikeyAssociationsControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
+  
+  fixtures :accounts
+  
   def test_truth
     assert true
   end

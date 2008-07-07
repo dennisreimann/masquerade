@@ -1,7 +1,7 @@
 <% form_tag consumer_start_path do %>
 	<div class="row">
 		<%= label_tag :openid_identifier, 'Identifier:', :class => 'check' %>
-		<%= text_field_tag :openid_identifier %>
+		<%= text_field_tag :openid_identifier, APP_CONFIG['host'] %>
 		<%= submit_tag 'Verify' %>
 	</div>
 	<div class="row">

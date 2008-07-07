@@ -3,9 +3,7 @@ class YubikeyAssociationsController < ApplicationController
   before_filter :login_required
     
   def create
-    if verify_yubico_otp(params[:yubico_otp])
-      current_account.yubico_identity = extract_yubico_identity_from_otp(params[:yubico_otp])
-      current_account.save
+    if current_account.associate_with_yubikey(params[:yubico_otp])
       flash[:notice] = 'Your account has been associated with your Yubico identity.'
     else
       flash[:error] = 'Sorry, the given Yubico one time password is incorrect.'

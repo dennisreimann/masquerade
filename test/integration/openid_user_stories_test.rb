@@ -151,7 +151,7 @@ class OpenidUserStoriesTest < ActionController::IntegrationTest
     assert @response.redirect_url_match?(checkid_request_params['openid.return_to']), "Redirected to: #{@response.redirect_url}"
     assert @response.redirect_url_match?("openid.mode=id_res"), "Response mode was expected to be id_res"
     assert @response.redirect_url_match?("openid.pape.auth_policies=")
-    assert @response.redirect_url_match?("openid.pape.auth_age="), "Response was expected to have PAPE Auth Age: #{@response.redirect_url}"
+    assert @response.redirect_url_match?("openid.pape.auth_time="), "Response was expected to have PAPE Auth Age: #{@response.redirect_url}"
     assert @response.redirect_url_match?("openid.pape.nist_auth_level="), "Response was expected to have PAPE NIST Auth Level: #{@response.redirect_url}"
   end
 end

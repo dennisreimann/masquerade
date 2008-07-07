@@ -9,8 +9,8 @@ The source code is available at {github}[http://github.com/dbloete/masquerade/] 
 
 == Installation
 
-1. Install the {ruby-openid gem}[http://openidenabled.com/ruby-openid/]
-	gem install ruby-openid
+1. Install the required gems
+	rake gems:install
 
 2. Configure the database:
 	* rename the file config/database.yml.example to database.yml

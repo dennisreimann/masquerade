@@ -1,8 +1,9 @@
 --- 
 default: &default
   name: masquerade
-  host: 'localhost:3000'
+  host: localhost:3000
   use_ssl: false
+  time_zone: Berlin
   email: info@your.domain.com
   session:
     session_key: openidserver_session_id

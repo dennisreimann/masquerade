@@ -19,9 +19,6 @@ Rails::Initializer.run do |config|
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = APP_CONFIG['session']
   
-  # Make Active Record use UTC-base instead of local time
-  #config.active_record.default_timezone = :utc
-  
   # Mailer
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
@@ -32,7 +29,10 @@ Rails::Initializer.run do |config|
     :password => APP_CONFIG['mailer']['password'],
     :authentication => APP_CONFIG['mailer']['authentication'] }
   
+  # Timezone
+  config.time_zone = APP_CONFIG['time_zone'] || 'UTC'
+  
   # Gems
-  config.gem 'ruby-openid', :lib => 'openid', :version => '2.0.4'
+  config.gem 'ruby-openid', :lib => 'openid', :version => '2.1.2'
   config.gem 'ruby-yadis', :lib => 'yadis', :version => '0.3.4'
 end
