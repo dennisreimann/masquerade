@@ -64,7 +64,7 @@ class AccountsController < ApplicationController
       account = Account.find_and_activate!(params[:id])
       flash[:notice] = 'Your account is activated - you can login now.'
       redirect_to login_path
-    rescue Account::ArgumentError, Account::ActivationCodeNotFound
+    rescue ArgumentError, Account::ActivationCodeNotFound
       flash[:error] = 'We could not find any account with the given activation code. Please create a new account.'
       redirect_to new_account_path
     rescue Account::AlreadyActivated
