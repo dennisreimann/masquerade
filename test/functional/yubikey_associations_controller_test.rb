@@ -16,8 +16,8 @@ class YubikeyAssociationsControllerTest < ActionController::TestCase
   end
   
   def test_should_remove_an_association
-    @account = accounts(:standard)
-    login_as(:standard)
+    @account = accounts(:with_yubico_identity)
+    login_as(:with_yubico_identity)
     delete :destroy
     @account.reload
     assert_nil @account.yubico_identity

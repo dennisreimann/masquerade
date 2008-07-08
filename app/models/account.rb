@@ -66,8 +66,8 @@ class Account < ActiveRecord::Base
   # Returns the user or nil.
   def self.authenticate(login, password)
     if a = find(:first, :conditions => ['login = ? and enabled = ? and activated_at IS NOT NULL', login, true]) # need to get the salt
-      if (password.length >= 44 && a.yubikey_authenticated?(password)) || a.authenticated?(password)
-        a.last_authenticated_at, a.last_authenticated_with_yubikey = Time.now, (password.length >= 44)
+      if a.authenticated?(password)
+        a.last_authenticated_at, a.last_authenticated_with_yubikey = Time.now, a.authenticated_with_yubikey?
         a.save(false)
         a
       end
@@ -83,18 +83,27 @@ class Account < ActiveRecord::Base
   def encrypt(password)
     self.class.encrypt(password, salt)
   end
-
+  
   def authenticated?(password)
-    encrypt(password) == crypted_password
+    if password.length < 50
+      encrypt(password) == crypted_password
+    else
+      password, yubico_otp = Account.split_password_and_yubico_otp(password)
+      encrypt(password) == crypted_password && @authenticated_with_yubikey = yubikey_authenticated?(yubico_otp)
+    end
   end
   
   # Is the Yubico OTP valid and belongs to this account?
   def yubikey_authenticated?(otp)
     if yubico_identity? && Account.verify_yubico_otp(otp)
-      Account.extract_yubico_identity_from_otp(otp) == yubico_identity
+      (Account.extract_yubico_identity_from_otp(otp) == yubico_identity)
     else
       false
     end
+  end
+  
+  def authenticated_with_yubikey?
+    @authenticated_with_yubikey || false
   end
   
   def associate_with_yubikey(otp)
@@ -189,6 +198,15 @@ class Account < ActiveRecord::Base
   # which are used to identify a Yubikey
   def self.extract_yubico_identity_from_otp(yubico_otp)
     yubico_otp[0..11]
+  end
+  
+  # Recieves a login token which consists of the users password and
+  # a Yubico one time password (the otp is always 44 characters long)
+  def self.split_password_and_yubico_otp(token)
+    token.reverse!
+    yubico_otp = token.slice!(0..43).reverse
+    password = token.reverse
+    [password, yubico_otp]
   end
   
   # Utilizes the Yubico library to verify an one time password 

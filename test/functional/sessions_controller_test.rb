@@ -81,8 +81,18 @@ class SessionsControllerTest < ActionController::TestCase
     post :create, :login => @account.login, :password => 'test'
     @account.reload
     assert_not_nil @account.last_authenticated_at
-    assert_not_nil @account.last_authenticated_with_yubikey
+    assert !@account.last_authenticated_with_yubikey
   end
+  
+  # def test_should_authenticate_with_password_and_yubico_otp
+  #   @account = accounts(:with_yubico_identity)
+  #   yubico_otp = @account.yubico_identity + 'x' * 32
+  #   Account.expects(:verify_yubico_otp).with(yubico_otp).returns(true)
+  #   post :create, :login => @account.login, :password => 'test' + yubico_otp
+  #   @account.reload
+  #   assert_not_nil @account.last_authenticated_at
+  #   assert @account.last_authenticated_with_yubikey
+  # end
   
   protected
   

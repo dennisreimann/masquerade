@@ -184,4 +184,10 @@ class AccountTest < ActiveSupport::TestCase
     assert !@account.yubikey_authenticated?(yubico_otp)
   end
   
+  def test_should_split_password_and_yubico_otp
+    password, yubico_otp = '123456', ('x' * 22 + 'y' * 22)
+    token = password + yubico_otp
+    assert_equal [password, yubico_otp], Account.split_password_and_yubico_otp(token)
+  end
+  
 end
