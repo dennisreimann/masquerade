@@ -137,17 +137,25 @@ class ServerController < ApplicationController
       flash[:error] = 'The identity verification request is invalid.'
       redirect_to home_path
     elsif !allow_verification?
-      flash[:notice] = 'Please log in to verify your identity.'
+      flash[:notice] = logged_in? && !pape_requirements_met?(auth_time) ?
+        'The Service Provider requires reauthentication, because your last login is too long ago.' :
+        'Please log in to verify your identity.'
       session[:return_to] = proceed_path
       redirect_to login_path
     end
   end
   
+  # The user must be logged in, he must be the owner of the claimed identifier
+  # and the PAPE requirements must be met if applicable.
+  def allow_verification?
+    logged_in? && correct_identifier? && pape_requirements_met?(auth_time)
+  end
+  
   # Is the user allowed to verify the claimed identifier? The user
   # must be logged in, so that we know his identifier or the identifier
-  # has to be selected by the server (id_select)
-  def allow_verification?
-    logged_in? && (openid_request.identity == identifier(current_account) || openid_request.id_select)
+  # has to be selected by the server (id_select).
+  def correct_identifier?
+    (openid_request.identity == identifier(current_account) || openid_request.id_select)
   end
   
   # Clears the stored request and answers
@@ -190,7 +198,7 @@ class ServerController < ApplicationController
   end
   
   def auth_time
-    current_account.last_authenticated_at.utc.iso8601 if current_account.last_authenticated_at
+    current_account.last_authenticated_at
   end
   
   def auth_policies

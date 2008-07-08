@@ -37,7 +37,7 @@ class ConsumerController < ApplicationController
     if params[:use_pape]
       papereq = OpenID::PAPE::Request.new
       papereq.add_policy_uri(OpenID::PAPE::AUTH_PHISHING_RESISTANT)
-      papereq.max_auth_age = 2*60
+      papereq.max_auth_age = 60
       oidreq.add_extension(papereq)
       oidreq.return_to_args['did_pape'] = 'y'
     end
