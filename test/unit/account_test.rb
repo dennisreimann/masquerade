@@ -156,4 +156,32 @@ class AccountTest < ActiveSupport::TestCase
     assert_nil Site.find_by_id(@site.id)
   end
   
+  def test_should_get_associated_with_a_yubikey_if_the_given_otp_is_correct
+    @account = accounts(:standard)
+    yubico_otp = 'x' * 44
+    assert @account.yubico_identity.nil?
+    Account.expects(:verify_yubico_otp).with(yubico_otp).returns(true)
+    @account.associate_with_yubikey(yubico_otp)
+    @account.reload
+    assert_equal yubico_otp[0..11], @account.yubico_identity
+  end
+  
+  def test_should_be_able_to_authenticate_with_a_yubikey_if_it_matches_the_yubico_identity
+    @account = accounts(:standard)
+    yubico_otp = 'x' * 44
+    @account.yubico_identity = yubico_otp[0..11]
+    assert @account.save
+    Account.expects(:verify_yubico_otp).with(yubico_otp).returns(true)
+    assert @account.yubikey_authenticated?(yubico_otp)
+  end
+  
+  def test_should_not_be_able_to_authenticate_with_a_yubikey_if_it_does_not_match_the_yubico_identity
+    @account = accounts(:standard)
+    yubico_otp = 'x' * 44
+    @account.yubico_identity = 'y' * 12
+    assert @account.save
+    Account.expects(:verify_yubico_otp).with(yubico_otp).returns(true)
+    assert !@account.yubikey_authenticated?(yubico_otp)
+  end
+  
 end

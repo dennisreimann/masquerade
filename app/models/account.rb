@@ -43,18 +43,6 @@ class Account < ActiveRecord::Base
     user
   end
   
-  # Utilizes the Yubico library to verify an one time password 
-  def self.verify_yubico_otp(otp)
-    yubico = Yubico.new(APP_CONFIG['yubico']['id'], APP_CONFIG['yubico']['api_key'])
-    yubico.verify(otp) == Yubico::E_OK
-  end
-  
-  # Returns the first twelve chars from the Yubico OTP,
-  # which are used to identify a Yubikey
-  def self.extract_yubico_identity_from_otp(yubico_otp)
-    yubico_otp[0..11]
-  end
-  
   def to_param
     login
   end
@@ -195,6 +183,18 @@ class Account < ActiveRecord::Base
     self.activated_at = Time.now.utc
     self.activation_code = nil
     self.save
+  end
+  
+  # Returns the first twelve chars from the Yubico OTP,
+  # which are used to identify a Yubikey
+  def self.extract_yubico_identity_from_otp(yubico_otp)
+    yubico_otp[0..11]
+  end
+  
+  # Utilizes the Yubico library to verify an one time password 
+  def self.verify_yubico_otp(otp)
+    yubico = Yubico.new(APP_CONFIG['yubico']['id'], APP_CONFIG['yubico']['api_key'])
+    yubico.verify(otp) == Yubico::E_OK
   end
   
 end
