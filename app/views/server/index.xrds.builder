@@ -9,7 +9,8 @@ xml.xrds(:XRDS,
       xml.Type OpenID::SReg::NS_URI_1_1
       xml.Type OpenID::SReg::NS_URI_1_0
       xml.Type OpenID::AX::AXMessage::NS_URI
-      xml.Type OpenID::PAPE::NS_URI
+      xml.Type OpenID::PAPE::AUTH_MULTI_FACTOR if APP_CONFIG['use_ssl']
+      xml.Type OpenID::PAPE::AUTH_PHISHING_RESISTANT if APP_CONFIG['use_ssl']
   		xml.URI endpoint_url
     end
   end

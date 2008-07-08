@@ -68,7 +68,12 @@ class Account < ActiveRecord::Base
   def pending?
     @activated
   end
-
+  
+  # Does the user have the possibility to authenticate with a one time password?
+  def has_otp_device?
+    !yubico_identity.nil?
+  end
+  
   # Authenticates a user by their login name and password.
   # Returns the user or nil.
   def self.authenticate(login, password)

@@ -14,6 +14,12 @@ module ApplicationHelper
     active_page? 'accounts' => ['show']
   end
   
+  # Is the current page the home page? This is used to display
+  # further information (like the endoint url) in the <head>
+  def home_page?
+    active_page? 'info' => ['index']
+  end
+  
   # Custom label names for request properties (like SReg data)
   def property_label_text(property)
     case property.to_sym
