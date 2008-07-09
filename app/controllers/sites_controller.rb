@@ -7,7 +7,7 @@ class SitesController < ApplicationController
   before_filter :find_personas, :only => [:create, :edit, :update]
   
   def index
-    @sites = @account.sites.find(:all, :include => :persona)
+    @sites = @account.sites.find(:all, :include => :persona, :order => :url)
 
     respond_to do |format|
       format.html
