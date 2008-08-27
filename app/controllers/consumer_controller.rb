@@ -18,7 +18,7 @@ class ConsumerController < ApplicationController
       oidreq.add_extension(sregreq)
       oidreq.return_to_args['did_sreg'] = 'y'
     end
-    if params[:use_ax]
+    if params[:use_ax_fetch]
       axreq = OpenID::AX::FetchRequest.new
       requested_attrs = [['http://axschema.org/namePerson/friendly', 'nickname', true],
                          ['http://axschema.org/contact/email', 'email', true],
@@ -32,7 +32,14 @@ class ConsumerController < ApplicationController
                          ['http://axschema.org/pref/timezone', 'timezone']]
       requested_attrs.each { |a| axreq.add(OpenID::AX::AttrInfo.new(a[0], a[1], a[2] || false, a[3] || 1)) }
       oidreq.add_extension(axreq)
-      oidreq.return_to_args['did_ax'] = 'y'
+      oidreq.return_to_args['did_ax_fetch'] = 'y'
+    end
+    if params[:use_ax_store]
+      ax_store_req = OpenID::AX::StoreRequest.new
+      ax_store_req.set_values('http://axschema.org/contact/email', %w(email@example.com))
+      ax_store_req.set_values('http://axschema.org/birthDate', %w(1976-08-07))
+      oidreq.add_extension(ax_store_req)
+      oidreq.return_to_args['did_ax_store'] = 'y'
     end
     if params[:use_pape]
       papereq = OpenID::PAPE::Request.new
@@ -76,16 +83,28 @@ class ConsumerController < ApplicationController
         end
         flash[:notice] += sreg_message
       end
-      if params[:did_ax]
-        ax_resp = OpenID::AX::FetchResponse.from_success_response(oidresp)
-        ax_message = "\n\n" + t(:attribute_exchange_data_requested)
-        unless ax_resp
-          ax_message << ", " + t(:but_none_was_returned)
+      if params[:did_ax_fetch]
+        ax_fetch_resp = OpenID::AX::FetchResponse.from_success_response(oidresp)
+        ax_fetch_message = "\n\nAttribute Exchange data was requested"
+        unless ax_fetch_resp
+          ax_fetch_message << ", but none was returned."
         else
-          ax_message << ". " + t(:the_following_data_were_sent) + "\n"
-          ax_resp.data.each { |k,v| ax_message << "#{k}: #{v}\n" }
+          ax_fetch_message << ". The following data were sent:\n"
+          ax_fetch_resp.data.each { |k,v| ax_fetch_message << "#{k}: #{v}\n" }
         end
-        flash[:notice] += ax_message
+        flash[:notice] += ax_fetch_message
+      end
+      if params[:did_ax_store]
+        ax_store_resp = OpenID::AX::StoreResponse.from_success_response(oidresp)
+        ax_store_message = "\n\nAttribute Exchange Store request sent"
+        unless ax_store_resp
+          ax_store_message << ", but got no response."
+        else
+          ax_store_message << ax_store_resp.succeeded? ?
+            ", but an error occured:\n#{ax_store_resp.error_message}" :
+            " and saved at the Idnetity Provider."
+        end
+        flash[:notice] += ax_store_message
       end
       if params[:did_pape]
         pape_resp = OpenID::PAPE::Response.from_success_response(oidresp)

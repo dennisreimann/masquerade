@@ -10,15 +10,19 @@
 	</div>
   <div class="row">
 		<%= check_box_tag :use_sreg %>
-		<%= label_tag :use_sreg, t(:request_registration_data), :class => 'check' %>
+		<%= label_tag :use_sreg, 'Request Simple Registration data', :class => 'check' %>
 	</div>
 	<div class="row">
-		<%= check_box_tag :use_ax %>
-		<%= label_tag :use_ax, t(:request_attribute_exchange_data), :class => 'check' %>
+		<%= check_box_tag :use_ax_fetch %>
+		<%= label_tag :use_ax_fetch, 'Request Attribute Exchange data', :class => 'check' %>
+	</div>
+	<div class="row">
+		<%= check_box_tag :use_ax_store %>
+		<%= label_tag :use_ax_store, 'Store attributes with Attribute Exchange', :class => 'check' %>
 	</div>
 	<div class="row">
 		<%= check_box_tag :use_pape %>
-		<%= label_tag :use_pape, t(:request_pape), :class => 'check' %>
+		<%= label_tag :use_pape, 'Request Provider Authentication Policy (PAPE)', :class => 'check' %>
 	</div>
 	<div class="row">
 		<%= check_box_tag :force_post %>

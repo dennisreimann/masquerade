@@ -1,4 +1,17 @@
 <h2><%=t :identity_request_from_host, :host => h(extract_host(@site.url)) %></h2>
+
+<% if ax_store_request %>
+<div class="attention">
+  <p>And do you accept following data sent from RP?</p>
+  <dl>
+  <% ax_store_request.data.each do |k,v| %>
+  <dt><%=h k %>:</dt>
+  <dd><%=h v.join(', ') %></dd>
+  <% end %>
+  </dl>
+</div>
+<% end %>
+
 <% if sreg_request || ax_fetch_request %>
 <p><%=t :trust_root_requests_some_personal_data, :trust_root => "<strong>#{h checkid_request.trust_root}</strong>" %><br />
 <% if @site.persona %>

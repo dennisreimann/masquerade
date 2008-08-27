@@ -10,7 +10,7 @@ class ServerController < ApplicationController
   before_filter :ensure_valid_checkid_request, :except => [:index, :cancel, :seatbelt_config, :seatbelt_login_state]
   after_filter :clear_checkid_request, :only => [:cancel, :complete]
   # These methods are used to display information about the request to the user
-  helper_method :sreg_request, :ax_fetch_request
+  helper_method :sreg_request, :ax_fetch_request, :ax_store_request
   
   # This is the server endpoint which handles all incoming OpenID requests.
   # Associate and CheckAuth requests are answered directly - functionality
@@ -50,7 +50,7 @@ class ServerController < ApplicationController
       resp = add_ax(resp, @site.ax_properties) if ax_fetch_request
       resp = add_pape(resp, auth_policies, auth_level, auth_time)
       render_response(resp)
-    elsif checkid_request.immediate && (sreg_request || ax_fetch_request)
+    elsif checkid_request.immediate && (sreg_request || ax_store_request || ax_fetch_request)
       render_response(checkid_request.answer(false))
     elsif checkid_request.immediate
       render_response(checkid_request.answer(true, nil, identity))
@@ -63,7 +63,7 @@ class ServerController < ApplicationController
   # choose which data should be transfered to the relying party.
   def decide
     @site = current_account.sites.find_or_initialize_by_url(checkid_request.trust_root)
-    @site.persona = current_account.personas.find(params[:persona_id] || :first) if sreg_request || ax_fetch_request
+    @site.persona = current_account.personas.find(params[:persona_id] || :first) if sreg_request || ax_store_request || ax_fetch_request
   end
   
   # This action is called by submitting the decision form, the information entered by
@@ -73,6 +73,34 @@ class ServerController < ApplicationController
     if params[:cancel]
       cancel
     else
+      # TODO: Implement processing of AX Store Request here
+      if ax_store_request
+        # begin
+        #   # I think all user's attribute should be saved, but table structure of RDBMS VERY statically.
+        #   # So we need to respond StoreResponse mode is 'store_response_failure'.
+        #   # In a nut shell, we may use XMLDB by now!
+        #   ax_store_request.data.each do |type_uri, values|
+        #     case type_uri
+        #     when 'http://axschema.org/email'
+        #       # XXX: This is dummy
+        #       user.emails.concat(values)
+        #     when 'http://axschema.org/birthDate'
+        #       # XXX: This is dummy
+        #       user.birth_date = Date.parse(values.first)
+        #     when 'http://axschema.org/contact/IM/Skype'
+        #       # XXX: This is dummy
+        #       # Just one
+        #       user.skype_id = values.first
+        #     else
+        #       ax_store_response = OpenID::AX::StoreResponse.new(false, "#{type_uri} isn't supported Type URI in this service.")
+        #     end
+        #   end
+        #   user.save
+        # rescue Error => e
+        #   ax_store_response = OpenID::AX::StoreResponse.new(false, e.message)
+        # end
+        oidresp.add_extension(ax_store_response)
+      end
       if params[:always]
         @site = current_account.sites.find_or_create_by_persona_id_and_url(params[:site][:persona_id], params[:site][:url])
         @site.update_attributes(params[:site])
