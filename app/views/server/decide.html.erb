@@ -1,4 +1,18 @@
 <h2>Identity request from <%=h extract_host(@site.url) %></h2>
+
+<% if ax_store_request %>
+<div class="attention">
+  <p>And do you accept following data sent from RP?</p>
+  <dl>
+  <% ax_store_request.data.each do |k,v| %>
+  <dt><%=h k %>:</dt>
+  <dd><%=h v.join(', ') %></dd>
+  <% end %>
+  </dl>
+</div>
+<% end %>
+
+
 <% if sreg_request || ax_fetch_request %>
 <p><strong><%=h checkid_request.trust_root %></strong> requests some personal data.<br />
 Please select the information you would like to submit.</p>
