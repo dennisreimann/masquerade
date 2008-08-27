@@ -96,7 +96,7 @@ class Yubico
   E_OPERATION_NOT_ALLOWED = "OPERATION_NOT_ALLOWED"
   
   # Returned if a parameter is bad or missing, respectively. (Also returns an "info" field -- needs to be parsed (1) )
-  E_INCORRECT_PARAMATER = "INCORRECT_PARAMETER"
+  E_INCORRECT_PARAMETER = "INCORRECT_PARAMETER"
   E_MISSING_PARAMETER = "MISSING_PARAMETER"
   
   # Returned on a Backend Error
