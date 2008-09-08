@@ -22,7 +22,7 @@ class Persona < ActiveRecord::Base
     prop ? self.send(prop[0]).to_s : ""
   end
   
-  def dob
+  def date_of_birth
     "#{dob_year? ? dob_year : '0000'}-#{dob_month? ? dob_month : '00'}-#{dob_day? ? dob_day : '00'}"
   end
   
@@ -44,7 +44,7 @@ class Persona < ActiveRecord::Base
       'language' => ['language', 'http://axschema.org/pref/language'],
       'timezone' => ['timezone', 'http://axschema.org/pref/timezone'],
       'gender' => ['gender', 'http://axschema.org/person/gender'],
-      'dob' => ['dob', 'http://axschema.org/birthDate'],
+      'date_of_birth' => ['dob', 'http://axschema.org/birthDate'],
       'dob_day' => ['dob_day', 'http://axschema.org/birthDate/birthday'],
       'dob_month' => ['dob_month', 'http://axschema.org/birthDate/birthMonth'],
       'dob_year' => ['dob_year', 'http://axschema.org/birthDate/birthYear'],
