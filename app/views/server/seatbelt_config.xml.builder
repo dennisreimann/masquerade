@@ -1,6 +1,6 @@
 xml.instruct!
-xml.opConfig(:version => '1.1', :serverIdentifier => endpoint_url) do
-	xml.configRevision('2008070601')
+xml.opConfig(:version => '1.0', :serverIdentifier => endpoint_url) do
+	xml.configRevision('2008090801')
 	xml.title(APP_CONFIG['name'])
 	xml.serverIdentifier(endpoint_url)
 	xml.opDomain(APP_CONFIG['host'])
