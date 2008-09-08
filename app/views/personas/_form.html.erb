@@ -53,8 +53,10 @@
   	<%= form.select :gender, [['Male', 'M'], ['Female', 'F']], { :include_blank => true } %>
 	</div>
 	<div class="row inline space">
-		<%= form.label :dob_3i, property_label_text(:dob) %>
-  	<%= form.date_select :dob, :order => [:day, :month, :year], :start_year => 1950, :end_year => Date.today.year, :include_blank => true %>
+		<%= form.label :dob_day, property_label_text(:dob) %>
+  	<%= select_day @persona.dob_day, :prefix => 'persona', :field_name => 'dob_day', :include_blank => true %>
+		<%= select_month @persona.dob_month, :prefix => 'persona', :field_name => 'dob_month', :include_blank => true %>
+		<%= select_year @persona.dob_year, :prefix => 'persona', :field_name => 'dob_year', :include_blank => true, :start_year => (Date.today.year - 100), :end_year => Date.today.year %>
 	</div>
 
 	<h3>Professional information</h3>

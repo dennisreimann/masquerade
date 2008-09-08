@@ -32,30 +32,30 @@ form            { margin: 1em 0 1.7em 0; border: 1px dotted #CCC; border-top: 2p
 input           { padding: 0.2em; }
 select          { width: 24em; }
 input[type=text],
-input[type=password]    { width: 24em; }
-input[type=checkbox],  
-input[type=radio]       { position: relative; top: -0.2em; }
-input.space             { margin-right: 0.7em; }
-select#persona_dob_1i   { width: 6em; }
-select#persona_dob_2i   { width: 13em; }
-select#persona_dob_3i   { width: 5em; }
-div.row                 { margin: 0 0 0.7em 0; clear: both; }
-div.space               { margin: 0 0 1.7em 0; }
-label                   { display: block; }
-label.check             { display: inline; margin: 0 2em 0 0.2em; }
-label.note              { display: inline; margin: 0 0 0 0.4em; }
-div.inline label        { float: left; width: 8.5em; }
-.labelspace             { margin-left: 10.5em; }
-.options a              { margin-right: 0.7em; }
-.note                   { font-size: 0.9em; color: #AAA; font-weight: normal; }
-.note a,
-a#forgot_password       { color: #AAA; margin: 0 0.3em; text-decoration: underline; font-weight: normal; }
-#openid_identifier      { background: url(/images/openid_symbol.png) 2px 50% no-repeat; padding-left: 25px; }
-.clear                  { clear: both; }
-.notice                 { margin: 0 0 1.7em 0; border: 1px solid #60964f; padding: 0.5em; background: #b3dca7; }
-.fieldWithErrors label  { color: #FF6200; }
-.error,
-#errorExplanation       { margin: 0 0 1.7em 0; padding: 0.5em 1em; background: #FF6200; color: #222; }
-#errorExplanation h2    { font-size: 1.1em; color: #222; }
-#errorExplanation ul    { margin: 0 0 0 1.2em; list-style: square; }
-#errorExplanation ul li { padding: 0; border: 0; }
+input[type=password]     { width: 24em; }
+input[type=checkbox],    
+input[type=radio]        { position: relative; top: -0.2em; }
+input.space              { margin-right: 0.7em; }
+select#persona_dob_day   { width: 6em; }
+select#persona_dob_month { width: 11em; }
+select#persona_dob_year  { width: 6em; }
+div.row                  { margin: 0 0 0.7em 0; clear: both; }
+div.space                { margin: 0 0 1.7em 0; }
+label                    { display: block; }
+label.check              { display: inline; margin: 0 2em 0 0.2em; }
+label.note               { display: inline; margin: 0 0 0 0.4em; }
+div.inline label         { float: left; width: 8.5em; }
+.labelspace              { margin-left: 10.5em; }
+.options a               { margin-right: 0.7em; }
+.note                    { font-size: 0.9em; color: #AAA; font-weight: normal; }
+.note a,                 
+a#forgot_password        { color: #AAA; margin: 0 0.3em; text-decoration: underline; font-weight: normal; }
+#openid_identifier       { background: url(/images/openid_symbol.png) 2px 50% no-repeat; padding-left: 25px; }
+.clear                   { clear: both; }
+.notice                  { margin: 0 0 1.7em 0; border: 1px solid #60964f; padding: 0.5em; background: #b3dca7; }
+.fieldWithErrors label   { color: #FF6200; }
+.error,                  
+#errorExplanation        { margin: 0 0 1.7em 0; padding: 0.5em 1em; background: #FF6200; color: #222; }
+#errorExplanation h2     { font-size: 1.1em; color: #222; }
+#errorExplanation ul     { margin: 0 0 0 1.2em; list-style: square; }
+#errorExplanation ul li  { padding: 0; border: 0; }

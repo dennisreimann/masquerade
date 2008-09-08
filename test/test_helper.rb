@@ -44,7 +44,9 @@ class Test::Unit::TestCase
       :language => 'DE',
       :timezone => 'Europe/Berlin',
       :gender => 'M',
-      :dob => '1982-01-10' }
+      :dob_day => '10',
+      :dob_month => '01',
+      :dob_year => '1982' }
   end
   
   def valid_properties
