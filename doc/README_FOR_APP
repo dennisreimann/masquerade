@@ -2,27 +2,24 @@
 
 masquerade is an OpenID server released under the MIT-license.
 
-For updates and further information see the {project website}[http://dennisbloete.de/projects/masquerade/]
+For updates and further information see the {project website}[http://github.com/dbloete/masquerade/]
 or try the {demo}[https://m.asquera.de/] (login = test / password = test123).
 
 The source code is available at {github}[http://github.com/dbloete/masquerade/] - feel free to fork and submit patches :)
 
 == Installation
 
-1. Install the required gems
-	rake gems:install
-
-2. Configure the database:
+1. Configure the database:
 	* rename the file config/database.yml.example to database.yml
 	* set the values in database.yml according to your database
 	* run the migration scripts
 		rake db:migrate
 
-3. Configure the application:
+2. Configure the application:
 	* rename the file config/app_config.yml.example to app_config.yml
 	* set the values in app_config.yml according to your environment
 
-4. Run the tests and see if everything seems to work
+3. Run the tests and see if everything seems to work
 	rake test
 
 == Testing the installation
