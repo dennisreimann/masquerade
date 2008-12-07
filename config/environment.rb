@@ -1,5 +1,5 @@
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.1.0' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -33,8 +33,8 @@ Rails::Initializer.run do |config|
   config.time_zone = APP_CONFIG['time_zone'] || 'UTC'
   
   # Gems
-  config.gem 'ruby-openid', :lib => 'openid', :version => '2.1.2'
-  config.gem 'ruby-yadis', :lib => 'yadis', :version => '0.3.4'
-  config.gem 'mocha', :version => '0.9.0'
+  config.gem 'ruby-openid', :lib => 'openid'
+  config.gem 'ruby-yadis', :lib => 'yadis'
+  config.gem 'mocha'
   
 end

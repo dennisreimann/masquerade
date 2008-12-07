@@ -2,7 +2,7 @@
 
 <%= error_messages_for :persona %>
 
-<% form_for @persona, :url => account_persona_path(@persona) do |persona| %>
+<% form_for @persona, :url => account_personas_path do |persona| %>
 	<%= render :partial => 'personas/form', :object => persona %>
 	<div>
 		<%= persona.submit 'create', :class => 'labelspace' %>

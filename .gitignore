@@ -14,4 +14,4 @@ db/*.sqlite3
 doc/api
 doc/app/*
 public/cache/**/*
-tmp/**/*
+tmp/*
