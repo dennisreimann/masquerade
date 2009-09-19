@@ -2,8 +2,7 @@
 
 masquerade is an OpenID server released under the MIT-license.
 
-For updates and further information see the {project website}[http://github.com/dbloete/masquerade/]
-or try the {demo}[https://m.asquera.de/] (login = test / password = test123).
+For updates and further information see the {project website}[http://github.com/dbloete/masquerade/].
 
 The source code is available at {github}[http://github.com/dbloete/masquerade/] - feel free to fork and submit patches :)
 
