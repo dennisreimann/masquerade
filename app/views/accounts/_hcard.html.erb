@@ -1,0 +1,29 @@
+<div id="hcard-<%= persona.fullname.gsub(/\s/, '-') %>" class="vcard">
+	<% if !persona.web_blog.empty? %>
+ <a class="url fn" href='<%= persona.web_blog %>' ><%= persona.fullname %></a>
+    <% else %>
+ <span class="fn"><%= persona.fullname %></span>
+    <% end %>
+ <% if persona.company_name%>
+ <div class="org"><%= persona.company_name %></div>
+ <% end %>
+ <% if persona.email %>
+ <a class="email" href="mailto:<%= persona.email %>"><%= persona.email %></a>
+ <% end %>
+ <% if persona.address %>
+ <div class="adr">
+  <div class="street-address"><%= persona.address %></div>
+  <span class="locality"><%= persona.city %></span>
+, 
+  <span class="region"><%= persona.state %></span>
+, 
+  <span class="postal-code"><%= persona.postcode %></span>
+
+  <span class="country-name"><%= persona.country %></span>
+
+ </div>
+ <% end %>
+ <% if persona.phone_mobile%>
+ <div class="tel"><%= persona.phone_mobile%></div>
+ <% end %>
+</div>

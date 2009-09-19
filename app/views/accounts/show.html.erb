@@ -1,2 +1,4 @@
 <h2><%=h @account.login %></h2>
 <p>OpenID: <%= identifier(@account) %></p>
+
+<%= render :partial => 'hcard', :locals => {:persona => @account.public_persona } if @account.public_persona	 %>

@@ -2,6 +2,7 @@ class Account < ActiveRecord::Base
   
   has_many :personas, :dependent => :destroy, :order => 'id ASC'
   has_many :sites, :dependent => :destroy
+  belongs_to :public_persona, :class_name  => "Persona"
 
   validates_presence_of :login
   validates_length_of :login, :within => 3..40
@@ -18,7 +19,7 @@ class Account < ActiveRecord::Base
   before_save   :encrypt_password
   before_create :make_activation_code
   
-  attr_accessible :login, :email, :password, :password_confirmation
+  attr_accessible :login, :email, :password, :password_confirmation, :public_persona_id
   attr_accessor :password
   
   class ActivationCodeNotFound < StandardError; end
