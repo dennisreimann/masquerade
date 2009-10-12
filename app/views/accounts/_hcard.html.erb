@@ -1,5 +1,5 @@
-<div id="hcard-<%= persona.fullname.gsub(/\s/, '-') %>" class="vcard">
-	<% if !persona.web_blog.empty? %>
+<div id="hcard-<%= persona.fullname.gsub(/\s/, '-') if persona.fullname %>" class="vcard">
+	<% if persona.web_blog and !persona.web_blog.empty? %>
  <a class="url fn" href='<%= persona.web_blog %>' ><%= persona.fullname %></a>
     <% else %>
  <span class="fn"><%= persona.fullname %></span>
