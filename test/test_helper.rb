@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
+
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
 
-class Test::Unit::TestCase
+class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
   # in a transaction that's rolled back on completion.  This ensures that the
   # test database remains unchanged so your fixtures don't have to be reloaded
@@ -128,7 +130,11 @@ class Test::Unit::TestCase
         OpenID::PAPE::AUTH_MULTI_FACTOR,
         OpenID::PAPE::AUTH_PHISHING_RESISTANT].join(' ') }
   end
-  
+
+  def assert_valid(object) # just for work with Rails 2.3.4.
+    assert object.valid?
+  end
+
   def assert_invalid(object, attribute, message = nil)
     assert_equal false, object.valid?
     assert object.errors.on(attribute), message
