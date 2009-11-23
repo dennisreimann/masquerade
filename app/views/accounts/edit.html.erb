@@ -1,74 +1,72 @@
-<h2>My profile</h2>
+<h2><%=t :my_profile %></h2>
 <%= error_messages_for :account %>
  
 <% form_for :account, :url => account_path, :html => { :method => :put } do |f| %>
 	<div class="row">
-		<%= f.label :email %>
+		<%= f.label :email, t(:email) %>
   		<%= f.text_field :email %>
 	</div>
 	
 	<div class="row">
-		<%= f.label :public_persona_id %>
+		<%= f.label :public_persona_id, t(:public_persona) %>
   		<%= f.select :public_persona_id, @account.personas.map{ |p| [ p.title, p.id ]}, :include_blank => true %>
 	</div>
 	
 	<div>
-  	<%= f.submit 'update' %>
+  	<%= f.submit t(:submit_update) %>
   </div>
 <% end %>
 
-<h2>My password</h2>
+<h2><%=t :my_password %></h2>
 <% form_tag change_password_account_path, :method => :put do %>
 	<div class="row">
-		<%= label_tag :old_password %>
+		<%= label_tag :old_password, t(:old_password) %>
   		<%= password_field_tag :old_password %>
 	</div>
 	<div class="row">
-  		<%= label_tag :password, 'New password <span class="note">(minimum length is 6 characters)</span>' %>
+  		<%= label_tag :password, t(:new_password_minimum_6_characters) %>
 		<%= password_field_tag :password %>
 	</div>
 	<div class="row">
-		<%= label_tag :password_confirmation, 'Password confirmation' %>
+		<%= label_tag :password_confirmation, t(:password_confirmation) %>
 		<%= password_field_tag :password_confirmation %>
 	</div>
 	<div>
-		<%= submit_tag 'update' %>
+		<%= submit_tag t(:submit_update) %>
 	</div>
 <% end %>
 
-<h2>My Yubikey</h2>
+<h2><%=t :my_yubikey %></h2>
 <% if @account.yubico_identity? %>
 <% form_tag account_yubikey_association_path, :method => :delete do %>
 	<div class="row">
-		<p>Your account is associated with the Yubico identity <strong><%= @account.yubico_identity %></strong></p>
-		<p class="note">You can use the Yubikey in addition to your password to sign into your account. Just enter your normal
-		password and your Yubico OTP (not seperated by spaces or anything) at the login page.</p>
+		<p><%=t :your_account_is_associated_with_the_yubico_identity %> <strong><%= @account.yubico_identity %></strong></p>
+		<p class="note"><%=t :yubikey_how_to_use %></p>
 	</div>
 	<div>
-		<%= submit_tag 'remove association' %>
+		<%= submit_tag t(:remove_association) %>
 	</div>
 <% end %>
 <% else %>
 <% form_tag account_yubikey_association_path do %>
 	<div class="row">
-		<%= label_tag :yubico_otp, 'Your Yubikey <span class="note">(a Yubico one time password)</span>' %>
+		<%= label_tag :yubico_otp, t(:your_yubikey_a_one_time_password) %>
   	<%= password_field_tag :yubico_otp %>
 	</div>
 	<div>
-		<%= submit_tag 'associate my account with this Yubikey' %>
+		<%= submit_tag t(:associate_account_with_yubikey) %>
 	</div>
 <% end %>
 <% end %>
 
-<h2>Disable my account</h2>
+<h2><%=t :disable_my_account %></h2>
 <% form_tag account_path, :method => :delete do %>
-	<p>Please consider that it won't be possible to reclaim
-	your current OpenID identifier <%= identifier(current_account) %></p>
+	<p><%=t :wont_be_possible_to_reclaim_identifier %> <%= identifier(current_account) %></p>
 	<div class="row">
-		<%= label_tag :confirmation_password, 'Confirm this step by entering your password' %>
+		<%= label_tag :confirmation_password, t(:confirm_by_entering_password) %>
   		<%= password_field_tag :confirmation_password, '' %>
 	</div>
 	<div>
-		<%= submit_tag 'delete my account and all my data' %>
+		<%= submit_tag t(:delete_my_account_and_data) %>
 	</div>
 <% end %>

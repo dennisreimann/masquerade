@@ -1,17 +1,18 @@
-<h2>Identity request from <%=h extract_host(@site.url) %></h2>
+<h2><%=t :identity_request_from_host, :host => h(extract_host(@site.url)) %></h2>
 <% if sreg_request || ax_fetch_request %>
-<p><strong><%=h checkid_request.trust_root %></strong> requests some personal data.<br />
-Please select the information you would like to submit.</p>
-<p class="note">The attributes shown are from your persona <strong><%=h @site.persona.title %></strong>.<br />
-To submit other values you can <%= link_to "edit the persona", edit_account_persona_path(@site.persona, :return => decide_path(:persona_id => @site.persona.id)) %>
-or <%= link_to_function "choose another persona", 'Element.toggle("persona_select")' %>.</p>
+<p><%=t :trust_root_requests_some_personal_data, :trust_root => "<strong>#{h checkid_request.trust_root}</strong>" %><br />
+<%=t :select_information_to_submit %></p>
+<p class="note"><%=t :attributes_are_shown_from_persona, :persona => "<strong>#{h @site.persona.title}</strong>" %><br />
+<%=t :to_submit_other_values_you_can_edit_or_choose, 
+  :edit_link => link_to(t(:edit_persona_link), edit_account_persona_path(@site.persona, :return => decide_path(:persona_id => @site.persona.id)))
+  :choose_link => link_to_function(t(:choose_other_persona), 'Element.toggle("persona_select")') %></p>
 <% else %>
-<p><strong><%=h checkid_request.trust_root %></strong> requires your authentication.</p>
+<p><%=t :trust_root_requires_authenticaton, :trust_root => "<strong>#{h checkid_request.trust_root}</strong>" %></p>
 <% end %>
 
 <% form_tag decide_path, :method => :get, :id => 'persona_select', :style => 'display:none;' do %>
 
-	<h3>Choose a persona</h3>
+	<h3><%=t :choose_persona_title %></h3>
 	<% unless current_account.personas.empty? %>
 	<div class="row">
 		<select id="persona_id" name="persona_id">
@@ -19,8 +20,8 @@ or <%= link_to_function "choose another persona", 'Element.toggle("persona_selec
 		</select>
 	</div>
 	<div>
-		<%= submit_tag "choose persona" %> or
-		<%= link_to "create a new persona", new_account_persona_path(:return => decide_path) %>
+		<%= submit_tag t(:choose_persona_submit) %> or
+		<%= link_to t(:create_new_persona_link), new_account_persona_path(:return => decide_path) %>
 	</div>
 	<% end %>
 	
@@ -31,8 +32,8 @@ or <%= link_to_function "choose another persona", 'Element.toggle("persona_selec
 	<% if sreg_request || ax_fetch_request %>
 	<table cellspacing="0">
     <tr>
-			<th colspan="2"><h4>Requested information</h4></th>
-			<th class="disclosure">disclosure</th>
+			<th colspan="2"><h4><%= t(:requested_information_title) %></h4></th>
+			<th class="disclosure"><%= t(:disclosure) %></th>
 		</tr>
 		<% (sreg_request.required + sreg_request.optional).each do |property| %>
 		<tr>
@@ -61,12 +62,12 @@ or <%= link_to_function "choose another persona", 'Element.toggle("persona_selec
 		<% if sreg_request || ax_fetch_request %>
 		<%= f.hidden_field :persona_id %>
 		<%= f.hidden_field :url %>
-		<%= submit_tag 'Trust this site only this time', :name => 'temporary', :class => 'space' %>
-		<%= submit_tag 'Always trust this site', :name => 'always', :class => 'space' %>
+		<%= submit_tag t(:trust_site_only_this_time), :name => 'temporary', :class => 'space' %>
+		<%= submit_tag t(:always_trust_site), :name => 'always', :class => 'space' %>
 		<% else %>
-		<%= submit_tag 'Approve this request', :name => 'temporary', :class => 'space' %>
+		<%= submit_tag t(:approve_request), :name => 'temporary', :class => 'space' %>
 		<% end %>
-		<%= submit_tag 'Cancel this request', :name => 'cancel' %>
+		<%= submit_tag t(:cancel_request), :name => 'cancel' %>
 	</div>
 	
 <% end unless current_account.personas.empty? %>

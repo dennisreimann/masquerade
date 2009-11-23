@@ -1,28 +1,28 @@
-<h2>Your release policy for <%=h extract_host(@site.url)%></h2>
+<h2><%=t :your_release_policy_for_site, :site => h(extract_host(@site.url)) %></h2>
 
 <%= error_messages_for 'site' %>
 
 <% form_for @site, :url => account_site_path(@site), :method => :put do |f| %>
 	
 	<div class="row space">
-		<%= f.label :persona_id, "Persona" %>
+		<%= f.label :persona_id, t(:persona_label) %>
 		<%= f.select :persona_id, current_account.personas.find(:all).collect { |p| [ p.title, p.id ] } %>
-		<%= submit_tag "choose persona" %>
+		<%= submit_tag t(:choose_persona_submit) %>
 	</div>
 	
 	<h3>
 		<%=h @site.persona.title %>
 		<span class="note">
-			<%= link_to "edit this persona", edit_account_persona_path(@site.persona, :return => url_for(:persona_id => params[:persona_id])) %> or
-			<%= link_to "create a new persona", new_account_persona_path(:return => url_for) %>
+			<%= link_to t(:edit_persona_link), edit_account_persona_path(@site.persona, :return => url_for(:persona_id => params[:persona_id])) %> <%=t :or %>
+			<%= link_to t(:create_new_persona_link), new_account_persona_path(:return => url_for) %>
 		</span>
 	</h3>
 	
 	<table cellspacing="0">
     <tr>
-			<th>property</th>
-			<th>value</th>
-			<th>disclosure</th>
+			<th><%=t :property %></th>
+			<th><%=t :value %></th>
+			<th><%=t :disclosure %></th>
 		</tr>
 		<% @site.release_policies.each do |release_policy| %>
 		<% property, type, value = release_policy.property, release_policy.type_identifier, @site.persona.property(release_policy.type_identifier) %>
@@ -38,7 +38,7 @@
 	</table>
 	
 	<div>
-		<%= submit_tag "update release policy" %>
+		<%= submit_tag t(:update_release_policy_submit) %>
 	</div>
 	
 <% end %>

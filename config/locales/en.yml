@@ -2,4 +2,184 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  
+  # account
+  public_persona: Public persona
+  forgot_password_create_new_one: You forgot your password? Here you can create a new one
+  account_created_but_not_activated_yet: Your OpenID account has been created, but it is not activated, yet.#
+  please_activate_it_by_clicking_the_following_link: Please activate it by clicking the following link
+  my_profile: My profile
+  login: Login
+  passwort: Password
+  my_password: My password
+  old_password: Old password
+  new_password_minimum_6_characters: New password <span class="note">(minimum length is 6 characters)</span>
+  password_confirmation: Password confirmation
+  submit_update: update
+  my_yubikey: My Yubikey
+  your_account_is_associated_with_the_yubico_identity: Your account is associated with the Yubico identity
+  yubikey_how_to_use: "You can use the Yubikey in addition to your password to sign into your account. Just enter your normal
+    password and your Yubico OTP (not seperated by spaces or anything) at the login page."
+  remove_association: remove association
+  your_yubikey_a_one_time_password: Your Yubikey <span class="note">(a Yubico one time password)</span>
+  associate_account_with_yubikey: associate my account with this Yubikey
+  disable_my_account: Disable my account
+  wont_be_possible_to_reclaim_identifier: Please consider that it won't be possible to reclaim your current OpenID identifier
+  confirm_by_entering_password: Confirm this step by entering your password
+  delete_my_account_and_data: delete my account and all my data
+
+  signup_title: Signup
+  signup: Signup  # ???
+
+  # consumer
+  identifier: Identifier
+  verify: Verify
+  use_immediate_mode: Use immediate mode
+  request_registration_data: Request registration data
+  request_attribute_exchange_data: Request attribute exchange data
+  request_pape: Request phishing-resistent auth policy (PAPE)
+  force_post: Force the transaction to use POST by adding 2K of extra data
+
+  # info
+  questions_answers: Questions? Answers!
+  here_we_cover_openid_topics: Here we cover some OpenID related topics.
+  openid_delegation: OpenID delegation
+  delegation_explanation: "Delegation is a way to use your own website or blog url as OpenID identifier. Requests can
+    be forwarded to this server by
+ adding the following HTML fragment to the <code>&lt;head&gt;</code>
+    of your site:"
+  get_your_openid: Get your OpenID
+  openid_intro: "<p>OpenID is a shared identity service, which allows you to log on to many different 
+    web sites using a single digital identity, eliminating the need for different user names
+    and passwords for each site.</p>
+    <p>OpenID is a decentralized, free and open standard that lets you control the amount of 
+    personal information that you would like to provide to other web sites.</p>
+    <p>Get started and {{signup_link}}.</p>"
+  signup_for_an_openid: signup for an OpenID
+  login_to_proceed: Please log in to proceed
+  host_requests_identification_you_need_to_login: "{{host}} requests your identification and you need to log in to proceed."
+  login_intro: "To log in, please navigate to <strong>{{login_url}}</strong>. The page your 
+    are currently viewing is used to <strong>protect yourself from phishing and online identity theft</strong>
+    and should contain no links.<br />If there are any links, please report to us, who sent you here."
+
+  # nav
+  my_identity: my identity
+  my_profile: my profile
+  my_personas: my personas
+  my_trusted_sites: my trusted sites
+  logout: logout
+  current_verification_request: current verification request
+  login_link: login
+  signup_link: signup
+  help: help
+  get_help: get help
+  openid_consumer_testsuite_title: OpenID Consumer Testsuite
+  relying_party_title: Relying Party
+  
+  # passwords
+  reset_password: reset password
+  forgot_password_title: Forgot password
+  please_enter_email: Please enter your email address
+  submit_send: send
+
+  # personas
+  edit_your_persona: Edit your persona “{{title}}”
+  personal_information: Personal information
+  professional_information: Professional information
+  phone: Phone
+  instant_messaging: Instant Messaging
+  other_information: Other information
+
+  nickname: Nickname
+  email: Email
+  address: Address
+  postcode: Postcode
+  city: City
+  state: State
+  country: Country
+  language: Language
+  timezone: Timezone
+  gender: Gender
+  company_name: Company name
+  job_title: Job title
+  phone_home: Phone home
+  phone_mobile: Phone mobile
+  phone_fax: Phone fax
+  phone_work: Phone work
+  biography: Biography
+  title: Title
+  fullname: Full name
+  birth_date: Birth date
+  address_business: Address
+  address_additional: Additional
+  address_additional_business: Additional
+  postcode_business: Postcode
+  city_business: City
+  state_business: State
+  country_business: Country
+  im_aim: AIM
+  im_icq: ICQ
+  im_msn: MSN
+  im_yahoo: Yahoo
+  im_jabber: Jabber
+  im_skype: Skype
+  image_url: Image URL
+  website_url: Website URL
+  blog_url: Blog URL
+  dob: Day of birth
+
+  my_personas_title: My personas
+  personas_intro: "Personas define certain roles of your account. For instance you can have a persona for private 
+    use and another one for business context. When a relying party requests your information
+    you can choose the persona that you would like to exchange data from."
+  edit: edit
+  delete: delete
+  really_want_to_delete_persona: Do you really want to delete the persona ”{{title}}”?
+  create_a_new_persona: create a new persona
+  create_a_new_persona_title: Create a new persona
+  
+  # sessions
+  login_title: Login
+  your_openid: Your OpenID
+  cancel_this_request: cancel this request
+  remember_me: Remember me
+  login_submit: login
+  i_forgot_my_password: I forgot my password
+
+  # server
+  identity_request_from_host: Identity request from {{host}}
+  trust_root_requests_some_personal_data: "{{trust_root}} requests some personal data."
+  select_information_to_submit: Please select the information you would like to submit.
+  attributes_are_shown_from_persona: The attributes shown are from your persona {{persona}}.
+  to_submit_other_values_you_can_edit_or_choose: To submit other values you can {{edit_link}} or {{choose_link}}.
+  edit_persona_link: edit the persona
+  choose_other_persona: choose another persona
+  trust_root_requires_authentication: "{{trust_root} requires your authentication."
+  choose_persona_title: Choose a persona
+  choose_persona_submit: choose persona
+  create_new_persona_link: create a new persona
+  requested_information_title: Requested information
+  disclosure: disclosure
+  trust_site_only_this_time: Trust this site only this time
+  always_trust_site: Always trust this site
+  approve_request: Approve this request
+  cancel_request: Cancel this request
+  
+  # sites
+  edit_link: edit
+  delete_link: delete
+  or: or
+  your_release_policy_for_site: Your release policy for {{site}}
+  persona_label: Persona
+  choose_persona_submit: choose persona
+  property: property
+  value: value
+  update_release_policy_submit: update release policy
+  identity_request_answered_without_interaction: Identity request from the following sites are answered directly without further interaction.
+  alter_release_policies_here: You can alter the release policies for these sites here.
+  really_want_to_delete_trust_for_site: Do you really want to delete the trust for {{site}}?
+  no_entries_yet: There are no entries, yet.
+  ext0: Ext0
+  ext1: Ext1
+  ext2: Ext2
+

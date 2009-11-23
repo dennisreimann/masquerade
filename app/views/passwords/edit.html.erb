@@ -1,13 +1,13 @@
 <% form_tag url_for(:action => "update", :id => @reset_code), :method => 'put' do %>
   <div class="row">
-		<%= label_tag :password %>
+		<%= label_tag :password, t(:password) %>
     <%= password_field_tag :password %>
 	</div>
   <div class="row">
-		<%= label_tag :password_confirmation %>
+		<%= label_tag :password_confirmation, t(:password_confirmation) %>
     <%= password_field_tag :password_confirmation %>
 	</div>
   <div>
-		<%= submit_tag "reset password" %>
+		<%= submit_tag t(:reset_password) %>
 	</div>
 <% end %>

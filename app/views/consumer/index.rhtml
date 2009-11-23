@@ -1,27 +1,27 @@
 <% form_tag consumer_start_path do %>
 	<div class="row">
-		<%= label_tag :openid_identifier, 'Identifier:', :class => 'check' %>
+		<%= label_tag :openid_identifier, t(:identifier) + ':', :class => 'check' %>
 		<%= text_field_tag :openid_identifier, APP_CONFIG['host'] %>
-		<%= submit_tag 'Verify' %>
+		<%= submit_tag t(:verify) %>
 	</div>
 	<div class="row">
 		<%= check_box_tag :immediate %>
-		<%= label_tag :immediate, 'Use immediate mode', :class => 'check' %>
+		<%= label_tag :immediate, t(:use_immediate_mode), :class => 'check' %>
 	</div>
   <div class="row">
 		<%= check_box_tag :use_sreg %>
-		<%= label_tag :use_sreg, 'Request registration data', :class => 'check' %>
+		<%= label_tag :use_sreg, t(:request_registration_data), :class => 'check' %>
 	</div>
 	<div class="row">
 		<%= check_box_tag :use_ax %>
-		<%= label_tag :use_ax, 'Request attribute exchange data', :class => 'check' %>
+		<%= label_tag :use_ax, t(:request_attribute_exchange_data), :class => 'check' %>
 	</div>
 	<div class="row">
 		<%= check_box_tag :use_pape %>
-		<%= label_tag :use_pape, 'Request phishing-resistent auth policy (PAPE)', :class => 'check' %>
+		<%= label_tag :use_pape, t(:request_pape), :class => 'check' %>
 	</div>
 	<div class="row">
 		<%= check_box_tag :force_post %>
-		<%= label_tag :force_post, 'Force the transaction to use POST by adding 2K of extra data', :class => 'check' %>
+		<%= label_tag :force_post, t(:force_post), :class => 'check' %>
 	</div>
 <% end %>

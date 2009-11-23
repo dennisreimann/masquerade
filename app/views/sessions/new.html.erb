@@ -1,27 +1,27 @@
-<h2>Login</h2>
+<h2><%=t :login_title %></h2>
 
 <% form_tag session_path do %>
 	<div class="row">
 		<% if checkid_request && !checkid_request.id_select %>
-		<strong>Your OpenID:</strong>
+		<strong><%=t :your_openid %>:</strong>
 		<%= checkid_request.identity %>
-		<span class="note"><%= link_to 'cancel this request', cancel_path %></span>
+		<span class="note"><%= link_to t(:cancel_this_request), cancel_path %></span>
 		<%= hidden_field_tag :login, extract_login_from_identifier(checkid_request.identity) %>
 		<% else %>
-		<%= label_tag :login %>
+		<%= label_tag :login, t(:login) %>
 		<%= text_field_tag :login %>
 		<% end %>
 	</div>
 	<div class="row">
-		<%= label_tag :password %>
+		<%= label_tag :password, t(:password) %>
 		<%= password_field_tag :password %>
 	</div>
 	<div class="row">
 		<%= check_box_tag :remember_me %>
-		<%= label_tag :remember_me, 'Remember me', :class => 'check' %>
+		<%= label_tag :remember_me, t(:remember_me), :class => 'check' %>
 	</div>
 	<div>
-		<%= submit_tag 'login' %>
-		<span class="note"><%= link_to 'I forgot my password', forgot_password_path %></span>
+		<%= submit_tag t(:login_submit) %>
+		<span class="note"><%= link_to t(:i_forgot_my_password), forgot_password_path %></span>
 	</div>
 <% end %>

@@ -1,9 +1,9 @@
 	<div class="row inline space">
-		<%= form.label :title %>
+		<%= form.label :title, t(:title) %>
 		<%= form.text_field :title %>
 	</div>
 	
-	<h3>Personal information</h3>
+	<h3><%=t :personal_information %></h3>
 	<div class="row inline">
 		<%= form.label :nickname, property_label_text(:nickname) %>
   	<%= form.text_field :nickname %>
@@ -59,7 +59,7 @@
 		<%= select_year @persona.dob_year, :prefix => 'persona', :field_name => 'dob_year', :include_blank => true, :start_year => (Date.today.year - 100), :end_year => Date.today.year %>
 	</div>
 
-	<h3>Professional information</h3>
+	<h3><%=t :professional_information %></h3>
 	<div class="row inline">
 		<%= form.label :company_name, property_label_text(:company_name) %>
   	<%= form.text_field :company_name %>
@@ -93,7 +93,7 @@
   	<%= form.select :country_business, Country.find(:all).map { |l| [ l.name, l.code ] }, { :include_blank => true } %>
 	</div>
 	
-	<h3>Phone</h3>
+	<h3><%=t :phone %></h3>
 	<div class="row inline">
 		<%= form.label :phone_home, property_label_text(:phone_home) %>
   	<%= form.text_field :phone_home %>
@@ -111,7 +111,7 @@
   	<%= form.text_field :phone_work %>
 	</div>
 	
-	<h3>Instant Messaging</h3>
+	<h3><%=t :instant_messaging %></h3>
 	<div class="row inline">
 		<%= form.label :im_aim, property_label_text(:im_aim) %>
   	<%= form.text_field :im_aim %>
@@ -137,7 +137,7 @@
   	<%= form.text_field :im_skype %>
 	</div>
 
-	<h3>Other information</h3>
+	<h3><%=t :other_information %></h3>
 	<div class="row inline">
 		<%= form.label :biography, property_label_text(:biography) %>
   	<%= form.text_field :biography %>

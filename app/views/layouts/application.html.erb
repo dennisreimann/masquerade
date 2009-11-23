@@ -22,18 +22,18 @@
 				<ul id="navi">
 				<% if logged_in? %>
 					<% unless checkid_request %>
-					<%= nav 'my identity', identity_path(current_account), 'accounts' => ['show'] %>
-					<%= nav 'my profile', edit_account_path, 'accounts' => ['edit', 'update'] %>
-					<%= nav 'my personas', account_personas_path, 'personas' => [] %>
-					<%= nav 'my trusted sites', account_sites_path, 'sites' => [] %>
-					<%= nav 'logout', logout_path %>
+					<%= nav t(:my_identity), identity_path(current_account), 'accounts' => ['show'] %>
+					<%= nav t(:my_profile), edit_account_path, 'accounts' => ['edit', 'update'] %>
+					<%= nav t(:my_personas), account_personas_path, 'personas' => [] %>
+					<%= nav t(:my_trusted_sites), account_sites_path, 'sites' => [] %>
+					<%= nav t(:logout), logout_path %>
 					<% else %>
-					<%= nav 'current verification request', proceed_path, 'server' => [] %>
+					<%= nav t(:current_verification_request), proceed_path, 'server' => [] %>
 					<% end %>
 				<% else %>
-					<%= nav 'login', login_path, 'sessions' => ['new', 'create'] %>
-					<%= nav 'signup', new_account_path, 'accounts' => ['new', 'create'] %>
-					<%= nav 'help', help_path, 'info' => ['help'] %>
+					<%= nav t(:login_link), login_path, 'sessions' => ['new', 'create'] %>
+					<%= nav t(:signup_link), new_account_path, 'accounts' => ['new', 'create'] %>
+					<%= nav t(:help), help_path, 'info' => ['help'] %>
 				<% end %>
 				</ul>
 			</div>
@@ -50,7 +50,7 @@
 				<span class="note">
 					powered by <%= link_to 'masquerade', 'http://dennisbloete.de/projects/masquerade/' %> 
 					and <%= link_to "#{image_tag('openid_symbol.png')} OpenID", 'http://openid.net/' %> | 
-					<%= link_to 'get help', help_path %>
+					<%= link_to t(:get_help), help_path %>
 				</span>
 			</div>
 		</div>

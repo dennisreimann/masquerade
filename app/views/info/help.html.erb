@@ -1,9 +1,7 @@
-<h2>Questions? Answers!</h2>
-<p>Here we cover some OpenID related topics.</p>
-<h3>OpenID delegation</h3>
-<p>Delegation is a way to use your own website or blog url as OpenID identifier. Requests can
-be forwarded to this server by adding the following HTML fragment to the <code>&lt;head&gt;</code>
-of your site:</p>
+<h2><%= t(:questions_answers) </h2>
+<p><%=t :here_we_cover_openid_topics %></p>
+<h3><%=t :openid_delegation %></h3>
+<p><%=t :delegation_explanation %></p>
 <pre>
 &lt;link rel="openid2.provider openid.server" href="<%= endpoint_url %>" /&gt;
 &lt;link rel="openid2.local_id openid.delegate" href="<%= identifier(logged_in? ? current_account : 'YOUR_LOGIN') %>" /&gt;

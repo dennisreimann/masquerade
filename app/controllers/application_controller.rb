@@ -16,6 +16,8 @@ class ApplicationController < ActionController::Base
   helper_method :extract_host, :extract_login_from_identifier, :checkid_request,
     :identifier, :endpoint_url, :scheme
   
+  before_filter :set_locale
+  
   protected
   
   # before_filter for every account-based controller
@@ -70,10 +72,18 @@ class ApplicationController < ActionController::Base
     render :file => "#{RAILS_ROOT}/public/#{status_code}.html", :status => status_code
   end
   
+  def set_locale 
+    I18n.locale = params[:locale] || extract_locale_from_accept_language_header 
+  end 
+  
   private
   
   def scheme
     APP_CONFIG['use_ssl'] ? 'https' : 'http'
   end
-  
+
+  def extract_locale_from_accept_language_header 
+    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first 
+  end   
+
 end

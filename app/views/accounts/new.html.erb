@@ -1,25 +1,25 @@
-<h2>Signup</h2>
+<h2><%=t :signup_title %></h2>
 
 <%= error_messages_for :account %>
 
 <% form_for :account, :url => account_path do |f| -%>
 	<div class="row">
-		<%= f.label :login %>
+		<%= f.label :login, t(:login) %>
 		<%= f.text_field :login %>
 	</div>
 	<div class="row">
-		<%= f.label :email %>
+		<%= f.label :email, t(:email) %>
 		<%= f.text_field :email %>
 	</div>
 	<div class="row">
-		<%= f.label :password %>
+		<%= f.label :password, t(:password) %>
 		<%= f.password_field :password %>
 	</div>
 	<div class="row">
-		<%= f.label :password_confirmation %>
+		<%= f.label :password_confirmation, t(:password_confirmation) %>
 		<%= f.password_field :password_confirmation %>
 	</div>
 	<div>
-  		<%= f.submit 'signup' %>
+  		<%= f.submit t(:signup) %>
 	</div>
 <% end -%>
