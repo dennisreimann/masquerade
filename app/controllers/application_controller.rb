@@ -72,8 +72,19 @@ class ApplicationController < ActionController::Base
     render :file => "#{RAILS_ROOT}/public/#{status_code}.html", :status => status_code
   end
   
+  # Set site locale from
+  # * params[:locale]
+  # * HTTP_ACCEPT_LANGUAGE header
+  # 
+  # If desired locale is not supported or nothing is set, fallback to English ("en")
   def set_locale 
-    I18n.locale = params[:locale] || extract_locale_from_accept_language_header 
+    locale = if params[:locale]
+      params[:locale]
+    elsif request.env['HTTP_ACCEPT_LANGUAGE']
+      request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+    end
+    
+    I18n.locale = (locale and I18n.available_locales.include?(locale.to_sym)) ? locale : 'en'
   end 
   
   private
@@ -81,9 +92,5 @@ class ApplicationController < ActionController::Base
   def scheme
     APP_CONFIG['use_ssl'] ? 'https' : 'http'
   end
-
-  def extract_locale_from_accept_language_header 
-    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first 
-  end   
 
 end
