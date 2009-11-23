@@ -1,0 +1,186 @@
+de:
+
+  # account
+  public_persona: Öffentliche Rolle
+  forgot_password_create_new_one: Sie haben Ihr Passwort vergessen? Hier können Sie ein neues setzen
+  account_created_but_not_activated_yet: Ihr OpenID-Account wurde angelegt. Er ist jedoch noch nicht aktiviert.
+  please_activate_it_by_clicking_the_following_link: Bitte aktivieren Sie den Account, indem Sie auf den Link klicken
+  my_profile: Mein Profil
+  login: Login
+  password: Passwort
+  my_password: Mein Passwort
+  old_password: Altes Passwort
+  new_password_minimum_6_characters: Neues Passwort <span class="note">(mindestens 6 Zeichen)</span>
+  password_confirmation: Passwort bestätigen
+  submit_update: Aktualisieren
+  my_yubikey: Mein Yubikey
+  your_account_is_associated_with_the_yubico_identity: Ihr Account ist mit der verbunden mit der Yubikey-Identität
+  yubikey_how_to_use: "Sie können den Yubikey benutzen, um sich zusätzlich zu Ihrem Passwort einzuloggen. Geben Sie einfach
+    Ihr Passwort und Ihr Yubico OTP (ohne Leerzeichen oder sonstige Trennzeichen) auf der Login-Seite ein."
+  remove_association: Assoziation entfernen.
+  your_yubikey_a_one_time_password: Ihr Yubikey <span class="note">(ein Yubico Einmalpasswort)</span>
+  associate_account_with_yubikey: Meinen Account mit diesem Yubikey verbinden
+  disable_my_account: Meinen Account deaktivieren
+  wont_be_possible_to_reclaim_identifier: Bitte beachten Sie, dass Sie Ihre aktuelle OpenID-Kennung nicht erneut verwenden können
+  confirm_by_entering_password: Bestätigen Sie bitte durch Eingabe Ihres Passworts
+  delete_my_account_and_data: Meinen Account und alle Daten löschen
+
+  signup_title: Anmelden
+  signup: Anmelden
+
+  # consumer
+  identifier: Kennung
+  verify: Überprüfen
+
+  # info
+  questions_answers: Fragen? Antworten!
+  here_we_cover_openid_topics: Hier werden einige grundlegende OpenID-Themen behandelt.
+  openid_delegation: OpenID-Delegation
+  delegation_explanation: "Mit Hilfe von Delegation können Sie Ihre eigene Website oder Ihren Blog als OpenID-Kennung verwenden. Anfragen können
+    an diesen Server weiter geleitet werden, indem Sie folgendes HTML-Fragment in den <code>&lt;head&gt;</code>
+    Ihrer Website einbauen:"
+  get_your_openid: Holen Sie sich eine OpenID
+  openid_intro: "<p>OpenID ist ein Dienst für eine gemeinsame Identität, durch den Sie sich mit einer einzigen
+    digitalen Identität an unterschiedlichen Webseiten anmelden können. Dadurch benötigen Sie nicht mehr für jede Website
+    einen eigenen Benutzernamen und Passwort.</p>
+    <p>OpenID ist dezentral, kostenlos und ein offener Standard. Es erlaubt Ihnen zu entscheiden, wie viele und welche
+    persönlichen Angaben Sie anderen Webseiten übermitteln.</p>
+    <p>Legen Sie los und {{signup_link}}.</p>"
+  signup_for_an_openid: melden Sie sich für eine OpenID an
+  login_to_proceed: Bitte loggen Sie sich ein, um fort zu fahren
+  host_requests_identification_you_need_to_login: "{{host}} möchte Ihre Identität ermitteln. Dafür müssen Sie sich einloggen."
+  login_intro: "Um sich einzuloggen, gehen Sie bitte zu <strong>{{login_url}}</strong>. Die Seite, die Sie gerade sehen,
+    ist <strong>als Schutz vor Phishing-Attacken und Identitätsklau</strong> gedacht
+    und sollte keine Links enthalten.<br />Falls hier Links auftauchen, geben Sie uns bitte Bescheid, wer Sie auf diese Seite 
+    geleitet hat."
+
+  # nav
+  my_identity: Meine Identität
+  my_profile: Mein Account
+  my_personas: Meine Rollen
+  my_trusted_sites: Meine vertrauten Websites
+  logout: ausloggen
+  current_verification_request: aktuelle Prüfanfrage
+  login_link: Einloggen
+  signup_link: Anmelden
+  help: Hilfe
+  get_help: Hilfe erhalten
+  openid_consumer_testsuite_title: OpenID Consumer Testsuite
+  relying_party_title: Vertrauende Gegenstelle
+  
+  # passwords
+  reset_password: Passwort zurück setzen
+  forgot_password_title: Passwort vergessen
+  please_enter_email: Bitte geben Sie Ihre E-Mail-Adresse ein
+  submit_send: Senden
+
+  # personas
+  edit_your_persona: Bearbeiten Sie Ihre Rolle “{{title}}”
+
+  personal_information: Persönliche Angaben
+  professional_information: Berufliche Angaben
+  phone: Telefon
+  instant_messaging: Instant Messaging
+  other_information: Weitere Angaben
+
+  nickname: Nickname
+  email: E-Mail
+  address: Adresse
+  postcode: Postleitzahl
+  city: Stadt
+  state: Bundesland
+  country: Land
+  language: Sprache
+  timezone: Zeitzone
+  gender: Geschlecht
+  company_name: Firma
+  job_title: Job-Bezeichnung
+  phone_home: Tel. privat
+  phone_mobile: Tel. mobil
+  phone_fax: Fax
+  phone_work: Tel. geschäftlich
+  biography: Biographie
+  title: Titel
+  fullname: Vor- und Nachname
+  birth_date: Geburtsdatum
+  address_business: Adresse
+  address_additional: Weitere
+  address_additional_business: Weitere
+  postcode_business: Postleitzahl
+  city_business: Stadt
+  state_business: Bundesland
+  country_business: Land
+  im_aim: AIM
+  im_icq: ICQ
+  im_msn: MSN
+  im_yahoo: Yahoo
+  im_jabber: Jabber
+  im_skype: Skype
+  image_url: Bild-URL
+  website_url: URL der Website
+  blog_url: Blog-URL
+  dob: Geburtsdatum
+
+  my_personas_title: Meine Rollen
+  personas_intro: "Sie können in Ihrem Account mehrere verschiedene Rollen nutzen. Zum Beispiel können Sie eine 
+    Rolle privat nutzen und eine fürs Geschäftliche. Wenn eine Gegenstelle Informationen anfordert können Sie
+    auswählen, aus welcher Rolle Ihre Daten übernommen werden."
+  edit: bearbeiten
+  delete: löschen
+  really_want_to_delete_persona: Wollen Sie die Rolle ”{{title}}” wirklich löschen?
+  create_a_new_persona: neue Rolle anlegen
+  create_a_new_persona_title: Neue Rolle anlegen
+
+  # sessions
+  login_title: Einloggen
+  your_openid: Ihre OpenID
+  cancel_this_request: diese Anfrage abbrechen
+  remember_me: Merken
+  login_submit: Einloggen
+  i_forgot_my_password: Ich habe mein Passwort vergessen
+
+  # server
+  identity_request_from_host: Identitätsanfrage von {{host}}
+  trust_root_requests_some_personal_data: "{{trust_root}} verlangt persönliche Angaben."
+  select_information_to_submit: Bitte wählen Sie die Angaben aus, die Sie übermitteln möchten.
+  attributes_are_shown_from_persona: Die folgenden Angaben stammen aus Ihrer Rolle {{persona}}.
+  to_submit_other_values_you_can_edit_or_choose: Um andere Werte zu übermitteln können Sie {{edit_link}} oder {{choose_link}}.
+  edit_persona_link: die Rolle bearbeiten
+  choose_other_persona: eine andere Rolle auswählen
+  trust_root_requires_authentication: "{{trust_root} verlangt Ihre Authorisierung."
+  choose_persona_title: Wählen Sie eine Rolle
+  choose_persona_submit: Rolle auswählen
+  create_new_persona_link: neue Rolle anlegen
+  requested_information_title: Verlangte Angaben
+  disclosure: Angabe
+  trust_site_only_this_time: Dieser Website einmal vertrauen
+  always_trust_site: Dieser Website immer vertrauen
+  approve_request: Anfrage bestätigen
+  cancel_request: Anfrage widerrufen
+  
+  # sites
+  edit_link: bearbeiten
+  delete_link: löschen
+  or: oder
+  your_release_policy_for_site: Ihre Vertrauensrichtlinien für {{site}}
+  persona_label: Rolle
+  choose_persona_submit: Rolle auswählen
+  property: Eigenschaft
+  value: Wert
+  update_release_policy_submit: Richtlinie aktualisieren
+  identity_request_answered_without_interaction: Identitätsanfragen der folgenden Websites werden ohne Nachfrage akzeptiert.
+  alter_release_policies_here: Sie können Ihre Richtlinien für diese Websites hier ändern.
+  really_want_to_delete_trust_for_site: Wollen Sie die Vertrauensstellung für {{site}} wirklich löschen?
+  no_entries_yet: Es gibt noch keine Einträge.
+  ext0: Ext0
+  ext1: Ext1
+  ext2: Ext2
+
+
+  # AR
+  activerecord:
+    attributes:
+      account:
+        email: E-Mail
+        public_persona: Öffentliche Rolle
+
