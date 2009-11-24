@@ -4,7 +4,7 @@
 <%=t :select_information_to_submit %></p>
 <p class="note"><%=t :attributes_are_shown_from_persona, :persona => "<strong>#{h @site.persona.title}</strong>" %><br />
 <%=t :to_submit_other_values_you_can_edit_or_choose, 
-  :edit_link => link_to(t(:edit_persona_link), edit_account_persona_path(@site.persona, :return => decide_path(:persona_id => @site.persona.id)))
+  :edit_link => link_to(t(:edit_persona_link), edit_account_persona_path(@site.persona, :return => decide_path(:persona_id => @site.persona.id))),
   :choose_link => link_to_function(t(:choose_other_persona), 'Element.toggle("persona_select")') %></p>
 <% else %>
 <p><%=t :trust_root_requires_authenticaton, :trust_root => "<strong>#{h checkid_request.trust_root}</strong>" %></p>
