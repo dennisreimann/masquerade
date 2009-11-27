@@ -3,7 +3,19 @@
 
 en:
   
-  # account
+  # account controller
+  thanks_for_signing_up_activation_link: Thank you for signing up! We sent you an email containing an activation link.
+  profile_updated: Your profile has been updated.
+  account_disabled: Your account has been disabled.
+  entered_password_is_wrong: The entered password is wrong.
+  account_activated_login_now: Your account is activated - you can login now.
+  couldnt_find_account_with_code_create_new_one: We could not find any account with the given activation code. Please create a new account.
+  account_already_activated_please_login: Your account is already activated - please login.
+  password_has_been_changed: Your password has been changed.
+  sorry_password_couldnt_be_changed: Sorry, your password could not be changed.
+  confirmation_of_new_password_invalid: The confirmation of the new password was incorrect.
+  old_password_incorrect: Your old password is incorrect.
+  # account views
   public_persona: Public persona
   forgot_password_create_new_one: You forgot your password? Here you can create a new one
   account_created_but_not_activated_yet: Your OpenID account has been created, but it is not activated, yet.#
@@ -31,7 +43,22 @@ en:
   signup_title: Signup
   signup: Signup  # ???
 
-  # consumer
+  # consumer controller
+  immediate_request_failed_setup_needed: Immediate request failed - setup needed
+  openid_transaction_cancelled: OpenID transaction cancelled.
+  verification_of_identifier_failed: "Verification of {{identifier}} failed: {{message}}"
+  verification_failed_message: "Verification failed: {{message}}"
+  verification_of_identifier_succeeded: Verification of {{identifier}} succeeded.
+  simple_registration_data_requested: Simple Registration data was requested
+  but_none_was_returned: but none was returned.
+  the_following_data_were_sent: "The following data were sent:"
+  attribute_exchange_data_requested: Attribute Exchange data was requested
+  authentication_policies_requested: Authentication policies were requested
+  and_server_reported_the_following: "and the server reported the following:"
+  but_the_server_did_not_report_one: but the server did not report one.
+  authentication_time: Authentication time
+
+  # consumer views
   identifier: Identifier
   verify: Verify
   use_immediate_mode: Use immediate mode
@@ -76,13 +103,26 @@ en:
   openid_consumer_testsuite_title: OpenID Consumer Testsuite
   relying_party_title: Relying Party
   
-  # passwords
+  # passwords controller
+  password_reset_link_has_been_sent: A password reset link has been sent to your email address.
+  could_not_find_user_with_email_address: Could not find a user with that email address.
+  password_reset: Password reset.
+  password_mismatch: Password mismatch.
+  password_cannot_be_blank: Password cannot be blank.
+  reset_code_invalid_try_again: Sorry, your password reset code is invalid. Please check the code and try again.
+
+  # passwords views
   reset_password: reset password
   forgot_password_title: Forgot password
   please_enter_email: Please enter your email address
   submit_send: send
 
-  # personas
+  # personas controller
+  persona_successfully_created: The persona was successfully created.
+  persona_updated: The persona has been updated.
+  persona_cannot_be_deleted: This persona cannot be deleted.
+
+  # personas views
   edit_your_persona: Edit your persona “{{title}}”
   personal_information: Personal information
   professional_information: Professional information
@@ -138,7 +178,12 @@ en:
   create_a_new_persona: create a new persona
   create_a_new_persona_title: Create a new persona
   
-  # sessions
+  # sessions controller
+  you_are_logged_in: You are now logged in.
+  login_incorrect_or_account_not_yet_activated: The login is incorrect or your account is not activated, yet.
+  you_are_now_logged_out: You are now logged out.
+
+  # sessions views
   login_title: Login
   your_openid: Your OpenID
   cancel_this_request: cancel this request
@@ -146,7 +191,13 @@ en:
   login_submit: login
   i_forgot_my_password: I forgot my password
 
-  # server
+  # server controller
+  this_is_openid_not_a_human_ressource: This is an OpenID server endpoint, not a human readable resource.
+  identity_verification_request_invalid: The identity verification request is invalid.
+  service_provider_requires_reauthentication_last_login_too_long_ago: The Service Provider requires reauthentication, because your last login is too long ago.
+  login_to_verify_identity: Please log in to verify your identity.
+
+  # server views
   identity_request_from_host: Identity request from {{host}}
   trust_root_requests_some_personal_data: "{{trust_root}} requests some personal data."
   select_information_to_submit: Please select the information you would like to submit.
@@ -165,7 +216,10 @@ en:
   approve_request: Approve this request
   cancel_request: Cancel this request
   
-  # sites
+  # sites controllers
+  release_policy_for_site_updated: The release policy for this site has been updated.
+
+  # sites views
   edit_link: edit
   delete_link: delete
   or: or
@@ -183,3 +237,7 @@ en:
   ext1: Ext1
   ext2: Ext2
 
+  # yubikey controller
+  account_associated_with_yubico_identity: Your account has been associated with your Yubico identity.
+  sorry_yubico_one_time_password_incorrect: Sorry, the given Yubico one time password is incorrect.
+  account_disassociated_from_yubico_identity: Your account has been disassociated from the Yubico identity.

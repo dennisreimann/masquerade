@@ -1,6 +1,18 @@
 de:
 
-  # account
+  # account controller
+  thanks_for_signing_up_activation_link: Danke für Ihre Anmeldung! Wir haben Ihnen eine E-Mail mit einem Aktivierungslink geschickt.
+  profile_updated: Ihr Account wurde aktualisiert.
+  account_disabled: Ihr Account wurde deaktiviert.
+  entered_password_is_wrong: Das eingegebene Passwort ist falsch.
+  account_activated_login_now: Ihr Account wurde aktiviert - Sie können sich jetzt einloggen.
+  couldnt_find_account_with_code_create_new_one: Wir konnten keinen Account mit dem angegebenen Aktivierungscode finden. Bitte erstellen Sie einen neuen Account.
+  account_already_activated_please_login: Ihr Account wurde bereits aktiviert - bitte loggen Sie sich ein.
+  password_has_been_changed: Ihr Passwort wurde geändert.
+  sorry_password_couldnt_be_changed: Entschuldigung, Ihr Passwort konnte nicht geändert werden.
+  confirmation_of_new_password_invalid: Die Bestätigung des neuen Passworts war inkorrekt.
+  old_password_incorrect: Ihr altes Passwort ist falsch.
+  # account views
   public_persona: Öffentliche Rolle
   forgot_password_create_new_one: Sie haben Ihr Passwort vergessen? Hier können Sie ein neues setzen
   account_created_but_not_activated_yet: Ihr OpenID-Account wurde angelegt. Er ist jedoch noch nicht aktiviert.
@@ -28,7 +40,22 @@ de:
   signup_title: Anmelden
   signup: Anmelden
 
-  # consumer
+  # consumer controller
+  immediate_request_failed_setup_needed: Immediate Request fehlgeschlagen - Einstellungen nötig
+  openid_transaction_cancelled: OpenID-Transaktion abgebrochen.
+  verification_of_identifier_failed: "Überprüfung von {{identifier}} fehlgeschlagen: {{message}}"
+  verification_failed_message: "Überprüfung fehlgeschlagen: {{message}}"
+  verification_of_identifier_succeeded: Überprüfung von {{identifier}} erfolgreich.
+  simple_registration_data_requested: Simple Registration Data wurde angefordert
+  but_none_was_returned: aber nichts wurde zurück geliefert.
+  the_following_data_were_sent: "Die folgenden Daten wurden gesendet:"
+  attribute_exchange_data_requested: Attribute Exchange-Daten wurden angefordert
+  authentication_policies_requested: Authentifizierungsregeln wurden angefordert
+  and_server_reported_the_following: "und der Server antwortete Folgendes:"
+  but_the_server_did_not_report_one: aber der Server meldete keine.
+  authentication_time: Authentifizierungszeit
+
+  # consumer views
   identifier: Kennung
   verify: Überprüfen
 
@@ -68,15 +95,27 @@ de:
   openid_consumer_testsuite_title: OpenID Consumer Testsuite
   relying_party_title: Vertrauende Gegenstelle
   
-  # passwords
+  # passwords controller
+  password_reset_link_has_been_sent: Ein Link zum Zurücksetzen des Passwortes wurde an Ihre E-Mail-Adresse geschickt.
+  could_not_find_user_with_email_address: Konnte keinen User mit dieser E-Mail-Adresse finden.
+  password_reset: Das Passwort wurde zurück gesetzt.
+  password_mismatch: Das Passwort stimmt nicht überein.
+  password_cannot_be_blank: Das Passwort kann nicht leer sein.
+  reset_code_invalid_try_again: Entschuldigung, der Code zum Zurücksetzen des Passworts ist falsch. Bitte prüfen Sie den Code und versuchen Sie es noch einmal.
+
+  # passwords views
   reset_password: Passwort zurück setzen
   forgot_password_title: Passwort vergessen
   please_enter_email: Bitte geben Sie Ihre E-Mail-Adresse ein
   submit_send: Senden
 
-  # personas
-  edit_your_persona: Bearbeiten Sie Ihre Rolle “{{title}}”
+  # personas controller
+  persona_successfully_created: Die Rolle wurde erfolgreich angelegt.
+  persona_updated: Die Rolle wurde aktualisiert.
+  persona_cannot_be_deleted: Diese Rolle kann nicht gelöscht werden.
 
+  # personas views
+  edit_your_persona: Bearbeiten Sie Ihre Rolle “{{title}}”
   personal_information: Persönliche Angaben
   professional_information: Berufliche Angaben
   phone: Telefon
@@ -131,7 +170,12 @@ de:
   create_a_new_persona: neue Rolle anlegen
   create_a_new_persona_title: Neue Rolle anlegen
 
-  # sessions
+  # sessions controller
+  you_are_logged_in: Sie sind jetzt eingeloggt.
+  login_incorrect_or_account_not_yet_activated: Die Zugangsdaten sind falsch oder der Account wurde noch nicht aktiviert.
+  you_are_now_logged_out: Sie sind jetzt ausgeloggt.
+
+  # sessions views
   login_title: Einloggen
   your_openid: Ihre OpenID
   cancel_this_request: diese Anfrage abbrechen
@@ -139,7 +183,13 @@ de:
   login_submit: Einloggen
   i_forgot_my_password: Ich habe mein Passwort vergessen
 
-  # server
+  # server controller
+  this_is_openid_not_a_human_ressource: Dies ist ein OpenID-Server-Endpunkt und keine von Menschen lesbare Ressource.
+  identity_verification_request_invalid: Die Anfrage zur Identitätsprüfung ist ungültig.
+  service_provider_requires_reauthentication_last_login_too_long_ago: Der Dienstanbieter erfordert eine erneute Authentifizierung, da Ihr letzter Login zu lange her war.
+  login_to_verify_identity: Bitte loggen Sie sich ein, um Ihre Identität zu bestätigen.
+
+  # server views
   identity_request_from_host: Identitätsanfrage von {{host}}
   trust_root_requests_some_personal_data: "{{trust_root}} verlangt persönliche Angaben."
   select_information_to_submit: Bitte wählen Sie die Angaben aus, die Sie übermitteln möchten.
@@ -158,7 +208,10 @@ de:
   approve_request: Anfrage bestätigen
   cancel_request: Anfrage widerrufen
   
-  # sites
+  # sites controllers
+  release_policy_for_site_updated: Die Richtlinie für diese Website wurde aktualisiert.
+
+  # sites views
   edit_link: bearbeiten
   delete_link: löschen
   or: oder
@@ -176,11 +229,17 @@ de:
   ext1: Ext1
   ext2: Ext2
 
+  # yubikey controller
+  account_associated_with_yubico_identity: Ihr Account wurde mit Ihrer Yubico-Identität verknüpft.
+  sorry_yubico_one_time_password_incorrect: Entschuldigung, das angegebene Yubico-Einmalpasswort ist falsch.
+  account_disassociated_from_yubico_identity: Ihr Account wurde von der Yubico-Identität gelöst.
+
 
   # AR
   activerecord:
     attributes:
+      persona:
+        title: Titel
       account:
         email: E-Mail
         public_persona: Öffentliche Rolle
-

@@ -26,7 +26,7 @@ class ServerController < ApplicationController
         elsif openid_request
           handle_non_checkid_request
         else
-          render :text => 'This is an OpenID server endpoint, not a human readable resource.'
+          render :text => t(:this_is_openid_not_a_human_ressource)
         end
       end
       format.xrds
@@ -134,12 +134,12 @@ class ServerController < ApplicationController
   def ensure_valid_checkid_request
     self.openid_request = checkid_request
     if !openid_request.is_a?(OpenID::Server::CheckIDRequest)
-      flash[:error] = 'The identity verification request is invalid.'
+      flash[:error] = t(:identity_verification_request_invalid)
       redirect_to home_path
     elsif !allow_verification?
       flash[:notice] = logged_in? && !pape_requirements_met?(auth_time) ?
-        'The Service Provider requires reauthentication, because your last login is too long ago.' :
-        'Please log in to verify your identity.'
+        t(:service_provider_requires_reauthentication_last_login_too_long_ago) :
+        t(:login_to_verify_identity)
       session[:return_to] = proceed_path
       redirect_to login_path
     end

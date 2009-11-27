@@ -9,10 +9,10 @@ class SessionsController < ApplicationController
   def create
     self.current_account = Account.authenticate(params[:login], params[:password])
     if logged_in?
-      flash[:notice] = 'You are now logged in.'
+      flash[:notice] = t(:you_are_logged_in)
       redirect_after_login
     else
-      flash[:error]  = 'The login is incorrect or your account is not activated, yet.'
+      flash[:error]  = t(:login_incorrect_or_account_not_yet_activated)
       redirect_to :action => 'new'
     end
   end
@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
     current_account.forget_me 
     cookies.delete :auth_token
     reset_session
-    flash[:notice] = 'You are now logged out.'
+    flash[:notice] = t(:you_are_now_logged_out)
     redirect_to home_path
   end
   

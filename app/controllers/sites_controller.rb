@@ -21,7 +21,7 @@ class SitesController < ApplicationController
   def update
     respond_to do |format|
       if @site.update_attributes(params[:site])
-        flash[:notice] = 'The release policy for this site has been updated.'
+        flash[:notice] = t(:release_policy_for_site_updated)
         format.html { redirect_to edit_account_site_path(@site) }
       else
         format.html { render :action => 'edit' }
