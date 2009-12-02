@@ -66,13 +66,12 @@ class Account < ActiveRecord::Base
   # Authenticates a user by their login name and password.
   # Returns the user or nil.
   def self.authenticate(login, password)
-    if a = find(:first, :conditions => ['login = ? and enabled = ? and activated_at IS NOT NULL', login, true]) # need to get the salt
-      if a.authenticated?(password)
-        a.last_authenticated_at, a.last_authenticated_with_yubikey = Time.now, a.authenticated_with_yubikey?
-        a.save(false)
-        a
-      end
-    end
+    options = {
+      :login => login,
+      :password => password }
+    backend_name = (APP_CONFIG['authentication_backend'] || 'database').camelize
+    backend = "AuthenticationBackend::#{backend_name}".constantize
+    backend.authenticate(options)
   end
 
   # Encrypts some data with the salt.

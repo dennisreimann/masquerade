@@ -17,6 +17,8 @@ The source code is available at {github}[http://github.com/dbloete/masquerade/] 
 2. Configure the application:
 	* rename the file config/app_config.yml.example to app_config.yml
 	* set the values in app_config.yml according to your environment
+	* if you would like to use an authentication backend other than the database,
+	  see the chapter Authentication Backends
 
 3. Run the tests and see if everything seems to work
 	rake test
@@ -48,11 +50,26 @@ OpenID requests. The server controller is supposed to only interact with relying
 a.k.a. consumer websites. It includes the OpenidServerSystem module, which provides some
 handy methods to access and answer OpenID requests.
 
+== Authentication Backends
+
+masquerade currently supports authentication with the account in the database (default)
+and an experimental version of authenticating with an LDAP backend. To use the LDAP
+backend, adjust the app_config.yml and add the following:
+
+  authentication_backend: ldap
+  ldap:
+    host: your.ldap.host
+    port: 1234
+    bind_dn: ''
+    base: ''
+
+This is an experimental version and still needs some more testing, go ahead :)
+
 == TODO
 
-* let the user set a standard persona which is used as default for requests
 * let the user choose to display information on his identity page (hCard)
 * add support for {Attribute Exchange Store Requests}[http://openid.net/specs/openid-attribute-exchange-1_0.html]
+* test the LDAP auth backend
 
 == Notes
 

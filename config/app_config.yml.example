@@ -15,6 +15,12 @@ default: &default
   yubico:
   	id: 99
     api_key: youryubicoapikey
+  authentication_backend: database
+  ldap:
+    host: your.ldap.host
+    port: 1234
+    bind_dn: ''
+    base: ''
     
 development:
   <<: *default
