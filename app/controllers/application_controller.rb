@@ -78,13 +78,9 @@ class ApplicationController < ActionController::Base
   # 
   # If desired locale is not supported or nothing is set, fallback to English ("en")
   def set_locale 
-    locale = if params[:locale]
-      params[:locale]
-    elsif request.env['HTTP_ACCEPT_LANGUAGE']
-      request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
-    end
-    
-    I18n.locale = (locale and I18n.available_locales.include?(locale.to_sym)) ? locale : 'en'
+    locale = params[:locale]
+    locale ||= request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first if request.env['HTTP_ACCEPT_LANGUAGE']
+    I18n.locale = (locale && I18n.available_locales.include?(locale.to_sym)) ? locale : 'en'
   end 
   
   private

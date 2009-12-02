@@ -82,10 +82,10 @@ de:
     geleitet hat."
 
   # nav
-  my_identity: Meine Identität
-  my_profile: Mein Account
-  my_personas: Meine Rollen
-  my_trusted_sites: Meine vertrauten Websites
+  my_identity: Identität
+  my_profile: Account
+  my_personas: Rollen
+  my_trusted_sites: Websites
   logout: ausloggen
   current_verification_request: aktuelle Prüfanfrage
   login_link: Einloggen

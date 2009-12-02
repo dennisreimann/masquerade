@@ -90,10 +90,10 @@ en:
     and should contain no links.<br />If there are any links, please report to us, who sent you here."
 
   # nav
-  my_identity: my identity
-  my_profile: my profile
-  my_personas: my personas
-  my_trusted_sites: my trusted sites
+  my_identity: identity
+  my_profile: profile
+  my_personas: personas
+  my_trusted_sites: trusted sites
   logout: logout
   current_verification_request: current verification request
   login_link: login
