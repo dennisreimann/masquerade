@@ -13,9 +13,9 @@ default: &default
     domain: your.domain.com
     from: info@your.domain.com
   yubico:
-  	id: 99
+    id: 99
     api_key: youryubicoapikey
-    
+
 development:
   <<: *default
 

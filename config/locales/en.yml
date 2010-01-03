@@ -22,7 +22,7 @@ en:
   please_activate_it_by_clicking_the_following_link: Please activate it by clicking the following link
   my_profile: My profile
   login: Login
-  passwort: Password
+  password: Password
   my_password: My password
   old_password: Old password
   new_password_minimum_6_characters: New password <span class="note">(minimum length is 6 characters)</span>
