@@ -1,0 +1,249 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+es:
+  
+  # account controller
+  thanks_for_signing_up_activation_link: Gracias por registrarte! Te hemos enviado un correo con un enlace para que actives tu cuenta.
+  profile_updated: Tu perfil a sido actualizado.
+  account_disabled: Tu cuenta a sido desabilitada.
+  entered_password_is_wrong: La clave ingresada es incorrecta.
+  account_activated_login_now: Tu cuenta ha sido activada - puedes entrar ahora.
+  couldnt_find_account_with_code_create_new_one: "No pudimos encontrar una cuenta con ese código de activación, por favor crea una nueva."
+  account_already_activated_please_login: Tu cuenta ya fué activada - por favor entra.
+  password_has_been_changed: Tu clave a sido modificada.
+  sorry_password_couldnt_be_changed: "Perdon, pero tu clave no pudo ser modificada."
+  confirmation_of_new_password_invalid: La confirmación de la nueva clave es incorrecta.
+  old_password_incorrect: Tu antigua clave es incorrecta.
+  # account views
+  public_persona: Persona pública
+  forgot_password_create_new_one: ¿Olvidate tu clave? Aquí puedes crear una nueva
+  account_created_but_not_activated_yet: "Tu cuenta OpenID a sido creada, pero no ha sido activada todavía."
+  please_activate_it_by_clicking_the_following_link: Por favor activala usando el siguiente enlace
+  my_profile: Mi perfil
+  login: Usuario
+  passwort: Clave
+  my_password: Mi clave
+  old_password: Antigua clave
+  new_password_minimum_6_characters: Nueva clave <span class="note">(el tamaño minimo son 6 caracteres)</span>
+  password_confirmation: Confirmación de la clave
+  submit_update: actualizar
+  my_yubikey: Mi Yubikey
+  your_account_is_associated_with_the_yubico_identity: Tu cuenta está asociada con la identidad Yubico
+  yubikey_how_to_use: 
+    "Puedes usar una Yubikey en conjunto con tu clave para entrar en tu cuenta. 
+    solo ingresa tu clave seguida de tu Yubico OTP (sin ningun espacio o separación) en la página de ingreso"
+  remove_association: eliminar asociación
+  your_yubikey_a_one_time_password: Tu Yubikey <span class="note">(Yubico one time password)</span>
+  associate_account_with_yubikey: asociar mi cuenta con esta Yubikey
+  disable_my_account: Desactivar mi cuenta
+  wont_be_possible_to_reclaim_identifier: Por favor considera que no podrás recuperartu identificación OpenID
+  confirm_by_entering_password: Confirma este paso ingresando tu clave.
+  delete_my_account_and_data: borrar mi cuenta y mis datos.
+
+  signup_title: Registro
+  signup: Registro  # ???
+
+  # consumer controller
+  immediate_request_failed_setup_needed: Petición inmediata fallida - hace falta una configuración
+  openid_transaction_cancelled: Transacción OpenID cancelada.
+  verification_of_identifier_failed: "Verificación de {{identifier}} fallida: {{message}}"
+  verification_failed_message: "Verificación fallida: {{message}}"
+  verification_of_identifier_succeeded: "Verificación de {{identifier}} exitosa."
+  simple_registration_data_requested: Han sido pedidos datos de registro simple
+  but_none_was_returned: pero ninguno fué entregado.
+  the_following_data_were_sent: "Se enviaron los siguientes datos:"
+  attribute_exchange_data_requested: Fue pedido el intercambio de atributos
+  authentication_policies_requested: Se pidieron las políticas de autentificación
+  and_server_reported_the_following: "y el servidor reportó lo siguiente"
+  but_the_server_did_not_report_one: pero el servidor no reportó ninguno
+  authentication_time: Tiempo de autentificación
+
+  # consumer views
+  identifier: Identificador
+  verify: Verificar
+  use_immediate_mode: Utilizar modo inmediato
+  request_registration_data: Pedir información de registro
+  request_attribute_exchange_data: Pedir intercambio de atributos
+  request_pape: Pedir politica de autentificación resistente a phishing (PAPE)
+  force_post: Force the transaction to use POST by adding 2K of extra data
+
+  # info
+  questions_answers: Preguntas? Respuestas!
+  here_we_cover_openid_topics: Aquí cubrimos algunos temas relacionados con OpenID.
+  openid_delegation: Delegación OpenID
+  delegation_explanation:
+    "Esta es una forma de utilizar la url de tu propio blog o sitio web como tu identificador OpenID.
+    Las peticiones serán redireccionadas a este servidor agregando el siguiente fragment e HTML a el 
+     <code>&lt;head&gt;</code> de tu sitio:"
+  get_your_openid: Obten tu OpenID
+  openid_intro: 
+    "<p>OpenID es un servicio de identificaciín, que te permite registrarte en distintos sitios 
+    utilizando una sola identidad digital, eliminando la necesidad de distintos nombres de usuarios 
+    y contraseñas para cada sitio</p>
+    <p>OpenID es descentralizado, gratis y un estandar abierto, que te permite controlar la 
+    cantidad de información personal que deseas entregar a cada sitio</p>
+    <p>Empieza a usarlo y {{signup_link}}.</p>"
+  signup_for_an_openid: registrate por tu OpenID
+  login_to_proceed: Por favor ingresa para continuar
+  host_requests_identification_you_need_to_login: 
+    "{{host}} ha pedido tu identificación y debes ingresar para continuar."
+  login_intro: 
+    "Para ingresar, por favor navega a <strong>{{login_url}}</strong>. La página 
+    que estas viendo actualmente es usada para <strong>protegerte del phishing y el robo de identidad online</strong>
+    y no debería contener enlaces.<br />Si tiene algún enlace, por favor informanos quien te envió aquí."
+
+  # nav
+  my_identity: identidad
+  my_profile: perfil
+  my_personas: personas
+  my_trusted_sites: sitios autorizados
+  logout: salir
+  current_verification_request: current verification request
+  login_link: entrar
+  signup_link: registrar
+  help: ayuda
+  get_help: obtener ayuda
+  openid_consumer_testsuite_title: Prueba de Consumidor OpenID
+  relying_party_title: Tercero de Confianza
+  
+  # passwords controller
+  password_reset_link_has_been_sent: Un enlace para resetear tu contraseña a sido enviado a tu dirección de correo electrónico.
+  could_not_find_user_with_email_address: No encontramos ningún usuario con ese correo electrónico.
+  password_reset: Resetear contraseña.
+  password_mismatch: Las contraseñas no coinciden.
+  password_cannot_be_blank: La contraseña no puede estár en blanco.
+  reset_code_invalid_try_again: 
+    "Lo sentimos, tu código de reseteo de contraseña es inválido. por favor revisa el código y prueba de nuevo."
+
+  # passwords views
+  reset_password: resetear clave
+  forgot_password_title: Clave olvidada
+  please_enter_email: Por favor ingresa tu correo electrónico
+  submit_send: enviar
+
+  # personas controller
+  persona_successfully_created: La persona se a creado exitosamente.
+  persona_updated: La persona ha sido eliminada.
+  persona_cannot_be_deleted: Esta persona no se puede eliminar.
+
+  # personas views
+  edit_your_persona: "Editar tu persona “{{title}}”"
+  personal_information: Información personal
+  professional_information: Información profecional
+  phone: Teléfonos
+  instant_messaging: Mensagería Instantanea
+  other_information: Otra información
+
+  nickname: Seudonimo
+  email: Correo Electrónico
+  address: Dirección
+  postcode: Código Postal
+  city: Ciudad
+  state: Estado
+  country: País
+  language: Idioma
+  timezone: Zona horaria
+  gender: Sexo
+  company_name: Compañía
+  job_title: Posición
+  phone_home: Teléfono hogar
+  phone_mobile: Teléfono móvil
+  phone_fax: Fax
+  phone_work: Teléfono trabajo
+  biography: Biografía
+  title: Título
+  fullname: Nombre completo
+  birth_date: Cumpleaños
+  address_business: Dirección
+  address_additional: Adicional
+  address_additional_business: Adicional
+  postcode_business: Código Postal
+  city_business: Ciudad
+  state_business: Estado
+  country_business: País
+  im_aim: AIM
+  im_icq: ICQ
+  im_msn: MSN
+  im_yahoo: Yahoo
+  im_jabber: Jabber
+  im_skype: Skype
+  image_url: URL Imagen
+  website_url: URL Sitio Web
+  blog_url: URL Blog
+  dob: Fecha de nacimiento
+
+  my_personas_title: Mis personas
+  personas_intro: 
+    "Las personas definen ciertos roles en tu cuenta. Por ejemplo puedes tener una persona para uso privado 
+    y otra en tu contexo de negocio. Cuando un tercero de confianza pida tu información
+    tu puees elegir la persona que deseas utilizar en ese intercambio de datos."
+  edit: editar
+  delete: eliminar
+  really_want_to_delete_persona: "Realmente quieres eliminar a la persona ”{{title}}”?"
+  create_a_new_persona: crear una nueva persona
+  create_a_new_persona_title: Crear una nueva persona
+  
+  # sessions controller
+  you_are_logged_in: Ahora estás ingresado.
+  login_incorrect_or_account_not_yet_activated: El usuario es incorrecto o la cuenta no ha sido activada todavía.
+  you_are_now_logged_out: Has salido.
+
+  # sessions views
+  login_title: Usuario
+  your_openid: Tu OpenID
+  cancel_this_request: cancelar esta petición
+  remember_me: recordarme
+  login_submit: usuario
+  i_forgot_my_password: Olvidé mi clave
+
+  # server controller
+  this_is_openid_not_a_human_ressource: "Este es un punto de conexión del servidor OpenID, no un recurso utilizable por personas"
+  identity_verification_request_invalid: La petición de verificación de identidad es inválida.
+  service_provider_requires_reauthentication_last_login_too_long_ago: "El proveedor del servicio requiere autenticación, porque tu último ingreso fue hace demasiado tiempo."
+  login_to_verify_identity: Por favor ingresa para verificar tu identidad.
+
+  # server views
+  identity_request_from_host: "Petición de identidad de {{host}}"
+  trust_root_requests_some_personal_data: "{{trust_root}} pidió algunos datos personales."
+  select_information_to_submit: Por favor selecciona la información que deseas enviar.
+  attributes_are_shown_from_persona: "Los atributos mostrados son de la persona {{persona}}."
+  to_submit_other_values_you_can_edit_or_choose: "Para enviar otros valores puedes {{edit_link}} o {{choose_link}}."
+  edit_persona_link: editar la persona
+  choose_other_persona: elegir otra persona
+  trust_root_requires_authentication: "{{trust_root} requiere tu autenticación."
+  choose_persona_title: Elige una persona
+  choose_persona_submit: elegir persona
+  create_new_persona_link: crear una nueva persona
+  requested_information_title: Información pédida
+  disclosure: liberar
+  trust_site_only_this_time: Confiar en este sitio solo esta vez
+  always_trust_site: Siempre confiar en este sitio
+  approve_request: Aprovar esta petición
+  cancel_request: Cancelar esta petición
+  
+  # sites controllers
+  release_policy_for_site_updated: Las políticas de liberación para este sitio han sido actualizadas.
+
+  # sites views
+  edit_link: editar
+  delete_link: eliminar
+  or: o
+  your_release_policy_for_site: Tu política de liberación para {{site}}
+  persona_label: Persona
+  choose_persona_submit: elige una persona
+  property: propiedad
+  value: valor
+  update_release_policy_submit: actualizar política de liberación
+  identity_request_answered_without_interaction: Peticiones de identificación de los siguientes sitios son contestadas directamente sin otra interacción.
+  alter_release_policies_here: Puedes modificar las política de liberaciónpara estos sitios.
+  really_want_to_delete_trust_for_site: "¿Estas seguro que deseas eliminar la confianza de {{site}}?"
+  no_entries_yet: No hay ninguna entrada todavía.
+  ext0: Ext0
+  ext1: Ext1
+  ext2: Ext2
+
+  # yubikey controller
+  account_associated_with_yubico_identity: Tu cuenta se a asociado con tu identidad Yubico.
+  sorry_yubico_one_time_password_incorrect: "Lo sentimos, la clave de un solo uso Yubico es incorrecta."
+  account_disassociated_from_yubico_identity: Tu cuenta se a desasociado de la identidad Yubico.
