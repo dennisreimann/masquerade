@@ -43,6 +43,10 @@ en:
   signup_title: Signup
   signup: Signup  # ???
 
+  # account mailer
+  please_activate_your_account: Please activate your account
+  your_request_for_a_new_password: Your request for a new password
+
   # consumer controller
   immediate_request_failed_setup_needed: Immediate request failed - setup needed
   openid_transaction_cancelled: OpenID transaction cancelled.

@@ -40,6 +40,10 @@ de:
   signup_title: Anmelden
   signup: Anmelden
 
+  # account mailer
+  please_activate_your_account: Bitte aktivieren Sie Ihren Account
+  your_request_for_a_new_password: Ihre Anfrage nach einem neuen Passwort
+
   # consumer controller
   immediate_request_failed_setup_needed: Immediate Request fehlgeschlagen - Einstellungen nötig
   openid_transaction_cancelled: OpenID-Transaktion abgebrochen.
