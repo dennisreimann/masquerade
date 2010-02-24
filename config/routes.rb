@@ -1,54 +1,42 @@
-ActionController::Routing::Routes.draw do |map|
+Masquerade::Application.routes.draw do
 
-  map.resource :account,
-    :member => { :activate => :get, :password => :get, :change_password => :put } do |account|
-    account.resources :personas do |personas|
-      personas.resources :properties
+  resource :account, :member => { :activate => :get, :password => :get, :change_password => :put } do
+    resources :personas do
+      resources :properties
     end
-    account.resources :sites do |sites|
-      sites.resources :release_policies
+    resources :sites do
+      resources :release_policies
     end
-    account.resource :yubikey_association
+    resource :yubikey_association
   end
   
-  map.resource :session
-  map.resource :password
+  resource :session
+  resource :password
   
-  map.with_options :controller => 'passwords' do |pwd|
-    pwd.forgot_password 'forgot_password', :action => 'new'
-    pwd.reset_password  'reset_password/:id', :action => 'edit'
-  end
   
-  map.with_options :controller => 'sessions' do |sessions|
-    sessions.login 'login', :action => 'new'
-    sessions.logout 'logout', :action => 'destroy'
-  end
+  match "/forgot_password", :to => "passwords#new", :as => :forgot_password
+  match "/reset_password/:id", :to => "passwords#edit", :as => :reset_password
   
-  map.with_options :controller => 'server' do |server|
-    server.server 'server', :action => 'index'
-    server.decide 'server/decide', :action => 'decide'
-    server.proceed 'server/proceed', :action => 'proceed'
-    server.complete 'server/complete', :action => 'complete'
-    server.cancel 'server/cancel', :action => 'cancel'
-    server.seatbelt_config 'server/seatbelt/config.:format', :action => 'seatbelt_config'
-    server.seatbelt_state 'server/seatbelt/state.:format', :action => 'seatbelt_login_state'
-  end
-
-  map.with_options :controller => 'consumer' do |consumer|
-    consumer.consumer 'consumer', :action => 'index'
-    consumer.consumer_start 'consumer/start', :action => 'start'
-    consumer.consumer_complete 'consumer/complete', :action => 'complete'
-  end
-
-  map.with_options :controller => 'info' do |info|
-    info.home '', :action => 'index'
-    info.help 'help', :action => 'help'
-    info.safe_login 'safe-login', :action => 'safe_login'
-  end
+  match "/login", :to => "sessions#new", :as => :login
+  match "/logout/:id", :to => "sessions#destroy", :as => :logout
   
-  map.with_options :controller => 'accounts' do |account|
-    account.formatted_identity ':account.:format', :action => 'show'
-    account.identity ':account', :action => 'show'
-  end
+  match "/server", :to => "server#index", :as => :server
+  match "/server/decide", :to => "server#decide", :as => :decide
+  match "/server/proceed", :to => "server#proceed", :as => :proceed
+  match "/server/complete", :to => "server#complete", :as => :complete
+  match "/server/cancel", :to => "server#cancel", :as => :cancel
+  match "/server/seatbelt/config.:format", :to => "server#seatbelt_config", :as => :seatbelt_config
+  match "/server/seatbelt/state.:format", :to => "server#seatbelt_login_state", :as => :seatbelt_state
+  
+  match "/consumer", :to => "consumer#index", :as => :consumer
+  match "/consumer/start", :to => "consumer#start", :as => :consumer_start
+  match "/consumer/complete", :to => "consumer#complete", :as => :consumer_complete
+  
+  match "/", :to => "info#index", :as => :home
+  match "/help", :to => "info#help", :as => :help
+  match "/safe-login", :to => "info#safe_login", :as => :safe_login
+  
+  match "/:account.:format", :to => "accounts#show", :as => :identity
+  match "/:account", :to => "accounts#show", :as => :formatted_identity
   
 end

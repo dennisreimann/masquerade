@@ -3,7 +3,7 @@ class AccountsController < ApplicationController
   before_filter :login_required, :except => [:show, :new, :create, :activate]
   
   def show
-    @account = Account.find(:first, :conditions => ['login = ? AND enabled = ?', params[:account], true])
+    @account = Account.first(:conditions => ['login = ? AND enabled = ?', params[:account], true])
     raise ActiveRecord::RecordNotFound if @account.nil?
     
     respond_to do |format|

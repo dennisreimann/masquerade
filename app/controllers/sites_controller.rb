@@ -7,7 +7,7 @@ class SitesController < ApplicationController
   before_filter :find_personas, :only => [:create, :edit, :update]
   
   def index
-    @sites = @account.sites.find(:all, :include => :persona, :order => :url)
+    @sites = @account.sites.all(:include => :persona, :order => :url)
 
     respond_to do |format|
       format.html
@@ -48,7 +48,7 @@ class SitesController < ApplicationController
   end
   
   def find_personas
-    @personas = @account.personas.find(:all, :order => 'title')
+    @personas = @account.personas.all(:order => 'title')
   end
   
 end

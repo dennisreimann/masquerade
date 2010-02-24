@@ -6,7 +6,7 @@
 	
 	<div class="row space">
 		<%= f.label :persona_id, t(:persona_label) %>
-		<%= f.select :persona_id, current_account.personas.find(:all).collect { |p| [ p.title, p.id ] } %>
+		<%= f.select :persona_id, current_account.personas.all.collect { |p| [ p.title, p.id ] } %>
 		<%= submit_tag t(:choose_persona_submit) %>
 	</div>
 	

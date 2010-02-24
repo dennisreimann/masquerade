@@ -6,7 +6,7 @@ class PersonasController < ApplicationController
 	before_filter :store_return_url, :only => [:new, :edit]
 	
 	def index
-		@personas = @account.personas.find(:all)
+		@personas = @account.personas.all
 
 		respond_to do |format|
 			format.html

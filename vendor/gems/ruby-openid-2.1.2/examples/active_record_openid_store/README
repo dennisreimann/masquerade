@@ -12,13 +12,13 @@ OpenID enabled rails app to an ActiveRecord based OpenID store.
 ==Install
 
 1) Copy this directory and all it's contents into your
-RAILS_ROOT/vendor/plugins directory.  You structure should look like
+Rails.root/vendor/plugins directory.  You structure should look like
 this:
 
-  RAILS_ROOT/vendor/plugins/active_record_openid_store/
+  Rails.root/vendor/plugins/active_record_openid_store/
 
 2) Copy the migration, XXX_add_open_id_store_to_db.rb to your
-   RAILS_ROOT/db/migrate directory.  Rename the XXX portion of the
+   Rails.root/db/migrate directory.  Rename the XXX portion of the
    file to next sequential migration number.
 
 3) Run the migration:
@@ -35,7 +35,7 @@ this:
 ==Upgrade
 
 If you are upgrading from the 1.x ActiveRecord store, replace your old
-RAILS_ROOT/vendor/plugins/active_record_openid_store/ directory with
+Rails.root/vendor/plugins/active_record_openid_store/ directory with
 the new one and run the migration XXX_upgrade_open_id_store.rb.
 
 ==What about garbage collection? 

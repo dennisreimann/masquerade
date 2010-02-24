@@ -113,7 +113,7 @@ class ConsumerController < ApplicationController
 
   def consumer
     if @consumer.nil?
-      dir = Pathname.new(RAILS_ROOT).join('db').join('cstore')
+      dir = Pathname.new(Rails.root).join('db').join('cstore')
       store = OpenID::Store::Filesystem.new(dir)
       @consumer = OpenID::Consumer.new(session, store)
     end
