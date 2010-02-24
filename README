@@ -138,7 +138,11 @@ Example:
 
   class WeblogController < ActionController::Base
     def index
+<<<<<<< HEAD
       @posts = Post.all
+=======
+      @posts = Post.find(:all)
+>>>>>>> Regenerated with the rails command
       debugger
     end
   end
