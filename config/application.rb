@@ -5,6 +5,17 @@ require 'rails/all'
 # Auto-require default libraries and those for the current Rails environment.
 Bundler.require :default, Rails.env
 
+require 'digest/sha1'
+require 'openid'
+require 'openid/consumer/discovery'
+require 'openid/extensions/sreg'
+require 'openid/extensions/pape'
+require 'openid/extensions/ax'
+require 'lib/openid_server_system'
+require 'lib/yubico'
+require 'lib/hash'
+require 'yaml'
+
 module Masquerade
   class Application < Rails::Application
     
@@ -51,9 +62,7 @@ module Masquerade
       :user_name => Masquerade::Application::Config['mailer']['user_name'],
       :password => Masquerade::Application::Config['mailer']['password'],
       :authentication => Masquerade::Application::Config['mailer']['authentication'] }
-    config.action_mailer.default_url_options = {
-      :protocol => (Masquerade::Application::Config['use_ssl'] ? 'https' : 'http'),
-      :host => Masquerade::Application::Config['host'] }
       
   end
 end
+
