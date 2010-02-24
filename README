@@ -139,10 +139,14 @@ Example:
   class WeblogController < ActionController::Base
     def index
 <<<<<<< HEAD
+<<<<<<< HEAD
       @posts = Post.all
 =======
       @posts = Post.find(:all)
 >>>>>>> Regenerated with the rails command
+=======
+      @posts = Post.all
+>>>>>>> Working on deprecation warnings
       debugger
     end
   end
