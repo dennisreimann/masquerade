@@ -1,11 +1,15 @@
 <h2><%=t :identity_request_from_host, :host => h(extract_host(@site.url)) %></h2>
 <% if sreg_request || ax_fetch_request %>
 <p><%=t :trust_root_requests_some_personal_data, :trust_root => "<strong>#{h checkid_request.trust_root}</strong>" %><br />
+<% if @site.persona %>
 <%=t :select_information_to_submit %></p>
 <p class="note"><%=t :attributes_are_shown_from_persona, :persona => "<strong>#{h @site.persona.title}</strong>" %><br />
 <%=t :to_submit_other_values_you_can_edit_or_choose, 
   :edit_link => link_to(t(:edit_persona_link), edit_account_persona_path(@site.persona, :return => decide_path(:persona_id => @site.persona.id))),
   :choose_link => link_to_function(t(:choose_other_persona), 'Element.toggle("persona_select")') %></p>
+<% else %>
+<p><%=t :identity_request_missing_persona, :create_link => link_to(t(:create_persona_link), new_account_persona_path(:return => decide_path)) %></p>
+<% end %>
 <% else %>
 <p><%=t :trust_root_requires_authenticaton, :trust_root => "<strong>#{h checkid_request.trust_root}</strong>" %></p>
 <% end %>

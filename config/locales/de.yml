@@ -195,10 +195,12 @@ de:
 
   # server views
   identity_request_from_host: Identitätsanfrage von {{host}}
+  identity_request_missing_persona: Bitte {{create_link}}, um die Identitätsanfrage zu beantworten.
   trust_root_requests_some_personal_data: "{{trust_root}} verlangt persönliche Angaben."
   select_information_to_submit: Bitte wählen Sie die Angaben aus, die Sie übermitteln möchten.
   attributes_are_shown_from_persona: Die folgenden Angaben stammen aus Ihrer Rolle {{persona}}.
   to_submit_other_values_you_can_edit_or_choose: Um andere Werte zu übermitteln können Sie {{edit_link}} oder {{choose_link}}.
+  create_persona_link: erstellen Sie eine Rolle
   edit_persona_link: die Rolle bearbeiten
   choose_other_persona: eine andere Rolle auswählen
   trust_root_requires_authentication: "{{trust_root} verlangt Ihre Authorisierung."

@@ -203,10 +203,12 @@ en:
 
   # server views
   identity_request_from_host: Identity request from {{host}}
+  identity_request_missing_persona: Please {{create_link}} to answer the identity request.
   trust_root_requests_some_personal_data: "{{trust_root}} requests some personal data."
   select_information_to_submit: Please select the information you would like to submit.
   attributes_are_shown_from_persona: The attributes shown are from your persona {{persona}}.
   to_submit_other_values_you_can_edit_or_choose: To submit other values you can {{edit_link}} or {{choose_link}}.
+  create_persona_link: create a persona
   edit_persona_link: edit the persona
   choose_other_persona: choose another persona
   trust_root_requires_authentication: "{{trust_root} requires your authentication."

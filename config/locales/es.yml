@@ -205,10 +205,12 @@ es:
 
   # server views
   identity_request_from_host: "Petición de identidad de {{host}}"
+  identity_request_missing_persona: Por favor {{create_link}}.
   trust_root_requests_some_personal_data: "{{trust_root}} pidió algunos datos personales."
   select_information_to_submit: Por favor selecciona la información que deseas enviar.
   attributes_are_shown_from_persona: "Los atributos mostrados son de la persona {{persona}}."
   to_submit_other_values_you_can_edit_or_choose: "Para enviar otros valores puedes {{edit_link}} o {{choose_link}}."
+  create_persona_link: crear una persona
   edit_persona_link: editar la persona
   choose_other_persona: elegir otra persona
   trust_root_requires_authentication: "{{trust_root} requiere tu autenticación."
