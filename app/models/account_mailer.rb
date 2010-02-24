@@ -1,6 +1,6 @@
 class AccountMailer < ActionMailer::Base
   
-  default_url_options[:host] = APP_CONFIG['host']
+  default_url_options[:host] = Masquerade::Application::Config['host']
   
   def signup_notification(account)
     setup_email(account)
@@ -15,7 +15,7 @@ class AccountMailer < ActionMailer::Base
   protected
   
   def setup_email(account)
-    @from           = APP_CONFIG['mailer']['from']
+    @from           = Masquerade::Application::Config['mailer']['from']
     @recipients     = account.email
     @sent_on        = Time.now
     @body[:account] = account

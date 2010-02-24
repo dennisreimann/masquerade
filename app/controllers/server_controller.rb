@@ -190,7 +190,7 @@ class ServerController < ApplicationController
   # The NIST Assurance Level, see:
   # http://openid.net/specs/openid-provider-authentication-policy-extension-1_0-01.html#anchor12
   def auth_level
-    if APP_CONFIG['use_ssl']
+    if Masquerade::Application::Config['use_ssl']
       current_account.last_authenticated_with_yubikey? ? 3 : 2
     else
       0

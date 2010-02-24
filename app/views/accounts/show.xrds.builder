@@ -9,8 +9,8 @@ xml.xrds(:XRDS,
       xml.Type OpenID::SReg::NS_URI_1_1
       xml.Type OpenID::SReg::NS_URI_1_0
       xml.Type OpenID::AX::AXMessage::NS_URI
-      xml.Type OpenID::PAPE::AUTH_MULTI_FACTOR if APP_CONFIG['use_ssl'] && @account.has_otp_device?
-      xml.Type OpenID::PAPE::AUTH_PHISHING_RESISTANT if APP_CONFIG['use_ssl'] && @account.has_otp_device?
+      xml.Type OpenID::PAPE::AUTH_MULTI_FACTOR if Masquerade::Application::Config['use_ssl'] && @account.has_otp_device?
+      xml.Type OpenID::PAPE::AUTH_PHISHING_RESISTANT if Masquerade::Application::Config['use_ssl'] && @account.has_otp_device?
   		xml.URI endpoint_url
   		xml.LocalID identity_url(:account => @account, :protocol => scheme)
     end
@@ -19,8 +19,8 @@ xml.xrds(:XRDS,
       xml.Type OpenID::SReg::NS_URI_1_1
       xml.Type OpenID::SReg::NS_URI_1_0
       xml.Type OpenID::AX::AXMessage::NS_URI
-      xml.Type OpenID::PAPE::AUTH_MULTI_FACTOR if APP_CONFIG['use_ssl'] && @account.has_otp_device?
-      xml.Type OpenID::PAPE::AUTH_PHISHING_RESISTANT if APP_CONFIG['use_ssl'] && @account.has_otp_device?
+      xml.Type OpenID::PAPE::AUTH_MULTI_FACTOR if Masquerade::Application::Config['use_ssl'] && @account.has_otp_device?
+      xml.Type OpenID::PAPE::AUTH_PHISHING_RESISTANT if Masquerade::Application::Config['use_ssl'] && @account.has_otp_device?
   		xml.URI endpoint_url
   		xml.tag!('openid:Delegate', identity_url(:account => @account, :protocol => scheme))
     end
@@ -29,8 +29,8 @@ xml.xrds(:XRDS,
       xml.Type OpenID::SReg::NS_URI_1_1
       xml.Type OpenID::SReg::NS_URI_1_0
       xml.Type OpenID::AX::AXMessage::NS_URI
-      xml.Type OpenID::PAPE::AUTH_MULTI_FACTOR if APP_CONFIG['use_ssl'] && @account.has_otp_device?
-      xml.Type OpenID::PAPE::AUTH_PHISHING_RESISTANT if APP_CONFIG['use_ssl'] && @account.has_otp_device?
+      xml.Type OpenID::PAPE::AUTH_MULTI_FACTOR if Masquerade::Application::Config['use_ssl'] && @account.has_otp_device?
+      xml.Type OpenID::PAPE::AUTH_PHISHING_RESISTANT if Masquerade::Application::Config['use_ssl'] && @account.has_otp_device?
   		xml.URI endpoint_url
   		xml.tag!('openid:Delegate', identity_url(:account => @account, :protocol => scheme))
     end

@@ -212,7 +212,7 @@ class Account < ActiveRecord::Base
   
   # Utilizes the Yubico library to verify an one time password 
   def self.verify_yubico_otp(otp)
-    yubico = Yubico.new(APP_CONFIG['yubico']['id'], APP_CONFIG['yubico']['api_key'])
+    yubico = Yubico.new(Masquerade::Application::Config['yubico']['id'], Masquerade::Application::Config['yubico']['api_key'])
     yubico.verify(otp) == Yubico::E_OK
   end
   

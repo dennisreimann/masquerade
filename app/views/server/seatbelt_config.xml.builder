@@ -1,11 +1,11 @@
 xml.instruct!
 xml.opConfig(:version => '1.0', :serverIdentifier => endpoint_url) do
 	xml.configRevision('2008090801')
-	xml.title(APP_CONFIG['name'])
+	xml.title(Masquerade::Application::Config['name'])
 	xml.serverIdentifier(endpoint_url)
-	xml.opDomain(APP_CONFIG['host'])
-	xml.opCertCommonName(APP_CONFIG['ssl_certificate_common_name']) if APP_CONFIG['use_ssl']
-	xml.opCertSHA1Hash(APP_CONFIG['ssl_certificate_sha1']) if APP_CONFIG['use_ssl']
+	xml.opDomain(Masquerade::Application::Config['host'])
+	xml.opCertCommonName(Masquerade::Application::Config['ssl_certificate_common_name']) if Masquerade::Application::Config['use_ssl']
+	xml.opCertSHA1Hash(Masquerade::Application::Config['ssl_certificate_sha1']) if Masquerade::Application::Config['use_ssl']
 	xml.loginUrl(login_url(:protocol => scheme))
 	xml.welcomeUrl(home_url(:protocol => scheme))
 	xml.loginStateUrl(seatbelt_state_url(:protocol => scheme, :format => :xml))

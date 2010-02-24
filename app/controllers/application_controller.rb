@@ -6,8 +6,6 @@ class ApplicationController < ActionController::Base
   
   protect_from_forgery
   
-  filter_parameter_logging :password, :token
-  
   rescue_from(
     ActiveRecord::RecordNotFound,
     ActionController::UnknownAction, :with => :render_404)
@@ -86,7 +84,7 @@ class ApplicationController < ActionController::Base
   private
   
   def scheme
-    APP_CONFIG['use_ssl'] ? 'https' : 'http'
+    Masquerade::Application::Config['use_ssl'] ? 'https' : 'http'
   end
 
 end

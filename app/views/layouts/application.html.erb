@@ -18,7 +18,7 @@
 	<body>
 		<div id="head">
       <div class="wrap">
-				<h1><%= link_to APP_CONFIG['name'], home_path %></h1>
+				<h1><%= link_to Masquerade::Application::Config['name'], home_path %></h1>
 				<ul id="navi">
 				<% if logged_in? %>
 					<% unless checkid_request %>

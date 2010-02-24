@@ -1,6 +1,6 @@
-ExceptionNotifier.exception_recipients = [APP_CONFIG['email']]
-ExceptionNotifier.sender_address = %("#{APP_CONFIG['name']}" <#{APP_CONFIG['mailer']['from']}>)
-ExceptionNotifier.email_prefix = "[#{APP_CONFIG['name']} Error] "
+ExceptionNotifier.exception_recipients = [Masquerade::Application::Config['email']]
+ExceptionNotifier.sender_address = %("#{Masquerade::Application::Config['name']}" <#{Masquerade::Application::Config['mailer']['from']}>)
+ExceptionNotifier.email_prefix = "[#{Masquerade::Application::Config['name']} Error] "
 
 # Email notifications will only occur when the IP address is determined not to
 # be local. You can specify certain addresses to always be local so that you'll
