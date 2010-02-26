@@ -16,8 +16,8 @@ class Persona < ActiveRecord::Base
     Persona.mappings.keys
   end
 
-  def self.attribute_name_for_type_uri(uri)
-    prop = mappings.detect { |i| i[1].include?(uri) }
+  def self.attribute_name_for_type_uri(type_uri)
+    prop = mappings.detect { |i| i[1].include?(type_uri) }
     prop ? prop[0] : nil
   end
   
@@ -28,7 +28,15 @@ class Persona < ActiveRecord::Base
   end
   
   def date_of_birth
-    "#{dob_year? ? dob_year : '0000'}-#{dob_month? ? dob_month : '00'}-#{dob_day? ? dob_day : '00'}"
+    "#{dob_year? ? dob_year : '0000'}-#{dob_month? ? dob_month.to_s.rjust(2, '0') : '00'}-#{dob_day? ? dob_day.to_s.rjust(2, '0') : '00'}"
+  end
+  
+  def date_of_birth=(dob)
+    res = dob.split("-")
+    self.dob_year = res[0]
+    self.dob_month = res[1]
+    self.dob_day = res[2]
+    dob
   end
   
   protected

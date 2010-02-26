@@ -100,9 +100,11 @@ class ConsumerController < ApplicationController
         unless ax_store_resp
           ax_store_message << ", but got no response."
         else
-          ax_store_message << ax_store_resp.succeeded? ?
-            ", but an error occured:\n#{ax_store_resp.error_message}" :
-            " and saved at the Identity Provider."
+          if ax_store_resp.succeeded?
+            ax_store_message << " and saved at the Identity Provider."
+          else
+            ax_store_message << ", but an error occured:\n#{ax_store_resp.error_message}"
+          end
         end
         flash[:notice] += ax_store_message
       end

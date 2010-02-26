@@ -72,43 +72,27 @@ class ServerController < ApplicationController
   def complete
     if params[:cancel]
       cancel
-    else
-      # TODO: Implement processing of AX Store Request here
-      if ax_store_request
-        # begin
-        #   # I think all user's attribute should be saved, but table structure of RDBMS VERY statically.
-        #   # So we need to respond StoreResponse mode is 'store_response_failure'.
-        #   # In a nut shell, we may use XMLDB by now!
-        #   ax_store_request.data.each do |type_uri, values|
-        #     case type_uri
-        #     when 'http://axschema.org/email'
-        #       # XXX: This is dummy
-        #       user.emails.concat(values)
-        #     when 'http://axschema.org/birthDate'
-        #       # XXX: This is dummy
-        #       user.birth_date = Date.parse(values.first)
-        #     when 'http://axschema.org/contact/IM/Skype'
-        #       # XXX: This is dummy
-        #       # Just one
-        #       user.skype_id = values.first
-        #     else
-        #       ax_store_response = OpenID::AX::StoreResponse.new(false, "#{type_uri} isn't supported Type URI in this service.")
-        #     end
-        #   end
-        #   user.save
-        # rescue Error => e
-        #   ax_store_response = OpenID::AX::StoreResponse.new(false, e.message)
-        # end
-        oidresp.add_extension(ax_store_response)
-      end
+    else  
+      resp = checkid_request.answer(true, nil, identifier(current_account))
       if params[:always]
         @site = current_account.sites.find_or_create_by_persona_id_and_url(params[:site][:persona_id], params[:site][:url])
         @site.update_attributes(params[:site])
       elsif sreg_request || ax_fetch_request
         @site = current_account.sites.find_or_initialize_by_persona_id_and_url(params[:site][:persona_id], params[:site][:url])
         @site.attributes = params[:site]
+      elsif ax_store_request
+        @site = current_account.sites.find_or_initialize_by_persona_id_and_url(params[:site][:persona_id], params[:site][:url])
+        modified_properties = 0
+        ax_store_request.data.each do |type_uri, values|
+          if property = Persona.attribute_name_for_type_uri(type_uri)
+            break unless params[:site][:ax_store][property.to_sym][:value]
+            @site.persona.update_attribute(property, values.first)
+            modified_properties += 1
+          end
+        end
+        ax_store_response = (modified_properties > 0) ? OpenID::AX::StoreResponse.new : OpenID::AX::StoreResponse.new(false, "None of the attributes were accepted.")
+        resp.add_extension(ax_store_response)
       end
-      resp = checkid_request.answer(true, nil, identifier(current_account))
       resp = add_pape(resp, auth_policies, auth_level, auth_time)
       resp = add_sreg(resp, @site.sreg_properties) if sreg_request && @site.sreg_properties
       resp = add_ax(resp, @site.ax_properties) if ax_fetch_request && @site.ax_properties
