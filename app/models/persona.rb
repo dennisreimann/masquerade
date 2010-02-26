@@ -15,6 +15,11 @@ class Persona < ActiveRecord::Base
   def self.properties
     Persona.mappings.keys
   end
+
+  def self.attribute_name_for_type_uri(uri)
+    prop = mappings.detect { |i| i[1].include?(uri) }
+    prop ? prop[0] : nil
+  end
   
   # Returns the personas attribute for the given SReg name or AX Type URI
   def property(type)

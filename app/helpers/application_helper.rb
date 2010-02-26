@@ -30,6 +30,11 @@ module ApplicationHelper
     end
   end
   
+  def property_label_text_for_type_uri(type_uri)
+    property = Persona.attribute_name_for_type_uri(type_uri)
+    property ? property_label_text(property) : type_uri
+  end
+  
   # Renders a navigation element and marks it as active where
   # appropriate. See active_page? for details
   def nav(name, url, pages = nil, active = false)
