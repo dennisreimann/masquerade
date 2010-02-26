@@ -114,7 +114,7 @@ module OpenID
         when OPENID2_NS
           require_fields = basic_fields + ['op_endpoint']
           require_sigs = basic_sig_fields +
-            ['response_nonce', 'claimed_id', 'assoc_handle',]
+            ['response_nonce', 'claimed_id', 'assoc_handle', 'op_endpoint']
         when OPENID1_NS
           require_fields = basic_fields + ['identity']
           require_sigs = basic_sig_fields
@@ -469,14 +469,14 @@ module OpenID
         # Fragments do not influence discovery, so we can't compare a
         # claimed identifier with a fragment to discovered information.
         defragged_claimed_id =
-          case Yadis::XRI.identifier_scheme(endpoint.claimed_id)
+          case Yadis::XRI.identifier_scheme(to_match.claimed_id)
           when :xri
-            endpoint.claimed_id
+            to_match.claimed_id
           when :uri
             begin
-              parsed = URI.parse(endpoint.claimed_id)
+              parsed = URI.parse(to_match.claimed_id)
             rescue URI::InvalidURIError
-              endpoint.claimed_id
+              to_match.claimed_id
             else
               parsed.fragment = nil
               parsed.to_s
