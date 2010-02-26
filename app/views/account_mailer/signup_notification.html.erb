@@ -1,4 +1,4 @@
-Your OpenID account has been created, but it is not activated, yet.
+<%=t :account_created_but_not_activated_yet %>
 
-Please activate it by clicking the following link:
-<%= activate_account_url(:id => @account.activation_code) %>
+<%=t :please_activate_it_by_clicking_the_following_link %>:
+<%= activate_account_url(:id => @account.activation_code, :protocol => (APP_CONFIG['use_ssl'] ? 'https' : 'http')) %>

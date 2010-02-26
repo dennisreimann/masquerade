@@ -4,12 +4,12 @@ class AccountMailer < ActionMailer::Base
   
   def signup_notification(account)
     setup_email(account)
-    @subject = 'Please activate your account'
+    @subject = I18n.translate(:please_activate_your_account)
   end
   
   def forgot_password(account)
     setup_email(account)
-    @subject = 'Your request for a new password'
+    @subject = I18n.translate(:your_request_for_a_new_password)
   end
   
   protected

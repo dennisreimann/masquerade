@@ -25,14 +25,13 @@ ActionController::Routing::Routes.draw do |map|
   end
   
   map.with_options :controller => 'server' do |server|
-    server.formatted_server 'server.:format', :action => 'index'
     server.server 'server', :action => 'index'
     server.decide 'server/decide', :action => 'decide'
     server.proceed 'server/proceed', :action => 'proceed'
     server.complete 'server/complete', :action => 'complete'
     server.cancel 'server/cancel', :action => 'cancel'
-    server.formatted_seatbelt_config 'server/seatbelt/config.:format', :action => 'seatbelt_config'
-    server.formatted_seatbelt_state 'server/seatbelt/state.:format', :action => 'seatbelt_login_state'
+    server.seatbelt_config 'server/seatbelt/config.:format', :action => 'seatbelt_config'
+    server.seatbelt_state 'server/seatbelt/state.:format', :action => 'seatbelt_login_state'
   end
 
   map.with_options :controller => 'consumer' do |consumer|

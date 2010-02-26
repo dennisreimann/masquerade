@@ -3,6 +3,7 @@ default: &default
   name: masquerade
   host: localhost:3000
   use_ssl: false
+  locale: en
   time_zone: Berlin
   email: info@your.domain.com
   session:
@@ -13,9 +14,9 @@ default: &default
     domain: your.domain.com
     from: info@your.domain.com
   yubico:
-  	id: 99
+    id: 99
     api_key: youryubicoapikey
-    
+
 development:
   <<: *default
 

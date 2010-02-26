@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
-		<title>OpenID Consumer Testsuite</title>
+		<title><%=t :openid_consumer_testsuite_title %></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<%= stylesheet_link_tag 'application' %>
 		<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
@@ -9,11 +9,11 @@
 	</head>
 	<body>
 		<div id="head">
-    		<h1>Relying Party</h1>
+    		<h1><%=t :relying_party_title %></h1>
 		</div>
 		<div id="main">
 			<div class="wrap">
-  			<h2>OpenID consumer testsuite</h2>
+  			<h2><%=t :openid_consumer_testsuite_title %></h2>
 	    	<% if flash[:notice] %><div class="notice"><%=simple_format h flash[:notice] %></div><% end %>
 	    	<% if flash[:error] %><div class="error"><%=simple_format h flash[:error] %></div><% end %>
 				<%= yield %>

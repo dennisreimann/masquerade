@@ -1,7 +1,2 @@
-<h2>Get your OpenID</h2>
-<p>OpenID is a shared identity service, which allows you to log on to many different 
-web sites using a single digital identity, eliminating the need for different user names
-and passwords for each site.</p>
-<p>OpenID is a decentralized, free and open standard that lets you control the amount of 
-personal information that you would like to provide to other web sites.</p>
-<p>Get started and <%= link_to 'signup for an OpenID', new_account_path %>.</p>
+<h2><%=t :get_your_openid %></h2>
+<%=t :openid_intro, :signup_link => link_to(t(:signup_for_an_openid), new_account_path) %>

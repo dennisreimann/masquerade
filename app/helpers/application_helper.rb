@@ -23,25 +23,10 @@ module ApplicationHelper
   # Custom label names for request properties (like SReg data)
   def property_label_text(property)
     case property.to_sym
-    when :fullname then 'Full name'
-    when :dob then 'Birth date'
-    when :address_business then 'Address'
-    when :address_additional then 'Additional'
-    when :address_additional_business then 'Additional'
-    when :postcode_business then 'Postcode'
-    when :city_business then 'City'
-    when :state_business then 'State'
-    when :country_business then 'Country'
-    when :im_aim then 'AIM'
-    when :im_icq then 'ICQ'
-    when :im_msn then 'MSN'
-    when :im_yahoo then 'Yahoo'
-    when :im_jabber then 'Jabber'
-    when :im_skype then 'Skype'
-    when :image_default then 'Image URL'
-    when :web_default then 'Website URL'
-    when :web_blog then 'Blog URL'
-    else property.to_s.humanize
+    when :image_default then t(:image_url)
+    when :web_default then t(:website_url)
+    when :web_blog then t(:blog_url)
+    else t(property.to_sym)
     end
   end
   

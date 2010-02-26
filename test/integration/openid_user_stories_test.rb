@@ -2,7 +2,7 @@ require "#{File.dirname(__FILE__)}/../test_helper"
 
 class OpenidUserStoriesTest < ActionController::IntegrationTest
   fixtures :all
-
+  
   def test_verifying_identifier_ownership
     claimed_id = "http://www.example.com/quentin"
     request_params = checkid_request_params.merge(
@@ -47,6 +47,28 @@ class OpenidUserStoriesTest < ActionController::IntegrationTest
     assert @response.redirect_url_match?(checkid_request_params['openid.return_to'])
     assert @response.redirect_url_match?("openid.mode=id_res")
     assert @response.redirect_url_match?("openid.sreg.nickname=#{@persona.nickname}"), "Response was expected to have SReg nickname"
+  end
+  
+  def test_providing_data_without_persona
+    @account = accounts(:standard)
+    @account.personas.each { |p| p.destroy }
+    claimed_id = "http://www.example.com/quentin"
+    request_params = checkid_request_params.merge(
+      'openid.identity' => claimed_id,
+      'openid.claimed_id' => claimed_id).merge(
+      sreg_request_params)
+    # OpenID requests comes in
+    post '/server', request_params 
+    # User has to log in
+    assert_redirected_to safe_login_url
+    post '/session', :login => @account.login, :password => 'test'
+    # User has to verify the request
+    assert_redirected_to proceed_url
+    follow_redirect!
+    assert_redirected_to decide_url
+    follow_redirect!
+    assert_template 'server/decide'
+    assert_match I18n.translate(:create_persona_link), @response.body
   end
 
   def test_responding_to_immidiate_requests_when_already_logged_in

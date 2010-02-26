@@ -1,19 +1,17 @@
-<h2>My personas</h2>
+<h2><%=t :my_personas_title %></h2>
 
-<p>Personas define certain roles of your account. For instance you can have a persona for private 
-use and another one for business context. When a relying party requests your information
-you can choose the persona that you would like to exchange data from.</p>
+<p><%=t :personas_intro %></p>
 
 <ul>
   <% @personas.each do |persona| %>
   <li>
 		<h3><%=h persona.title%></h3>
 		<div class="options">
-			<%= link_to 'edit', edit_account_persona_path(persona) %>
-			<%= link_to 'delete', account_persona_path(persona), :confirm => "Do you really want to delete the persona “#{h persona.title}”?", :method => :delete %>
+			<%= link_to t(:edit), edit_account_persona_path(persona) %>
+			<%= link_to t(:delete), account_persona_path(persona), :confirm => t(:really_want_to_delete_persona, :title => h(persona.title)), :method => :delete %>
 		</div>
   </li>
   <% end %>
 </ul>
 
-<%= link_to 'create a new persona', new_account_persona_path %>
+<%= link_to t(:create_a_new_persona), new_account_persona_path %>

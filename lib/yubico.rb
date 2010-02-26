@@ -62,6 +62,7 @@
 #
 
 require 'net/http'
+require 'net/http'
 require 'uri'
 require 'digest/sha1'
 require 'digest/md5'
@@ -96,7 +97,7 @@ class Yubico
   E_OPERATION_NOT_ALLOWED = "OPERATION_NOT_ALLOWED"
   
   # Returned if a parameter is bad or missing, respectively. (Also returns an "info" field -- needs to be parsed (1) )
-  E_INCORRECT_PARAMATER = "INCORRECT_PARAMETER"
+  E_INCORRECT_PARAMETER = "INCORRECT_PARAMETER"
   E_MISSING_PARAMETER = "MISSING_PARAMETER"
   
   # Returned on a Backend Error
@@ -136,12 +137,12 @@ class Yubico
 		def verify( otp, id = @_id )
 		  @_id = id if @_id.nil?
 			# Set up the full URL for the request, then pass it through the +URI+ gauntlet.
-			fullurl = "http://api.yubico.com/wsapi/verify?id="+ (@_id.to_s) +"&otp="+ otp
+			fullurl = "https://api.yubico.com/wsapi/verify?id="+ (@_id.to_s) +"&otp="+ otp
 			url = URI.parse(fullurl)
-			# Make the call to the server and return the full response, not just the body (to be used later)
-			res = Net::HTTP.start(url.host, url.port) { |http|
-			  http.get((url.path + "?" + url.query))
-			}
+			http = Net::HTTP.new(url.host, 443)
+      http.use_ssl = true
+      # Make the call to the server and return the full response, not just the body (to be used later)
+      res = http.get(url.path + "?" + url.query)
 		  # Parse and find the status within the response's body, to verify this is, in fact, what we're looking for.
 		  if ( !(/status=([a-zA-Z0-9_]+)/.match(res.body)) )
 		    # If it's not, let's raise an error.
@@ -199,13 +200,10 @@ class Yubico
 			operation = "add_key"
 			mesg = "id=#{id}&nonce=#{nonce}&operation=#{operation}"
 			key = self.hmac( @_id, mesg, 'sha1' )
-			
 			url = URI.parse("http://api.yubico.com/wsapi/add_key?operation=#{operation}&id=#{id}&nonce=#{nonce}&h=#{key}")
-			url.port = 80
-			res = Net::HTTP.start(url.host, url.port) { |http|
-				http.get( url.path + "?" + url.query )
-			}
-
+      http = Net::HTTP.new(url.host, 443)
+      http.use_ssl = true
+      res = http.get(url.path + "?" + url.query)
 			if( ( res.body ) && ( /status=([\w_]+)[\s]/.match(res.body) ) )
 				@_res = res.body
 				return res.body.scan(/status=([\w_]+)[\s]/).first
@@ -220,17 +218,13 @@ class Yubico
 		  if not @_key
 		    return E_MISSING_SECRET
 		  end
-		  
 		  operation = "delete_key"
 		  mesg = "key_id=#{key_id}&id=#{id}&nonce=#{nonce}&operation=#{operation}"
 		  key = self.hmac( @_id, mesg, 'sha1' )
-		  
 		  url = URI.parse("http://api.yubico.com/wsapi/delete_key?#{mesg}&h=#{key}")
-		  url.port = 80
-		  res = Net::HTTP.start(url.host, url.port) { |http|
-		    http.get( url.path + "?" + url.query )
-		  }
-		  
+		  http = Net::HTTP.new(url.host, 443)
+      http.use_ssl = true
+      res = http.get(url.path + "?" + url.query)
 		  if( (res.body) && ( /status=([\w_]+)[\s]/.match(res.body) ) )
 		    @_res = res.body
 		    return res.body.scan(/status=([\w_]+)[\s]/).first

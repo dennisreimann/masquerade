@@ -1,9 +1,9 @@
-<h2>Edit your persona “<%=h @persona.title %>”</h2>
+<h2><%=t :edit_your_persona, :title => h(@persona.title) %></h2>
 <%= error_messages_for :persona %>
 
 <% form_for @persona, :url => account_persona_path(@persona) do |persona| %>
 	<%= render :partial => 'personas/form', :object => persona %>
 	<div>
-		<%= persona.submit 'update', :class => 'labelspace' %>
+		<%= persona.submit t(:submit_update), :class => 'labelspace' %>
 	</div>
 <% end %>

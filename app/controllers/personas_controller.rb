@@ -27,7 +27,7 @@ class PersonasController < ApplicationController
 		respond_to do |format|
 			begin
 				@persona.save!
-				flash[:notice] = 'The persona was successfully created.'
+				flash[:notice] = t(:persona_successfully_created)
 				format.html { redirect_back_or_default account_personas_path }
 			rescue ActiveRecord::RecordInvalid
 				format.html { render :action => "new" }
@@ -39,7 +39,7 @@ class PersonasController < ApplicationController
 		respond_to do |format|
 			begin
 				@persona.update_attributes(params[:persona])
-				flash[:notice] = 'The persona has been updated.'
+				flash[:notice] = t(:persona_updated)
 				format.html { redirect_back_or_default account_personas_path }
 			rescue ActiveRecord::RecordInvalid, ActiveRecord::MultiparameterAssignmentErrors
 				format.html { render :action => "edit" }
@@ -52,7 +52,7 @@ class PersonasController < ApplicationController
 			begin
 				@persona.destroy
 			rescue Persona::NotDeletable
-				flash[:error] = 'This persona cannot be deleted.'
+				flash[:error] = t(:persona_cannot_be_deleted)
 			end
 			format.html { redirect_to account_personas_path }
 		end
