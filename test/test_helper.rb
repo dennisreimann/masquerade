@@ -103,7 +103,7 @@ class ActiveSupport::TestCase
   
   def ax_fetch_request_params
     { 'openid.ns.ax' => OpenID::AX::AXMessage::NS_URI,
-      'openid.ax.mode' => 'fetch_request',
+      'openid.ax.mode' => OpenID::AX::FetchRequest::MODE,
       'openid.ax.type.nickname' => 'http://axschema.org/namePerson/friendly',
       'openid.ax.type.gender' => 'http://axschema.org/person/gender',
       'openid.ax.required' => 'nickname',
@@ -113,13 +113,11 @@ class ActiveSupport::TestCase
   
   def ax_store_request_params
     { 'openid.ns.ax' => OpenID::AX::AXMessage::NS_URI,
-      'openid.ax.mode' => 'store_request',
+      'openid.ax.mode' => OpenID::AX::StoreRequest::MODE,
       'openid.ax.type.fullname' => 'http://axschema.org/namePerson',
       'openid.ax.value.fullname' => 'Bob Smith',
       'openid.ax.type.email' => 'http://axschema.org/contact/email',
-      'openid.ax.count.email' => '2',
-      'openid.ax.value.email.1' => 'mail@mydomain.com',
-      'openid.ax.value.email.2' => 'info@mydomain.com' }
+      'openid.ax.value.email' => 'mail@mydomain.com' }
   end
   
   def pape_request_params
