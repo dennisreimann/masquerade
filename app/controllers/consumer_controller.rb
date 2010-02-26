@@ -102,7 +102,7 @@ class ConsumerController < ApplicationController
         else
           ax_store_message << ax_store_resp.succeeded? ?
             ", but an error occured:\n#{ax_store_resp.error_message}" :
-            " and saved at the Idnetity Provider."
+            " and saved at the Identity Provider."
         end
         flash[:notice] += ax_store_message
       end

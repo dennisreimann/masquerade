@@ -5,8 +5,8 @@
 <% if @site.persona %>
 <%=t :select_information_to_submit %></p>
 <ul>
-<% ax_store_request.data.each do |property, value| %>
-<li><%=h property %>: <%= value.join(', ') %> - currently: <%= @site.persona.property(property) %></li>
+<% ax_store_request.data.each do |type_uri, value| %>
+<li><%=h property_label_text_for_type_uri(type_uri) %>: <%= value.join(', ') %> - currently: <%= @site.persona.property(type_uri) %></li>
 <% end %>
 </ul>
 <p class="note"><%=t :attributes_are_shown_from_persona, :persona => "<strong>#{h @site.persona.title}</strong>" %><br />
