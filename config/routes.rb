@@ -1,6 +1,10 @@
 Masquerade::Application.routes.draw do
 
-  resource :account, :member => { :activate => :get, :password => :get, :change_password => :put } do
+  resource :account do
+    get :activate
+    get :password
+    put :change_password
+    
     resources :personas do
       resources :properties
     end
@@ -32,11 +36,11 @@ Masquerade::Application.routes.draw do
   match "/consumer/start", :to => "consumer#start", :as => :consumer_start
   match "/consumer/complete", :to => "consumer#complete", :as => :consumer_complete
   
-  match "/", :to => "info#index", :as => :home
-  match "/help", :to => "info#help", :as => :help
-  match "/safe-login", :to => "info#safe_login", :as => :safe_login
-  
   match "/:account.:format", :to => "accounts#show", :as => :identity
   match "/:account", :to => "accounts#show", :as => :formatted_identity
+  
+  match "/help", :to => "info#help", :as => :help
+  match "/safe-login", :to => "info#safe_login", :as => :safe_login
+  root :to => "info#index", :as => :home
   
 end

@@ -4,7 +4,7 @@ class PasswordsController < ApplicationController
 
   # Forgot password
   def create
-    if @account = Account.find_by_email(params[:email], :conditions => 'activation_code IS NULL')
+    if @account = Account.find_by_email(params[:email]).conditions('activation_code IS NULL')
       @account.forgot_password!   
       flash[:notice] = t(:password_reset_link_has_been_sent)
       redirect_to login_path

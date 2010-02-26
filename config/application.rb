@@ -62,6 +62,9 @@ module Masquerade
       :user_name => Masquerade::Application::Config['mailer']['user_name'],
       :password => Masquerade::Application::Config['mailer']['password'],
       :authentication => Masquerade::Application::Config['mailer']['authentication'] }
+    config.action_mailer.default_url_options = {
+      :protocol => (Masquerade::Application::Config['use_ssl'] ? 'https' : 'http'),
+      :host => Masquerade::Application::Config['host'] }
       
   end
 end
