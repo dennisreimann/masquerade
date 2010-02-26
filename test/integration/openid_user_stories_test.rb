@@ -152,6 +152,38 @@ class OpenidUserStoriesTest < ActionController::IntegrationTest
     assert @response.redirect_url_match?(@persona.gender), "Response was expected to have AX gender: #{@response.redirect_url}"
   end
   
+  def test_storing_ax_data
+    @account = accounts(:standard)
+    @persona = @account.personas.first
+    claimed_id = "http://www.example.com/quentin"
+    request_params = checkid_request_params.merge(
+      'openid.identity' => claimed_id,
+      'openid.claimed_id' => claimed_id).merge(
+      ax_store_request_params)
+    # OpenID requests comes in
+    post '/server', request_params 
+    # User has to log in
+    assert_redirected_to safe_login_url
+    post '/session', :login => 'quentin', :password => 'test'
+    # User has to verify the request
+    assert_redirected_to proceed_url
+    follow_redirect!
+    assert_redirected_to decide_url
+    follow_redirect!
+    assert_template 'server/decide'
+    post 'server/complete', :temporary => 1, :site => {
+      :persona_id => @persona.id }
+    assert @response.redirect_url_match?(checkid_request_params['openid.return_to'])
+    assert @response.redirect_url_match?("openid.mode=id_res"), "Response mode was expected to be id_res"
+    assert @response.redirect_url_match?("openid.ax.mode=store_response"), "AX mode was expected to be store_response"
+    # Check the attributes
+    @persona.reload
+    expected_fullname = ax_store_request_params['openid.ax.value.fullname']    
+    expected_email = ax_store_request_params['openid.ax.value.email']
+    assert_equal expected_fullname, @persona.fullname, "Full name was expected to be #{expected_fullname}"
+    assert_equal expected_email, @persona.email, "E-mail was expected to be #{expected_email}"
+  end
+  
   def test_responding_to_pape_requests
     claimed_id = "http://www.example.com/quentin"
     request_params = checkid_request_params.merge(
