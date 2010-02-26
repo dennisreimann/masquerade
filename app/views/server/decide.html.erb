@@ -4,11 +4,6 @@
 <p><%=t :trust_root_sends_some_personal_data, :trust_root => "<strong>#{h checkid_request.trust_root}</strong>" %><br />
 <% if @site.persona %>
 <%=t :select_information_to_submit %></p>
-<ul>
-<% ax_store_request.data.each do |type_uri, value| %>
-<li><%=h property_label_text_for_type_uri(type_uri) %>: <%= value.join(', ') %> - currently: <%= @site.persona.property(type_uri) %></li>
-<% end %>
-</ul>
 <p class="note"><%=t :attributes_are_shown_from_persona, :persona => "<strong>#{h @site.persona.title}</strong>" %><br />
 <%=t :to_submit_other_values_you_can_edit_or_choose, 
   :edit_link => link_to(t(:edit_persona_link), edit_account_persona_path(@site.persona, :return => decide_path(:persona_id => @site.persona.id))),
@@ -16,7 +11,6 @@
 <% else %>
 <p><%=t :identity_request_missing_persona, :create_link => link_to(t(:create_persona_link), new_account_persona_path(:return => decide_path)) %></p>
 <% end %>
-
 
 <% elsif sreg_request || ax_fetch_request %>
 <p><%=t :trust_root_requests_some_personal_data, :trust_root => "<strong>#{h checkid_request.trust_root}</strong>" %><br />
@@ -48,7 +42,7 @@
 	</div>
 	<% end %>
 	
-<% end if sreg_request || ax_fetch_request %>
+<% end if sreg_request || ax_fetch_request || ax_store_request %>
 
 <% form_for @site, :url => complete_path do |f| %>
 
@@ -81,10 +75,36 @@
 		<% end if ax_fetch_request %>
 	</table>
 	<% end %>
+	
+	<% if ax_store_request %>
+	<table cellspacing="0">
+    <tr>
+			<th colspan="2"><h4><%= t(:requested_information_title) %></h4></th>
+			<th class="disclosure">current</th>
+			<th class="disclosure">accept</th>
+		</tr>
+		<% ax_store_request.data.each do |type_uri, value| %>
+		<% attribute = Persona.attribute_name_for_type_uri(type_uri) %>
+		<tr>
+			<td><%= label_tag "site_ax_store_#{attribute}", property_label_text_for_type_uri(type_uri) %></td>
+			<td><%= label_tag "site_ax_store_#{attribute}", value %></td>
+			<td><%= label_tag "site_ax_store_#{attribute}", @site.persona.property(type_uri) %></td>
+			<td>
+				<%= check_box_tag "site[ax_store][#{attribute}][value]", value, false, :id => "site_ax_store_#{attribute}" %>
+				<%= hidden_field_tag "site[ax_store][#{attribute}][type]", type_uri, :id => "site_ax_type_#{attribute}" %>
+			</td>
+		</tr>
+		<% end %>
+	</table>
+	<% end %>
+	
 	<div>
-		<% if sreg_request || ax_fetch_request %>
+		<% if sreg_request || ax_fetch_request || ax_store_request %>
 		<%= f.hidden_field :persona_id %>
 		<%= f.hidden_field :url %>
+		<% end %>
+		
+		<% if sreg_request || ax_fetch_request %>
 		<%= submit_tag t(:trust_site_only_this_time), :name => 'temporary', :class => 'space' %>
 		<%= submit_tag t(:always_trust_site), :name => 'always', :class => 'space' %>
 		<% else %>
