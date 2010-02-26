@@ -27,7 +27,8 @@ module OpenID
 
         OPENID1_SIGNED = ['return_to', 'identity']
         OPENID2_SIGNED =
-          OPENID1_SIGNED + ['response_nonce', 'claimed_id', 'assoc_handle']
+          OPENID1_SIGNED + ['response_nonce', 'claimed_id', 'assoc_handle',
+                            'op_endpoint']
 
         def mkMsg(ns, fields, signed_fields)
           msg = Message.new(ns)
@@ -605,7 +606,9 @@ module OpenID
           expected_endpoint.local_id = nil
           expected_endpoint.claimed_id = claimed_id
   
-          hacked_discover = Proc.new { ['unused', [expected_endpoint]] }
+          hacked_discover = Proc.new {
+            |_claimed_id| ['unused', [expected_endpoint]]
+          }
           idres = IdResHandler.new(resp_mesg, nil, nil, @endpoint)
           assert_log_matches('Performing discovery') {
             OpenID.with_method_overridden(:discover, hacked_discover) {
@@ -661,7 +664,7 @@ module OpenID
                                  'identity' => 'sour grapes',
                                  'claimed_id' => 'monkeysoft',
                                  'op_endpoint' => 'Phone Home'}) do |idres|
-              idres.instance_def(:discover_and_verify) do
+              idres.instance_def(:discover_and_verify) do |claimed_id, endpoints|
                 @endpoint = endpoint
               end
             end
@@ -683,13 +686,28 @@ module OpenID
                                  'identity' => 'sour grapes',
                                  'claimed_id' => 'monkeysoft',
                                  'op_endpoint' => 'Green Cheese'}) do |idres|
-                        idres.extend(InstanceDefExtension)
-              idres.instance_def(:discover_and_verify) do
+              idres.instance_def(:discover_and_verify) do |claimed_id, endpoints|
                 @endpoint = endpoint
               end
             end
           }
           assert(endpoint.equal?(result))
+        end
+
+        def test_verify_discovery_single_claimed_id_mismatch
+          idres = IdResHandler.new(nil, nil)
+          @endpoint.local_id = 'my identity'
+          @endpoint.claimed_id = 'http://i-am-sam/'
+          @endpoint.server_url = 'Phone Home'
+          @endpoint.type_uris = [OPENID_2_0_TYPE]
+
+          to_match = @endpoint.dup
+          to_match.claimed_id = 'http://something.else/'
+
+          e = assert_raises(ProtocolError) {
+            idres.send(:verify_discovery_single, @endpoint, to_match)
+          }
+          assert(e.to_s =~ /different subjects/)
         end
 
         def test_openid2_use_pre_discovered
@@ -768,7 +786,7 @@ module OpenID
             assert_raises(verified_error) {
               call_verify_modify({'ns' => OPENID1_NS,
                                    'identity' => @endpoint.local_id}) { |idres|
-                idres.instance_def(:discover_and_verify) do
+                idres.instance_def(:discover_and_verify) do |claimed_id, endpoints|
                   raise verified_error
                 end
               }

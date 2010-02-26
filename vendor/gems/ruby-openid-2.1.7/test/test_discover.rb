@@ -273,6 +273,33 @@ module OpenID
                     false)
     end
 
+    def test_malformed_meta_tag
+      @id_url = "http://user.myopenid.com/"
+
+      services = _discover(
+                           'text/html',
+                           read_data_file('test_discover/malformed_meta_tag.html', false),
+                           2)
+
+      _checkService(
+                    services[0],
+                    "http://www.myopenid.com/server",
+                    @id_url,
+                    @id_url,
+                    nil,
+                    ['2.0'],
+                    false)
+
+      _checkService(
+                    services[1],
+                    "http://www.myopenid.com/server",
+                    @id_url,
+                    @id_url,
+                    nil,
+                    ['1.1'],
+                    false)
+    end
+
     def test_html1
       services = _discover('text/html',
                            read_data_file('test_discover/openid.html', false),
@@ -524,6 +551,28 @@ module OpenID
 
     def test_xri
       user_xri, services = OpenID.discover_xri('=smoker')
+
+      _checkService(services[0],
+                    "http://www.myopenid.com/server",
+                    Yadis::XRI.make_xri("=!1000"),
+                    'http://smoker.myopenid.com/',
+                    Yadis::XRI.make_xri("=!1000"),
+                    ['1.0'],
+                    true,
+                    '=smoker')
+
+      _checkService(services[1],
+                    "http://www.livejournal.com/openid/server.bml",
+                    Yadis::XRI.make_xri("=!1000"),
+                    'http://frank.livejournal.com/',
+                    Yadis::XRI.make_xri("=!1000"),
+                    ['1.0'],
+                    true,
+                    '=smoker')
+    end
+
+    def test_xri_normalize
+      user_xri, services = OpenID.discover_xri('xri://=smoker')
 
       _checkService(services[0],
                     "http://www.myopenid.com/server",
