@@ -222,7 +222,10 @@ de:
   choose_persona_submit: Rolle auswählen
   create_new_persona_link: neue Rolle anlegen
   requested_information_title: Verlangte Angaben
-  disclosure: Angabe
+  sent_information_title: Gesendete Angaben
+  disclosure: freigeben
+  accept: akzeptieren
+  current: aktueller Wert
   trust_site_only_this_time: Dieser Website einmal vertrauen
   always_trust_site: Dieser Website immer vertrauen
   approve_request: Anfrage bestätigen
