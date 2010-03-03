@@ -9,23 +9,23 @@
 		<%= label_tag :immediate, t(:use_immediate_mode), :class => 'check' %>
 	</div>
   <div class="row">
-		<%= check_box_tag :use_sreg %>
+		<%= check_box_tag :use_sreg, params[:did_sreg] %>
 		<%= label_tag :use_sreg, t(:request_registration_data), :class => 'check' %>
 	</div>
 	<div class="row">
-		<%= check_box_tag :use_ax_fetch %>
+		<%= check_box_tag :use_ax_fetch, params[:did_ax_fetch] %>
 		<%= label_tag :use_ax_fetch, t(:request_attribute_exchange_data), :class => 'check' %>
 	</div>
 	<div class="row">
-		<%= check_box_tag :use_ax_store %>
-		<%= label_tag :use_ax_store, 'Store attributes with Attribute Exchange', :class => 'check' %>
+		<%= check_box_tag :use_ax_store, params[:did_ax_store] %>
+		<%= label_tag :use_ax_store, t(:store_attribute_exchange_data), :class => 'check' %>
 	</div>
 	<div class="row">
-		<%= check_box_tag :use_pape %>
+		<%= check_box_tag :use_pape, params[:did_pape] %>
 		<%= label_tag :use_pape, t(:request_pape), :class => 'check' %>
 	</div>
 	<div class="row">
-		<%= check_box_tag :force_post %>
+		<%= check_box_tag :force_post, params[:force_post] %>
 		<%= label_tag :force_post, t(:force_post), :class => 'check' %>
 	</div>
 <% end %>

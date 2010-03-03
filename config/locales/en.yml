@@ -55,8 +55,12 @@ en:
   verification_of_identifier_succeeded: Verification of {{identifier}} succeeded.
   simple_registration_data_requested: Simple Registration data was requested
   but_none_was_returned: but none was returned.
+  but_got_no_response: but got no response.
+  but_an_error_occured: "but an error occured:\n{{error_message}}"
+  and_saved_at_the_identity_provider: and saved at the Identity Provider.
   the_following_data_were_sent: "The following data were sent:"
   attribute_exchange_data_requested: Attribute Exchange data was requested
+  attribute_exchange_store_requested: Attribute Exchange Store request sent
   authentication_policies_requested: Authentication policies were requested
   and_server_reported_the_following: "and the server reported the following:"
   but_the_server_did_not_report_one: but the server did not report one.
@@ -68,6 +72,7 @@ en:
   use_immediate_mode: Use immediate mode
   request_registration_data: Request registration data
   request_attribute_exchange_data: Request attribute exchange data
+  store_attribute_exchange_data: Store attributes with attribute exchange
   request_pape: Request phishing-resistent auth policy (PAPE)
   force_post: Force the transaction to use POST by adding 2K of extra data
 
@@ -171,6 +176,7 @@ en:
   website_url: Website URL
   blog_url: Blog URL
   dob: Day of birth
+  date_of_birth: Day of birth
 
   my_personas_title: My personas
   personas_intro: "Personas define certain roles of your account. For instance you can have a persona for private 
@@ -207,7 +213,9 @@ en:
   trust_root_requests_some_personal_data: "{{trust_root}} requests some personal data."
   trust_root_sends_some_personal_data: "{{trust_root}} sends some personal data:"
   select_information_to_submit: Please select the information you would like to submit.
+  select_information_to_accept: Please select the information you would like to accept.
   attributes_are_shown_from_persona: The attributes shown are from your persona {{persona}}.
+  attributes_will_be_added_to_persona: The attributes will be added to your persona {{persona}} ({{choose_link}}).
   to_submit_other_values_you_can_edit_or_choose: To submit other values you can {{edit_link}} or {{choose_link}}.
   create_persona_link: create a persona
   edit_persona_link: edit the persona
