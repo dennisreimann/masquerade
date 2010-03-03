@@ -54,6 +54,7 @@ de:
   but_none_was_returned: aber nichts wurde zurück geliefert.
   but_got_no_response: aber es gab keine Antwort.
   but_an_error_occured: "aber es trat ein Fehler auf:\n{{error_message}}"
+  and_saved_at_the_identity_provider: und auf dem Server gespeichert.
   the_following_data_were_sent: "Die folgenden Daten wurden gesendet:"
   attribute_exchange_data_requested: Attribute Exchange-Daten wurden angefordert
   attribute_exchange_store_requested: Attribute Exchange-Daten wurden gesendet
