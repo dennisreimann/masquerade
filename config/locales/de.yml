@@ -52,8 +52,11 @@ de:
   verification_of_identifier_succeeded: Überprüfung von {{identifier}} erfolgreich.
   simple_registration_data_requested: Simple Registration Data wurde angefordert
   but_none_was_returned: aber nichts wurde zurück geliefert.
+  but_got_no_response: aber es gab keine Antwort.
+  but_an_error_occured: "aber es trat ein Fehler auf:\n{{error_message}}"
   the_following_data_were_sent: "Die folgenden Daten wurden gesendet:"
   attribute_exchange_data_requested: Attribute Exchange-Daten wurden angefordert
+  attribute_exchange_store_requested: Attribute Exchange-Daten wurden gesendet
   authentication_policies_requested: Authentifizierungsregeln wurden angefordert
   and_server_reported_the_following: "und der Server antwortete Folgendes:"
   but_the_server_did_not_report_one: aber der Server meldete keine.
@@ -62,6 +65,12 @@ de:
   # consumer views
   identifier: Kennung
   verify: Überprüfen
+  use_immediate_mode: Immediate Modus benutzen
+  request_registration_data: SReg-Daten anfordern
+  request_attribute_exchange_data: AX-Daten anfordern (Fetch Modus)
+  store_attribute_exchange_data: AX-Daten senden (Store Modus)
+  request_pape: PAPE-Anfrage (Anti-Phishing Modus) senden
+  force_post: Die Transaktion mit HTTP POST durchführen
 
   # info
   questions_answers: Fragen? Antworten!
@@ -163,6 +172,7 @@ de:
   website_url: URL der Website
   blog_url: Blog-URL
   dob: Geburtsdatum
+  date_of_birth: Geburtsdatum
 
   my_personas_title: Meine Rollen
   personas_intro: "Sie können in Ihrem Account mehrere verschiedene Rollen nutzen. Zum Beispiel können Sie eine 
@@ -199,7 +209,9 @@ de:
   trust_root_requests_some_personal_data: "{{trust_root}} verlangt persönliche Angaben."
   trust_root_sends_some_personal_data: "{{trust_root}} sendet persönliche Angaben:"
   select_information_to_submit: Bitte wählen Sie die Angaben aus, die Sie übermitteln möchten.
+  select_information_to_accept: Bitte wählen Sie die Angaben aus, die Sie akzeptieren möchten.
   attributes_are_shown_from_persona: Die folgenden Angaben stammen aus Ihrer Rolle {{persona}}.
+  attributes_will_be_added_to_persona: Die Werte werden in Ihre Rolle {{persona}} übernommen ({{choose_link}}).
   to_submit_other_values_you_can_edit_or_choose: Um andere Werte zu übermitteln können Sie {{edit_link}} oder {{choose_link}}.
   create_persona_link: erstellen Sie eine Rolle
   edit_persona_link: die Rolle bearbeiten

@@ -82,15 +82,20 @@ class ServerController < ApplicationController
         @site.attributes = params[:site]
       elsif ax_store_request
         @site = current_account.sites.find_or_initialize_by_persona_id_and_url(params[:site][:persona_id], params[:site][:url])
-        modified_properties = 0
+        not_supported, not_accepted, accepted = [], [], []
         ax_store_request.data.each do |type_uri, values|
           if property = Persona.attribute_name_for_type_uri(type_uri)
-            break unless params[:site][:ax_store][property.to_sym][:value]
-            @site.persona.update_attribute(property, values.first)
-            modified_properties += 1
+            if params[:site][:ax_store][property.to_sym][:value]
+              @site.persona.update_attribute(property, values.first)
+              accepted << type_uri
+            else
+              not_accepted << type_uri
+            end
+          else
+            not_supported << type_uri
           end
         end
-        ax_store_response = (modified_properties > 0) ? OpenID::AX::StoreResponse.new : OpenID::AX::StoreResponse.new(false, "None of the attributes were accepted.")
+        ax_store_response = (accepted.count > 0) ? OpenID::AX::StoreResponse.new : OpenID::AX::StoreResponse.new(false, "None of the attributes were accepted.")
         resp.add_extension(ax_store_response)
       end
       resp = add_pape(resp, auth_policies, auth_level, auth_time)

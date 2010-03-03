@@ -38,6 +38,7 @@ class ConsumerController < ApplicationController
       ax_store_req = OpenID::AX::StoreRequest.new
       ax_store_req.set_values('http://axschema.org/contact/email', %w(email@example.com))
       ax_store_req.set_values('http://axschema.org/birthDate', %w(1976-08-07))
+      ax_store_req.set_values('http://axschema.org/customValueThatIsNotSupported', %w(unsupported))
       oidreq.add_extension(ax_store_req)
       oidreq.return_to_args['did_ax_store'] = 'y'
     end
@@ -96,14 +97,14 @@ class ConsumerController < ApplicationController
       end
       if params[:did_ax_store]
         ax_store_resp = OpenID::AX::StoreResponse.from_success_response(oidresp)
-        ax_store_message = "\n\nAttribute Exchange Store request sent"
+        ax_store_message = "\n\n" + t(:attribute_exchange_store_requested)
         unless ax_store_resp
-          ax_store_message << ", but got no response."
+          ax_store_message << ", " + t(:but_got_no_response)
         else
           if ax_store_resp.succeeded?
-            ax_store_message << " and saved at the Identity Provider."
+            ax_store_message << " " + t(:and_saved_at_the_identity_provider)
           else
-            ax_store_message << ", but an error occured:\n#{ax_store_resp.error_message}"
+            ax_store_message << ", " + t(:but_an_error_occured, :error_message => ax_store_resp.error_message)
           end
         end
         flash[:notice] += ax_store_message
