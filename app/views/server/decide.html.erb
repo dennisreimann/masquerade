@@ -77,9 +77,9 @@
 	<% if ax_store_request %>
 	<table cellspacing="0">
     <tr>
-			<th colspan="2"><h4><%= t(:requested_information_title) %></h4></th>
-			<th class="disclosure">current</th>
-			<th class="disclosure">accept</th>
+			<th colspan="2"><h4><%= t(:sent_information_title) %></h4></th>
+			<th class="current"><%= t(:current) %></th>
+			<th class="accept"><%= t(:accept) %></th>
 		</tr>
 		<% ax_store_request.data.each do |type_uri, value| %>
 		<% if attribute = Persona.attribute_name_for_type_uri(type_uri) %>

@@ -225,7 +225,10 @@ en:
   choose_persona_submit: choose persona
   create_new_persona_link: create a new persona
   requested_information_title: Requested information
+  sent_information_title: Sent information
   disclosure: disclosure
+  accept: accept
+  current: current
   trust_site_only_this_time: Trust this site only this time
   always_trust_site: Always trust this site
   approve_request: Approve this request
