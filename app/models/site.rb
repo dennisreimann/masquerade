@@ -5,7 +5,7 @@ class Site < ActiveRecord::Base
   
   validates_presence_of :url, :persona, :account
   validates_uniqueness_of :url, :scope => :account_id
-  attr_accessible :url, :persona_id, :properties, :ax, :sreg
+  attr_accessible :url, :persona_id, :properties, :ax_fetch, :sreg
   
   # Sets the release policies by first deleting the old ones and
   # then appending a new one for every given sreg and ax property.
@@ -25,7 +25,7 @@ class Site < ActiveRecord::Base
   # Generates a release policy for each property that has a value.
   # This setter is used in the server controllers complete action
   # to set the attributes recieved from the decision form.
-  def ax=(props)
+  def ax_fetch=(props)
     props.each_pair do |property, details|
       release_policies.build(:property => property, :type_identifier => details['type']) if details['value']
     end
