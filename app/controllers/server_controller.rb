@@ -85,7 +85,8 @@ class ServerController < ApplicationController
         not_supported, not_accepted, accepted = [], [], []
         ax_store_request.data.each do |type_uri, values|
           if property = Persona.attribute_name_for_type_uri(type_uri)
-            if params[:site][:ax_store][property.to_sym][:value]
+            store_attribute = params[:site][:ax_store][property.to_sym]
+            if store_attribute && !store_attribute[:value].blank?
               @site.persona.update_attribute(property, values.first)
               accepted << type_uri
             else

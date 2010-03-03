@@ -62,12 +62,12 @@
 		<% end if sreg_request %>
 		<% ax_fetch_request.attributes.each do |property| %>
 		<tr>
-			<td><%= label_tag "site_ax_#{property.ns_alias}", property_label_text(property.ns_alias) %></td>
-			<td><%= label_tag "site_ax_#{property.ns_alias}", @site.persona.property(property.type_uri) %></td>
+			<td><%= label_tag "site_ax_fetch_#{property.ns_alias}", property_label_text(property.ns_alias) %></td>
+			<td><%= label_tag "site_ax_fetch_#{property.ns_alias}", @site.persona.property(property.type_uri) %></td>
 			<td>
-				<%= check_box_tag "site[ax][#{property.ns_alias}][value]", @site.persona.property(property.type_uri), property.required, :id => "site_ax_#{property.ns_alias}", :class => ax_request_for_field(property) %>
-				<%= hidden_field_tag "site[ax][#{property.ns_alias}][type]", property.type_uri, :id => "site_ax_type_#{property.ns_alias}" %>
-				<%= label_tag "site_ax_#{property.ns_alias}", ax_request_for_field(property), :class => 'note' %>
+				<%= check_box_tag "site[ax_fetch][#{property.ns_alias}][value]", @site.persona.property(property.type_uri), property.required, :id => "site_ax_fetch_#{property.ns_alias}", :class => ax_request_for_field(property) %>
+				<%= hidden_field_tag "site[ax_fetch][#{property.ns_alias}][type]", property.type_uri, :id => "site_ax_fetch_type_#{property.ns_alias}" %>
+				<%= label_tag "site_ax_fetch_#{property.ns_alias}", ax_request_for_field(property), :class => 'note' %>
 			</td>
 		</tr>
 		<% end if ax_fetch_request %>
@@ -89,7 +89,7 @@
 			<td><%= label_tag "site_ax_store_#{attribute}", @site.persona.property(type_uri) %></td>
 			<td>
 				<%= check_box_tag "site[ax_store][#{attribute}][value]", value, false, :id => "site_ax_store_#{attribute}" %>
-				<%= hidden_field_tag "site[ax_store][#{attribute}][type]", type_uri, :id => "site_ax_type_#{attribute}" %>
+				<%= hidden_field_tag "site[ax_store][#{attribute}][type]", type_uri, :id => "site_ax_store_type_#{attribute}" %>
 			</td>
 		</tr>
   	<% end %>
