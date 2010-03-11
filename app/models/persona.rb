@@ -24,7 +24,7 @@ class Persona < ActiveRecord::Base
   # Returns the personas attribute for the given SReg name or AX Type URI
   def property(type)
     prop = Persona.mappings.detect { |i| i[1].include?(type) }
-    prop ? self.send(prop[0]).to_s : ""
+    prop ? self.send(prop[0]).to_s : nil
   end
   
   def date_of_birth

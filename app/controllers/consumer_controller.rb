@@ -20,7 +20,8 @@ class ConsumerController < ApplicationController
     end
     if params[:use_ax_fetch]
       axreq = OpenID::AX::FetchRequest.new
-      requested_attrs = [['http://axschema.org/namePerson/friendly', 'nickname', true],
+      requested_attrs = [['https://openid.tzi.de/spec/schema', 'uid', true],
+                         ['http://axschema.org/namePerson/friendly', 'nickname', true],
                          ['http://axschema.org/contact/email', 'email', true],
                          ['http://axschema.org/namePerson', 'fullname'],
                          ['http://axschema.org/contact/web/default', 'website', false, 2],

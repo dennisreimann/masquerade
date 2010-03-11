@@ -229,6 +229,9 @@ en:
   disclosure: disclosure
   accept: accept
   current: current
+  required: required
+  optional: optional
+  not_supported: not supported
   trust_site_only_this_time: Trust this site only this time
   always_trust_site: Always trust this site
   approve_request: Approve this request

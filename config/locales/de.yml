@@ -226,6 +226,9 @@ de:
   disclosure: freigeben
   accept: akzeptieren
   current: aktueller Wert
+  required: benötigt
+  optional: optional
+  not_supported: nicht unterstützt
   trust_site_only_this_time: Dieser Website einmal vertrauen
   always_trust_site: Dieser Website immer vertrauen
   approve_request: Anfrage bestätigen

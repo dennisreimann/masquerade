@@ -220,6 +220,9 @@ es:
   create_new_persona_link: crear una nueva persona
   requested_information_title: Información pédida
   disclosure: liberar
+  required: required
+  optional: optional
+  not_supported: not supported
   trust_site_only_this_time: Confiar en este sitio solo esta vez
   always_trust_site: Siempre confiar en este sitio
   approve_request: Aprovar esta petición

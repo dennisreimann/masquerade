@@ -61,11 +61,12 @@
 		</tr>
 		<% end if sreg_request %>
 		<% ax_fetch_request.attributes.each do |property| %>
+		<% supported = !Persona.attribute_name_for_type_uri(property.type_uri).nil? %>
 		<tr>
 			<td><%= label_tag "site_ax_fetch_#{property.ns_alias}", property_label_text(property.ns_alias) %></td>
-			<td><%= label_tag "site_ax_fetch_#{property.ns_alias}", @site.persona.property(property.type_uri) %></td>
+			<td><%= label_tag "site_ax_fetch_#{property.ns_alias}", supported ? @site.persona.property(property.type_uri) : t(:not_supported), :class => supported ? nil : 'note' %></td>
 			<td>
-				<%= check_box_tag "site[ax_fetch][#{property.ns_alias}][value]", @site.persona.property(property.type_uri), property.required, :id => "site_ax_fetch_#{property.ns_alias}", :class => ax_request_for_field(property) %>
+				<%= check_box_tag "site[ax_fetch][#{property.ns_alias}][value]", @site.persona.property(property.type_uri), property.required, :id => "site_ax_fetch_#{property.ns_alias}", :class => ax_request_for_field(property), :disabled => !supported %>
 				<%= hidden_field_tag "site[ax_fetch][#{property.ns_alias}][type]", property.type_uri, :id => "site_ax_fetch_type_#{property.ns_alias}" %>
 				<%= label_tag "site_ax_fetch_#{property.ns_alias}", ax_request_for_field(property), :class => 'note' %>
 			</td>
