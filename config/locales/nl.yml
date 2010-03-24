@@ -1,0 +1,262 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+nl:
+  
+  # account controller
+  thanks_for_signing_up_activation_link: Bedankt voor het aanmelden! We hebben u een mail gestuurd met een activatielink.
+  profile_updated: Uw profiel werd bijgewerkt.
+  account_disabled: Uw account has werd uitgezet.
+  entered_password_is_wrong: Het ingevoerde wachtwoord is fout.
+  account_activated_login_now: Uw account werd geactiveerd - u kunt nu inloggen.
+  couldnt_find_account_with_code_create_new_one: We konden geen account vinden met de opgegeven activatiecode. Maak alstublieft een niew account aan.
+  account_already_activated_please_login: Uw account is al geactiveerd - Log in alstublieft.
+  password_has_been_changed: Uw wachtwoord werd gewijzigd.
+  sorry_password_couldnt_be_changed: Sorrie, uw wachtwoord kon niet gewijzigd worden.
+  confirmation_of_new_password_invalid: De confirmatie van het nieuwe wachtwoord is incorrect.
+  old_password_incorrect: Uw oude wachtwoord is incorrect
+  # account views
+  public_persona: Publieke persona
+  forgot_password_create_new_one: U vergat uw wachtwoord? Hier kunt u een nieuwe aanmaken.
+  account_created_but_not_activated_yet: Uw OpenID account werd aangemaakt, maar is nog niet geactiveerd.#
+  please_activate_it_by_clicking_the_following_link: Activeert u alstublieft door op de volgende link te klikken.
+  my_profile: Mijn profiel
+  login: Login
+  password: Wachtwoord
+  my_password: Mijn wachtwoord
+  old_password: Oude wachtwoord
+  new_password_minimum_6_characters: Nieuw wachtwoord <span class="note">(minimum lengte is 6 karakters)</span>
+  password_confirmation: Wachtwoord confirmatie
+  submit_update: update
+  my_yubikey: Mijn Yubikey
+  your_account_is_associated_with_the_yubico_identity: Uw account is gekoppeld met de Yubico identiteit
+  yubikey_how_to_use: "U kunt de Yubikey gebruiken naast de wachtwoord inlog om in te loggen in uw account. Voer uw normale 
+    wachtwoord en uw Yubico OPT (niet gesplitst met spaties en dergelijke) op de loginpagina in."
+  remove_association: verwijder koppeling
+  your_yubikey_a_one_time_password: Uw Yubikey <span class="note">(een Yubico eenmalig wachtwoord, OTP)</span>
+  associate_account_with_yubikey: koppel mijn account met deze Yubikey
+  disable_my_account: Zet mijn account uit
+  wont_be_possible_to_reclaim_identifier: Wees bewust van het gegeven dat het niet mogelijk zal zijn uw huidige OpenID identificatie terug te halen.
+  confirm_by_entering_password: Bevestig door het wachtwoord in te voeren
+  delete_my_account_and_data: verwijder mijn account en al mijn data
+
+  signup_title: Registreer
+  signup: Registreer  # ???
+
+  # account mailer
+  please_activate_your_account: Activeer alstublieft uw account
+  your_request_for_a_new_password: Uw aanvraag voor een nieuw wachtwoord
+
+  # consumer controller
+  immediate_request_failed_setup_needed: Onmiddelijke aanvraag mislukt - inregelen vereist
+  openid_transaction_cancelled: OpenID transactie afgebroken.
+  verification_of_identifier_failed: "Verificatie van {{identifier}} mislukt: {{message}}"
+  verification_failed_message: "Verificatie mislukt: {{message}}"
+  verification_of_identifier_succeeded: Verificatie van {{identifier}} gelukt.
+  simple_registration_data_requested: Simpele Registratiedata werd aangevraagd
+  but_none_was_returned: maar werd niet teruggegeven.
+  but_got_no_response: maar geen reactie.
+  but_an_error_occured: "maar een fout deed zich voor:\n{{error_message}}"
+  and_saved_at_the_identity_provider: en werd opgeslagen bij de Identity Provider.
+  the_following_data_were_sent: "De volgende data werd verzonden:"
+  attribute_exchange_data_requested: Uitwisseling van attributen werd aangevraagd
+  attribute_exchange_store_requested: Uitwisseling van attributen werd verzonden
+  authentication_policies_requested: Authenticatiebeleid werd aangevraagd
+  and_server_reported_the_following: "en de server meldde het volgende:"
+  but_the_server_did_not_report_one: maar de server rapporteerde geen.
+  authentication_time: Authenticatietijd
+
+  # consumer views
+  identifier: Indentificatie
+  verify: Bevestigen
+  use_immediate_mode: Gebruik direct modus
+  request_registration_data: Vraag regsitratiedata aan
+  request_attribute_exchange_data: Vraag uitwisseing van attributen aan
+  store_attribute_exchange_data: Sla attributen met attribuutuitwisselingen op
+  request_pape: Vraag phising-velig beleid voor authenticatieRequest (PAPE)
+  force_post: Forceer gebruik van POST in de transacties door 2K aan extra data toe te voegen
+
+  # info
+  questions_answers: Vragne? Antwoorden!
+  here_we_cover_openid_topics: Hier behandelen we enkele OpenIDgerelateerde onderwerpen.
+  openid_delegation: OpenID delegatie
+  delegation_explanation: "Delegatie is een manier om onze eigen website of blog-url als OpenID-identificatie te gebruiken. Aanvragen kunnen naar deze server worden doorgestuurd, dooe het volgende HTML-fragment aan de <code>&lt;head&gt;</code>
+    van uw site toe te voegen:"
+  get_your_openid: Get your OpenID
+  openid_intro: "<p>OpenID is a shared identity service, which allows you to log on to many different 
+    web sites using a single digital identity, eliminating the need for different user names
+    and passwords for each site.</p>
+    <p>OpenID is a decentralized, free and open standard that lets you control the amount of 
+    personal information that you would like to provide to other web sites.</p>
+    <p>Get started and {{signup_link}}.</p>"
+  signup_for_an_openid: signup for an OpenID
+  login_to_proceed: Please log in to proceed
+  host_requests_identification_you_need_to_login: "{{host}} requests your identification and you need to log in to proceed."
+  login_intro: "To log in, please navigate to <strong>{{login_url}}</strong>. The page your 
+    are currently viewing is used to <strong>protect yourself from phishing and online identity theft</strong>
+    and should contain no links.<br />If there are any links, please report to us, who sent you here."
+
+  # nav
+  my_identity: identity
+  my_profile: profile
+  my_personas: personas
+  my_trusted_sites: trusted sites
+  logout: logout
+  current_verification_request: current verification request
+  login_link: login
+  signup_link: signup
+  help: help
+  get_help: get help
+  openid_consumer_testsuite_title: OpenID Consumer Testsuite
+  relying_party_title: Relying Party
+  
+  # passwords controller
+  password_reset_link_has_been_sent: A password reset link has been sent to your email address.
+  could_not_find_user_with_email_address: Could not find a user with that email address.
+  password_reset: Password reset.
+  password_mismatch: Password mismatch.
+  password_cannot_be_blank: Password cannot be blank.
+  reset_code_invalid_try_again: Sorry, your password reset code is invalid. Please check the code and try again.
+
+  # passwords views
+  reset_password: reset password
+  forgot_password_title: Forgot password
+  please_enter_email: Please enter your email address
+  submit_send: send
+
+  # personas controller
+  persona_successfully_created: The persona was successfully created.
+  persona_updated: The persona has been updated.
+  persona_cannot_be_deleted: This persona cannot be deleted.
+
+  # personas views
+  edit_your_persona: Edit your persona “{{title}}”
+  personal_information: Personal information
+  professional_information: Professional information
+  phone: Phone
+  instant_messaging: Instant Messaging
+  other_information: Other information
+
+  nickname: Nickname
+  email: Email
+  address: Address
+  postcode: Postcode
+  city: City
+  state: State
+  country: Country
+  language: Language
+  timezone: Timezone
+  gender: Gender
+  company_name: Company name
+  job_title: Job title
+  phone_home: Phone home
+  phone_mobile: Phone mobile
+  phone_fax: Phone fax
+  phone_work: Phone work
+  biography: Biography
+  title: Title
+  fullname: Full name
+  birth_date: Birth date
+  address_business: Address
+  address_additional: Additional
+  address_additional_business: Additional
+  postcode_business: Postcode
+  city_business: City
+  state_business: State
+  country_business: Country
+  im_aim: AIM
+  im_icq: ICQ
+  im_msn: MSN
+  im_yahoo: Yahoo
+  im_jabber: Jabber
+  im_skype: Skype
+  image_url: Image URL
+  website_url: Website URL
+  blog_url: Blog URL
+  dob: Day of birth
+  date_of_birth: Day of birth
+
+  my_personas_title: My personas
+  personas_intro: "Personas define certain roles of your account. For instance you can have a persona for private 
+    use and another one for business context. When a relying party requests your information
+    you can choose the persona that you would like to exchange data from."
+  edit: edit
+  delete: delete
+  really_want_to_delete_persona: Do you really want to delete the persona ”{{title}}”?
+  create_a_new_persona: create a new persona
+  create_a_new_persona_title: Create a new persona
+  
+  # sessions controller
+  you_are_logged_in: You are now logged in.
+  login_incorrect_or_account_not_yet_activated: The login is incorrect or your account is not activated, yet.
+  you_are_now_logged_out: You are now logged out.
+
+  # sessions views
+  login_title: Login
+  your_openid: Your OpenID
+  cancel_this_request: cancel this request
+  remember_me: Remember me
+  login_submit: login
+  i_forgot_my_password: I forgot my password
+
+  # server controller
+  this_is_openid_not_a_human_ressource: This is an OpenID server endpoint, not a human readable resource.
+  identity_verification_request_invalid: The identity verification request is invalid.
+  service_provider_requires_reauthentication_last_login_too_long_ago: The Service Provider requires reauthentication, because your last login is too long ago.
+  login_to_verify_identity: Please log in to verify your identity.
+
+  # server views
+  identity_request_from_host: Identity request from {{host}}
+  identity_request_missing_persona: Please {{create_link}} to answer the identity request.
+  trust_root_requests_some_personal_data: "{{trust_root}} requests some personal data."
+  trust_root_sends_some_personal_data: "{{trust_root}} sends some personal data:"
+  select_information_to_submit: Please select the information you would like to submit.
+  select_information_to_accept: Please select the information you would like to accept.
+  attributes_are_shown_from_persona: The attributes shown are from your persona {{persona}}.
+  attributes_will_be_added_to_persona: The attributes will be added to your persona {{persona}} ({{choose_link}}).
+  to_submit_other_values_you_can_edit_or_choose: To submit other values you can {{edit_link}} or {{choose_link}}.
+  create_persona_link: create a persona
+  edit_persona_link: edit the persona
+  choose_other_persona: choose another persona
+  trust_root_requires_authentication: "{{trust_root} requires your authentication."
+  choose_persona_title: Choose a persona
+  choose_persona_submit: choose persona
+  create_new_persona_link: create a new persona
+  requested_information_title: Requested information
+  sent_information_title: Sent information
+  disclosure: disclosure
+  accept: accept
+  current: current
+  required: required
+  optional: optional
+  not_supported: not supported
+  trust_site_only_this_time: Trust this site only this time
+  always_trust_site: Always trust this site
+  approve_request: Approve this request
+  cancel_request: Cancel this request
+  
+  # sites controllers
+  release_policy_for_site_updated: The release policy for this site has been updated.
+
+  # sites views
+  edit_link: edit
+  delete_link: delete
+  or: or
+  your_release_policy_for_site: Your release policy for {{site}}
+  persona_label: Persona
+  choose_persona_submit: choose persona
+  property: property
+  value: value
+  update_release_policy_submit: update release policy
+  identity_request_answered_without_interaction: Identity request from the following sites are answered directly without further interaction.
+  alter_release_policies_here: You can alter the release policies for these sites here.
+  really_want_to_delete_trust_for_site: Do you really want to delete the trust for {{site}}?
+  no_entries_yet: There are no entries, yet.
+  ext0: Ext0
+  ext1: Ext1
+  ext2: Ext2
+
+  # yubikey controller
+  account_associated_with_yubico_identity: Your account has been associated with your Yubico identity.
+  sorry_yubico_one_time_password_incorrect: Sorry, the given Yubico one time password is incorrect.
+  account_disassociated_from_yubico_identity: Your account has been disassociated from the Yubico identity.
