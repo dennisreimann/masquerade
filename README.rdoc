@@ -9,14 +9,14 @@ The source code is available at {github}[http://github.com/dbloete/masquerade/] 
 == Installation
 
 1. Configure the database:
-	* rename the file config/database.yml.example to database.yml
-	* set the values in database.yml according to your database
-	* run the migration scripts
-		rake db:migrate
+* rename the file config/database.yml.example to database.yml
+* set the values in database.yml according to your database
+* run the migration scripts
+  rake db:migrate
 
 2. Configure the application:
-	* rename the file config/app_config.yml.example to app_config.yml
-	* set the values in app_config.yml according to your environment
+* rename the file config/app_config.yml.example to app_config.yml
+* set the values in app_config.yml according to your environment
 
 3. Run the tests and see if everything seems to work
 	rake test
@@ -50,9 +50,7 @@ handy methods to access and answer OpenID requests.
 
 == TODO
 
-* let the user set a standard persona which is used as default for requests
-* let the user choose to display information on his identity page (hCard)
-* add support for {Attribute Exchange Store Requests}[http://openid.net/specs/openid-attribute-exchange-1_0.html]
+* Let the user set a standard persona which is used as default for requests
 
 == Notes
 
