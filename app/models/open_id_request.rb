@@ -11,6 +11,12 @@ class OpenIdRequest < ActiveRecord::Base
     self[:parameters] = params.is_a?(Hash) ? params.delete_if { |k,v| k.index('openid.') != 0 } : nil
   end
   
+  def from_trusted_domain?
+    host = URI.parse(parameters['openid.realm'] || parameters['openid.trust_root']).host
+    
+    APP_CONFIG['trusted_domains'].find { |domain| host.ends_with? domain }
+  end
+
   private
   
   def make_token

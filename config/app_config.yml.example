@@ -105,12 +105,16 @@ default: &default
       - http://axschema.org/contact/web/default
     web_blog:
       - http://axschema.org/contact/web/blog
+  trusted_domains:
+    
 
 development:
   <<: *default
 
 test:
   <<: *default
+  trusted_domains:
+    - trusted-domain.com
 
 production:
   <<: *default
