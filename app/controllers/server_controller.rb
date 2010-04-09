@@ -125,16 +125,20 @@ class ServerController < ApplicationController
     elsif openid_request.immediate
       render_response(openid_request.answer(false))
     else
-      save_checkid_request
+      request = save_checkid_request
       session[:return_to] = proceed_path
-      redirect_to safe_login_path
+      redirect_to( request.from_trusted_domain? ? login_path : safe_login_path )
     end
   end
   
-  # Stores the current OpenID request
+  # Stores the current OpenID request.
+  # Returns the OpenIdRequest
   def save_checkid_request
     clear_checkid_request
-    session[:request_token] = OpenIdRequest.create(:parameters => openid_params).token
+    request = OpenIdRequest.create(:parameters => openid_params)
+    session[:request_token] = request.token
+
+    request
   end
   
   # Deletes the old request when a new one comes in.

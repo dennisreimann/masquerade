@@ -4,6 +4,23 @@ class ServerControllerTest < ActionController::TestCase
   
   fixtures :accounts, :personas
 
+  def test_should_redirect_to_safe_login_page_if_untrusted_domain
+    login_as(:standard)
+    post :index, checkid_request_params
+    assert_redirected_to safe_login_url
+    assert_not_nil @request.session[:return_to]
+    assert_not_nil @request.session[:request_token]
+  end
+
+  def test_should_redirect_to_login_page_if_trusted_domain
+    login_as(:standard)
+    domain = APP_CONFIG['trusted_domains'].first
+    post :index, checkid_request_params.merge('openid.trust_root' => "http://#{domain}/", 'openid.realm' => "http://#{domain}/", 'openid.return_to' => "http://#{domain}/return")
+    assert_redirected_to login_url
+    assert_not_nil @request.session[:return_to]
+    assert_not_nil @request.session[:request_token]
+  end
+
   def test_should_save_site_if_user_chose_to_trust_always
     fake_checkid_request(:standard)
     assert_difference('Site.count', 1) do
