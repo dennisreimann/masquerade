@@ -94,6 +94,13 @@ class SessionsControllerTest < ActionController::TestCase
   #   assert @account.last_authenticated_with_yubikey
   # end
   
+  def test_should_disallow_password_only_login_when_yubikey_is_mandatory
+    account = accounts(:with_yubico_identity)
+    post :create, :login => account.login, :password => 'test'
+    assert @response.has_flash?
+    assert_redirected_to new_session_url
+  end
+  
   protected
   
   def auth_token(token)

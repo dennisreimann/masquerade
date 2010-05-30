@@ -19,7 +19,7 @@ class Account < ActiveRecord::Base
   before_save   :encrypt_password
   before_create :make_activation_code
   
-  attr_accessible :login, :email, :password, :password_confirmation, :public_persona_id
+  attr_accessible :login, :email, :password, :password_confirmation, :public_persona_id, :yubikey_mandatory
   attr_accessor :password
   
   class ActivationCodeNotFound < StandardError; end
@@ -86,7 +86,7 @@ class Account < ActiveRecord::Base
   end
   
   def authenticated?(password)
-    if password.length < 50
+    if password.length < 50 && !(yubico_identity? && yubikey_mandatory?) 
       encrypt(password) == crypted_password
     else
       password, yubico_otp = Account.split_password_and_yubico_otp(password)

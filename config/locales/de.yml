@@ -31,6 +31,10 @@ de:
     Ihr Passwort und Ihr Yubico OTP (ohne Leerzeichen oder sonstige Trennzeichen) auf der Login-Seite ein."
   remove_association: Assoziation entfernen.
   your_yubikey_a_one_time_password: Ihr Yubikey <span class="note">(ein Yubico Einmalpasswort)</span>
+  your_yubikey_is_optional_for_login: Ihr Yubikey ist beim Login zur Zeit optional.
+  make_my_yubikey_optional: Meinen Yubikey beim Einloggen optional machen
+  your_yubikey_is_mandatory_for_login: Ihr Yubikey ist beim Login zur Zeit <strong>erforderlich</strong>.
+  make_my_yubikey_mandatory: Meinen Yubikey bei jedem Einloggen erfordern
   associate_account_with_yubikey: Meinen Account mit diesem Yubikey verbinden
   disable_my_account: Meinen Account deaktivieren
   wont_be_possible_to_reclaim_identifier: Bitte beachten Sie, dass Sie Ihre aktuelle OpenID-Kennung nicht erneut verwenden können

@@ -47,6 +47,23 @@
 		<%= submit_tag t(:remove_association) %>
 	</div>
 <% end %>
+
+<% form_for :account, :url => account_path, :html => { :method => :put } do |f| %>
+	<div>
+	  <p>
+	    <% if @account.yubikey_mandatory? %>
+	     <%=t :your_yubikey_is_mandatory_for_login %>
+	    <% else %>
+	     <%=t :your_yubikey_is_optional_for_login %>
+	    <% end %>
+	  </p>
+    <div>
+      <%= f.hidden_field :yubikey_mandatory, :value => (@account.yubikey_mandatory ? 0 : 1)  %>
+      <%= submit_tag( @account.yubikey_mandatory ? t(:make_my_yubikey_optional) : t(:make_my_yubikey_mandatory) ) %>
+    </div>
+	</div>
+<% end %>
+
 <% else %>
 <% form_tag account_yubikey_association_path do %>
 	<div class="row">
