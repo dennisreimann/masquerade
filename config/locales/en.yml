@@ -35,6 +35,10 @@ en:
   remove_association: remove association
   your_yubikey_a_one_time_password: Your Yubikey <span class="note">(a Yubico one time password)</span>
   associate_account_with_yubikey: associate my account with this Yubikey
+  your_yubikey_is_optional_for_login: Your Yubikey is currently optional for login.
+  make_my_yubikey_mandatory: Make my Yubikey mandatory for login
+  your_yubikey_is_mandatory_for_login: Your Yubikey is currently <strong>mandatory</strong> for login.
+  make_my_yubikey_optional: Make my Yubikey optional for login
   disable_my_account: Disable my account
   wont_be_possible_to_reclaim_identifier: Please consider that it won't be possible to reclaim your current OpenID identifier
   confirm_by_entering_password: Confirm this step by entering your password
