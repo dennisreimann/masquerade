@@ -2,6 +2,7 @@
 .bundle
 .loadpath
 .project
+.rvmrc
 Thumbs.db
 log/*.log
 Capfile
