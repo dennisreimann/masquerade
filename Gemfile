@@ -1,5 +1,4 @@
-# Edit this Gemfile to bundle your application's dependencies.
-source 'http://gemcutter.org'
+source :rubygems
 
 gem "rails", "3.0.1"
 gem "mysql"

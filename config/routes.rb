@@ -1,4 +1,4 @@
-Masquerade::Application.routes.draw do
+Masquerade::Application.routes.draw do |map|
 
   resource :account do
     get :activate
@@ -18,29 +18,29 @@ Masquerade::Application.routes.draw do
   resource :password
   
   
-  match "/forgot_password", :to => "passwords#new", :as => :forgot_password
-  match "/reset_password/:id", :to => "passwords#edit", :as => :reset_password
+  match "/forgot_password" => "passwords#new", :as => :forgot_password
+  match "/reset_password/:id"  => "passwords#edit", :as => :reset_password
   
-  match "/login", :to => "sessions#new", :as => :login
-  match "/logout/:id", :to => "sessions#destroy", :as => :logout
+  match "/login" => "sessions#new", :as => :login
+  match "/logout/:id" => "sessions#destroy", :as => :logout
   
-  match "/server", :to => "server#index", :as => :server
-  match "/server/decide", :to => "server#decide", :as => :decide
-  match "/server/proceed", :to => "server#proceed", :as => :proceed
-  match "/server/complete", :to => "server#complete", :as => :complete
-  match "/server/cancel", :to => "server#cancel", :as => :cancel
-  match "/server/seatbelt/config.:format", :to => "server#seatbelt_config", :as => :seatbelt_config
-  match "/server/seatbelt/state.:format", :to => "server#seatbelt_login_state", :as => :seatbelt_state
+  match "/server" => "server#index", :as => :server
+  match "/server/decide" => "server#decide", :as => :decide
+  match "/server/proceed" => "server#proceed", :as => :proceed
+  match "/server/complete" => "server#complete", :as => :complete
+  match "/server/cancel" => "server#cancel", :as => :cancel
+  match "/server/seatbelt/config.:format" => "server#seatbelt_config", :as => :seatbelt_config
+  match "/server/seatbelt/state.:format" => "server#seatbelt_login_state", :as => :seatbelt_state
   
-  match "/consumer", :to => "consumer#index", :as => :consumer
-  match "/consumer/start", :to => "consumer#start", :as => :consumer_start
-  match "/consumer/complete", :to => "consumer#complete", :as => :consumer_complete
+  match "/consumer" => "consumer#index", :as => :consumer
+  match "/consumer/start" => "consumer#start", :as => :consumer_start
+  match "/consumer/complete" => "consumer#complete", :as => :consumer_complete
   
-  match "/:account.:format", :to => "accounts#show", :as => :identity
-  match "/:account", :to => "accounts#show", :as => :formatted_identity
+  match "/:account.:format" => "accounts#show", :as => :identity
+  match "/:account" => "accounts#show", :as => :formatted_identity
   
-  match "/help", :to => "info#help", :as => :help
-  match "/safe-login", :to => "info#safe_login", :as => :safe_login
+  match "/help" => "info#help", :as => :help
+  match "/safe-login" => "info#safe_login", :as => :safe_login
   root :to => "info#index", :as => :home
   
 end

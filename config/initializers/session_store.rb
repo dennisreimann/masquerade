@@ -4,7 +4,7 @@
 # If you change this key, all old sessions will become invalid!
 # Make sure the secret is at least 30 characters and all random, 
 # no regular words or you'll be exposed to dictionary attacks.
-ActionController::Base.session = Masquerade::Application::Config['session']
+Rails.application.config.session_store :cookie_store, :key => Masquerade::Application::Config['session']['session_key']
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
