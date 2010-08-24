@@ -39,7 +39,6 @@ Rails::Initializer.run do |config|
   
   # Gems
   config.gem 'ruby-openid', :lib => 'openid'
-  # config.gem 'dbloete-ruby-openid', :lib => 'ruby-openid', :source => 'http://gems.github.com'
   config.gem 'ruby-yadis', :lib => 'yadis'
   config.gem 'mocha'
   
