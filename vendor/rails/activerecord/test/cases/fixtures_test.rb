@@ -254,6 +254,11 @@ class FixturesWithoutInstantiationTest < ActiveRecord::TestCase
     assert_nil @unknown
   end
 
+  def test_visibility_of_accessor_method
+    assert_equal false, respond_to?(:topics, false), "should be private method"
+    assert_equal true, respond_to?(:topics, true), "confirm to respond surely"
+  end
+
   def test_accessor_methods
     assert_equal "The First Topic", topics(:first).title
     assert_equal "Jamis", developers(:jamis).name
@@ -519,8 +524,8 @@ class FoxyFixturesTest < ActiveRecord::TestCase
   end
 
   def test_identifies_consistently
-    assert_equal 1281023246, Fixtures.identify(:ruby)
-    assert_equal 2140105598, Fixtures.identify(:sapphire_2)
+    assert_equal 207281424, Fixtures.identify(:ruby)
+    assert_equal 1066363776, Fixtures.identify(:sapphire_2)
   end
 
   TIMESTAMP_COLUMNS = %w(created_at created_on updated_at updated_on)

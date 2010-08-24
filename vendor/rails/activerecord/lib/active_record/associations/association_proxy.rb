@@ -53,6 +53,7 @@ module ActiveRecord
 
       def initialize(owner, reflection)
         @owner, @reflection = owner, reflection
+        reflection.check_validity!
         Array(reflection.options[:extend]).each { |ext| proxy_extend(ext) }
         reset
       end
@@ -208,17 +209,12 @@ module ActiveRecord
 
       private
         # Forwards any missing method call to the \target.
-        def method_missing(method, *args)
+        def method_missing(method, *args, &block)
           if load_target
-            unless @target.respond_to?(method)
-              message = "undefined method `#{method.to_s}' for \"#{@target}\":#{@target.class.to_s}"
-              raise NoMethodError, message
-            end
-
-            if block_given?
-              @target.send(method, *args)  { |*block_args| yield(*block_args) }
+            if @target.respond_to?(method)
+              @target.send(method, *args, &block)
             else
-              @target.send(method, *args)
+              super
             end
           end
         end
@@ -273,6 +269,19 @@ module ActiveRecord
         # Returns the ID of the owner, quoted if needed.
         def owner_quoted_id
           @owner.quoted_id
+        end
+
+        def set_inverse_instance(record, instance)
+          return if record.nil? || !we_can_set_the_inverse_on_this?(record)
+          inverse_relationship = @reflection.inverse_of
+          unless inverse_relationship.nil?
+            record.send(:"set_#{inverse_relationship.name}_target", instance)
+          end
+        end
+
+        # Override in subclasses
+        def we_can_set_the_inverse_on_this?(record)
+          false
         end
     end
   end

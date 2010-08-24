@@ -1,5 +1,5 @@
 #--
-# Copyright (c) 2004-2009 David Heinemeier Hansson
+# Copyright (c) 2004-2010 David Heinemeier Hansson
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -51,8 +51,8 @@ module ActionView
   autoload :Helpers, 'action_view/helpers'
 end
 
-class ERB
-  autoload :Util, 'action_view/erb/util'
-end
+require 'active_support/core_ext/string/output_safety'
+
+ActionView::SafeBuffer = ActiveSupport::Deprecation::DeprecatedConstantProxy.new('ActionView::SafeBuffer', 'ActiveSupport::SafeBuffer')
 
 I18n.load_path << "#{File.dirname(__FILE__)}/action_view/locale/en.yml"

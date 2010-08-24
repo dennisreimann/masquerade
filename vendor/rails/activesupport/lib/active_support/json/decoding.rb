@@ -5,11 +5,15 @@ module ActiveSupport
   mattr_accessor :parse_json_times
 
   module JSON
+    # Listed in order of preference.
+    DECODERS = %w(Yajl Yaml)
+
     class << self
+      attr_reader :parse_error
       delegate :decode, :to => :backend
 
       def backend
-        self.backend = "Yaml" unless defined?(@backend)
+        set_default_backend unless defined?(@backend)
         @backend
       end
 
@@ -20,6 +24,7 @@ module ActiveSupport
           require "active_support/json/backends/#{name.to_s.downcase}.rb"
           @backend = ActiveSupport::JSON::Backends::const_get(name)
         end
+        @parse_error = @backend::ParseError
       end
 
       def with_backend(name)
@@ -27,6 +32,18 @@ module ActiveSupport
         yield
       ensure
         self.backend = old_backend
+      end
+
+      def set_default_backend
+        DECODERS.find do |name|
+          begin
+            self.backend = name
+            true
+          rescue LoadError
+            # Try next decoder.
+            false
+          end
+        end
       end
     end
   end

@@ -97,7 +97,7 @@ module ActiveRecord
             end_sql
 
             unless affected_rows == 1
-              raise ActiveRecord::StaleObjectError, "Attempted to update a stale object"
+              raise ActiveRecord::StaleObjectError, "Attempted to update a stale object: #{self.class.name}"
             end
 
             affected_rows
@@ -109,27 +109,27 @@ module ActiveRecord
           end
         end
 
-  def destroy_with_lock #:nodoc:
-    return destroy_without_lock unless locking_enabled?
+        def destroy_with_lock #:nodoc:
+          return destroy_without_lock unless locking_enabled?
 
-    unless new_record?
-      lock_col = self.class.locking_column
-      previous_value = send(lock_col).to_i
+          unless new_record?
+            lock_col = self.class.locking_column
+            previous_value = send(lock_col).to_i
 
-      affected_rows = connection.delete(
-        "DELETE FROM #{self.class.quoted_table_name} " +
-        "WHERE #{connection.quote_column_name(self.class.primary_key)} = #{quoted_id} " +
-              "AND #{self.class.quoted_locking_column} = #{quote_value(previous_value)}",
-        "#{self.class.name} Destroy"
-      )
+            affected_rows = connection.delete(
+              "DELETE FROM #{self.class.quoted_table_name} " +
+              "WHERE #{connection.quote_column_name(self.class.primary_key)} = #{quoted_id} " +
+                    "AND #{self.class.quoted_locking_column} = #{quote_value(previous_value)}",
+              "#{self.class.name} Destroy"
+            )
 
-      unless affected_rows == 1
-        raise ActiveRecord::StaleObjectError, "Attempted to delete a stale object"
-      end
-    end
+            unless affected_rows == 1
+              raise ActiveRecord::StaleObjectError, "Attempted to delete a stale object: #{self.class.name}"
+            end
+          end
 
-    freeze
-  end
+          freeze
+        end
 
       module ClassMethods
         DEFAULT_LOCKING_COLUMN = 'lock_version'

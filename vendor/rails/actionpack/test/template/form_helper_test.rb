@@ -92,6 +92,19 @@ class FormHelperTest < ActionView::TestCase
   tests ActionView::Helpers::FormHelper
 
   def setup
+    super
+
+    # Create "label" locale for testing I18n label helpers
+    I18n.backend.store_translations 'label', {
+      :helpers => {
+        :label => {
+          :post => {
+            :body => "Write entire text here"
+          }
+        }
+      }
+    }
+
     @post = Post.new
     @comment = Comment.new
     def @post.errors()
@@ -111,6 +124,10 @@ class FormHelperTest < ActionView::TestCase
     @post.body        = "Back to the hill and over it again!"
     @post.secret      = 1
     @post.written_on  = Date.new(2004, 6, 15)
+
+    def Post.human_attribute_name(attribute)
+      attribute.to_s == "cost" ? "Total cost" : attribute.to_s.humanize
+    end
 
     @controller = Class.new do
       attr_reader :url_for_options
@@ -135,6 +152,27 @@ class FormHelperTest < ActionView::TestCase
   def test_label_with_symbols
     assert_dom_equal('<label for="post_title">Title</label>', label(:post, :title))
     assert_dom_equal('<label for="post_secret">Secret?</label>', label(:post, :secret?))
+  end
+
+  def test_label_with_locales_strings
+    old_locale, I18n.locale = I18n.locale, :label
+    assert_dom_equal('<label for="post_body">Write entire text here</label>', label("post", "body"))
+  ensure
+    I18n.locale = old_locale
+  end
+
+  def test_label_with_human_attribute_name
+    old_locale, I18n.locale = I18n.locale, :label
+    assert_dom_equal('<label for="post_cost">Total cost</label>', label(:post, :cost))
+  ensure
+    I18n.locale = old_locale
+  end
+
+  def test_label_with_locales_symbols
+    old_locale, I18n.locale = I18n.locale, :label
+    assert_dom_equal('<label for="post_body">Write entire text here</label>', label(:post, :body))
+  ensure
+    I18n.locale = old_locale
   end
 
   def test_label_with_for_attribute_as_symbol
@@ -699,6 +737,26 @@ class FormHelperTest < ActionView::TestCase
 
     expected = '<form action="http://www.example.com" method="post">' +
                '<input name="post[title]" size="30" type="text" id="post_title" value="Hello World" />' +
+               '<input id="post_author_attributes_name" name="post[author_attributes][name]" size="30" type="text" value="author #321" />' +
+               '<input id="post_author_attributes_id" name="post[author_attributes][id]" type="hidden" value="321" />' +
+               '</form>'
+
+    assert_dom_equal expected, output_buffer
+  end
+  
+  def test_nested_fields_for_with_existing_records_on_a_nested_attributes_one_to_one_association_with_explicit_hidden_field_placement
+    @post.author = Author.new(321)
+
+    form_for(:post, @post) do |f|
+      concat f.text_field(:title)
+      f.fields_for(:author) do |af|
+        concat af.hidden_field(:id)
+        concat af.text_field(:name)
+      end
+    end
+    
+    expected = '<form action="http://www.example.com" method="post">' +
+               '<input name="post[title]" size="30" type="text" id="post_title" value="Hello World" />' +
                '<input id="post_author_attributes_id" name="post[author_attributes][id]" type="hidden" value="321" />' +
                '<input id="post_author_attributes_name" name="post[author_attributes][name]" size="30" type="text" value="author #321" />' +
                '</form>'
@@ -718,6 +776,30 @@ class FormHelperTest < ActionView::TestCase
       end
     end
 
+    expected = '<form action="http://www.example.com" method="post">' +
+               '<input name="post[title]" size="30" type="text" id="post_title" value="Hello World" />' +
+               '<input id="post_comments_attributes_0_name" name="post[comments_attributes][0][name]" size="30" type="text" value="comment #1" />' +
+               '<input id="post_comments_attributes_0_id" name="post[comments_attributes][0][id]" type="hidden" value="1" />' +
+               '<input id="post_comments_attributes_1_name" name="post[comments_attributes][1][name]" size="30" type="text" value="comment #2" />' +
+               '<input id="post_comments_attributes_1_id" name="post[comments_attributes][1][id]" type="hidden" value="2" />' +
+               '</form>'
+
+    assert_dom_equal expected, output_buffer
+  end
+
+  def test_nested_fields_for_with_existing_records_on_a_nested_attributes_collection_association_with_explicit_hidden_field_placement
+    @post.comments = Array.new(2) { |id| Comment.new(id + 1) }
+
+    form_for(:post, @post) do |f|
+      concat f.text_field(:title)
+      @post.comments.each do |comment|
+        f.fields_for(:comments, comment) do |cf|
+          concat cf.hidden_field(:id)
+          concat cf.text_field(:name)
+        end
+      end
+    end
+    
     expected = '<form action="http://www.example.com" method="post">' +
                '<input name="post[title]" size="30" type="text" id="post_title" value="Hello World" />' +
                '<input id="post_comments_attributes_0_id" name="post[comments_attributes][0][id]" type="hidden" value="1" />' +
@@ -764,9 +846,45 @@ class FormHelperTest < ActionView::TestCase
 
     expected = '<form action="http://www.example.com" method="post">' +
                '<input name="post[title]" size="30" type="text" id="post_title" value="Hello World" />' +
-               '<input id="post_comments_attributes_0_id" name="post[comments_attributes][0][id]" type="hidden" value="321" />' +
                '<input id="post_comments_attributes_0_name" name="post[comments_attributes][0][name]" size="30" type="text" value="comment #321" />' +
+               '<input id="post_comments_attributes_0_id" name="post[comments_attributes][0][id]" type="hidden" value="321" />' +
                '<input id="post_comments_attributes_1_name" name="post[comments_attributes][1][name]" size="30" type="text" value="new comment" />' +
+               '</form>'
+
+    assert_dom_equal expected, output_buffer
+  end
+
+  def test_nested_fields_for_with_an_empty_supplied_attributes_collection
+    form_for(:post, @post) do |f|
+      concat f.text_field(:title)
+      f.fields_for(:comments, []) do |cf|
+        concat cf.text_field(:name)
+      end
+    end
+
+    expected = '<form action="http://www.example.com" method="post">' +
+               '<input name="post[title]" size="30" type="text" id="post_title" value="Hello World" />' +
+               '</form>'
+
+    assert_dom_equal expected, output_buffer
+  end
+
+  def test_nested_fields_for_with_existing_records_on_a_supplied_nested_attributes_collection
+    @post.comments = Array.new(2) { |id| Comment.new(id + 1) }
+
+    form_for(:post, @post) do |f|
+      concat f.text_field(:title)
+      f.fields_for(:comments, @post.comments) do |cf|
+        concat cf.text_field(:name)
+      end
+    end
+
+    expected = '<form action="http://www.example.com" method="post">' +
+               '<input name="post[title]" size="30" type="text" id="post_title" value="Hello World" />' +
+               '<input id="post_comments_attributes_0_name" name="post[comments_attributes][0][name]" size="30" type="text" value="comment #1" />' +
+               '<input id="post_comments_attributes_0_id" name="post[comments_attributes][0][id]" type="hidden" value="1" />' +
+               '<input id="post_comments_attributes_1_name" name="post[comments_attributes][1][name]" size="30" type="text" value="comment #2" />' +
+               '<input id="post_comments_attributes_1_id" name="post[comments_attributes][1][id]" type="hidden" value="2" />' +
                '</form>'
 
     assert_dom_equal expected, output_buffer
@@ -786,8 +904,8 @@ class FormHelperTest < ActionView::TestCase
 
     expected = '<form action="http://www.example.com" method="post">' +
                '<input name="post[title]" size="30" type="text" id="post_title" value="Hello World" />' +
-               '<input id="post_comments_attributes_0_id" name="post[comments_attributes][0][id]" type="hidden" value="321" />' +
                '<input id="post_comments_attributes_0_name" name="post[comments_attributes][0][name]" size="30" type="text" value="comment #321" />' +
+               '<input id="post_comments_attributes_0_id" name="post[comments_attributes][0][id]" type="hidden" value="321" />' +
                '<input id="post_comments_attributes_1_name" name="post[comments_attributes][1][name]" size="30" type="text" value="new comment" />' +
                '</form>'
 
@@ -805,8 +923,8 @@ class FormHelperTest < ActionView::TestCase
     end
 
     expected = '<form action="http://www.example.com" method="post">' +
-               '<input id="post_comments_attributes_abc_id" name="post[comments_attributes][abc][id]" type="hidden" value="321" />' +
                '<input id="post_comments_attributes_abc_name" name="post[comments_attributes][abc][name]" size="30" type="text" value="comment #321" />' +
+               '<input id="post_comments_attributes_abc_id" name="post[comments_attributes][abc][id]" type="hidden" value="321" />' +
                '</form>'
 
     assert_dom_equal expected, output_buffer
@@ -840,18 +958,18 @@ class FormHelperTest < ActionView::TestCase
     end
 
     expected = '<form action="http://www.example.com" method="post">' +
-               '<input id="post_comments_attributes_0_id" name="post[comments_attributes][0][id]" type="hidden" value="321" />' +
                '<input id="post_comments_attributes_0_name" name="post[comments_attributes][0][name]" size="30" type="text" value="comment #321" />' +
-               '<input id="post_comments_attributes_0_relevances_attributes_0_id" name="post[comments_attributes][0][relevances_attributes][0][id]" type="hidden" value="314" />' +
                '<input id="post_comments_attributes_0_relevances_attributes_0_value" name="post[comments_attributes][0][relevances_attributes][0][value]" size="30" type="text" value="commentrelevance #314" />' +
-               '<input id="post_tags_attributes_0_id" name="post[tags_attributes][0][id]" type="hidden" value="123" />' +
+               '<input id="post_comments_attributes_0_relevances_attributes_0_id" name="post[comments_attributes][0][relevances_attributes][0][id]" type="hidden" value="314" />' +
+               '<input id="post_comments_attributes_0_id" name="post[comments_attributes][0][id]" type="hidden" value="321" />' +
                '<input id="post_tags_attributes_0_value" name="post[tags_attributes][0][value]" size="30" type="text" value="tag #123" />' +
-               '<input id="post_tags_attributes_0_relevances_attributes_0_id" name="post[tags_attributes][0][relevances_attributes][0][id]" type="hidden" value="3141" />' +
                '<input id="post_tags_attributes_0_relevances_attributes_0_value" name="post[tags_attributes][0][relevances_attributes][0][value]" size="30" type="text" value="tagrelevance #3141" />' +
-               '<input id="post_tags_attributes_1_id" name="post[tags_attributes][1][id]" type="hidden" value="456" />' +
+               '<input id="post_tags_attributes_0_relevances_attributes_0_id" name="post[tags_attributes][0][relevances_attributes][0][id]" type="hidden" value="3141" />' +
+               '<input id="post_tags_attributes_0_id" name="post[tags_attributes][0][id]" type="hidden" value="123" />' +
                '<input id="post_tags_attributes_1_value" name="post[tags_attributes][1][value]" size="30" type="text" value="tag #456" />' +
-               '<input id="post_tags_attributes_1_relevances_attributes_0_id" name="post[tags_attributes][1][relevances_attributes][0][id]" type="hidden" value="31415" />' +
                '<input id="post_tags_attributes_1_relevances_attributes_0_value" name="post[tags_attributes][1][relevances_attributes][0][value]" size="30" type="text" value="tagrelevance #31415" />' +
+               '<input id="post_tags_attributes_1_relevances_attributes_0_id" name="post[tags_attributes][1][relevances_attributes][0][id]" type="hidden" value="31415" />' +
+               '<input id="post_tags_attributes_1_id" name="post[tags_attributes][1][id]" type="hidden" value="456" />' +
                '</form>'
 
     assert_dom_equal expected, output_buffer
@@ -1022,12 +1140,12 @@ class FormHelperTest < ActionView::TestCase
 
   class LabelledFormBuilder < ActionView::Helpers::FormBuilder
     (field_helpers - %w(hidden_field)).each do |selector|
-      src = <<-END_SRC
+      src, line = <<-END_SRC, __LINE__ + 1
         def #{selector}(field, *args, &proc)
-          "<label for='\#{field}'>\#{field.to_s.humanize}:</label> " + super + "<br/>"
+          ("<label for='\#{field}'>\#{field.to_s.humanize}:</label> " + super + "<br/>").html_safe
         end
       END_SRC
-      class_eval src, __FILE__, __LINE__
+      class_eval src, __FILE__, line
     end
   end
 
@@ -1090,6 +1208,22 @@ class FormHelperTest < ActionView::TestCase
     @post = nil
 
     form_for(:post, post) do |f|
+       concat f.error_message_on('author_name')
+       concat f.error_messages
+    end
+
+    expected = %(<form action='http://www.example.com' method='post'>) +
+               %(<div class='formError'>can't be empty</div>) +
+               %(<div class="errorExplanation" id="errorExplanation"><h2>1 error prohibited this post from being saved</h2><p>There were problems with the following fields:</p><ul><li>Author name can't be empty</li></ul></div>) +
+               %(</form>)
+
+    assert_dom_equal expected, output_buffer
+
+  end
+  
+  def test_default_form_builder_without_object
+
+    form_for(:post) do |f|
        concat f.error_message_on('author_name')
        concat f.error_messages
     end

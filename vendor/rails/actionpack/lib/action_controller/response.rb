@@ -47,7 +47,8 @@ module ActionController # :nodoc:
       @block = nil
 
       @body = "",
-      @session, @assigns = [], []
+      @session = []
+      @assigns = []
     end
 
     def location; headers['Location'] end
@@ -116,11 +117,7 @@ module ActionController # :nodoc:
     end
 
     def etag=(etag)
-      if etag.blank?
-        headers.delete('ETag')
-      else
-        headers['ETag'] = %("#{Digest::MD5.hexdigest(ActiveSupport::Cache.expand_cache_key(etag))}")
-      end
+      headers['ETag'] = %("#{Digest::MD5.hexdigest(ActiveSupport::Cache.expand_cache_key(etag))}")
     end
 
     def redirect(url, status)
@@ -201,7 +198,7 @@ module ActionController # :nodoc:
 
       def nonempty_ok_response?
         ok = !status || status.to_s[0..2] == '200'
-        ok && body.is_a?(String) && !body.empty?
+        ok && body.is_a?(String) && !body.blank?
       end
 
       def set_conditional_cache_control!
@@ -232,7 +229,8 @@ module ActionController # :nodoc:
       end
 
       def convert_cookies!
-        headers['Set-Cookie'] = Array(headers['Set-Cookie']).compact
+        cookies = Array(headers['Set-Cookie']).compact
+        headers['Set-Cookie'] = cookies unless cookies.empty?
       end
   end
 end

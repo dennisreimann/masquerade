@@ -434,7 +434,7 @@ end
 # Any fixture labeled "DEFAULTS" is safely ignored.
 
 class Fixtures < (RUBY_VERSION < '1.9' ? YAML::Omap : Hash)
-  MAX_ID = 2 ** 31 - 1
+  MAX_ID = 2 ** 30 - 1
   DEFAULT_FILTER_RE = /\.ya?ml$/
 
   @@all_cached_fixtures = {}
@@ -891,6 +891,7 @@ module ActiveRecord
 
             instances.size == 1 ? instances.first : instances
           end
+          private table_name
         end
       end
 
