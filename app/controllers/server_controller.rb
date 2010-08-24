@@ -204,7 +204,7 @@ class ServerController < ApplicationController
     when OpenID::Server::MalformedTrustRoot: "Malformed trust root '#{exception.to_s}'"
     else exception.to_s
     end
-    render :text => "Invalid OpenID request: #{error}", :status => 500
+    render :text => h("Invalid OpenID request: #{error}"), :status => 500
   end
   
   private
