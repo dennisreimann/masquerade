@@ -3,7 +3,7 @@ class OpenIdRequest < ActiveRecord::Base
   validates_presence_of :token
   validates_presence_of :parameters
   
-  before_validation_on_create :make_token
+  before_validation :make_token, :on => :create
   
   serialize :parameters, Hash
   

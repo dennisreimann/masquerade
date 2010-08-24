@@ -1,6 +1,6 @@
 <h2><%=t :forgot_password_title %></h2>
 
-<% form_tag password_path do %>
+<%= form_tag password_path do %>
 	<div class="row">
 		<%= content_tag :label, t(:please_enter_email), :for => 'email' %>
   	<%= text_field_tag :email, params[:email] %>

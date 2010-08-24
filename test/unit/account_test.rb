@@ -40,10 +40,10 @@ class AccountTest < ActiveSupport::TestCase
   def test_should_require_valid_email
     @account.email = "test"
     assert_equal false, @account.valid?
-    assert @account.errors.on(:email)
+    assert @account.errors[:email]
     @account.email = "test@hotmail"
     assert_equal false, @account.valid?
-    assert @account.errors.on(:email)
+    assert @account.errors[:email]
     @account.email = "test@bla.com"
     assert_valid @account
   end

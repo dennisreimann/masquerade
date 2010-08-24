@@ -47,9 +47,9 @@ es:
   # consumer controller
   immediate_request_failed_setup_needed: Petición inmediata fallida - hace falta una configuración
   openid_transaction_cancelled: Transacción OpenID cancelada.
-  verification_of_identifier_failed: "Verificación de {{identifier}} fallida: {{message}}"
-  verification_failed_message: "Verificación fallida: {{message}}"
-  verification_of_identifier_succeeded: "Verificación de {{identifier}} exitosa."
+  verification_of_identifier_failed: "Verificación de %{identifier} fallida: %{message}"
+  verification_failed_message: "Verificación fallida: %{message}"
+  verification_of_identifier_succeeded: "Verificación de %{identifier} exitosa."
   simple_registration_data_requested: Han sido pedidos datos de registro simple
   but_none_was_returned: pero ninguno fué entregado.
   the_following_data_were_sent: "Se enviaron los siguientes datos:"
@@ -83,13 +83,13 @@ es:
     y contraseñas para cada sitio</p>
     <p>OpenID es descentralizado, gratis y un estandar abierto, que te permite controlar la 
     cantidad de información personal que deseas entregar a cada sitio</p>
-    <p>Empieza a usarlo y {{signup_link}}.</p>"
+    <p>Empieza a usarlo y %{signup_link}.</p>"
   signup_for_an_openid: registrate por tu OpenID
   login_to_proceed: Por favor ingresa para continuar
   host_requests_identification_you_need_to_login: 
-    "{{host}} ha pedido tu identificación y debes ingresar para continuar."
+    "%{host} ha pedido tu identificación y debes ingresar para continuar."
   login_intro: 
-    "Para ingresar, por favor navega a <strong>{{login_url}}</strong>. La página 
+    "Para ingresar, por favor navega a <strong>%{login_url}</strong>. La página 
     que estas viendo actualmente es usada para <strong>protegerte del phishing y el robo de identidad online</strong>
     y no debería contener enlaces.<br />Si tiene algún enlace, por favor informanos quien te envió aquí."
 
@@ -128,7 +128,7 @@ es:
   persona_cannot_be_deleted: Esta persona no se puede eliminar.
 
   # personas views
-  edit_your_persona: "Editar tu persona “{{title}}”"
+  edit_your_persona: "Editar tu persona “%{title}”"
   personal_information: Información personal
   professional_information: Información profecional
   phone: Teléfonos
@@ -181,7 +181,7 @@ es:
     tu puees elegir la persona que deseas utilizar en ese intercambio de datos."
   edit: editar
   delete: eliminar
-  really_want_to_delete_persona: "Realmente quieres eliminar a la persona ”{{title}}”?"
+  really_want_to_delete_persona: "Realmente quieres eliminar a la persona ”%{title}”?"
   create_a_new_persona: crear una nueva persona
   create_a_new_persona_title: Crear una nueva persona
   
@@ -205,16 +205,16 @@ es:
   login_to_verify_identity: Por favor ingresa para verificar tu identidad.
 
   # server views
-  identity_request_from_host: "Petición de identidad de {{host}}"
-  identity_request_missing_persona: Por favor {{create_link}}.
-  trust_root_requests_some_personal_data: "{{trust_root}} pidió algunos datos personales."
+  identity_request_from_host: "Petición de identidad de %{host}"
+  identity_request_missing_persona: Por favor %{create_link}.
+  trust_root_requests_some_personal_data: "%{trust_root} pidió algunos datos personales."
   select_information_to_submit: Por favor selecciona la información que deseas enviar.
-  attributes_are_shown_from_persona: "Los atributos mostrados son de la persona {{persona}}."
-  to_submit_other_values_you_can_edit_or_choose: "Para enviar otros valores puedes {{edit_link}} o {{choose_link}}."
+  attributes_are_shown_from_persona: "Los atributos mostrados son de la persona %{persona}."
+  to_submit_other_values_you_can_edit_or_choose: "Para enviar otros valores puedes %{edit_link} o %{choose_link}."
   create_persona_link: crear una persona
   edit_persona_link: editar la persona
   choose_other_persona: elegir otra persona
-  trust_root_requires_authentication: "{{trust_root} requiere tu autenticación."
+  trust_root_requires_authentication: "%{trust_root} requiere tu autenticación."
   choose_persona_title: Elige una persona
   choose_persona_submit: elegir persona
   create_new_persona_link: crear una nueva persona
@@ -235,7 +235,7 @@ es:
   edit_link: editar
   delete_link: eliminar
   or: o
-  your_release_policy_for_site: Tu política de liberación para {{site}}
+  your_release_policy_for_site: Tu política de liberación para %{site}
   persona_label: Persona
   choose_persona_submit: elige una persona
   property: propiedad
@@ -243,7 +243,7 @@ es:
   update_release_policy_submit: actualizar política de liberación
   identity_request_answered_without_interaction: Peticiones de identificación de los siguientes sitios son contestadas directamente sin otra interacción.
   alter_release_policies_here: Puedes modificar las política de liberaciónpara estos sitios.
-  really_want_to_delete_trust_for_site: "¿Estas seguro que deseas eliminar la confianza de {{site}}?"
+  really_want_to_delete_trust_for_site: "¿Estas seguro que deseas eliminar la confianza de %{site}?"
   no_entries_yet: No hay ninguna entrada todavía.
   ext0: Ext0
   ext1: Ext1

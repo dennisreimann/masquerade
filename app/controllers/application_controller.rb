@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   
-  include ExceptionNotifiable
   include OpenidServerSystem
   include AuthenticatedSystem
   

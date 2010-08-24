@@ -120,7 +120,7 @@ class ActiveSupport::TestCase
 
   def assert_invalid(object, attribute, message = nil)
     assert_equal false, object.valid?
-    assert object.errors.on(attribute), message
+    assert object.errors[attribute], message
   end
   
   def assert_login_required

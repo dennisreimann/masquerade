@@ -51,13 +51,13 @@ de:
   # consumer controller
   immediate_request_failed_setup_needed: Immediate Request fehlgeschlagen - Einstellungen nötig
   openid_transaction_cancelled: OpenID-Transaktion abgebrochen.
-  verification_of_identifier_failed: "Überprüfung von {{identifier}} fehlgeschlagen: {{message}}"
-  verification_failed_message: "Überprüfung fehlgeschlagen: {{message}}"
-  verification_of_identifier_succeeded: Überprüfung von {{identifier}} erfolgreich.
+  verification_of_identifier_failed: "Überprüfung von %{identifier} fehlgeschlagen: %{message}"
+  verification_failed_message: "Überprüfung fehlgeschlagen: %{message}"
+  verification_of_identifier_succeeded: Überprüfung von %{identifier} erfolgreich.
   simple_registration_data_requested: Simple Registration Data wurde angefordert
   but_none_was_returned: aber nichts wurde zurück geliefert.
   but_got_no_response: aber es gab keine Antwort.
-  but_an_error_occured: "aber es trat ein Fehler auf:\n{{error_message}}"
+  but_an_error_occured: "aber es trat ein Fehler auf:\n%{error_message}"
   and_saved_at_the_identity_provider: und auf dem Server gespeichert.
   the_following_data_were_sent: "Die folgenden Daten wurden gesendet:"
   attribute_exchange_data_requested: Attribute Exchange-Daten wurden angefordert
@@ -90,11 +90,11 @@ de:
     einen eigenen Benutzernamen und Passwort.</p>
     <p>OpenID ist dezentral, kostenlos und ein offener Standard. Es erlaubt Ihnen zu entscheiden, wie viele und welche
     persönlichen Angaben Sie anderen Webseiten übermitteln.</p>
-    <p>Legen Sie los und {{signup_link}}.</p>"
+    <p>Legen Sie los und %{signup_link}.</p>"
   signup_for_an_openid: melden Sie sich für eine OpenID an
   login_to_proceed: Bitte loggen Sie sich ein, um fort zu fahren
-  host_requests_identification_you_need_to_login: "{{host}} möchte Ihre Identität ermitteln. Dafür müssen Sie sich einloggen."
-  login_intro: "Um sich einzuloggen, gehen Sie bitte zu <strong>{{login_url}}</strong>. Die Seite, die Sie gerade sehen,
+  host_requests_identification_you_need_to_login: "%{host} möchte Ihre Identität ermitteln. Dafür müssen Sie sich einloggen."
+  login_intro: "Um sich einzuloggen, gehen Sie bitte zu <strong>%{login_url}</strong>. Die Seite, die Sie gerade sehen,
     ist <strong>als Schutz vor Phishing-Attacken und Identitätsklau</strong> gedacht
     und sollte keine Links enthalten.<br />Falls hier Links auftauchen, geben Sie uns bitte Bescheid, wer Sie auf diese Seite 
     geleitet hat."
@@ -133,7 +133,7 @@ de:
   persona_cannot_be_deleted: Diese Rolle kann nicht gelöscht werden.
 
   # personas views
-  edit_your_persona: Bearbeiten Sie Ihre Rolle “{{title}}”
+  edit_your_persona: Bearbeiten Sie Ihre Rolle “%{title}”
   personal_information: Persönliche Angaben
   professional_information: Berufliche Angaben
   phone: Telefon
@@ -185,7 +185,7 @@ de:
     auswählen, aus welcher Rolle Ihre Daten übernommen werden."
   edit: bearbeiten
   delete: löschen
-  really_want_to_delete_persona: Wollen Sie die Rolle ”{{title}}” wirklich löschen?
+  really_want_to_delete_persona: Wollen Sie die Rolle ”%{title}” wirklich löschen?
   create_a_new_persona: neue Rolle anlegen
   create_a_new_persona_title: Neue Rolle anlegen
 
@@ -209,19 +209,19 @@ de:
   login_to_verify_identity: Bitte loggen Sie sich ein, um Ihre Identität zu bestätigen.
 
   # server views
-  identity_request_from_host: Identitätsanfrage von {{host}}
-  identity_request_missing_persona: Bitte {{create_link}}, um die Identitätsanfrage zu beantworten.
-  trust_root_requests_some_personal_data: "{{trust_root}} verlangt persönliche Angaben."
-  trust_root_sends_some_personal_data: "{{trust_root}} sendet persönliche Angaben:"
+  identity_request_from_host: Identitätsanfrage von %{host}
+  identity_request_missing_persona: Bitte %{create_link}, um die Identitätsanfrage zu beantworten.
+  trust_root_requests_some_personal_data: "%{trust_root} verlangt persönliche Angaben."
+  trust_root_sends_some_personal_data: "%{trust_root} sendet persönliche Angaben:"
   select_information_to_submit: Bitte wählen Sie die Angaben aus, die Sie übermitteln möchten.
   select_information_to_accept: Bitte wählen Sie die Angaben aus, die Sie akzeptieren möchten.
-  attributes_are_shown_from_persona: Die folgenden Angaben stammen aus Ihrer Rolle {{persona}}.
-  attributes_will_be_added_to_persona: Die Werte werden in Ihre Rolle {{persona}} übernommen ({{choose_link}}).
-  to_submit_other_values_you_can_edit_or_choose: Um andere Werte zu übermitteln können Sie {{edit_link}} oder {{choose_link}}.
+  attributes_are_shown_from_persona: Die folgenden Angaben stammen aus Ihrer Rolle %{persona}.
+  attributes_will_be_added_to_persona: Die Werte werden in Ihre Rolle %{persona} übernommen (%{choose_link}).
+  to_submit_other_values_you_can_edit_or_choose: Um andere Werte zu übermitteln können Sie %{edit_link} oder %{choose_link}.
   create_persona_link: erstellen Sie eine Rolle
   edit_persona_link: die Rolle bearbeiten
   choose_other_persona: eine andere Rolle auswählen
-  trust_root_requires_authentication: "{{trust_root} verlangt Ihre Authorisierung."
+  trust_root_requires_authentication: "%{trust_root} verlangt Ihre Authorisierung."
   choose_persona_title: Wählen Sie eine Rolle
   choose_persona_submit: Rolle auswählen
   create_new_persona_link: neue Rolle anlegen
@@ -245,7 +245,7 @@ de:
   edit_link: bearbeiten
   delete_link: löschen
   or: oder
-  your_release_policy_for_site: Ihre Vertrauensrichtlinien für {{site}}
+  your_release_policy_for_site: Ihre Vertrauensrichtlinien für %{site}
   persona_label: Rolle
   choose_persona_submit: Rolle auswählen
   property: Eigenschaft
@@ -253,7 +253,7 @@ de:
   update_release_policy_submit: Richtlinie aktualisieren
   identity_request_answered_without_interaction: Identitätsanfragen der folgenden Websites werden ohne Nachfrage akzeptiert.
   alter_release_policies_here: Sie können Ihre Richtlinien für diese Websites hier ändern.
-  really_want_to_delete_trust_for_site: Wollen Sie die Vertrauensstellung für {{site}} wirklich löschen?
+  really_want_to_delete_trust_for_site: Wollen Sie die Vertrauensstellung für %{site} wirklich löschen?
   no_entries_yet: Es gibt noch keine Einträge.
   ext0: Ext0
   ext1: Ext1
