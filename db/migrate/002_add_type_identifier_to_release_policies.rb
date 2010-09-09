@@ -5,7 +5,7 @@ class AddTypeIdentifierToReleasePolicies < ActiveRecord::Migration
       release_policy.update_attribute(:type_identifier, release_policy.property)
     end
     remove_index :release_policies, :column => [:site_id, :property]
-    add_index :release_policies, [:site_id, :property, :type_identifier], :unique => true, :name => :unique_property
+    add_index :release_policies, [:site_id, :property, :type_identifier], :unique => true, :name => 'unique_property'
   end
 
   def self.down
