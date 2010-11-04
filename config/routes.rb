@@ -1,4 +1,4 @@
-Masquerade::Application.routes.draw do |map|
+Masquerade::Application.routes.draw do
 
   resource :account do
     get :activate
@@ -16,32 +16,32 @@ Masquerade::Application.routes.draw do |map|
 
   resource :session
   resource :password
+  
+  get "/help" => "info#help", :as => :help
+  get "/safe-login" => "info#safe_login", :as => :safe_login
+  
+  get "/forgot_password" => "passwords#new", :as => :forgot_password
+  get "/reset_password/:id" => "passwords#edit", :as => :reset_password
 
-  match "/forgot_password" => "passwords#new", :as => :forgot_password
-  match "/reset_password/:id" => "passwords#edit", :as => :reset_password
-
-  match "/login" => "sessions#new", :as => :login
-  match "/logout/:id" => "sessions#destroy", :as => :logout
+  get "/login" => "sessions#new", :as => :login
+  get "/logout" => "sessions#destroy", :as => :logout
 
   match "/server" => "server#index", :as => :server
   match "/server/decide" => "server#decide", :as => :decide
   match "/server/proceed" => "server#proceed", :as => :proceed
   match "/server/complete" => "server#complete", :as => :complete
   match "/server/cancel" => "server#cancel", :as => :cancel
-  match "/server/seatbelt/config.:format" => "server#seatbelt_config", :as => :seatbelt_config
-  match "/server/seatbelt/state.:format" => "server#seatbelt_login_state", :as => :seatbelt_state
+  get "/server/seatbelt/config.:format" => "server#seatbelt_config", :as => :seatbelt_config
+  get "/server/seatbelt/state.:format" => "server#seatbelt_login_state", :as => :seatbelt_state
 
-  match "/consumer" => "consumer#index", :as => :consumer
-  match "/consumer/start" => "consumer#start", :as => :consumer_start
+  get "/consumer" => "consumer#index", :as => :consumer
+  post "/consumer/start" => "consumer#start", :as => :consumer_start
   match "/consumer/complete" => "consumer#complete", :as => :consumer_complete
 
-  match "/:account.:format" => "accounts#show", :as => :identity
-  match "/:account" => "accounts#show", :as => :formatted_identity
+  get "/:account.:format" => "accounts#show", :as => :formatted_identity
+  get "/:account" => "accounts#show", :as => :identity
 
-  match "/help" => "info#help", :as => :help
-  match "/safe-login" => "info#safe_login", :as => :safe_login
-
-  root :to => "info#index", :as => :home
+  root :to => "info#index"
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

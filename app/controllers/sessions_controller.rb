@@ -12,8 +12,7 @@ class SessionsController < ApplicationController
       flash[:notice] = t(:you_are_logged_in)
       redirect_after_login
     else
-      flash[:error]  = t(:login_incorrect_or_account_not_yet_activated)
-      redirect_to :action => 'new'
+      redirect_to login_path, :alert => t(:login_incorrect_or_account_not_yet_activated)
     end
   end
 
@@ -21,8 +20,7 @@ class SessionsController < ApplicationController
     current_account.forget_me 
     cookies.delete :auth_token
     reset_session
-    flash[:notice] = t(:you_are_now_logged_out)
-    redirect_to home_path
+    redirect_to root_path, :notice => t(:you_are_now_logged_out)
   end
   
   private

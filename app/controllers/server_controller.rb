@@ -156,8 +156,7 @@ class ServerController < ApplicationController
   def ensure_valid_checkid_request
     self.openid_request = checkid_request
     if !openid_request.is_a?(OpenID::Server::CheckIDRequest)
-      flash[:error] = t(:identity_verification_request_invalid)
-      redirect_to home_path
+      redirect_to root_path, :alert => t(:identity_verification_request_invalid)
     elsif !allow_verification?
       flash[:notice] = logged_in? && !pape_requirements_met?(auth_time) ?
         t(:service_provider_requires_reauthentication_last_login_too_long_ago) :

@@ -6,8 +6,7 @@ class ConsumerController < ApplicationController
     begin
       oidreq = openid_consumer.begin(params[:openid_identifier])
     rescue OpenID::OpenIDError => e
-      flash[:error] = "Discovery failed for #{params[:openid_identifier]}: #{e}"
-      redirect_to consumer_path
+      redirect_to consumer_path, :alert => "Discovery failed for #{params[:openid_identifier]}: #{e}"
       return
     end
     if params[:use_sreg]
@@ -65,11 +64,11 @@ class ConsumerController < ApplicationController
     oidresp = openid_consumer.complete(parameters, url_for({}))
     case oidresp.status
     when OpenID::Consumer::SETUP_NEEDED
-      flash[:error] = t(:immediate_request_failed_setup_needed)
+      flash[:alert] = t(:immediate_request_failed_setup_needed)
     when OpenID::Consumer::CANCEL
-      flash[:error] = t(:openid_transaction_cancelled)
+      flash[:alert] = t(:openid_transaction_cancelled)
     when OpenID::Consumer::FAILURE
-      flash[:error] = oidresp.display_identifier ?
+      flash[:alert] = oidresp.display_identifier ?
         t(:verification_of_identifier_failed, :identifier => oidresp.display_identifier, :message => oidresp.message) :
         t(:verification_failed_message, :message => oidresp.message)
     when OpenID::Consumer::SUCCESS

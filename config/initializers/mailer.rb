@@ -8,5 +8,5 @@ Rails.application.config.action_mailer.smtp_settings = {
   :password => Masquerade::Application::Config['mailer']['password'],
   :authentication => Masquerade::Application::Config['mailer']['authentication'] }
 
-ActionMailer::Base.default_url_options[:protocol] = (Masquerade::Application::Config['use_ssl'] ? 'https' : 'http'),
+ActionMailer::Base.default_url_options[:protocol] = Masquerade::Application::Config['use_ssl'] ? 'https' : 'http'
 ActionMailer::Base.default_url_options[:host] = Masquerade::Application::Config['host']

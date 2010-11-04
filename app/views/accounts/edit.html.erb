@@ -25,7 +25,7 @@
 	  <%= password_field_tag :old_password %>
 	</div>
 	<div class="row">
-  	<%= label_tag :password, t(:new_password_minimum_6_characters) %>
+  	<%= label_tag :password, t(:new_password_minimum_6_characters).html_safe %>
 		<%= password_field_tag :password %>
 	</div>
 	<div class="row">
@@ -68,7 +68,7 @@
 <% else %>
 <%= form_tag account_yubikey_association_path do %>
 	<div class="row">
-		<%= label_tag :yubico_otp, t(:your_yubikey_a_one_time_password) %>
+		<%= label_tag :yubico_otp, t(:your_yubikey_a_one_time_password).html_safe %>
   	<%= password_field_tag :yubico_otp %>
 	</div>
 	<div>

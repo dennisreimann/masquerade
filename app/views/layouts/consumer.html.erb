@@ -15,7 +15,7 @@
 			<div class="wrap">
   			<h2><%=t :openid_consumer_testsuite_title %></h2>
 	    	<% if flash[:notice] %><div class="notice"><%=simple_format h flash[:notice] %></div><% end %>
-	    	<% if flash[:error] %><div class="error"><%=simple_format h flash[:error] %></div><% end %>
+	    	<% if flash[:alert] %><div class="error"><%=simple_format h flash[:alert] %></div><% end %>
 				<%= yield %>
 			</div>
 		</div>

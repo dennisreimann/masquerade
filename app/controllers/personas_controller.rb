@@ -52,7 +52,7 @@ class PersonasController < ApplicationController
 			begin
 				@persona.destroy
 			rescue Persona::NotDeletable
-				flash[:error] = t(:persona_cannot_be_deleted)
+				flash[:alert] = t(:persona_cannot_be_deleted)
 			end
 			format.html { redirect_to account_personas_path }
 		end

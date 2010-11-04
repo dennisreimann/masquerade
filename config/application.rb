@@ -6,18 +6,6 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
-# require 'digest/sha1'
-# require 'openid'
-# require 'openid/consumer/discovery'
-require 'openid/extensions/sreg'
-require 'openid/extensions/pape'
-require 'openid/extensions/ax'
-require 'lib/openid_server_system'
-require 'lib/authenticated_system'
-# require 'lib/yubico'
-# require 'lib/hash'
-# require 'yaml'
-
 module Masquerade
   class Application < Rails::Application
     

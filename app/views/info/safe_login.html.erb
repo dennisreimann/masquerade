@@ -17,7 +17,7 @@
 				<% if checkid_request %>
     		<p><%=t :host_requests_identification_you_need_to_login, :host => extract_host(checkid_request.trust_root) %></p>
 				<% end %>
-				<p><%=t :login_intro, :login_url => login_url(:protocol => scheme) %></p>
+				<%=simple_format t(:login_intro, :login_url => login_url(:protocol => scheme)) %>
 			</div>
 		</div>
 	</body>
