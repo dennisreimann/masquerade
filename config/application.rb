@@ -42,16 +42,6 @@ module Masquerade
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters << [:password, :token]
 
-    # Mailer
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      :address => Masquerade::Application::Config['mailer']['address'],
-      :domain => Masquerade::Application::Config['mailer']['domain'],
-      :port => Masquerade::Application::Config['mailer']['port'],
-      :user_name => Masquerade::Application::Config['mailer']['user_name'],
-      :password => Masquerade::Application::Config['mailer']['password'],
-      :authentication => Masquerade::Application::Config['mailer']['authentication'] }
-
   end
 end
 
