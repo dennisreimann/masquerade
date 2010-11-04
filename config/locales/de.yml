@@ -9,14 +9,14 @@ de:
   couldnt_find_account_with_code_create_new_one: Wir konnten keinen Account mit dem angegebenen Aktivierungscode finden. Bitte erstellen Sie einen neuen Account.
   account_already_activated_please_login: Ihr Account wurde bereits aktiviert - bitte loggen Sie sich ein.
   password_has_been_changed: Ihr Passwort wurde geändert.
-  sorry_password_couldnt_be_changed: Entschuldigung, Ihr Passwort konnte nicht geändert werden.
+  sorry_password_couldnt_be_changed: "Entschuldigung, Ihr Passwort konnte nicht geändert werden."
   confirmation_of_new_password_invalid: Die Bestätigung des neuen Passworts war inkorrekt.
   old_password_incorrect: Ihr altes Passwort ist falsch.
   # account views
   public_persona: Öffentliche Rolle
   forgot_password_create_new_one: Sie haben Ihr Passwort vergessen? Hier können Sie ein neues setzen
   account_created_but_not_activated_yet: Ihr OpenID-Account wurde angelegt. Er ist jedoch noch nicht aktiviert.
-  please_activate_it_by_clicking_the_following_link: Bitte aktivieren Sie den Account, indem Sie auf den Link klicken
+  please_activate_it_by_clicking_the_following_link: "Bitte aktivieren Sie den Account, indem Sie auf den Link klicken"
   my_profile: Mein Profil
   login: Login
   password: Passwort

@@ -2,7 +2,7 @@
 
 <%= error_messages_for 'site' %>
 
-<% form_for @site, :url => account_site_path(@site), :method => :put do |f| %>
+<%= form_for @site, :url => account_site_path(@site), :method => :put do |f| %>
 	
 	<div class="row space">
 		<%= f.label :persona_id, t(:persona_label) %>

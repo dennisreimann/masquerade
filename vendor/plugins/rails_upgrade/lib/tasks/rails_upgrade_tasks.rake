@@ -49,8 +49,11 @@ namespace :rails do
       "app/helpers/application_helper.rb",
       "config/routes.rb",
       "config/environment.rb",
-      "config/environments/*",
+      "config/environments/development.rb",
+      "config/environments/production.rb",
+      "config/environments/staging.rb",
       "config/database.yml",
+      "config.ru",
       "doc/README_FOR_APP",
       "test/test_helper.rb"]
       

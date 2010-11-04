@@ -49,7 +49,7 @@ class Persona < ActiveRecord::Base
   
   # Mappings for SReg names and AX Type URIs to attributes
   def self.mappings
-    APP_CONFIG['attribute_mappings']
+    Masquerade::Application::Config['attribute_mappings']
   end
   
 end

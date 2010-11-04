@@ -22,10 +22,9 @@ class GemfileGeneratorTest < ActiveSupport::TestCase
   PREAMBLE = <<STR
 # Edit this Gemfile to bundle your application's dependencies.
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
-path "/path/to/rails", :glob => "{*/,}*.gemspec"
-git "git://github.com/rails/rack.git"
+source 'http://rubygems.org'
 
-gem "rails", "3.0.pre"
+gem 'rails', '3.0.0.beta3'
 
 STR
 
@@ -61,13 +60,13 @@ STR
     generator = Rails::Upgrading::GemfileGenerator.new
     generator.environment_code = "config.gem 'camping', :lib => 'kamping'"
     
-    assert_equal PREAMBLE + "gem 'camping', :require_as => 'kamping'", generator.generate_gemfile    
+    assert_equal PREAMBLE + "gem 'camping', :require => 'kamping'", generator.generate_gemfile    
   end
   
   def test_generates_with_all_options
     generator = Rails::Upgrading::GemfileGenerator.new
     generator.environment_code = "config.gem 'camping', :lib => 'kamping', :source => 'http://code.whytheluckystiff.net', :version => '2.1.1'"
     
-    assert_equal PREAMBLE + "source 'http://code.whytheluckystiff.net'\ngem 'camping', '2.1.1', :require_as => 'kamping'", generator.generate_gemfile     
+    assert_equal PREAMBLE + "source 'http://code.whytheluckystiff.net'\ngem 'camping', '2.1.1', :require => 'kamping'", generator.generate_gemfile     
   end
 end

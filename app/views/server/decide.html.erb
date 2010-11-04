@@ -25,7 +25,7 @@
 <p><%=t :trust_root_requires_authenticaton, :trust_root => "<strong>#{h checkid_request.trust_root}</strong>" %></p>
 <% end %>
 
-<% form_tag decide_path, :method => :get, :id => 'persona_select', :style => 'display:none;' do %>
+<%= form_tag decide_path, :method => :get, :id => 'persona_select', :style => 'display:none;' do %>
 
 	<h3><%=t :choose_persona_title %></h3>
 	<% unless current_account.personas.empty? %>
@@ -42,7 +42,7 @@
 	
 <% end if sreg_request || ax_fetch_request || ax_store_request %>
 
-<% form_for @site, :url => complete_path do |f| %>
+<%= form_for @site, :url => complete_path do |f| %>
 
 	<% if sreg_request || ax_fetch_request %>
 	<table cellspacing="0">

@@ -47,7 +47,7 @@ module Rails
         data = {}
         
         # Add new keys from old keys
-        data[:require_as] = options[:lib] if options[:lib]
+        data[:require] = options[:lib] if options[:lib]
         data[:source] = options[:source] if options[:source]
         
         version = options[:version]
@@ -60,10 +60,9 @@ module Rails
         preamble = <<STR
 # Edit this Gemfile to bundle your application's dependencies.
 # This preamble is the current preamble for Rails 3 apps; edit as needed.
-path "/path/to/rails", :glob => "{*/,}*.gemspec"
-git "git://github.com/rails/rack.git"
+source 'http://rubygems.org'
 
-gem "rails", "3.0.pre"
+gem 'rails', '3.0.0.beta3'
 
 STR
         preamble + generate_upgraded_code

@@ -185,7 +185,17 @@ module Rails
       end
       
       def opts_to_string(opts)
-        opts.is_a?(Hash) ? opts.to_a.map {|o, v| ":#{o} => '#{v}'"}.join(", ") : nil
+        opts.is_a?(Hash) ? opts.map {|k, v|
+          ":#{k} => " + (v.is_a?(Hash) ? ('{ ' + opts_to_string(v) + ' }') : "#{value_to_string(v)}")
+        }.join(", ") : opts.to_s
+      end
+      
+      def value_to_string(value)
+        case value
+        when Regexp then value.inspect
+        when String then "'" + value.to_s + "'"
+        else value.to_s
+        end
       end
     end
     

@@ -94,6 +94,11 @@ end
     assert_equal "match '/about' => 'static#about', :something => 'extra'", route.to_route_code
   end
   
+  def test_generates_code_for_route_with_requirements
+    route = Rails::Upgrading::FakeRoute.new("/foo", {:controller => 'foo', :action => 'bar', :requirements => {:digit => /%d/}})
+    assert_equal "match '/foo' => 'foo#bar', :constraints => { :digit => /%d/ }", route.to_route_code
+  end
+  
   def test_generates_code_for_root
     routes_code = "
       ActionController::Routing::Routes.draw do |map|

@@ -1,4 +1,4 @@
-<% form_tag consumer_start_path do %>
+<%= form_tag consumer_start_path do %>
 	<div class="row">
 		<%= label_tag :openid_identifier, t(:identifier) + ':', :class => 'check' %>
 		<%= text_field_tag :openid_identifier, Masquerade::Application::Config['host'] %>

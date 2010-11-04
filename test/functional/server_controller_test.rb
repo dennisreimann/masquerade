@@ -14,7 +14,7 @@ class ServerControllerTest < ActionController::TestCase
 
   def test_should_redirect_to_login_page_if_trusted_domain
     login_as(:standard)
-    domain = APP_CONFIG['trusted_domains'].first
+    domain = Masquerade::Application::Config['trusted_domains'].first
     post :index, checkid_request_params.merge('openid.trust_root' => "http://#{domain}/", 'openid.realm' => "http://#{domain}/", 'openid.return_to' => "http://#{domain}/return")
     assert_redirected_to login_url
     assert_not_nil @request.session[:return_to]
