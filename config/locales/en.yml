@@ -54,13 +54,13 @@ en:
   # consumer controller
   immediate_request_failed_setup_needed: Immediate request failed - setup needed
   openid_transaction_cancelled: OpenID transaction cancelled.
-  verification_of_identifier_failed: "Verification of {{identifier}} failed: {{message}}"
-  verification_failed_message: "Verification failed: {{message}}"
-  verification_of_identifier_succeeded: Verification of {{identifier}} succeeded.
+  verification_of_identifier_failed: "Verification of %{identifier} failed: %{message}"
+  verification_failed_message: "Verification failed: %{message}"
+  verification_of_identifier_succeeded: Verification of %{identifier} succeeded.
   simple_registration_data_requested: Simple Registration data was requested
   but_none_was_returned: but none was returned.
   but_got_no_response: but got no response.
-  but_an_error_occured: "but an error occured:\n{{error_message}}"
+  but_an_error_occured: "but an error occured:\n%{error_message}"
   and_saved_at_the_identity_provider: and saved at the Identity Provider.
   the_following_data_were_sent: "The following data were sent:"
   attribute_exchange_data_requested: Attribute Exchange data was requested
@@ -94,11 +94,11 @@ en:
     and passwords for each site.</p>
     <p>OpenID is a decentralized, free and open standard that lets you control the amount of 
     personal information that you would like to provide to other web sites.</p>
-    <p>Get started and {{signup_link}}.</p>"
+    <p>Get started and %{signup_link}.</p>"
   signup_for_an_openid: signup for an OpenID
   login_to_proceed: Please log in to proceed
-  host_requests_identification_you_need_to_login: "{{host}} requests your identification and you need to log in to proceed."
-  login_intro: "To log in, please navigate to <strong>{{login_url}}</strong>. The page your 
+  host_requests_identification_you_need_to_login: "%{host} requests your identification and you need to log in to proceed."
+  login_intro: "To log in, please navigate to <strong>%{login_url}</strong>. The page your 
     are currently viewing is used to <strong>protect yourself from phishing and online identity theft</strong>
     and should contain no links.<br />If there are any links, please report to us, who sent you here."
 
@@ -136,7 +136,7 @@ en:
   persona_cannot_be_deleted: This persona cannot be deleted.
 
   # personas views
-  edit_your_persona: Edit your persona “{{title}}”
+  edit_your_persona: Edit your persona “%{title}”
   personal_information: Personal information
   professional_information: Professional information
   phone: Phone
@@ -188,7 +188,7 @@ en:
     you can choose the persona that you would like to exchange data from."
   edit: edit
   delete: delete
-  really_want_to_delete_persona: Do you really want to delete the persona ”{{title}}”?
+  really_want_to_delete_persona: Do you really want to delete the persona ”%{title}”?
   create_a_new_persona: create a new persona
   create_a_new_persona_title: Create a new persona
   
@@ -212,19 +212,19 @@ en:
   login_to_verify_identity: Please log in to verify your identity.
 
   # server views
-  identity_request_from_host: Identity request from {{host}}
-  identity_request_missing_persona: Please {{create_link}} to answer the identity request.
-  trust_root_requests_some_personal_data: "{{trust_root}} requests some personal data."
-  trust_root_sends_some_personal_data: "{{trust_root}} sends some personal data:"
+  identity_request_from_host: Identity request from %{host}
+  identity_request_missing_persona: Please %{create_link} to answer the identity request.
+  trust_root_requests_some_personal_data: "%{trust_root} requests some personal data."
+  trust_root_sends_some_personal_data: "%{trust_root} sends some personal data:"
   select_information_to_submit: Please select the information you would like to submit.
   select_information_to_accept: Please select the information you would like to accept.
-  attributes_are_shown_from_persona: The attributes shown are from your persona {{persona}}.
-  attributes_will_be_added_to_persona: The attributes will be added to your persona {{persona}} ({{choose_link}}).
-  to_submit_other_values_you_can_edit_or_choose: To submit other values you can {{edit_link}} or {{choose_link}}.
+  attributes_are_shown_from_persona: The attributes shown are from your persona %{persona}.
+  attributes_will_be_added_to_persona: The attributes will be added to your persona %{persona} (%{choose_link}).
+  to_submit_other_values_you_can_edit_or_choose: To submit other values you can %{edit_link} or %{choose_link}.
   create_persona_link: create a persona
   edit_persona_link: edit the persona
   choose_other_persona: choose another persona
-  trust_root_requires_authentication: "{{trust_root} requires your authentication."
+  trust_root_requires_authentication: "%{trust_root} requires your authentication."
   choose_persona_title: Choose a persona
   choose_persona_submit: choose persona
   create_new_persona_link: create a new persona
@@ -248,7 +248,7 @@ en:
   edit_link: edit
   delete_link: delete
   or: or
-  your_release_policy_for_site: Your release policy for {{site}}
+  your_release_policy_for_site: Your release policy for %{site}
   persona_label: Persona
   choose_persona_submit: choose persona
   property: property
@@ -256,7 +256,7 @@ en:
   update_release_policy_submit: update release policy
   identity_request_answered_without_interaction: Identity request from the following sites are answered directly without further interaction.
   alter_release_policies_here: You can alter the release policies for these sites here.
-  really_want_to_delete_trust_for_site: Do you really want to delete the trust for {{site}}?
+  really_want_to_delete_trust_for_site: Do you really want to delete the trust for %{site}?
   no_entries_yet: There are no entries, yet.
   ext0: Ext0
   ext1: Ext1

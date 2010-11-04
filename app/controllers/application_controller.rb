@@ -1,12 +1,9 @@
 class ApplicationController < ActionController::Base
   
-  include ExceptionNotifiable
   include OpenidServerSystem
   include AuthenticatedSystem
   
   protect_from_forgery
-  
-  filter_parameter_logging :password, :token
   
   rescue_from(
     ActiveRecord::RecordNotFound,
@@ -69,7 +66,7 @@ class ApplicationController < ActionController::Base
   end
   
   def render_error(status_code)
-    render :file => "#{RAILS_ROOT}/public/#{status_code}.html", :status => status_code
+    render :file => "#{Rails.root}/public/#{status_code}.html", :status => status_code
   end
   
   # Set site locale from
@@ -86,7 +83,7 @@ class ApplicationController < ActionController::Base
   private
   
   def scheme
-    APP_CONFIG['use_ssl'] ? 'https' : 'http'
+    Masquerade::Application::Config['use_ssl'] ? 'https' : 'http'
   end
 
 end

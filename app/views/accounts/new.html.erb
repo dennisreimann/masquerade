@@ -2,7 +2,7 @@
 
 <%= error_messages_for :account %>
 
-<% form_for :account, :url => account_path do |f| -%>
+<%= form_for :account, :url => account_path do |f| -%>
 	<div class="row">
 		<%= f.label :login, t(:login) %>
 		<%= f.text_field :login %>

@@ -30,10 +30,10 @@ class SessionsControllerTest < ActionController::TestCase
     assert_nil session[:account_id]
   end
 
-  def test_should_redirect_to_login_failed_login
+  def test_should_redirect_to_login_after_failed_login
     post :create, :login => accounts(:standard).login, :password => 'bad password'
-    assert @response.has_flash?
-    assert_redirected_to new_session_url
+    assert_redirected_to login_path
+    assert flash.any?
   end
 
   def test_should_reset_session_on_logout
@@ -97,8 +97,8 @@ class SessionsControllerTest < ActionController::TestCase
   def test_should_disallow_password_only_login_when_yubikey_is_mandatory
     account = accounts(:with_yubico_identity)
     post :create, :login => account.login, :password => 'test'
-    assert @response.has_flash?
-    assert_redirected_to new_session_url
+    assert_redirected_to login_url
+    assert flash.any?
   end
   
   protected

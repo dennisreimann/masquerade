@@ -1,7 +1,7 @@
 module ApplicationHelper
   
   def page_title
-    @page_title ? "#{@page_title} | #{APP_CONFIG['name']}" : APP_CONFIG['name']
+    @page_title ? "#{@page_title} | #{Masquerade::Application::Config['name']}" : Masquerade::Application::Config['name']
   end
   
   def label_tag(field, text = nil, options = {})

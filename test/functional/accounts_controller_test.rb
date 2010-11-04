@@ -35,7 +35,7 @@ class AccountsControllerTest < ActionController::TestCase
     login_as(:standard)
     delete :destroy, :confirmation_password => 'test'
     assert !accounts(:standard).reload.enabled
-    assert_redirected_to home_url
+    assert_redirected_to root_url
   end
   
   def test_should_not_disable_account_if_confirmation_password_does_not_match

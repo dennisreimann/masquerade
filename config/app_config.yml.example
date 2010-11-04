@@ -2,10 +2,10 @@
 default: &default
   name: masquerade
   host: localhost:3000
+  email: info@your.domain.com
   use_ssl: false
   locale: en
   time_zone: Berlin
-  email: info@your.domain.com
   session:
     key: openidserver_session_id
     secret: replacethiswithyourowntopsecretsessionsecretsothatnoonewillknowit

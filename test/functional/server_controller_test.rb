@@ -14,7 +14,7 @@ class ServerControllerTest < ActionController::TestCase
 
   def test_should_redirect_to_login_page_if_trusted_domain
     login_as(:standard)
-    domain = APP_CONFIG['trusted_domains'].first
+    domain = Masquerade::Application::Config['trusted_domains'].first
     post :index, checkid_request_params.merge('openid.trust_root' => "http://#{domain}/", 'openid.realm' => "http://#{domain}/", 'openid.return_to' => "http://#{domain}/return")
     assert_redirected_to login_url
     assert_not_nil @request.session[:return_to]
@@ -31,8 +31,8 @@ class ServerControllerTest < ActionController::TestCase
           :properties => valid_properties }
     end
     assert_response :redirect
-    assert @response.redirect_url_match?(checkid_request_params['openid.return_to'])
-    assert @response.redirect_url_match?(/mode=id_res/)
+    assert_match(checkid_request_params['openid.return_to'], @response.redirect_url)
+    assert_match(/mode=id_res/,  @response.redirect_url)
   end
   
   def test_should_not_save_site_if_user_chose_to_trust_temporary
@@ -42,16 +42,16 @@ class ServerControllerTest < ActionController::TestCase
         :site => valid_site_attributes.merge(:properties => valid_properties)
     end
     assert_response :redirect
-    assert @response.redirect_url_match?(checkid_request_params['openid.return_to'])
-    assert @response.redirect_url_match?(/mode=id_res/)
+    assert_match(checkid_request_params['openid.return_to'], @response.redirect_url)
+    assert_match(/mode=id_res/,  @response.redirect_url)
   end
   
   def test_should_redirect_to_openid_cancel_url_if_user_chose_to_cancel
     fake_checkid_request(:standard)
     post :complete, :cancel => 1
     assert_response :redirect
-    assert @response.redirect_url_match?(checkid_request_params['openid.return_to'])
-    assert @response.redirect_url_match?(/mode=cancel/)
+    assert_match(checkid_request_params['openid.return_to'], @response.redirect_url)
+    assert_match(/mode=cancel/,  @response.redirect_url)
   end
   
   def test_should_ask_user_to_login_if_claimed_id_does_not_belong_to_current_account

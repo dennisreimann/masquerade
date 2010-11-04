@@ -3,7 +3,7 @@ class OpenIdRequest < ActiveRecord::Base
   validates_presence_of :token
   validates_presence_of :parameters
   
-  before_validation_on_create :make_token
+  before_validation :make_token, :on => :create
   
   serialize :parameters, Hash
   
@@ -13,17 +13,13 @@ class OpenIdRequest < ActiveRecord::Base
   
   def from_trusted_domain?
     host = URI.parse(parameters['openid.realm'] || parameters['openid.trust_root']).host
-    trusted_domains.find { |domain| host.ends_with? domain }
+    Masquerade::Application::Config['trusted_domains'].find { |domain| host.ends_with? domain }
   end
 
   private
   
   def make_token
     self.token = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
-  end
-  
-  def trusted_domains
-    APP_CONFIG['trusted_domains'] || []
   end
   
 end

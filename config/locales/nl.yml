@@ -50,13 +50,13 @@ nl:
   # consumer controller
   immediate_request_failed_setup_needed: Onmiddelijke aanvraag mislukt - inregelen vereist
   openid_transaction_cancelled: OpenID transactie afgebroken.
-  verification_of_identifier_failed: "Verificatie van {{identifier}} mislukt: {{message}}"
-  verification_failed_message: "Verificatie mislukt: {{message}}"
-  verification_of_identifier_succeeded: Verificatie van {{identifier}} gelukt.
+  verification_of_identifier_failed: "Verificatie van %{identifier} mislukt: %{message}"
+  verification_failed_message: "Verificatie mislukt: %{message}"
+  verification_of_identifier_succeeded: Verificatie van %{identifier} gelukt.
   simple_registration_data_requested: Simpele Registratiedata werd aangevraagd
   but_none_was_returned: maar werd niet teruggegeven.
   but_got_no_response: maar geen reactie.
-  but_an_error_occured: "maar een fout deed zich voor:\n{{error_message}}"
+  but_an_error_occured: "maar een fout deed zich voor:\n%{error_message}"
   and_saved_at_the_identity_provider: en werd opgeslagen bij de Identity Provider.
   the_following_data_were_sent: "De volgende data werd verzonden:"
   attribute_exchange_data_requested: Uitwisseling van attributen werd aangevraagd
@@ -86,11 +86,11 @@ nl:
   openid_intro: "<p>OpenID is een gedeelde identiteitsdienst, waarmee je kunt inloggen op veel verschillende
   websites met één enkele identiteit. Het is niet langer nodig verschillende gebruikersnamen en wachtwoorden voor elke site te hebben.</p>
     <p>OpenID is een gedecentraliseerde, vrije en open standaard waarmee u zelf bepaalt hoeveel persoonlijke informatie wordt doorgegeven aan andere websites.</p>
-    <p>Begin hier and {{signup_link}}.</p>"
+    <p>Begin hier and %{signup_link}.</p>"
   signup_for_an_openid: maak een OpenID aan
   login_to_proceed: Logt u alstublieft in om verder te gaan
-  host_requests_identification_you_need_to_login: "{{host}} vraagt uw identificatie. U moet inloggen om verder te gaan."
-  login_intro: "Om in te loggen, ga alstublieft naar<strong>{{login_url}}</strong>. De pagina die u nu ziet, wordt gebruikt om <strong>uzelf tegen <em>phishing</em> en online identiteitsdiefstal te beschermen.</strong>
+  host_requests_identification_you_need_to_login: "%{host} vraagt uw identificatie. U moet inloggen om verder te gaan."
+  login_intro: "Om in te loggen, ga alstublieft naar<strong>%{login_url}</strong>. De pagina die u nu ziet, wordt gebruikt om <strong>uzelf tegen <em>phishing</em> en online identiteitsdiefstal te beschermen.</strong>
     en zou geen links moeten bebvatten.<br />Indien er wel links zijn, geeft u dan alstublieft aan ons door wie u hierheen zond."
 
   # nav
@@ -127,7 +127,7 @@ nl:
   persona_cannot_be_deleted: Deze persona kon niet verwijderd worden.
 
   # personas views
-  edit_your_persona: Bewerk uw persona “{{title}}”
+  edit_your_persona: Bewerk uw persona “%{title}”
   personal_information: Persoonlijke informatie
   professional_information: Zakelijke informatie
   phone: Telefoon
@@ -179,7 +179,7 @@ nl:
    Wanneer een vertrouwende partij uw gegevens opvraagt, kunt u het persona kiezen waarvan u de data wilt overleggen."
   edit: bewerken
   delete: verwijderen
-  really_want_to_delete_persona: Weet u zeker dat u persona ”{{title}}” wilt verwijderen?
+  really_want_to_delete_persona: Weet u zeker dat u persona ”%{title}” wilt verwijderen?
   create_a_new_persona: nieuwe persona aanmaken
   create_a_new_persona_title: Maak een nieuwe persona aan
   
@@ -203,19 +203,19 @@ nl:
   login_to_verify_identity: Log alstublieft in om uw identiteit te verefiëren.
 
   # server views
-  identity_request_from_host: Aanvraag voor identiteit van {{host}}
-  identity_request_missing_persona: Alstublieft {{create_link}} om deze aanvraag voor uw identiteit te beantwoorden.
-  trust_root_requests_some_personal_data: "{{trust_root}} vraagt persoonlijke data aan."
-  trust_root_sends_some_personal_data: "{{trust_root}} stuurt persoonlijke data:"
+  identity_request_from_host: Aanvraag voor identiteit van %{host}
+  identity_request_missing_persona: Alstublieft %{create_link} om deze aanvraag voor uw identiteit te beantwoorden.
+  trust_root_requests_some_personal_data: "%{trust_root} vraagt persoonlijke data aan."
+  trust_root_sends_some_personal_data: "%{trust_root} stuurt persoonlijke data:"
   select_information_to_submit: Selecteer alstublieft de informatie die u wilt verzenden.
   select_information_to_accept: Selecteer alstublieft de informatie die u wilt accepteren.
-  attributes_are_shown_from_persona: De getoonde attributen zijn van uw persona {{persona}}.
-  attributes_will_be_added_to_persona: De attributen zullen aan uw persona {{persona}} ({{choose_link}}) worden toegevoegd.
-  to_submit_other_values_you_can_edit_or_choose: Om andere waarden te verzenden kun u een {{edit_link}} of een {{choose_link}}.
+  attributes_are_shown_from_persona: De getoonde attributen zijn van uw persona %{persona}.
+  attributes_will_be_added_to_persona: De attributen zullen aan uw persona %{persona} (%{choose_link}) worden toegevoegd.
+  to_submit_other_values_you_can_edit_or_choose: Om andere waarden te verzenden kun u een %{edit_link} of een %{choose_link}.
   create_persona_link: persona aanmaken
   edit_persona_link: persona bewerken
   choose_other_persona: andere persona kiezen
-  trust_root_requires_authentication: "{{trust_root} vereist uw autenticatie."
+  trust_root_requires_authentication: "%{trust_root} vereist uw autenticatie."
   choose_persona_title: Persona kiezen
   choose_persona_submit: persona kiezen
   create_new_persona_link: nieuwe persona aanmaken
@@ -239,7 +239,7 @@ nl:
   edit_link: bewerk
   delete_link: verwijder
   or: of
-  your_release_policy_for_site: Uw uitgiftebeleid voor {{site}}
+  your_release_policy_for_site: Uw uitgiftebeleid voor %{site}
   persona_label: Persona
   choose_persona_submit: persona kiezen
   property: eigenschap
@@ -247,7 +247,7 @@ nl:
   update_release_policy_submit: uitgiftebeleid bijwerken
   identity_request_answered_without_interaction: Aanvraag voor identiteit van de volgende sites, worden direct, zonder verdere interactie beantwoord.
   alter_release_policies_here: U kunt het uitgiftebeleid voor deze sites hier bewerken.
-  really_want_to_delete_trust_for_site: Wilt u echt het vertrouwen voor site {{site}} verwijderen?
+  really_want_to_delete_trust_for_site: Wilt u echt het vertrouwen voor site %{site} verwijderen?
   no_entries_yet: Er zijn nog een items
   ext0: Ext0
   ext1: Ext1

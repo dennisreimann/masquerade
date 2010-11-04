@@ -1,6 +1,6 @@
 <h2><%=t :login_title %></h2>
 
-<% form_tag session_path do %>
+<%= form_tag session_path do %>
 	<div class="row">
 		<% if checkid_request && !checkid_request.id_select %>
 		<strong><%=t :your_openid %>:</strong>

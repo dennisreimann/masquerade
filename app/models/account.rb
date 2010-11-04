@@ -66,10 +66,10 @@ class Account < ActiveRecord::Base
   # Authenticates a user by their login name and password.
   # Returns the user or nil.
   def self.authenticate(login, password)
-    if a = find(:first, :conditions => ['login = ? and enabled = ? and activated_at IS NOT NULL', login, true]) # need to get the salt
+    if a = first(:conditions => ['login = ? and enabled = ? and activated_at IS NOT NULL', login, true]) # need to get the salt
       if a.authenticated?(password)
         a.last_authenticated_at, a.last_authenticated_with_yubikey = Time.now, a.authenticated_with_yubikey?
-        a.save(false)
+        a.save(:validate => false)
         a
       end
     end
@@ -110,7 +110,7 @@ class Account < ActiveRecord::Base
   def associate_with_yubikey(otp)
     if Account.verify_yubico_otp(otp)
       self.yubico_identity = Account.extract_yubico_identity_from_otp(otp)
-      save(false)
+      save(:validate => false)
     else
       false
     end
@@ -132,13 +132,13 @@ class Account < ActiveRecord::Base
   def remember_me_until(time)
     self.remember_token_expires_at = time
     self.remember_token = encrypt("#{email}--#{remember_token_expires_at}")
-    save(false)
+    save(:validate => false)
   end
 
   def forget_me
     self.remember_token_expires_at = nil
     self.remember_token = nil
-    save(false)
+    save(:validate => false)
   end
 
   def forgot_password!
@@ -212,7 +212,7 @@ class Account < ActiveRecord::Base
   
   # Utilizes the Yubico library to verify an one time password 
   def self.verify_yubico_otp(otp)
-    yubico = Yubico.new(APP_CONFIG['yubico']['id'], APP_CONFIG['yubico']['api_key'])
+    yubico = Yubico.new(Masquerade::Application::Config['yubico']['id'], Masquerade::Application::Config['yubico']['api_key'])
     yubico.verify(otp) == Yubico::E_OK
   end
   

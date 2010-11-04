@@ -1,0 +1,7 @@
+rvm --create ree@masquerade
+
+if [[ -s masquerade.gems ]] ; then
+  rvm gemset import masquerade.gems
+fi
+
+rvm wrapper ree@masquerade textmate

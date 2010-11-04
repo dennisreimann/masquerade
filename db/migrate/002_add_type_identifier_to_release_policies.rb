@@ -1,7 +1,7 @@
 class AddTypeIdentifierToReleasePolicies < ActiveRecord::Migration
   def self.up
     add_column :release_policies, :type_identifier, :string
-    ReleasePolicy.find(:all).each do |release_policy|
+    ReleasePolicy.all.each do |release_policy|
       release_policy.update_attribute(:type_identifier, release_policy.property)
     end
     remove_index :release_policies, :column => [:site_id, :property]
