@@ -1,33 +1,33 @@
-<h2><%=t :identity_request_from_host, :host => h(extract_host(@site.url)) %></h2>
+<h2><%= t(:identity_request_from_host, :host => h(extract_host(@site.url))).html_safe %></h2>
 
 <% if ax_store_request %>
-<p><%=t :trust_root_sends_some_personal_data, :trust_root => "<strong>#{h checkid_request.trust_root}</strong>" %><br />
+<p><%= t(:trust_root_sends_some_personal_data, :trust_root => "<strong>#{h checkid_request.trust_root}</strong>").html_safe %><br />
 <% if @site.persona %>
-<%=t :select_information_to_accept %></p>
-<p class="note"><%=t :attributes_will_be_added_to_persona, :persona => "<strong>#{h @site.persona.title}</strong>",
-  :choose_link => link_to_function(t(:choose_other_persona), 'Element.toggle("persona_select")') %></p>
+<%= t(:select_information_to_accept) %></p>
+<p class="note"><%= t(:attributes_will_be_added_to_persona, :persona => "<strong>#{h @site.persona.title}</strong>",
+  :choose_link => link_to_function(t(:choose_other_persona), 'Element.toggle("persona_select")')).html_safe %></p>
 <% else %>
-<p><%=t :identity_request_missing_persona, :create_link => link_to(t(:create_persona_link), new_account_persona_path(:return => decide_path)) %></p>
+<p><%= t(:identity_request_missing_persona, :create_link => link_to(t(:create_persona_link), new_account_persona_path(:return => decide_path))).html_safe %></p>
 <% end %>
 
 <% elsif sreg_request || ax_fetch_request %>
-<p><%=t :trust_root_requests_some_personal_data, :trust_root => "<strong>#{h checkid_request.trust_root}</strong>" %><br />
+<p><%= t(:trust_root_requests_some_personal_data, :trust_root => "<strong>#{h checkid_request.trust_root}</strong>").html_safe %><br />
 <% if @site.persona %>
-<%=t :select_information_to_submit %></p>
-<p class="note"><%=t :attributes_are_shown_from_persona, :persona => "<strong>#{h @site.persona.title}</strong>" %><br />
-<%=t :to_submit_other_values_you_can_edit_or_choose, 
+<%= t(:select_information_to_submit) %></p>
+<p class="note"><%= t(:attributes_are_shown_from_persona, :persona => "<strong>#{h @site.persona.title}</strong>").html_safe %><br />
+<%= t(:to_submit_other_values_you_can_edit_or_choose, 
   :edit_link => link_to(t(:edit_persona_link), edit_account_persona_path(@site.persona, :return => decide_path(:persona_id => @site.persona.id))),
-  :choose_link => link_to_function(t(:choose_other_persona), 'Element.toggle("persona_select")') %></p>
+  :choose_link => link_to_function(t(:choose_other_persona), 'Element.toggle("persona_select")')).html_safe %></p>
 <% else %>
-<p><%=t :identity_request_missing_persona, :create_link => link_to(t(:create_persona_link), new_account_persona_path(:return => decide_path)) %></p>
+<p><%= t(:identity_request_missing_persona, :create_link => link_to(t(:create_persona_link), new_account_persona_path(:return => decide_path))).html_safe %></p>
 <% end %>
 <% else %>
-<p><%=t :trust_root_requires_authenticaton, :trust_root => "<strong>#{h checkid_request.trust_root}</strong>" %></p>
+<p><%= t(:trust_root_requires_authentication, :trust_root => "<strong>#{h checkid_request.trust_root}</strong>").html_safe %></p>
 <% end %>
 
 <%= form_tag decide_path, :method => :get, :id => 'persona_select', :style => 'display:none;' do %>
 
-	<h3><%=t :choose_persona_title %></h3>
+	<h3><%= t(:choose_persona_title) %></h3>
 	<% unless current_account.personas.empty? %>
 	<div class="row">
 		<select id="persona_id" name="persona_id">

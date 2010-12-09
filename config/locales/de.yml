@@ -33,7 +33,7 @@ de:
   your_yubikey_a_one_time_password: Ihr Yubikey <span class="note">(ein Yubico Einmalpasswort)</span>
   your_yubikey_is_optional_for_login: Ihr Yubikey ist beim Login zur Zeit optional.
   make_my_yubikey_optional: Meinen Yubikey beim Einloggen optional machen
-  your_yubikey_is_mandatory_for_login: Ihr Yubikey ist beim Login zur Zeit <strong>erforderlich</strong>.
+  your_yubikey_is_mandatory_for_login: Ihr Yubikey ist beim Login zur Zeit erforderlich.
   make_my_yubikey_mandatory: Meinen Yubikey bei jedem Einloggen erfordern
   associate_account_with_yubikey: Meinen Account mit diesem Yubikey verbinden
   disable_my_account: Meinen Account deaktivieren
@@ -213,6 +213,7 @@ de:
   identity_request_missing_persona: Bitte %{create_link}, um die Identitätsanfrage zu beantworten.
   trust_root_requests_some_personal_data: "%{trust_root} verlangt persönliche Angaben."
   trust_root_sends_some_personal_data: "%{trust_root} sendet persönliche Angaben:"
+  trust_root_requires_authentication: "%{trust_root} verlangt Ihre Autorisierung."
   select_information_to_submit: Bitte wählen Sie die Angaben aus, die Sie übermitteln möchten.
   select_information_to_accept: Bitte wählen Sie die Angaben aus, die Sie akzeptieren möchten.
   attributes_are_shown_from_persona: Die folgenden Angaben stammen aus Ihrer Rolle %{persona}.
@@ -221,7 +222,6 @@ de:
   create_persona_link: erstellen Sie eine Rolle
   edit_persona_link: die Rolle bearbeiten
   choose_other_persona: eine andere Rolle auswählen
-  trust_root_requires_authentication: "%{trust_root} verlangt Ihre Authorisierung."
   choose_persona_title: Wählen Sie eine Rolle
   choose_persona_submit: Rolle auswählen
   create_new_persona_link: neue Rolle anlegen

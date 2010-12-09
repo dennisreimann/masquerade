@@ -37,7 +37,7 @@ en:
   associate_account_with_yubikey: associate my account with this Yubikey
   your_yubikey_is_optional_for_login: Your Yubikey is currently optional for login.
   make_my_yubikey_mandatory: Make my Yubikey mandatory for login
-  your_yubikey_is_mandatory_for_login: Your Yubikey is currently <strong>mandatory</strong> for login.
+  your_yubikey_is_mandatory_for_login: Your Yubikey is currently mandatory for login.
   make_my_yubikey_optional: Make my Yubikey optional for login
   disable_my_account: Disable my account
   wont_be_possible_to_reclaim_identifier: Please consider that it won't be possible to reclaim your current OpenID identifier
@@ -216,6 +216,7 @@ en:
   identity_request_missing_persona: Please %{create_link} to answer the identity request.
   trust_root_requests_some_personal_data: "%{trust_root} requests some personal data."
   trust_root_sends_some_personal_data: "%{trust_root} sends some personal data:"
+  trust_root_requires_authentication: "%{trust_root} requires your authentication."
   select_information_to_submit: Please select the information you would like to submit.
   select_information_to_accept: Please select the information you would like to accept.
   attributes_are_shown_from_persona: The attributes shown are from your persona %{persona}.
@@ -224,7 +225,6 @@ en:
   create_persona_link: create a persona
   edit_persona_link: edit the persona
   choose_other_persona: choose another persona
-  trust_root_requires_authentication: "%{trust_root} requires your authentication."
   choose_persona_title: Choose a persona
   choose_persona_submit: choose persona
   create_new_persona_link: create a new persona
