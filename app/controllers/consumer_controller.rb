@@ -60,7 +60,7 @@ class ConsumerController < ApplicationController
   end
 
   def complete
-    parameters = params.reject{ |k,v| request.path_parameters[k] }
+    parameters = params.reject{ |k,v| request.path_parameters[k.to_sym] }
     oidresp = openid_consumer.complete(parameters, url_for({}))
     case oidresp.status
     when OpenID::Consumer::SETUP_NEEDED
