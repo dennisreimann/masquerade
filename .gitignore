@@ -13,7 +13,6 @@ config/mongrel_cluster.yml
 db/schema.rb
 db/schema.sql
 db/*.sqlite3
-doc/api
-doc/app/*
+doc/*
 public/cache/**/*
 tmp/*
