@@ -13,7 +13,7 @@ class OpenIdRequest < ActiveRecord::Base
   
   def from_trusted_domain?
     host = URI.parse(parameters['openid.realm'] || parameters['openid.trust_root']).host
-    Masquerade::Application::Config['trusted_domains'].find { |domain| host.ends_with? domain }
+    Masquerade::Application::Config['trusted_domains'].find { |domain| host.ends_with? domain } unless Masquerade::Application::Config['trusted_domains'].nil?
   end
 
   private

@@ -9,6 +9,9 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 module Masquerade
   class Application < Rails::Application
     
+    # TODO Remove when Psych YAML parser is fixed! See https://github.com/carlhuda/bundler/issues/1038 and http://redmine.ruby-lang.org/issues/show/4357.
+    YAML::ENGINE.yamler = 'syck' if RUBY_VERSION > "1.9"
+    
     Masquerade::Application::Config = YAML.load(File.read("#{Rails.root}/config/app_config.yml"))[Rails.env]
     
     # Settings in config/environments/* take precedence over those specified here.

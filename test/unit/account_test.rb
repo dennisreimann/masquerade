@@ -1,4 +1,5 @@
-require File.dirname(__FILE__) + '/../test_helper'
+# coding: utf-8
+require 'test_helper'
 
 class AccountTest < ActiveSupport::TestCase  
   fixtures :accounts
