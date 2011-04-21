@@ -47,6 +47,7 @@ de:
   # account mailer
   please_activate_your_account: Bitte aktivieren Sie Ihren Account
   your_request_for_a_new_password: Ihre Anfrage nach einem neuen Passwort
+  activation_link: Aktivierungslink
 
   # consumer controller
   immediate_request_failed_setup_needed: Immediate Request fehlgeschlagen - Einstellungen nötig
