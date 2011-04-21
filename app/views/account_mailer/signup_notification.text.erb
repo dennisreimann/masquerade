@@ -1,0 +1,5 @@
+<%=t :account_created_but_not_activated_yet %>
+
+<%=t :please_activate_it_by_clicking_the_following_link %>:
+
+<%= url_for(:controller => 'accounts', :action => 'activate', :id => @account.activation_code, :only_path => false) %>
