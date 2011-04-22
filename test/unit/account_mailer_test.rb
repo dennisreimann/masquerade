@@ -12,14 +12,16 @@ class AccountMailerTest < ActiveSupport::TestCase
   def test_should_send_signup_notification
     response = AccountMailer.signup_notification(@account)
     assert_equal @account.email, response.to[0]
-    assert_match @account.activation_code, response.body
+    assert response.parts.size == 2
+    response.parts.each { |part| assert_match @account.activation_code, part.body }
   end
   
   def test_should_send_forgot_password
     @account.forgot_password!
     response = AccountMailer.forgot_password(@account)
     assert_equal @account.email, response.to[0]
-    assert_match @account.password_reset_code, response.body
+    assert response.parts.size == 2
+    response.parts.each { |part| assert_match @account.password_reset_code, part.body }
   end
   
 end
