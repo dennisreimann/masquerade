@@ -1,7 +1,7 @@
 source :rubygems
 
-gem "rails", "~> 3.0.3"
-gem "mysql"
+gem "rails", "~> 3.0.7"
+gem "mysql2"
 gem 'ruby-openid', :require => 'openid'
 gem 'ruby-yadis', :require => 'yadis'
 

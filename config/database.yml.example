@@ -1,5 +1,5 @@
 development:
-  adapter: mysql
+  adapter: mysql2
   host: localhost
   database: masquerade_development
   username: masquerade
@@ -7,7 +7,7 @@ development:
   encoding: utf8
   
 test:
-  adapter: mysql
+  adapter: mysql2
   host: localhost
   database: masquerade_test
   username: masquerade
@@ -15,7 +15,7 @@ test:
   encoding: utf8
 
 production:
-  adapter: mysql
+  adapter: mysql2
   host: localhost
   database: masquerade_production
   username: masquerade
