@@ -1,6 +1,7 @@
-require "#{File.dirname(__FILE__)}/../test_helper"
+require 'test_helper'
 
 class OpenidUserStoriesTest < ActionController::IntegrationTest
+  
   fixtures :all
   
   def test_verifying_identifier_ownership
@@ -248,4 +249,5 @@ class OpenidUserStoriesTest < ActionController::IntegrationTest
     assert_match "openid.pape.auth_time=", @response.redirect_url, "Response was expected to have PAPE Auth Age: #{@response.redirect_url}"
     assert_match "openid.pape.nist_auth_level=", @response.redirect_url, "Response was expected to have PAPE NIST Auth Level: #{@response.redirect_url}"
   end
+  
 end

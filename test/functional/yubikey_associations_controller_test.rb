@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test_helper'
 
 class YubikeyAssociationsControllerTest < ActionController::TestCase
   
@@ -23,4 +23,5 @@ class YubikeyAssociationsControllerTest < ActionController::TestCase
     assert_nil @account.yubico_identity
     assert_redirected_to edit_account_url
   end
+  
 end

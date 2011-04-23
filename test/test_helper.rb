@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 ENV["RAILS_ENV"] = "test"
 
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
@@ -121,7 +123,7 @@ class ActiveSupport::TestCase
     assert object.valid?
   end
 
-  def assert_invalid(object, attribute, message = nil)
+  def assert_invalid(object, attribute, message = "")
     assert_equal false, object.valid?
     assert object.errors[attribute], message
   end
