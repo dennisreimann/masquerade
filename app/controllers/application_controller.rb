@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   include OpenidServerSystem
   include AuthenticatedSystem
   
+  helper_method :email_as_login?
+  
   protect_from_forgery
   
   rescue_from(
@@ -84,6 +86,10 @@ class ApplicationController < ActionController::Base
   
   def scheme
     Masquerade::Application::Config['use_ssl'] ? 'https' : 'http'
+  end
+
+  def email_as_login?
+    Masquerade::Application::Config['email_as_login']
   end
 
 end

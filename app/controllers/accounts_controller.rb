@@ -21,7 +21,13 @@ class AccountsController < ApplicationController
 
   def create
     cookies.delete :auth_token
-    @account = Account.new(params[:account])
+    attrs = params[:account]
+
+    if email_as_login?
+      attrs[:login] = attrs[:email]
+    end
+    
+    @account = Account.new(attrs)
     begin
       @account.save!
       redirect_to login_path, :notice => t(:thanks_for_signing_up_activation_link)
@@ -36,7 +42,11 @@ class AccountsController < ApplicationController
 
   def update
     @account = current_account
-    if @account.update_attributes(params[:account])
+    attrs = params[:account]
+    attrs.delete(:email) if email_as_login?
+    attrs.delete(:login)
+    
+    if @account.update_attributes(attrs)
       redirect_to edit_account_path(:account => current_account), :notice => t(:profile_updated)
     else
       render :action => 'edit'
