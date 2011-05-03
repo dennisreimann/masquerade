@@ -9,7 +9,8 @@ group :production do
 end
 
 group :development do 
-  gem 'ruby-debug'
+  gem 'ruby-debug', :platforms => 'ruby_18'
+  gem 'ruby-debug19', :platforms => 'ruby_19'
   gem 'sqlite3'
 end
 
