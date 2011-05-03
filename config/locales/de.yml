@@ -2,12 +2,14 @@ de:
 
   # account controller
   thanks_for_signing_up_activation_link: Danke für Ihre Anmeldung! Wir haben Ihnen eine E-Mail mit einem Aktivierungslink geschickt.
+  activation_link_resent: Wir haben Ihnen eine E-Mail mit einem Aktivierungslink geschickt.
   profile_updated: Ihr Account wurde aktualisiert.
   account_disabled: Ihr Account wurde deaktiviert.
   entered_password_is_wrong: Das eingegebene Passwort ist falsch.
   account_activated_login_now: Ihr Account wurde aktiviert - Sie können sich jetzt einloggen.
   couldnt_find_account_with_code_create_new_one: Wir konnten keinen Account mit dem angegebenen Aktivierungscode finden. Bitte erstellen Sie einen neuen Account.
   account_already_activated_please_login: Ihr Account wurde bereits aktiviert - bitte loggen Sie sich ein.
+  account_already_activated_or_missing: Der Account wurde bereits aktiviert oder existiert nicht.
   password_has_been_changed: Ihr Passwort wurde geändert.
   sorry_password_couldnt_be_changed: "Entschuldigung, Ihr Passwort konnte nicht geändert werden."
   confirmation_of_new_password_invalid: Die Bestätigung des neuen Passworts war inkorrekt.
@@ -43,6 +45,7 @@ de:
 
   signup_title: Anmelden
   signup: Anmelden
+  resend_activation_email: Aktivierungsmail erneut zuschicken
 
   # account mailer
   please_activate_your_account: Bitte aktivieren Sie Ihren Account

@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
   
-  before_filter :login_required, :except => [:show, :new, :create, :activate]
+  before_filter :login_required, :except => [:show, :new, :create, :activate, :resend_activation_email]
   before_filter :detect_xrds, :only => :show
   
   def show
@@ -94,6 +94,19 @@ class AccountsController < ApplicationController
     else
       redirect_to edit_account_path, :alert => t(:old_password_incorrect)
     end 
+  end
+
+  def resend_activation_email
+    account = Account.find_by_login(params[:account])
+    
+    if account && !account.active?
+      AccountMailer.signup_notification(account).deliver 
+      flash[:notice] = t(:activation_link_resent)
+    else
+      flash[:alert] = t(:account_already_activated_or_missing)
+    end
+    
+    redirect_to login_path
   end
 
   protected
