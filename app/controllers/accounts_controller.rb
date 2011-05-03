@@ -1,6 +1,7 @@
 class AccountsController < ApplicationController
   
   before_filter :login_required, :except => [:show, :new, :create, :activate]
+  before_filter :detect_xrds, :only => :show
   
   def show
     @account = Account.first(:conditions => ['login = ? AND enabled = ?', params[:account], true])
@@ -83,6 +84,15 @@ class AccountsController < ApplicationController
     else
       redirect_to edit_account_path, :alert => t(:old_password_incorrect)
     end 
+  end
+
+  protected
+
+  def detect_xrds
+    if params[:account] =~ /\A(.+)\.xrds\z/
+      request.format = :xrds
+      params[:account] = $1
+    end
   end
   
 end

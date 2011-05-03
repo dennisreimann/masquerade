@@ -5,9 +5,9 @@ class Account < ActiveRecord::Base
   belongs_to :public_persona, :class_name => "Persona"
 
   validates_presence_of :login
-  validates_length_of :login, :within => 3..40
+  validates_length_of :login, :within => 3..100
   validates_uniqueness_of :login, :case_sensitive => false
-  validates_format_of :login, :with => /^[A-Za-z0-9_-]+$/
+  validates_format_of :login, :with => /^[A-Za-z0-9_@.-]+$/
   validates_presence_of :email
   validates_uniqueness_of :email, :case_sensitive => false
   validates_format_of :email, :with => /(^([^@\s]+)@((?:[-_a-z0-9]+\.)+[a-z]{2,})$)|(^$)/i
