@@ -5,7 +5,7 @@ class Account < ActiveRecord::Base
   belongs_to :public_persona, :class_name => "Persona"
 
   validates_presence_of :login
-  validates_length_of :login, :within => 3..100
+  validates_length_of :login, :within => 3..254
   validates_uniqueness_of :login, :case_sensitive => false
   validates_format_of :login, :with => /^[A-Za-z0-9_@.-]+$/
   validates_presence_of :email
