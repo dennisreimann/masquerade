@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
   end
   
   def extract_login_from_identifier(openid_url)
-    openid_url.gsub(identifier(''), '')
+    openid_url.gsub(/^https?:\/\/.*\//, '')
   end
   
   def checkid_request
