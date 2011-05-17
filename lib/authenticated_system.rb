@@ -14,7 +14,9 @@ module AuthenticatedSystem
 
     # Store the given account id in the session.
     def current_account=(new_account)
-      session[:account_id] = (new_account.nil? || new_account.is_a?(Symbol)) ? nil : new_account.id
+      if self.auth_type_used != :basic
+        session[:account_id] = (new_account.nil? || new_account.is_a?(Symbol)) ? nil : new_account.id
+      end
       @current_account = new_account || :false
     end
 
@@ -89,18 +91,29 @@ module AuthenticatedSystem
     # Inclusion hook to make #current_account and #logged_in?
     # available as ActionView helper methods.
     def self.included(base)
-      base.send :helper_method, :current_account, :logged_in?
+      base.send :helper_method, :current_account, :logged_in?, :auth_type_used
     end
 
     # Called from #current_account.  First attempt to login by the account id stored in the session.
     def login_from_session
-      self.current_account = Account.find(session[:account_id]) if session[:account_id]
+      account = Account.find(session[:account_id]) if session[:account_id]
+      self.auth_type_used = :session if not account.nil?
+      self.current_account = account
     end
 
+    def auth_type_used
+      @auth_type_used
+    end
+    def auth_type_used= t
+      @auth_type_used = t
+    end
     # Called from #current_account.  Now, attempt to login by basic authentication information.
     def login_from_basic_auth
       authenticate_with_http_basic do |accountname, password|
-        self.current_account = Account.authenticate(accountname, password)
+        account = Account.authenticate(accountname, password)
+        self.auth_type_used = :basic if not account.nil?
+        self.current_account = account
+        account
       end
     end
 
@@ -110,7 +123,9 @@ module AuthenticatedSystem
       if account && account.remember_token?
         account.remember_me
         cookies[:auth_token] = { :value => account.remember_token, :expires => account.remember_token_expires_at }
+        self.auth_type_used = :cookie if not account.nil?
         self.current_account = account
+        account
       end
     end
 end

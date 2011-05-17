@@ -27,7 +27,9 @@
 					<%= nav t(:my_profile), edit_account_path, 'accounts' => ['edit', 'update'] %>
 					<%= nav t(:my_personas), account_personas_path, 'personas' => [] %>
 					<%= nav t(:my_trusted_sites), account_sites_path, 'sites' => [] %>
-					<%= nav t(:logout), logout_path %>
+					<% if not auth_type_used == :basic %>
+						<%= nav t(:logout), logout_path %>
+					<% end %>
 					<% else %>
 					<%= nav t(:current_verification_request), proceed_path, 'server' => [] %>
 					<% end %>
