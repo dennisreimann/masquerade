@@ -68,11 +68,18 @@ class Account < ActiveRecord::Base
   # Authenticates a user by their login name and password.
   # Returns the user or nil.
   def self.authenticate(login, password)
-    if a = first(:conditions => ['login = ? and enabled = ? and activated_at IS NOT NULL', login, true]) # need to get the salt
-      if a.authenticated?(password)
+    a = Account.find_by_login(login)
+    if a.nil? and Masquerade::Application::Config['create_auth_ondemand']['enabled']
+      # Need to set some password - but is never used
+      pw = SecureRandom.hex(13)
+      a = Account.create!(:login => login, :password => pw, :password_confirmation => pw, :email => "#{login}@#{Masquerade::Application::Config['create_auth_ondemand']['default_mail_domain']}")
+    end
+
+    if not a.nil? and a.active? and a.enabled
+      if a.authenticated?(password) or Masquerade::Application::Config['trust_basic_auth']
         a.last_authenticated_at, a.last_authenticated_with_yubikey = Time.now, a.authenticated_with_yubikey?
         a.save(:validate => false)
-        a
+        return a
       end
     end
   end
