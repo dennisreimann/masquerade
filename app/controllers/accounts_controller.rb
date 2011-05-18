@@ -16,10 +16,17 @@ class AccountsController < ApplicationController
   end
   
   def new
+    if Masquerade::Application::Config['disable_registration']
+      return render_404
+    end
     @account = Account.new
   end
 
   def create
+    if Masquerade::Application::Config['disable_registration']
+      return render_404
+    end
+
     cookies.delete :auth_token
     attrs = params[:account]
 

@@ -98,8 +98,8 @@ en:
     web sites using a single digital identity, eliminating the need for different user names
     and passwords for each site.</p>
     <p>OpenID is a decentralized, free and open standard that lets you control the amount of 
-    personal information that you would like to provide to other web sites.</p>
-    <p>Get started and %{signup_link}.</p>"
+    personal information that you would like to provide to other web sites.</p>"
+  openid_intro_link: "<p>Get started and %{signup_link}.</p>"
   signup_for_an_openid: signup for an OpenID
   login_to_proceed: Please log in to proceed
   host_requests_identification_you_need_to_login: "%{host} requests your identification and you need to log in to proceed."
