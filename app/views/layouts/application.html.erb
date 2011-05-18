@@ -35,7 +35,9 @@
 					<% end %>
 				<% else %>
 					<%= nav t(:login_link), login_path, 'sessions' => ['new', 'create'] %>
-					<%= nav t(:signup_link), new_account_path, 'accounts' => ['new', 'create'] %>
+					<% unless Masquerade::Application::Config['disable_registration'] %>
+						<%= nav t(:signup_link), new_account_path, 'accounts' => ['new', 'create'] %>
+					<% end %>
 					<%= nav t(:help), help_path, 'info' => ['help'] %>
 				<% end %>
 				</ul>

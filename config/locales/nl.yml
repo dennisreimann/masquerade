@@ -86,8 +86,8 @@ nl:
   get_your_openid: Maak een OpenID
   openid_intro: "<p>OpenID is een gedeelde identiteitsdienst, waarmee je kunt inloggen op veel verschillende
   websites met één enkele identiteit. Het is niet langer nodig verschillende gebruikersnamen en wachtwoorden voor elke site te hebben.</p>
-    <p>OpenID is een gedecentraliseerde, vrije en open standaard waarmee u zelf bepaalt hoeveel persoonlijke informatie wordt doorgegeven aan andere websites.</p>
-    <p>Begin hier and %{signup_link}.</p>"
+    <p>OpenID is een gedecentraliseerde, vrije en open standaard waarmee u zelf bepaalt hoeveel persoonlijke informatie wordt doorgegeven aan andere websites.</p>"
+  openid_intro_link: "<p>Begin hier and %{signup_link}.</p>"
   signup_for_an_openid: maak een OpenID aan
   login_to_proceed: Logt u alstublieft in om verder te gaan
   host_requests_identification_you_need_to_login: "%{host} vraagt uw identificatie. U moet inloggen om verder te gaan."

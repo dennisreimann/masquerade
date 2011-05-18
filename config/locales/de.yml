@@ -94,8 +94,8 @@ de:
     digitalen Identität an unterschiedlichen Webseiten anmelden können. Dadurch benötigen Sie nicht mehr für jede Website
     einen eigenen Benutzernamen und Passwort.</p>
     <p>OpenID ist dezentral, kostenlos und ein offener Standard. Es erlaubt Ihnen zu entscheiden, wie viele und welche
-    persönlichen Angaben Sie anderen Webseiten übermitteln.</p>
-    <p>Legen Sie los und %{signup_link}.</p>"
+    persönlichen Angaben Sie anderen Webseiten übermitteln.</p>"
+  openid_intro_link: "<p>Legen Sie los und %{signup_link}.</p>"
   signup_for_an_openid: melden Sie sich für eine OpenID an
   login_to_proceed: Bitte loggen Sie sich ein, um fort zu fahren
   host_requests_identification_you_need_to_login: "%{host} möchte Ihre Identität ermitteln. Dafür müssen Sie sich einloggen."
