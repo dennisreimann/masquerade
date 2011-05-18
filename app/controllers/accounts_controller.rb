@@ -97,6 +97,10 @@ class AccountsController < ApplicationController
   end
   
   def change_password
+    unless Masquerade::Application::Config['can_change_password']
+      return render_404
+    end
+
     if Account.authenticate(current_account.login, params[:old_password])
       if ((params[:password] == params[:password_confirmation]) && !params[:password_confirmation].blank?)
         current_account.password_confirmation = params[:password_confirmation]

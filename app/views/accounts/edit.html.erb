@@ -20,23 +20,25 @@
   </div>
 <% end %>
 
-<h2><%=t :my_password %></h2>
-<%= form_tag change_password_account_path, :method => :put do %>
-	<div class="row">
-		<%= label_tag :old_password, t(:old_password) %>
-	  <%= password_field_tag :old_password %>
-	</div>
-	<div class="row">
-  	<%= label_tag :password, t(:new_password_minimum_6_characters).html_safe %>
-		<%= password_field_tag :password %>
-	</div>
-	<div class="row">
-		<%= label_tag :password_confirmation, t(:password_confirmation) %>
-		<%= password_field_tag :password_confirmation %>
-	</div>
-	<div>
-		<%= submit_tag t(:submit_update) %>
-	</div>
+<% if Masquerade::Application::Config['can_change_password'] %>
+  <h2><%=t :my_password %></h2>
+  <%= form_tag change_password_account_path, :method => :put do %>
+    <div class="row">
+      <%= label_tag :old_password, t(:old_password) %>
+      <%= password_field_tag :old_password %>
+    </div>
+    <div class="row">
+      <%= label_tag :password, t(:new_password_minimum_6_characters).html_safe %>
+      <%= password_field_tag :password %>
+    </div>
+    <div class="row">
+      <%= label_tag :password_confirmation, t(:password_confirmation) %>
+      <%= password_field_tag :password_confirmation %>
+    </div>
+    <div>
+      <%= submit_tag t(:submit_update) %>
+    </div>
+  <% end %>
 <% end %>
 
 <h2><%=t :my_yubikey %></h2>
