@@ -65,6 +65,10 @@ class AccountsController < ApplicationController
   end
 
   def destroy
+    unless Masquerade::Application::Config['can_disable_account']
+      return render_404
+    end
+
     @account = current_account
     if @account.authenticated?(params[:confirmation_password])
       @account.disable!

@@ -79,15 +79,18 @@
 <% end %>
 <% end %>
 
-<h2><%=t :disable_my_account %></h2>
+<% if Masquerade::Application::Config['can_disable_account'] %>
+  <h2><%=t :disable_my_account %></h2>
 
-<%= form_tag account_path, :method => :delete do %>
-	<p><%=t :wont_be_possible_to_reclaim_identifier %> <%= identifier(current_account) %></p>
-	<div class="row">
-		<%= label_tag :confirmation_password, t(:confirm_by_entering_password) %>
-  		<%= password_field_tag :confirmation_password, '' %>
-	</div>
-	<div>
-		<%= submit_tag t(:delete_my_account_and_data) %>
-	</div>
+  <%= form_tag account_path, :method => :delete do %>
+    <p><%=t :wont_be_possible_to_reclaim_identifier %> <%= identifier(current_account) %></p>
+    <div class="row">
+      <%= label_tag :confirmation_password, t(:confirm_by_entering_password) %>
+        <%= password_field_tag :confirmation_password, '' %>
+    </div>
+    <div>
+      <%= submit_tag t(:delete_my_account_and_data) %>
+    </div>
+  <% end %>
 <% end %>
+
