@@ -4,6 +4,9 @@ class SessionsController < ApplicationController
   after_filter :set_login_cookie, :only => :create
   
   def new
+    if logged_in?
+      redirect_after_login
+    end
   end
 
   def create
