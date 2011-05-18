@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
   end
   
   def render_error(status_code)
-    render :file => "#{Rails.root}/public/#{status_code}.html", :status => status_code
+    render :file => "#{Rails.root}/public/#{status_code}.html", :status => status_code, :layout => false
   end
   
   # Set site locale from
