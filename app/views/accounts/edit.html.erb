@@ -41,44 +41,46 @@
   <% end %>
 <% end %>
 
-<h2><%=t :my_yubikey %></h2>
-<% if @account.yubico_identity? %>
-<%= form_tag account_yubikey_association_path, :method => :delete do %>
-	<div class="row">
-		<p><%=t :your_account_is_associated_with_the_yubico_identity %> <strong><%= @account.yubico_identity %></strong></p>
-		<p class="note"><%=t :yubikey_how_to_use %></p>
-	</div>
-	<div>
-		<%= submit_tag t(:remove_association) %>
-	</div>
-<% end %>
-
-<%= form_for :account, :url => account_path, :html => { :method => :put } do |f| %>
-	<div>
-	  <p>
-	    <% if @account.yubikey_mandatory? %>
-	     <%=t :your_yubikey_is_mandatory_for_login %>
-	    <% else %>
-	     <%=t :your_yubikey_is_optional_for_login %>
-	    <% end %>
-	  </p>
-    <div>
-      <%= f.hidden_field :yubikey_mandatory, :value => (@account.yubikey_mandatory ? 0 : 1)  %>
-      <%= submit_tag( @account.yubikey_mandatory ? t(:make_my_yubikey_optional) : t(:make_my_yubikey_mandatory) ) %>
+<% if Masquerade::Application::Config['can_use_yubikey'] %>
+  <h2><%=t :my_yubikey %></h2>
+  <% if @account.yubico_identity? %>
+  <%= form_tag account_yubikey_association_path, :method => :delete do %>
+    <div class="row">
+      <p><%=t :your_account_is_associated_with_the_yubico_identity %> <strong><%= @account.yubico_identity %></strong></p>
+      <p class="note"><%=t :yubikey_how_to_use %></p>
     </div>
-	</div>
-<% end %>
+    <div>
+      <%= submit_tag t(:remove_association) %>
+    </div>
+  <% end %>
 
-<% else %>
-<%= form_tag account_yubikey_association_path do %>
-	<div class="row">
-		<%= label_tag :yubico_otp, t(:your_yubikey_a_one_time_password).html_safe %>
-  	<%= password_field_tag :yubico_otp %>
-	</div>
-	<div>
-		<%= submit_tag t(:associate_account_with_yubikey) %>
-	</div>
-<% end %>
+  <%= form_for :account, :url => account_path, :html => { :method => :put } do |f| %>
+    <div>
+      <p>
+        <% if @account.yubikey_mandatory? %>
+         <%=t :your_yubikey_is_mandatory_for_login %>
+        <% else %>
+         <%=t :your_yubikey_is_optional_for_login %>
+        <% end %>
+      </p>
+      <div>
+        <%= f.hidden_field :yubikey_mandatory, :value => (@account.yubikey_mandatory ? 0 : 1)  %>
+        <%= submit_tag( @account.yubikey_mandatory ? t(:make_my_yubikey_optional) : t(:make_my_yubikey_mandatory) ) %>
+      </div>
+    </div>
+  <% end %>
+
+  <% else %>
+  <%= form_tag account_yubikey_association_path do %>
+    <div class="row">
+      <%= label_tag :yubico_otp, t(:your_yubikey_a_one_time_password).html_safe %>
+      <%= password_field_tag :yubico_otp %>
+    </div>
+    <div>
+      <%= submit_tag t(:associate_account_with_yubikey) %>
+    </div>
+  <% end %>
+  <% end %>
 <% end %>
 
 <% if Masquerade::Application::Config['can_disable_account'] %>

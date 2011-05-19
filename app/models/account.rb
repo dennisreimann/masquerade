@@ -97,7 +97,7 @@ class Account < ActiveRecord::Base
   def authenticated?(password)
     if password.length < 50 && !(yubico_identity? && yubikey_mandatory?) 
       encrypt(password) == crypted_password
-    else
+    elsif Masquerade::Application::Config['can_use_yubikey']
       password, yubico_otp = Account.split_password_and_yubico_otp(password)
       encrypt(password) == crypted_password && @authenticated_with_yubikey = yubikey_authenticated?(yubico_otp)
     end
