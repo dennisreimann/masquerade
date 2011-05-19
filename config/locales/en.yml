@@ -5,12 +5,14 @@ en:
   
   # account controller
   thanks_for_signing_up_activation_link: Thank you for signing up! We sent you an email containing an activation link.
+  activation_link_resent: We sent you an email containing an activation link.
   profile_updated: Your profile has been updated.
   account_disabled: Your account has been disabled.
   entered_password_is_wrong: The entered password is wrong.
   account_activated_login_now: Your account is activated - you can login now.
   couldnt_find_account_with_code_create_new_one: We could not find any account with the given activation code. Please create a new account.
   account_already_activated_please_login: Your account is already activated - please login.
+  account_already_activated_or_missing: "The account is already activated or doesn't exist."
   password_has_been_changed: Your password has been changed.
   sorry_password_couldnt_be_changed: Sorry, your password could not be changed.
   confirmation_of_new_password_invalid: The confirmation of the new password was incorrect.
@@ -46,6 +48,7 @@ en:
 
   signup_title: Signup
   signup: Signup  # ???
+  resend_activation_email: resend activation email
 
   # account mailer
   please_activate_your_account: Please activate your account

@@ -8,7 +8,7 @@
 		<span class="note"><%= link_to t(:cancel_this_request), cancel_path %></span>
 		<%= hidden_field_tag :login, extract_login_from_identifier(checkid_request.identity) %>
 		<% else %>
-		<%= label_tag :login, t(:login) %>
+		<%= label_tag :login, email_as_login? ? t(:email) : t(:login) %>
 		<%= text_field_tag :login %>
 		<% end %>
 	</div>

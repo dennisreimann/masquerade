@@ -41,7 +41,15 @@
 		<div id="main">
 			<div class="wrap">
     		<% if flash[:notice] %><div class="notice"><%=simple_format h(flash[:notice]) %></div><% end %>
-    		<% if flash[:alert] %><div class="error"><%=simple_format h(flash[:alert]) %></div><% end %>
+    		<% if flash[:alert] %>
+			<div class="error">
+				<%=simple_format h(flash[:alert]) %>
+
+				<% unless params[:resend_activation_for].blank? -%>
+					<%= button_to t(:resend_activation_email), resend_activation_email_path(:account => params[:resend_activation_for]) -%>
+				<%- end %>
+			</div>
+		<% end %>
 				<%= yield %>
 			</div>
 		</div>

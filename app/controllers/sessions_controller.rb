@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       flash[:notice] = t(:you_are_logged_in)
       redirect_after_login
     else
-      redirect_to login_path, :alert => t(:login_incorrect_or_account_not_yet_activated)
+      redirect_to login_path(:resend_activation_for => params[:login]), :alert => t(:login_incorrect_or_account_not_yet_activated)
     end
   end
 

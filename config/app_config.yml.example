@@ -6,6 +6,7 @@ default: &default
   use_ssl: false
   locale: en
   time_zone: Berlin
+  email_as_login: false
   session:
     key: openidserver_session_id
     secret: replacethiswithyourowntopsecretsessionsecretsothatnoonewillknowit
