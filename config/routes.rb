@@ -5,17 +5,13 @@ Masquerade::Application.routes.draw do
     get :password
     put :change_password
     
-    resources :personas do
-      resources :properties
-    end
-    resources :sites do
-      resources :release_policies
-    end
-    resource :yubikey_association
+    resources :personas
+    resources :sites
+    resource :yubikey_association, :only => [:create, :destroy]
   end
 
-  resource :session
   resource :password
+  resource :session, :only => [:new, :create, :destroy]
   
   get "/help" => "info#help", :as => :help
   get "/safe-login" => "info#safe_login", :as => :safe_login
