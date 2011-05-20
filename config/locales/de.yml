@@ -2,6 +2,7 @@ de:
 
   # account controller
   thanks_for_signing_up_activation_link: Danke für Ihre Anmeldung! Wir haben Ihnen eine E-Mail mit einem Aktivierungslink geschickt.
+  thanks_for_signing_up: Danke für Ihre Anmeldung!
   activation_link_resent: Wir haben Ihnen eine E-Mail mit einem Aktivierungslink geschickt.
   profile_updated: Ihr Account wurde aktualisiert.
   account_disabled: Ihr Account wurde deaktiviert.

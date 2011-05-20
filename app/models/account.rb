@@ -181,7 +181,9 @@ class Account < ActiveRecord::Base
   end
   
   def make_activation_code
-    self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+    if Masquerade::Application::Config['send_activation_mail']
+      self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+    end
   end
   
   def make_password_reset_code

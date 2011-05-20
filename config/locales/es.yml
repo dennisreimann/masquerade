@@ -5,6 +5,7 @@ es:
   
   # account controller
   thanks_for_signing_up_activation_link: Gracias por registrarte! Te hemos enviado un correo con un enlace para que actives tu cuenta.
+  thanks_for_signing_up: Gracias por registrarte!
   profile_updated: Tu perfil a sido actualizado.
   account_disabled: Tu cuenta a sido desabilitada.
   entered_password_is_wrong: La clave ingresada es incorrecta.

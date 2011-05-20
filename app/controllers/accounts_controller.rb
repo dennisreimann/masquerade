@@ -30,7 +30,11 @@ class AccountsController < ApplicationController
     @account = Account.new(attrs)
     begin
       @account.save!
-      redirect_to login_path, :notice => t(:thanks_for_signing_up_activation_link)
+      if Masquerade::Application::Config['send_activation_mail']
+        redirect_to login_path, :notice => t(:thanks_for_signing_up_activation_link)
+      else
+        redirect_to login_path, :notice => t(:thanks_for_signing_up)
+      end
     rescue ActiveRecord::RecordInvalid
       render :action => 'new'
     end
@@ -67,6 +71,10 @@ class AccountsController < ApplicationController
   end
   
   def activate
+    unless Masquerade::Application::Config['send_activation_mail']
+      return render_404
+    end
+
     begin
       account = Account.find_and_activate!(params[:id])
       redirect_to login_path, :notice => t(:account_activated_login_now)
