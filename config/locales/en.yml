@@ -5,6 +5,7 @@ en:
   
   # account controller
   thanks_for_signing_up_activation_link: Thank you for signing up! We sent you an email containing an activation link.
+  thanks_for_signing_up: Thank you for signing up!
   activation_link_resent: We sent you an email containing an activation link.
   profile_updated: Your profile has been updated.
   account_disabled: Your account has been disabled.
