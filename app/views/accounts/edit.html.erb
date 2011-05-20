@@ -3,10 +3,12 @@
 <%= error_messages_for :account %>
  
 <%= form_for :account, :url => account_path, :html => { :method => :put } do |f| %>
+	<% unless email_as_login? -%>
 	<div class="row">
 		<%= f.label :email, t(:email) %>
 		<%= f.text_field :email %>
 	</div>
+	<% end -%>
 	
 	<div class="row">
 		<%= f.label :public_persona_id, t(:public_persona) %>

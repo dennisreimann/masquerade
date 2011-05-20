@@ -25,6 +25,7 @@ Masquerade::Application.routes.draw do
 
   get "/login" => "sessions#new", :as => :login
   get "/logout" => "sessions#destroy", :as => :logout
+  post '/resend_activation_email/*account' => 'accounts#resend_activation_email', :as => :resend_activation_email
 
   match "/server" => "server#index", :as => :server
   match "/server/decide" => "server#decide", :as => :decide
@@ -38,8 +39,7 @@ Masquerade::Application.routes.draw do
   post "/consumer/start" => "consumer#start", :as => :consumer_start
   match "/consumer/complete" => "consumer#complete", :as => :consumer_complete
 
-  get "/:account.:format" => "accounts#show", :as => :formatted_identity
-  get "/:account" => "accounts#show", :as => :identity
+  get "/*account" => "accounts#show", :as => :identity
 
   root :to => "info#index"
 

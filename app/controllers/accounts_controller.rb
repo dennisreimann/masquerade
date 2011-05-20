@@ -1,6 +1,7 @@
 class AccountsController < ApplicationController
   
-  before_filter :login_required, :except => [:show, :new, :create, :activate]
+  before_filter :login_required, :except => [:show, :new, :create, :activate, :resend_activation_email]
+  before_filter :detect_xrds, :only => :show
   
   def show
     @account = Account.first(:conditions => ['login = ? AND enabled = ?', params[:account], true])
@@ -20,7 +21,13 @@ class AccountsController < ApplicationController
 
   def create
     cookies.delete :auth_token
-    @account = Account.new(params[:account])
+    attrs = params[:account]
+
+    if email_as_login?
+      attrs[:login] = attrs[:email]
+    end
+    
+    @account = Account.new(attrs)
     begin
       @account.save!
       redirect_to login_path, :notice => t(:thanks_for_signing_up_activation_link)
@@ -35,7 +42,11 @@ class AccountsController < ApplicationController
 
   def update
     @account = current_account
-    if @account.update_attributes(params[:account])
+    attrs = params[:account]
+    attrs.delete(:email) if email_as_login?
+    attrs.delete(:login)
+    
+    if @account.update_attributes(attrs)
       redirect_to edit_account_path(:account => current_account), :notice => t(:profile_updated)
     else
       render :action => 'edit'
@@ -83,6 +94,28 @@ class AccountsController < ApplicationController
     else
       redirect_to edit_account_path, :alert => t(:old_password_incorrect)
     end 
+  end
+
+  def resend_activation_email
+    account = Account.find_by_login(params[:account])
+    
+    if account && !account.active?
+      AccountMailer.signup_notification(account).deliver 
+      flash[:notice] = t(:activation_link_resent)
+    else
+      flash[:alert] = t(:account_already_activated_or_missing)
+    end
+    
+    redirect_to login_path
+  end
+
+  protected
+
+  def detect_xrds
+    if params[:account] =~ /\A(.+)\.xrds\z/
+      request.format = :xrds
+      params[:account] = $1
+    end
   end
   
 end
