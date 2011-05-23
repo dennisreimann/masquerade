@@ -200,6 +200,7 @@ en:
   # sessions controller
   you_are_logged_in: You are now logged in.
   login_incorrect_or_account_not_yet_activated: The login is incorrect or your account is not activated, yet.
+  login_incorrect: The login is incorrect.
   you_are_now_logged_out: You are now logged out.
 
   # sessions views

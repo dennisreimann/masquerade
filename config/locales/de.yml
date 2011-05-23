@@ -197,6 +197,7 @@ de:
   # sessions controller
   you_are_logged_in: Sie sind jetzt eingeloggt.
   login_incorrect_or_account_not_yet_activated: Die Zugangsdaten sind falsch oder der Account wurde noch nicht aktiviert.
+  login_incorrect: Die Zugangsdaten sind falsch.
   you_are_now_logged_out: Sie sind jetzt ausgeloggt.
 
   # sessions views

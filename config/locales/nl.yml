@@ -187,6 +187,7 @@ nl:
   # sessions controller
   you_are_logged_in: U bent nu ingelogd.
   login_incorrect_or_account_not_yet_activated: De inloggegevens zijn incorrect of uw account is nog niet geactiveerd.
+  login_incorrect: De inloggegevens zijn incorrect.
   you_are_now_logged_out: U bent nu uitgelogd.
 
   # sessions views
