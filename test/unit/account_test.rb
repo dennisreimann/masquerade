@@ -145,8 +145,10 @@ class AccountTest < ActiveSupport::TestCase
   
   def test_should_delete_associated_personas_on_destroy
     @account.save
-    @persona = @account.personas.create(valid_persona_attributes)
+    # one default persona
     assert_equal 1, @account.personas.size
+    @persona = @account.personas.create(valid_persona_attributes)
+    assert_equal 2, @account.personas.size
     @account.destroy
     assert_nil Persona.find_by_id(@persona.id)
   end
