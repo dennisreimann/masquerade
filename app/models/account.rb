@@ -1,6 +1,6 @@
 class Account < ActiveRecord::Base
   
-  has_many :personas, :dependent => :destroy, :order => 'id ASC'
+  has_many :personas, :dependent => :delete_all, :order => 'id ASC'
   has_many :sites, :dependent => :destroy
   belongs_to :public_persona, :class_name => "Persona"
 
