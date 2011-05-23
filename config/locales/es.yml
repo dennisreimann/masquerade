@@ -189,6 +189,7 @@ es:
   # sessions controller
   you_are_logged_in: Ahora estás ingresado.
   login_incorrect_or_account_not_yet_activated: El usuario es incorrecto o la cuenta no ha sido activada todavía.
+  login_incorrect: El usuario es incorrecto.
   you_are_now_logged_out: Has salido.
 
   # sessions views
