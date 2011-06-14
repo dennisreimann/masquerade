@@ -11,6 +11,32 @@ class AccountsControllerTest < ActionController::TestCase
     assert_redirected_to login_path
   end
 
+  def test_should_show_correct_message_after_signup_if_send_activation_mail_is_disabled
+    Masquerade::Application::Config['disable_registration'] = false # doesn't make sense if registration is disabled
+    Masquerade::Application::Config['send_activation_mail'] = true
+    post :create, :account => valid_account_attributes
+    assert_equal I18n.t(:thanks_for_signing_up_activation_link), flash[:notice]
+  end
+
+  def test_should_show_correct_message_after_signup_if_send_activation_mail_is_enabled
+    Masquerade::Application::Config['disable_registration'] = false # doesn't make sense if registration is disabled
+    Masquerade::Application::Config['send_activation_mail'] = false
+    post :create, :account => valid_account_attributes
+    assert_equal I18n.t(:thanks_for_signing_up), flash[:notice]
+  end
+
+  def test_should_allow_activate_if_send_activation_mail_is_enabled
+    Masquerade::Application::Config['send_activation_mail'] = true
+    get :activate, :account => valid_account_attributes
+    assert_response :found
+  end
+
+  def test_should_return404_activate_if_send_activation_mail_is_disabled
+    Masquerade::Application::Config['send_activation_mail'] = false
+    get :activate, :account => valid_account_attributes
+    assert_response :not_found
+  end
+
   def test_should_require_login_for_edit
     get :edit
     assert_login_required
