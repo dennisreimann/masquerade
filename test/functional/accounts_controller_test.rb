@@ -4,11 +4,20 @@ class AccountsControllerTest < ActionController::TestCase
   
   fixtures :accounts
   
-  def test_should_allow_signup
+  def test_should_allow_signup_if_enabled
+    Masquerade::Application::Config['disable_registration'] = false
     assert_difference 'Account.count' do
       post :create, :account => valid_account_attributes
     end  
     assert_redirected_to login_path
+  end
+
+  def test_should_return404_on_signup_if_disabled
+    Masquerade::Application::Config['disable_registration'] = true
+    get :new
+    assert_response :not_found
+    post :create, :account => valid_account_attributes
+    assert_response :not_found
   end
 
   def test_should_show_correct_message_after_signup_if_send_activation_mail_is_disabled
