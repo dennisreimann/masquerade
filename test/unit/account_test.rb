@@ -76,9 +76,16 @@ class AccountTest < ActiveSupport::TestCase
     assert_valid @account
   end
   
-  def test_should_assign_activation_code_on_create
+  def test_should_assign_activation_code_on_create_if_send_activation_mail_is_enabled
+    Masquerade::Application::Config['send_activation_mail'] = true
     @account.save
     assert_not_nil @account.activation_code
+  end
+
+  def test_should_not_assign_activation_code_on_create_if_send_activation_mail_is_disabled
+    Masquerade::Application::Config['send_activation_mail'] = false
+    @account.save
+    assert_nil @account.activation_code
   end
   
   def test_should_find_and_activate_by_activation_token
