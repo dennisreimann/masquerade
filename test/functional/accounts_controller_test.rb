@@ -66,14 +66,23 @@ class AccountsControllerTest < ActionController::TestCase
     assert_login_required
   end
   
-  def test_should_disable_account_if_confirmation_password_matches
+  def test_should_disable_account_if_confirmation_password_matches_and_can_disable_account_is_enabled
+    Masquerade::Application::Config['can_disable_account'] = true
     login_as(:standard)
     delete :destroy, :confirmation_password => 'test'
     assert !accounts(:standard).reload.enabled
     assert_redirected_to root_url
   end
+
+  def test_should_get_404_on_disable_account_if_confirmation_password_matches_and_can_disable_account_is_disabled
+    Masquerade::Application::Config['can_disable_account'] = false
+    login_as(:standard)
+    delete :destroy, :confirmation_password => 'test'
+    assert_response :not_found
+  end
   
   def test_should_not_disable_account_if_confirmation_password_does_not_match
+    Masquerade::Application::Config['can_disable_account'] = true # doesn't make sense if registration is disabled
     login_as(:standard)
     delete :destroy, :confirmation_password => 'lksdajflsaf'
     assert accounts(:standard).reload.enabled
