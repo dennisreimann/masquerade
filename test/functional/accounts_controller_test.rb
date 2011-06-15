@@ -79,6 +79,20 @@ class AccountsControllerTest < ActionController::TestCase
     assert accounts(:standard).reload.enabled
     assert_redirected_to edit_account_url
   end
+
+  def test_should_show_disable_account_if_can_disable_account_is_enabled
+    Masquerade::Application::Config['can_disable_account'] = true
+    login_as(:standard)
+    get :edit
+    assert_select "h2:nth-of-type(4)", I18n.t(:disable_my_account)
+  end
+
+  def test_should_not_show_disable_account_if_can_disable_account_is_disabled
+    Masquerade::Application::Config['can_disable_account'] = false
+    login_as(:standard)
+    get :edit
+    assert_select "h2:nth-of-type(4)", {:text => I18n.t(:disable_my_account), :count => 0}
+  end
   
   def test_should_set_yadis_header_on_identity_page
     account = accounts(:standard).login
