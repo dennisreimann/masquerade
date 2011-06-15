@@ -15,6 +15,13 @@ class SessionsControllerTest < ActionController::TestCase
     assert_redirected_to identity_url(account)
   end
 
+  def test_should_redirect_to_users_on_login_if_allready_logged_in
+    login_as :standard
+    account = accounts(:standard)
+    get :new
+    assert_redirected_to identity_url(account)
+  end
+
   def test_should_set_cookie_with_auth_token_if_user_chose_to_be_remembered
     post :create, :login => accounts(:standard).login, :password => 'test', :remember_me => "1"
     assert_not_nil @response.cookies["auth_token"]
