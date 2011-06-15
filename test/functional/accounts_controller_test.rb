@@ -61,11 +61,26 @@ class AccountsControllerTest < ActionController::TestCase
     assert_login_required
   end
   
-  def test_should_require_login_for_change_password
+  def test_should_require_login_for_change_password_and_change_password_is_enabled
+    Masquerade::Application::Config['can_change_password'] = true
     put :change_password
     assert_login_required
   end
-  
+
+  def test_should_return404_on_change_password_if_change_password_is_disabled
+    Masquerade::Application::Config['can_change_password'] = false
+    login_as(:standard)
+    put :change_password
+    assert_response :not_found
+  end
+
+  def test_should_change_password_if_change_password_is_enabled
+    Masquerade::Application::Config['can_change_password'] = true
+    login_as(:standard)
+    put :change_password, :old_password => 'test', :password => 'testtest', :password_confirmation => 'testtest'
+    assert flash[:notice] == I18n.t(:password_has_been_changed)
+  end
+
   def test_should_disable_account_if_confirmation_password_matches_and_can_disable_account_is_enabled
     Masquerade::Application::Config['can_disable_account'] = true
     login_as(:standard)
@@ -89,7 +104,22 @@ class AccountsControllerTest < ActionController::TestCase
     assert_redirected_to edit_account_url
   end
 
+  def test_should_show_change_password_if_can_can_change_password_is_enabled
+    Masquerade::Application::Config['can_change_password'] = true
+    login_as(:standard)
+    get :edit
+    assert_select "h2:nth-of-type(2)", I18n.t(:my_password)
+  end
+
+  def test_should_not_show_disable_account_if_can_disable_account_is_disabled
+    Masquerade::Application::Config['can_change_password'] = false
+    login_as(:standard)
+    get :edit
+    assert_select "h2:nth-of-type(2)", {:text => I18n.t(:my_password), :count => 0}
+  end
+
   def test_should_show_disable_account_if_can_disable_account_is_enabled
+    Masquerade::Application::Config['can_change_password'] = true # required for h2 count in selector
     Masquerade::Application::Config['can_disable_account'] = true
     login_as(:standard)
     get :edit
@@ -97,12 +127,13 @@ class AccountsControllerTest < ActionController::TestCase
   end
 
   def test_should_not_show_disable_account_if_can_disable_account_is_disabled
+    Masquerade::Application::Config['can_change_password'] = true # required for h2 count in selector
     Masquerade::Application::Config['can_disable_account'] = false
     login_as(:standard)
     get :edit
     assert_select "h2:nth-of-type(4)", {:text => I18n.t(:disable_my_account), :count => 0}
   end
-  
+
   def test_should_set_yadis_header_on_identity_page
     account = accounts(:standard).login
     get :show, :account => account
