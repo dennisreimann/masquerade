@@ -133,4 +133,9 @@ class ActiveSupport::TestCase
     assert_not_nil @request.session[:return_to]
   end
   
+  # verbatim, from ActiveController's own unit tests
+  # stolen from http://stackoverflow.com/questions/1165478/testing-http-basic-auth-in-rails-2-2/1258046#1258046
+  def encode_credentials(username, password)
+    "Basic #{ActiveSupport::Base64.encode64("#{username}:#{password}")}"
+  end
 end
