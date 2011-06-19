@@ -71,7 +71,11 @@ class Account < ActiveRecord::Base
     a = Account.find_by_login(login)
     if a.nil? and Masquerade::Application::Config['create_auth_ondemand']['enabled']
       # Need to set some password - but is never used
-      pw = SecureRandom.hex(13)
+      if Masquerade::Application::Config['create_auth_ondemand']['random_password']
+        pw = SecureRandom.hex(13)
+      else
+        pw = password
+      end
       a = Account.create!(:login => login, :password => pw, :password_confirmation => pw, :email => "#{login}@#{Masquerade::Application::Config['create_auth_ondemand']['default_mail_domain']}")
     end
 
