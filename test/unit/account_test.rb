@@ -98,17 +98,74 @@ class AccountTest < ActiveSupport::TestCase
   end
   
   def test_should_reset_password
+    Masquerade::Application::Config['trust_basic_auth'] = false # doesn't make sense without
     accounts(:standard).update_attributes(:password => 'new password', :password_confirmation => 'new password')
     assert_equal accounts(:standard), Account.authenticate('quentin', 'new password')
   end
 
   def test_should_not_rehash_password
+    Masquerade::Application::Config['trust_basic_auth'] = false # doesn't make sense without
     accounts(:standard).update_attributes(:login => 'quentin2')
     assert_equal accounts(:standard), Account.authenticate('quentin2', 'test')
   end
 
   def test_should_authenticate_user
+    Masquerade::Application::Config['trust_basic_auth'] = false # doesn't make sense without
     assert_equal accounts(:standard), Account.authenticate('quentin', 'test')
+  end
+
+  def test_should_not_check_password_if_trust_basic_auth_is_enabled_and_basic_is_used
+    Masquerade::Application::Config['trust_basic_auth'] = true
+    assert_equal accounts(:standard), Account.authenticate('quentin', 'nottest', true)
+  end
+
+  def test_should_check_password_if_trust_basic_auth_is_enabled_and_basic_is_not_used
+    Masquerade::Application::Config['trust_basic_auth'] = true
+    assert_not_equal accounts(:standard), Account.authenticate('quentin', 'nottest', false)
+  end
+
+  def test_should_check_password_if_trust_basic_auth_is_disabled
+    Masquerade::Application::Config['trust_basic_auth'] = false
+    assert_not_equal accounts(:standard), Account.authenticate('quentin', 'nottest', true)
+    assert_not_equal accounts(:standard), Account.authenticate('quentin', 'nottest', false)
+    assert_equal accounts(:standard), Account.authenticate('quentin', 'test', true)
+  end
+
+  def test_should_not_login_if_trust_basic_auth_is_enabled_but_account_is_disabled
+    Masquerade::Application::Config['trust_basic_auth'] = true
+    account = accounts(:standard)
+    account.activation_code = 666
+    account.activated_at = nil
+    account.save!
+    assert_not_equal account, Account.authenticate('quentin', 'test')
+  end
+
+  def test_should_create_account_on_demand_if_create_auth_ondemand_is_enabled
+    Masquerade::Application::Config['create_auth_ondemand']['enabled'] = true
+    Masquerade::Application::Config['create_auth_ondemand']['default_mail_domain'] = "example.net"
+    Account.authenticate('notexistingtestuser', 'somepassword')
+    account = Account.find_by_login('notexistingtestuser')
+    assert account.kind_of? Account
+    assert_equal 'notexistingtestuser', account.login
+    assert_equal 'notexistingtestuser@example.net', account.email
+  end
+
+  def test_should_create_random_password_on_create_account_on_demand_if_create_auth_ondemand_is_enabled_and_random_password_is_enabled
+    Masquerade::Application::Config['create_auth_ondemand']['enabled'] = true
+    Masquerade::Application::Config['create_auth_ondemand']['default_mail_domain'] = "example.net"
+    Masquerade::Application::Config['create_auth_ondemand']['random_password'] = true
+    Account.authenticate('notexistingtestuser', 'somepassword')
+    account = Account.find_by_login('notexistingtestuser')
+    assert_not_equal account.encrypt('somepassword'), account.crypted_password
+  end
+
+  def test_should_create_random_password_on_create_account_on_demand_if_create_auth_ondemand_is_enabled_and_random_password_is_disabled
+    Masquerade::Application::Config['create_auth_ondemand']['enabled'] = true
+    Masquerade::Application::Config['create_auth_ondemand']['default_mail_domain'] = "example.net"
+    Masquerade::Application::Config['create_auth_ondemand']['random_password'] = false
+    Account.authenticate('notexistingtestuser', 'somepassword')
+    account = Account.find_by_login('notexistingtestuser')
+    assert_equal account.encrypt('somepassword'), account.crypted_password
   end
 
   def test_should_set_remember_token
