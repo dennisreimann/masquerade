@@ -67,7 +67,7 @@ class Account < ActiveRecord::Base
   
   # Authenticates a user by their login name and password.
   # Returns the user or nil.
-  def self.authenticate(login, password)
+  def self.authenticate(login, password, basic_auth_used=false)
     a = Account.find_by_login(login)
     if a.nil? and Masquerade::Application::Config['create_auth_ondemand']['enabled']
       # Need to set some password - but is never used
@@ -76,7 +76,7 @@ class Account < ActiveRecord::Base
     end
 
     if not a.nil? and a.active? and a.enabled
-      if a.authenticated?(password) or Masquerade::Application::Config['trust_basic_auth']
+      if a.authenticated?(password) or (Masquerade::Application::Config['trust_basic_auth'] and basic_auth_used)
         a.last_authenticated_at, a.last_authenticated_with_yubikey = Time.now, a.authenticated_with_yubikey?
         a.save(:validate => false)
         return a

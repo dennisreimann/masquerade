@@ -110,7 +110,7 @@ module AuthenticatedSystem
     # Called from #current_account.  Now, attempt to login by basic authentication information.
     def login_from_basic_auth
       authenticate_with_http_basic do |accountname, password|
-        account = Account.authenticate(accountname, password)
+        account = Account.authenticate(accountname, password, true)
         self.auth_type_used = :basic if not account.nil?
         self.current_account = account
         account
