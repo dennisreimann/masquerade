@@ -1,0 +1,72 @@
+/* TODO borders on subgraph - doesn't work */
+digraph masquerade_auth {
+  subgraph authenticate {
+    label="authenticate"
+    color = purple;
+
+    "account exist?" -> "account active?" [label="yes"];
+    "account exist?" -> "create_auth_ondemand" [label="no"];
+
+    "account active?" -> "account enabled?" [label="yes"];
+    "account active?" -> "failure" [label="no"];
+
+    "account enabled?" -> "password.nil?" [label="yes"];
+    "account enabled?" -> "failure" [label="no"];
+
+
+    subgraph create_acc_on_demand {
+      label = "create account";
+      color = purple;
+
+      "create_auth_ondemand" -> "random_password" [label="enabled"];
+      "create_auth_ondemand" -> "failure" [label="disabled"];
+
+      "random_password" -> "generate random password" [label="enabled"];
+      "random_password" -> "use incomming password" [label="disabled"];
+
+      "generate random password" -> "account active?";
+      "use incomming password" -> "account active?";
+    }
+
+    subgraph authenticated {
+      label = "authenticated?";
+      color = purple;
+
+      "password.nil?" -> "authenticated failure" [label="yes"];
+      "password.nil?" -> "password.length < 50?" [label="no"];
+
+      "password.length < 50?" -> "yubico_identity?" [label="yes"];
+      "password.length < 50?" -> "encrypted password matches saved?" [label="no"];
+
+      subgraph yubico {
+        label = "yubico";
+        color = purple;
+
+        "yubico_identity?" -> "yubikey_mandatory?" [label="yes"];
+        "yubico_identity?" -> "encrypted password matches saved?" [label="no"];
+
+        "yubikey_mandatory?" -> "can_use_yubikey" [label="yes"];
+        "yubikey_mandatory?" -> "encrypted password matches saved?" [label="no"];
+
+        "can_use_yubikey" -> "yubikey_authenticated?" [label="yes"];
+        "can_use_yubikey" -> "authenticated failure" [label="no"];
+
+        "yubikey_authenticated?" -> "encrypted password matches saved?" [label="yes"];
+        "yubikey_authenticated?" -> "authenticated failure" [label="no"];
+      }
+
+      "encrypted password matches saved?" -> "authenticated success" [label="yes"];
+      "encrypted password matches saved?" -> "authenticated failure" [label="no"];
+    }
+
+    "authenticated failure" -> "trust_basic_auth"
+    "authenticated success" -> "success"
+
+    "trust_basic_auth" -> "basic_auth_used" [label="enabled"]
+    "trust_basic_auth" -> "failure" [label="disabled"]
+
+    "basic_auth_used" -> "success" [label="yes"]
+    "basic_auth_used" -> "failure" [label="no"]
+  }
+
+}
