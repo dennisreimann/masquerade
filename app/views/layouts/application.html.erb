@@ -14,6 +14,7 @@
 		<link rel="icon" href="/favicon.ico" type="image/ico" />
 		<%= stylesheet_link_tag 'application' %>
 		<%= javascript_include_tag 'prototype' %>
+		<%= javascript_include_tag :defaults %>
 	</head>
 	<body>
 		<div id="head">
@@ -26,13 +27,17 @@
 					<%= nav t(:my_profile), edit_account_path, 'accounts' => ['edit', 'update'] %>
 					<%= nav t(:my_personas), account_personas_path, 'personas' => [] %>
 					<%= nav t(:my_trusted_sites), account_sites_path, 'sites' => [] %>
-					<%= nav t(:logout), logout_path %>
+					<% if not auth_type_used == :basic %>
+						<%= nav t(:logout), logout_path %>
+					<% end %>
 					<% else %>
 					<%= nav t(:current_verification_request), proceed_path, 'server' => [] %>
 					<% end %>
 				<% else %>
 					<%= nav t(:login_link), login_path, 'sessions' => ['new', 'create'] %>
-					<%= nav t(:signup_link), new_account_path, 'accounts' => ['new', 'create'] %>
+					<% unless Masquerade::Application::Config['disable_registration'] %>
+						<%= nav t(:signup_link), new_account_path, 'accounts' => ['new', 'create'] %>
+					<% end %>
 					<%= nav t(:help), help_path, 'info' => ['help'] %>
 				<% end %>
 				</ul>

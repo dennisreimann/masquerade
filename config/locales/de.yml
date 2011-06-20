@@ -2,6 +2,7 @@ de:
 
   # account controller
   thanks_for_signing_up_activation_link: Danke für Ihre Anmeldung! Wir haben Ihnen eine E-Mail mit einem Aktivierungslink geschickt.
+  thanks_for_signing_up: Danke für Ihre Anmeldung!
   activation_link_resent: Wir haben Ihnen eine E-Mail mit einem Aktivierungslink geschickt.
   profile_updated: Ihr Account wurde aktualisiert.
   account_disabled: Ihr Account wurde deaktiviert.
@@ -93,8 +94,8 @@ de:
     digitalen Identität an unterschiedlichen Webseiten anmelden können. Dadurch benötigen Sie nicht mehr für jede Website
     einen eigenen Benutzernamen und Passwort.</p>
     <p>OpenID ist dezentral, kostenlos und ein offener Standard. Es erlaubt Ihnen zu entscheiden, wie viele und welche
-    persönlichen Angaben Sie anderen Webseiten übermitteln.</p>
-    <p>Legen Sie los und %{signup_link}.</p>"
+    persönlichen Angaben Sie anderen Webseiten übermitteln.</p>"
+  openid_intro_link: "<p>Legen Sie los und %{signup_link}.</p>"
   signup_for_an_openid: melden Sie sich für eine OpenID an
   login_to_proceed: Bitte loggen Sie sich ein, um fort zu fahren
   host_requests_identification_you_need_to_login: "%{host} möchte Ihre Identität ermitteln. Dafür müssen Sie sich einloggen."
@@ -196,6 +197,7 @@ de:
   # sessions controller
   you_are_logged_in: Sie sind jetzt eingeloggt.
   login_incorrect_or_account_not_yet_activated: Die Zugangsdaten sind falsch oder der Account wurde noch nicht aktiviert.
+  login_incorrect: Die Zugangsdaten sind falsch.
   you_are_now_logged_out: Sie sind jetzt ausgeloggt.
 
   # sessions views

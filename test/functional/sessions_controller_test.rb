@@ -15,6 +15,13 @@ class SessionsControllerTest < ActionController::TestCase
     assert_redirected_to identity_url(account)
   end
 
+  def test_should_redirect_to_users_on_login_if_allready_logged_in
+    login_as :standard
+    account = accounts(:standard)
+    get :new
+    assert_redirected_to identity_url(account)
+  end
+
   def test_should_set_cookie_with_auth_token_if_user_chose_to_be_remembered
     post :create, :login => accounts(:standard).login, :password => 'test', :remember_me => "1"
     assert_not_nil @response.cookies["auth_token"]
@@ -28,6 +35,33 @@ class SessionsControllerTest < ActionController::TestCase
   def test_should_not_save_account_id_in_session_after_failed_login
     post :create, :login => accounts(:standard).login, :password => 'bad password'
     assert_nil session[:account_id]
+  end
+
+  def test_should_not_save_account_id_in_session_after_basic_login
+    @request.env['HTTP_AUTHORIZATION'] = encode_credentials(accounts(:standard).login, 'test')
+    post :new
+    assert_nil session[:account_id]
+    assert @controller.send(:logged_in?)
+    assert @controller.send(:auth_type_used) == :basic
+  end
+
+  def test_should_set_correct_auth_type_on_basic_login
+    @request.env['HTTP_AUTHORIZATION'] = encode_credentials(accounts(:standard).login, 'test')
+    get :new
+    assert @controller.send(:auth_type_used) == :basic
+  end
+
+  def test_should_set_correct_auth_type_on_login_with_session
+    login_as :standard
+    get :new
+    assert @controller.send(:auth_type_used) == :session
+  end
+
+  def test_should_set_correct_auth_type_on_login_with_cookie
+    accounts(:standard).remember_me
+    @request.cookies["auth_token"] = cookie_for(:standard)
+    get :new
+    assert @controller.send(:auth_type_used) == :cookie
   end
 
   def test_should_redirect_to_login_after_failed_login

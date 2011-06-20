@@ -4,6 +4,9 @@ class SessionsController < ApplicationController
   after_filter :set_login_cookie, :only => :create
   
   def new
+    if logged_in?
+      redirect_after_login
+    end
   end
 
   def create
@@ -12,7 +15,11 @@ class SessionsController < ApplicationController
       flash[:notice] = t(:you_are_logged_in)
       redirect_after_login
     else
-      redirect_to login_path(:resend_activation_for => params[:login]), :alert => t(:login_incorrect_or_account_not_yet_activated)
+      if Account.find_by_login(params[:login]).nil? or Account.find_by_login(params[:login]).enabled?
+        redirect_to login_path, :alert => t(:login_incorrect)
+      else
+        redirect_to login_path(:resend_activation_for => params[:login]), :alert => t(:login_incorrect_or_account_not_yet_activated)
+      end
     end
   end
 
