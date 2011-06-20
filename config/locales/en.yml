@@ -5,6 +5,7 @@ en:
   
   # account controller
   thanks_for_signing_up_activation_link: Thank you for signing up! We sent you an email containing an activation link.
+  thanks_for_signing_up: Thank you for signing up!
   activation_link_resent: We sent you an email containing an activation link.
   profile_updated: Your profile has been updated.
   account_disabled: Your account has been disabled.
@@ -97,8 +98,8 @@ en:
     web sites using a single digital identity, eliminating the need for different user names
     and passwords for each site.</p>
     <p>OpenID is a decentralized, free and open standard that lets you control the amount of 
-    personal information that you would like to provide to other web sites.</p>
-    <p>Get started and %{signup_link}.</p>"
+    personal information that you would like to provide to other web sites.</p>"
+  openid_intro_link: "<p>Get started and %{signup_link}.</p>"
   signup_for_an_openid: signup for an OpenID
   login_to_proceed: Please log in to proceed
   host_requests_identification_you_need_to_login: "%{host} requests your identification and you need to log in to proceed."
@@ -199,6 +200,7 @@ en:
   # sessions controller
   you_are_logged_in: You are now logged in.
   login_incorrect_or_account_not_yet_activated: The login is incorrect or your account is not activated, yet.
+  login_incorrect: The login is incorrect.
   you_are_now_logged_out: You are now logged out.
 
   # sessions views

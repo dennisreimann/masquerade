@@ -4,6 +4,9 @@ class PasswordsController < ApplicationController
 
   # Forgot password
   def create
+    unless Masquerade::Application::Config['can_change_password']
+      return render_404
+    end
     if @account = Account.find_by_email(params[:email], :conditions => 'activation_code IS NULL')
       @account.forgot_password!
       redirect_to login_path, :notice => t(:password_reset_link_has_been_sent)
@@ -15,6 +18,9 @@ class PasswordsController < ApplicationController
   
   # Reset password
   def update
+    unless Masquerade::Application::Config['can_change_password']
+      return render_404
+    end
     unless params[:password].blank?
       if @account.update_attributes(:password => params[:password], :password_confirmation => params[:password_confirmation])
         redirect_to login_path, :notice => t(:password_reset)

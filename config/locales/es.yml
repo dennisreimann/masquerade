@@ -5,6 +5,7 @@ es:
   
   # account controller
   thanks_for_signing_up_activation_link: Gracias por registrarte! Te hemos enviado un correo con un enlace para que actives tu cuenta.
+  thanks_for_signing_up: Gracias por registrarte!
   profile_updated: Tu perfil a sido actualizado.
   account_disabled: Tu cuenta a sido desabilitada.
   entered_password_is_wrong: La clave ingresada es incorrecta.
@@ -82,8 +83,8 @@ es:
     utilizando una sola identidad digital, eliminando la necesidad de distintos nombres de usuarios 
     y contraseñas para cada sitio</p>
     <p>OpenID es descentralizado, gratis y un estandar abierto, que te permite controlar la 
-    cantidad de información personal que deseas entregar a cada sitio</p>
-    <p>Empieza a usarlo y %{signup_link}.</p>"
+    cantidad de información personal que deseas entregar a cada sitio</p>"
+  openid_intro_link: "<p>Empieza a usarlo y %{signup_link}.</p>"
   signup_for_an_openid: registrate por tu OpenID
   login_to_proceed: Por favor ingresa para continuar
   host_requests_identification_you_need_to_login: 
@@ -188,6 +189,7 @@ es:
   # sessions controller
   you_are_logged_in: Ahora estás ingresado.
   login_incorrect_or_account_not_yet_activated: El usuario es incorrecto o la cuenta no ha sido activada todavía.
+  login_incorrect: El usuario es incorrecto.
   you_are_now_logged_out: Has salido.
 
   # sessions views

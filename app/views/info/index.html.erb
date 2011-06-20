@@ -1,2 +1,5 @@
 <h2><%=t :get_your_openid %></h2>
-<%= simple_format t(:openid_intro, :signup_link => link_to(t(:signup_for_an_openid), new_account_path)) %>
+<%= simple_format t(:openid_intro) %>
+<% unless Masquerade::Application::Config['disable_registration'] %>
+  <%= simple_format t(:openid_intro_link, :signup_link => link_to(t(:signup_for_an_openid), new_account_path)) %>
+<% end %>

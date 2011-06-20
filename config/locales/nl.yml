@@ -5,6 +5,7 @@ nl:
   
   # account controller
   thanks_for_signing_up_activation_link: Bedankt voor het aanmelden! We hebben u een mail gestuurd met een activatielink.
+  thanks_for_signing_up: Bedankt voor het aanmelden!
   profile_updated: Uw profiel werd bijgewerkt.
   account_disabled: Uw account has werd uitgezet.
   entered_password_is_wrong: Het ingevoerde wachtwoord is fout.
@@ -85,8 +86,8 @@ nl:
   get_your_openid: Maak een OpenID
   openid_intro: "<p>OpenID is een gedeelde identiteitsdienst, waarmee je kunt inloggen op veel verschillende
   websites met één enkele identiteit. Het is niet langer nodig verschillende gebruikersnamen en wachtwoorden voor elke site te hebben.</p>
-    <p>OpenID is een gedecentraliseerde, vrije en open standaard waarmee u zelf bepaalt hoeveel persoonlijke informatie wordt doorgegeven aan andere websites.</p>
-    <p>Begin hier and %{signup_link}.</p>"
+    <p>OpenID is een gedecentraliseerde, vrije en open standaard waarmee u zelf bepaalt hoeveel persoonlijke informatie wordt doorgegeven aan andere websites.</p>"
+  openid_intro_link: "<p>Begin hier and %{signup_link}.</p>"
   signup_for_an_openid: maak een OpenID aan
   login_to_proceed: Logt u alstublieft in om verder te gaan
   host_requests_identification_you_need_to_login: "%{host} vraagt uw identificatie. U moet inloggen om verder te gaan."
@@ -186,6 +187,7 @@ nl:
   # sessions controller
   you_are_logged_in: U bent nu ingelogd.
   login_incorrect_or_account_not_yet_activated: De inloggegevens zijn incorrect of uw account is nog niet geactiveerd.
+  login_incorrect: De inloggegevens zijn incorrect.
   you_are_now_logged_out: U bent nu uitgelogd.
 
   # sessions views

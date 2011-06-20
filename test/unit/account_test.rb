@@ -76,9 +76,16 @@ class AccountTest < ActiveSupport::TestCase
     assert_valid @account
   end
   
-  def test_should_assign_activation_code_on_create
+  def test_should_assign_activation_code_on_create_if_send_activation_mail_is_enabled
+    Masquerade::Application::Config['send_activation_mail'] = true
     @account.save
     assert_not_nil @account.activation_code
+  end
+
+  def test_should_not_assign_activation_code_on_create_if_send_activation_mail_is_disabled
+    Masquerade::Application::Config['send_activation_mail'] = false
+    @account.save
+    assert_nil @account.activation_code
   end
   
   def test_should_find_and_activate_by_activation_token
@@ -91,17 +98,74 @@ class AccountTest < ActiveSupport::TestCase
   end
   
   def test_should_reset_password
+    Masquerade::Application::Config['trust_basic_auth'] = false # doesn't make sense without
     accounts(:standard).update_attributes(:password => 'new password', :password_confirmation => 'new password')
     assert_equal accounts(:standard), Account.authenticate('quentin', 'new password')
   end
 
   def test_should_not_rehash_password
+    Masquerade::Application::Config['trust_basic_auth'] = false # doesn't make sense without
     accounts(:standard).update_attributes(:login => 'quentin2')
     assert_equal accounts(:standard), Account.authenticate('quentin2', 'test')
   end
 
   def test_should_authenticate_user
+    Masquerade::Application::Config['trust_basic_auth'] = false # doesn't make sense without
     assert_equal accounts(:standard), Account.authenticate('quentin', 'test')
+  end
+
+  def test_should_not_check_password_if_trust_basic_auth_is_enabled_and_basic_is_used
+    Masquerade::Application::Config['trust_basic_auth'] = true
+    assert_equal accounts(:standard), Account.authenticate('quentin', 'nottest', true)
+  end
+
+  def test_should_check_password_if_trust_basic_auth_is_enabled_and_basic_is_not_used
+    Masquerade::Application::Config['trust_basic_auth'] = true
+    assert_not_equal accounts(:standard), Account.authenticate('quentin', 'nottest', false)
+  end
+
+  def test_should_check_password_if_trust_basic_auth_is_disabled
+    Masquerade::Application::Config['trust_basic_auth'] = false
+    assert_not_equal accounts(:standard), Account.authenticate('quentin', 'nottest', true)
+    assert_not_equal accounts(:standard), Account.authenticate('quentin', 'nottest', false)
+    assert_equal accounts(:standard), Account.authenticate('quentin', 'test', true)
+  end
+
+  def test_should_not_login_if_trust_basic_auth_is_enabled_but_account_is_disabled
+    Masquerade::Application::Config['trust_basic_auth'] = true
+    account = accounts(:standard)
+    account.activation_code = 666
+    account.activated_at = nil
+    account.save!
+    assert_not_equal account, Account.authenticate('quentin', 'test')
+  end
+
+  def test_should_create_account_on_demand_if_create_auth_ondemand_is_enabled
+    Masquerade::Application::Config['create_auth_ondemand']['enabled'] = true
+    Masquerade::Application::Config['create_auth_ondemand']['default_mail_domain'] = "example.net"
+    Account.authenticate('notexistingtestuser', 'somepassword')
+    account = Account.find_by_login('notexistingtestuser')
+    assert account.kind_of? Account
+    assert_equal 'notexistingtestuser', account.login
+    assert_equal 'notexistingtestuser@example.net', account.email
+  end
+
+  def test_should_create_random_password_on_create_account_on_demand_if_create_auth_ondemand_is_enabled_and_random_password_is_enabled
+    Masquerade::Application::Config['create_auth_ondemand']['enabled'] = true
+    Masquerade::Application::Config['create_auth_ondemand']['default_mail_domain'] = "example.net"
+    Masquerade::Application::Config['create_auth_ondemand']['random_password'] = true
+    Account.authenticate('notexistingtestuser', 'somepassword')
+    account = Account.find_by_login('notexistingtestuser')
+    assert_not_equal account.encrypt('somepassword'), account.crypted_password
+  end
+
+  def test_should_create_random_password_on_create_account_on_demand_if_create_auth_ondemand_is_enabled_and_random_password_is_disabled
+    Masquerade::Application::Config['create_auth_ondemand']['enabled'] = true
+    Masquerade::Application::Config['create_auth_ondemand']['default_mail_domain'] = "example.net"
+    Masquerade::Application::Config['create_auth_ondemand']['random_password'] = false
+    Account.authenticate('notexistingtestuser', 'somepassword')
+    account = Account.find_by_login('notexistingtestuser')
+    assert_equal account.encrypt('somepassword'), account.crypted_password
   end
 
   def test_should_set_remember_token
@@ -145,8 +209,10 @@ class AccountTest < ActiveSupport::TestCase
   
   def test_should_delete_associated_personas_on_destroy
     @account.save
-    @persona = @account.personas.create(valid_persona_attributes)
+    # one default persona
     assert_equal 1, @account.personas.size
+    @persona = @account.personas.create(valid_persona_attributes)
+    assert_equal 2, @account.personas.size
     @account.destroy
     assert_nil Persona.find_by_id(@persona.id)
   end
@@ -177,8 +243,29 @@ class AccountTest < ActiveSupport::TestCase
     Account.expects(:verify_yubico_otp).with(yubico_otp).returns(true)
     assert @account.yubikey_authenticated?(yubico_otp)
   end
-  
+
+  def test_should_not_be_able_to_authenticate_with_a_yubikey_if_can_use_yubikey_is_disabled
+    Masquerade::Application::Config['can_use_yubikey'] = false
+    @account = accounts(:standard)
+    yubico_otp = 'x' * 44
+    @account.yubico_identity = yubico_otp[0..11]
+    @account.yubikey_mandatory = true
+    assert @account.save
+    assert (not @account.authenticated?("test" + yubico_otp))
+  end
+
+  def test_should_be_able_to_authenticate_with_a_yubikey_if_can_use_yubikey_is_enabled
+    Masquerade::Application::Config['can_use_yubikey'] = true
+    @account = accounts(:standard)
+    yubico_otp = 'x' * 44
+    @account.yubico_identity = yubico_otp[0..11]
+    @account.yubikey_mandatory = true
+    assert @account.save
+    assert (not @account.authenticated?("test" + yubico_otp))
+  end
+
   def test_should_not_be_able_to_authenticate_with_a_yubikey_if_it_does_not_match_the_yubico_identity
+    Masquerade::Application::Config['can_use_yubikey'] = true # makes no sense without
     @account = accounts(:standard)
     yubico_otp = 'x' * 44
     @account.yubico_identity = 'y' * 12

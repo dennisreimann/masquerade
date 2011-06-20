@@ -1,5 +1,15 @@
 --- 
 default: &default
+  send_activation_mail: true
+  trust_basic_auth: false
+  disable_registration: false
+  can_change_password: true
+  can_disable_account: true
+  can_use_yubikey: true
+  create_auth_ondemand:
+    enabled: false
+    default_mail_domain: example.com
+    random_password: true
   name: masquerade
   host: localhost:3000
   email: info@your.domain.com

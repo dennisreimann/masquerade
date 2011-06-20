@@ -1,4 +1,4 @@
-if ExceptionNotifier
+if Module.const_defined? "ExceptionNotifier"
   Masquerade::Application.config.middleware.use ExceptionNotifier,
     :email_prefix => "[#{Masquerade::Application::Config['name']} Error] ",
     :sender_address => %("#{Masquerade::Application::Config['name']}" <#{Masquerade::Application::Config['mailer']['from']}>),

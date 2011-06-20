@@ -1,6 +1,6 @@
 class Account < ActiveRecord::Base
   
-  has_many :personas, :dependent => :destroy, :order => 'id ASC'
+  has_many :personas, :dependent => :delete_all, :order => 'id ASC'
   has_many :sites, :dependent => :destroy
   belongs_to :public_persona, :class_name => "Persona"
 
@@ -67,12 +67,23 @@ class Account < ActiveRecord::Base
   
   # Authenticates a user by their login name and password.
   # Returns the user or nil.
-  def self.authenticate(login, password)
-    if a = first(:conditions => ['login = ? and enabled = ? and activated_at IS NOT NULL', login, true]) # need to get the salt
-      if a.authenticated?(password)
+  def self.authenticate(login, password, basic_auth_used=false)
+    a = Account.find_by_login(login)
+    if a.nil? and Masquerade::Application::Config['create_auth_ondemand']['enabled']
+      # Need to set some password - but is never used
+      if Masquerade::Application::Config['create_auth_ondemand']['random_password']
+        pw = SecureRandom.hex(13)
+      else
+        pw = password
+      end
+      a = Account.create!(:login => login, :password => pw, :password_confirmation => pw, :email => "#{login}@#{Masquerade::Application::Config['create_auth_ondemand']['default_mail_domain']}")
+    end
+
+    if not a.nil? and a.active? and a.enabled
+      if a.authenticated?(password) or (Masquerade::Application::Config['trust_basic_auth'] and basic_auth_used)
         a.last_authenticated_at, a.last_authenticated_with_yubikey = Time.now, a.authenticated_with_yubikey?
         a.save(:validate => false)
-        a
+        return a
       end
     end
   end
@@ -88,9 +99,11 @@ class Account < ActiveRecord::Base
   end
   
   def authenticated?(password)
-    if password.length < 50 && !(yubico_identity? && yubikey_mandatory?) 
+    if password.nil?
+      return false
+    elsif password.length < 50 && !(yubico_identity? && yubikey_mandatory?)
       encrypt(password) == crypted_password
-    else
+    elsif Masquerade::Application::Config['can_use_yubikey']
       password, yubico_otp = Account.split_password_and_yubico_otp(password)
       encrypt(password) == crypted_password && @authenticated_with_yubikey = yubikey_authenticated?(yubico_otp)
     end
@@ -181,7 +194,9 @@ class Account < ActiveRecord::Base
   end
   
   def make_activation_code
-    self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+    if Masquerade::Application::Config['send_activation_mail']
+      self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+    end
   end
   
   def make_password_reset_code
