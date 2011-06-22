@@ -6,7 +6,8 @@ class AccountObserver < ActiveRecord::Observer
     else
       account.send(:activate!)
     end
-    account.personas.new(:title => "Standard").update_attribute(:deletable, false)
+    account.public_persona = account.personas.build(:title => "Standard", :deletable => false)
+    account.save!
   end
 
   def after_save(account)
