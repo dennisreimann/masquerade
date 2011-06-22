@@ -15,10 +15,16 @@ class SessionsController < ApplicationController
       flash[:notice] = t(:you_are_logged_in)
       redirect_after_login
     else
-      if Account.find_by_login(params[:login]).nil? or Account.find_by_login(params[:login]).enabled?
+      a = Account.find_by_login(params[:login])
+      
+      if a.nil?
         redirect_to login_path, :alert => t(:login_incorrect)
+      elsif a.active? && a.enabled?
+        redirect_to login_path, :alert => t(:password_incorrect)
+      elsif not a.enabled?
+        redirect_to login_path, :alert => t(:account_disabled)
       else
-        redirect_to login_path(:resend_activation_for => params[:login]), :alert => t(:login_incorrect_or_account_not_yet_activated)
+        redirect_to login_path(:resend_activation_for => params[:login]), :alert => t(:account_not_yet_activated)
       end
     end
   end
