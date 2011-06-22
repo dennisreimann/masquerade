@@ -16,7 +16,7 @@ class Account < ActiveRecord::Base
   validates_length_of :password, :within => 6..40, :if => :password_required?
   validates_confirmation_of :password, :if => :password_required?
   # check `rake routes' for whether this list is still complete when routes are changed
-  validates_exclusion_of :login, :in => %w[account session password help safe-login forgot_password reset_password login logout server consumer]
+  validates_exclusion_of :login, :in => %w[account session password help forgot_password reset_password login logout server consumer]
   
   before_save   :encrypt_password
   before_create :make_activation_code

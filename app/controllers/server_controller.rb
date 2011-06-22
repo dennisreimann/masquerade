@@ -54,6 +54,9 @@ class ServerController < ApplicationController
       render_response(checkid_request.answer(false))
     elsif checkid_request.immediate
       render_response(checkid_request.answer(true, nil, identity))
+    elsif current_openid_request.from_trusted_domain?
+      resp = checkid_request.answer(true, nil, identity)
+      render_response(resp)
     else
       redirect_to decide_path
     end
@@ -63,7 +66,8 @@ class ServerController < ApplicationController
   # choose which data should be transfered to the relying party.
   def decide
     @site = current_account.sites.find_or_initialize_by_url(checkid_request.trust_root)
-    @site.persona = current_account.personas.find(params[:persona_id] || :first) if sreg_request || ax_store_request || ax_fetch_request
+    @site.persona = current_account.personas.find_by_id(params[:persona_id]) if sreg_request || ax_store_request || ax_fetch_request
+    @site.persona ||= current_account.public_persona
   end
   
   # This action is called by submitting the decision form, the information entered by
@@ -75,8 +79,9 @@ class ServerController < ApplicationController
     else  
       resp = checkid_request.answer(true, nil, identifier(current_account))
       if params[:always]
-        @site = current_account.sites.find_or_create_by_persona_id_and_url(params[:site][:persona_id], params[:site][:url])
-        @site.update_attributes(params[:site])
+        @site = current_account.sites.find_or_initialize_by_persona_id_and_url(params[:site][:persona_id], params[:site][:url])
+        @site.attributes = params[:site]
+        @site.save!
       elsif sreg_request || ax_fetch_request
         @site = current_account.sites.find_or_initialize_by_persona_id_and_url(params[:site][:persona_id], params[:site][:url])
         @site.attributes = params[:site]
@@ -127,7 +132,7 @@ class ServerController < ApplicationController
     else
       request = save_checkid_request
       session[:return_to] = proceed_path
-      redirect_to( request.from_trusted_domain? ? login_path : safe_login_path )
+      redirect_to(login_path)
     end
   end
   

@@ -14,7 +14,6 @@ Masquerade::Application.routes.draw do
   resource :session, :only => [:new, :create, :destroy]
   
   get "/help" => "info#help", :as => :help
-  get "/safe-login" => "info#safe_login", :as => :safe_login
   
   get "/forgot_password" => "passwords#new", :as => :forgot_password
   get "/reset_password/:id" => "passwords#edit", :as => :reset_password

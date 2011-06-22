@@ -99,14 +99,12 @@
 	<% end %>
 	
 	<div>
-		<% if sreg_request || ax_fetch_request || ax_store_request %>
 		<%= f.hidden_field :persona_id %>
 		<%= f.hidden_field :url %>
-		<% end %>
 		
+		<%= submit_tag t(:always_trust_site), :name => 'always', :class => 'space' %>
 		<% if sreg_request || ax_fetch_request %>
 		<%= submit_tag t(:trust_site_only_this_time), :name => 'temporary', :class => 'space' %>
-		<%= submit_tag t(:always_trust_site), :name => 'always', :class => 'space' %>
 		<% else %>
 		<%= submit_tag t(:approve_request), :name => 'temporary', :class => 'space' %>
 		<% end %>
