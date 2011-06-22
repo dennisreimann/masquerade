@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100530172422) do
+ActiveRecord::Schema.define(:version => 20110622140038) do
 
   create_table "accounts", :force => true do |t|
     t.boolean  "enabled",                                       :default => true
