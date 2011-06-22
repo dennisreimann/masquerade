@@ -9,6 +9,7 @@
 		<% elsif home_page? %>
 		<meta http-equiv="X-XRDS-Location" content="<%= server_url(:format => :xrds, :protocol => scheme) %>" />
 		<% end %>
+		<%= csrf_meta_tag %>
 		<link rel="seatbelt.config" type="application/xml" href="<%= seatbelt_config_url(:format => :xml, :protocol => scheme) %>" />
 		<link rel="Shortcut Icon" href="/favicon.ico" type="image/x-icon" />
 		<link rel="icon" href="/favicon.ico" type="image/ico" />
