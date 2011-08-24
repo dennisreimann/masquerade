@@ -125,6 +125,7 @@ class ServerController < ApplicationController
     elsif openid_request.immediate
       render_response(openid_request.answer(false))
     else
+      reset_session
       request = save_checkid_request
       session[:return_to] = proceed_path
       redirect_to( request.from_trusted_domain? ? login_path : safe_login_path )
