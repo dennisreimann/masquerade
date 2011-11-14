@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
-  
+
   before_filter :login_required, :only => :destroy
   after_filter :set_login_cookie, :only => :create
-  
+
   def new
     if logged_in?
       redirect_after_login
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       redirect_after_login
     else
       a = Account.find_by_login(params[:login])
-      
+
       if a.nil?
         redirect_to login_path, :alert => t(:login_incorrect)
       elsif a.active? && a.enabled?
@@ -30,23 +30,23 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    current_account.forget_me 
+    current_account.forget_me
     cookies.delete :auth_token
     reset_session
     redirect_to root_path, :notice => t(:you_are_now_logged_out)
   end
-  
+
   private
-  
+
   def set_login_cookie
     if logged_in? && params[:remember_me] == '1'
       self.current_account.remember_me
-      cookies[:auth_token] = { 
+      cookies[:auth_token] = {
         :value => self.current_account.remember_token,
         :expires => self.current_account.remember_token_expires_at }
     end
   end
-  
+
   def redirect_after_login
     if return_to = session[:return_to]
       session[:return_to] = nil
@@ -55,5 +55,5 @@ class SessionsController < ApplicationController
       redirect_to identifier(current_account)
     end
   end
-  
+
 end

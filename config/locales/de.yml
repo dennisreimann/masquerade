@@ -101,7 +101,7 @@ de:
   host_requests_identification_you_need_to_login: "%{host} möchte Ihre Identität ermitteln. Dafür müssen Sie sich einloggen."
   login_intro: "Um sich einzuloggen, gehen Sie bitte zu <strong>%{login_url}</strong>. Die Seite, die Sie gerade sehen,
     ist <strong>als Schutz vor Phishing-Attacken und Identitätsklau</strong> gedacht
-    und sollte keine Links enthalten.<br />Falls hier Links auftauchen, geben Sie uns bitte Bescheid, wer Sie auf diese Seite 
+    und sollte keine Links enthalten.<br />Falls hier Links auftauchen, geben Sie uns bitte Bescheid, wer Sie auf diese Seite
     geleitet hat."
 
   # nav
@@ -117,7 +117,7 @@ de:
   get_help: Hilfe erhalten
   openid_consumer_testsuite_title: OpenID Consumer Testsuite
   relying_party_title: Vertrauende Gegenstelle
-  
+
   # passwords controller
   password_reset_link_has_been_sent: Ein Link zum Zurücksetzen des Passwortes wurde an Ihre E-Mail-Adresse geschickt.
   could_not_find_user_with_email_address: Konnte keinen User mit dieser E-Mail-Adresse finden.
@@ -185,7 +185,7 @@ de:
   date_of_birth: Geburtsdatum
 
   my_personas_title: Meine Rollen
-  personas_intro: "Sie können in Ihrem Account mehrere verschiedene Rollen nutzen. Zum Beispiel können Sie eine 
+  personas_intro: "Sie können in Ihrem Account mehrere verschiedene Rollen nutzen. Zum Beispiel können Sie eine
     Rolle privat nutzen und eine fürs Geschäftliche. Wenn eine Gegenstelle Informationen anfordert können Sie
     auswählen, aus welcher Rolle Ihre Daten übernommen werden."
   edit: bearbeiten
@@ -245,7 +245,7 @@ de:
   always_trust_site: Dieser Website immer vertrauen
   approve_request: Anfrage bestätigen
   cancel_request: Anfrage widerrufen
-  
+
   # sites controllers
   release_policy_for_site_updated: Die Richtlinie für diese Website wurde aktualisiert.
 

@@ -2,7 +2,7 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  
+
   # account controller
   thanks_for_signing_up_activation_link: Thank you for signing up! We sent you an email containing an activation link.
   thanks_for_signing_up: Thank you for signing up!
@@ -94,16 +94,16 @@ en:
  adding the following HTML fragment to the <code>&lt;head&gt;</code>
     of your site:"
   get_your_openid: Get your OpenID
-  openid_intro: "<p>OpenID is a shared identity service, which allows you to log on to many different 
+  openid_intro: "<p>OpenID is a shared identity service, which allows you to log on to many different
     web sites using a single digital identity, eliminating the need for different user names
     and passwords for each site.</p>
-    <p>OpenID is a decentralized, free and open standard that lets you control the amount of 
+    <p>OpenID is a decentralized, free and open standard that lets you control the amount of
     personal information that you would like to provide to other web sites.</p>"
   openid_intro_link: "<p>Get started and %{signup_link}.</p>"
   signup_for_an_openid: signup for an OpenID
   login_to_proceed: Please log in to proceed
   host_requests_identification_you_need_to_login: "%{host} requests your identification and you need to log in to proceed."
-  login_intro: "To log in, please navigate to <strong>%{login_url}</strong>. The page your 
+  login_intro: "To log in, please navigate to <strong>%{login_url}</strong>. The page your
     are currently viewing is used to <strong>protect yourself from phishing and online identity theft</strong>
     and should contain no links.<br />If there are any links, please report to us, who sent you here."
 
@@ -120,7 +120,7 @@ en:
   get_help: get help
   openid_consumer_testsuite_title: OpenID Consumer Testsuite
   relying_party_title: Relying Party
-  
+
   # passwords controller
   password_reset_link_has_been_sent: A password reset link has been sent to your email address.
   could_not_find_user_with_email_address: Could not find a user with that email address.
@@ -188,7 +188,7 @@ en:
   date_of_birth: Day of birth
 
   my_personas_title: My personas
-  personas_intro: "Personas define certain roles of your account. For instance you can have a persona for private 
+  personas_intro: "Personas define certain roles of your account. For instance you can have a persona for private
     use and another one for business context. When a relying party requests your information
     you can choose the persona that you would like to exchange data from."
   edit: edit
@@ -196,7 +196,7 @@ en:
   really_want_to_delete_persona: Do you really want to delete the persona ”%{title}”?
   create_a_new_persona: create a new persona
   create_a_new_persona_title: Create a new persona
-  
+
   # sessions controller
   you_are_logged_in: You are now logged in.
   account_not_yet_activated: Your account is not activated, yet.
@@ -248,7 +248,7 @@ en:
   always_trust_site: Always trust this site
   approve_request: Approve this request
   cancel_request: Cancel this request
-  
+
   # sites controllers
   release_policy_for_site_updated: The release policy for this site has been updated.
 

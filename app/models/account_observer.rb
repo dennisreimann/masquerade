@@ -1,5 +1,5 @@
 class AccountObserver < ActiveRecord::Observer
-  
+
   def after_create(account)
     if Masquerade::Application::Config['send_activation_mail']
       AccountMailer.signup_notification(account).deliver
@@ -14,5 +14,5 @@ class AccountObserver < ActiveRecord::Observer
   def after_save(account)
     AccountMailer.forgot_password(account).deliver if account.recently_forgot_password?
   end
-  
+
 end

@@ -1,1 +1,1 @@
-rvm --create 1.9.2@masquerade
+rvm use 1.9.3-p0@masquerade --create
