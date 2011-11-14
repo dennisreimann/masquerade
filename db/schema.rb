@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(:version => 20110622140038) do
     t.string   "web_blog"
     t.integer  "dob_day",                     :limit => 2
     t.integer  "dob_month",                   :limit => 2
-    t.integer  "dob_year",                    :limit => 4
+    t.integer  "dob_year"
   end
 
   add_index "personas", ["account_id", "title"], :name => "index_personas_on_account_id_and_title", :unique => true
