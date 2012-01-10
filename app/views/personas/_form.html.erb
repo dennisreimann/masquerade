@@ -46,7 +46,7 @@
 	</div>
 	<div class="row inline">
 		<%= form.label :timezone, property_label_text(:timezone) %>
-  	<%= form.select :timezone, Timezone.all.map { |l| [ l.name, l.name ] }, { :include_blank => true } %>
+  	<%= form.select :timezone, ActiveSupport::TimeZone::MAPPING.values.sort, { :include_blank => true } %>
 	</div>
 	<div class="row inline">
 		<%= form.label :gender, property_label_text(:gender) %>

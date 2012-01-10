@@ -59,10 +59,6 @@ class ActiveSupport::TestCase
   def valid_language_attributes
     { :name => 'German', :code => 'DE' }
   end
-
-  def valid_timezone_attributes
-    { :name => 'Europe/Berlin' }
-  end
   
   def checkid_request_params
     { 'openid.ns' => OpenID::OPENID2_NS,
