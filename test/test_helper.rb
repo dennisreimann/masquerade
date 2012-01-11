@@ -52,11 +52,7 @@ class ActiveSupport::TestCase
     { :url => "http://dennisbloete.de/" }
   end
   
-  def valid_country_attributes
-    { :name => 'Germany', :code => 'DE' }
-  end
-
-  def valid_language_attributes
+   def valid_language_attributes
     { :name => 'German', :code => 'DE' }
   end
   

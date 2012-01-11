@@ -38,7 +38,7 @@
 	</div>
 	<div class="row inline">
 		<%= form.label :country, property_label_text(:country) %>
-  	<%= form.select :country, Country.all.map { |l| [ l.name, l.code ] }, { :include_blank => true } %>
+  	<%= form.select :country, countries_for_select, { :include_blank => true } %>
 	</div>
 	<div class="row inline">
 		<%= form.label :language, property_label_text(:language) %>
@@ -90,7 +90,7 @@
 	</div>
 	<div class="row inline space">
 		<%= form.label :country_business, property_label_text(:country_business) %>
-  	<%= form.select :country_business, Country.all.map { |l| [ l.name, l.code ] }, { :include_blank => true } %>
+  	<%= form.select :country_business, countries_for_select, { :include_blank => true } %>
 	</div>
 	
 	<h3><%=t :phone %></h3>
