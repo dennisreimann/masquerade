@@ -82,6 +82,5 @@ class CreateInitialSchema < ActiveRecord::Migration
     drop_table :personas
     drop_table :release_policies
     drop_table :sites
-    drop_table :timezones
   end
 end
