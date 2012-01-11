@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110622140038) do
+ActiveRecord::Schema.define(:version => 20120111002919) do
 
   create_table "accounts", :force => true do |t|
     t.boolean  "enabled",                                       :default => true
@@ -34,18 +35,6 @@ ActiveRecord::Schema.define(:version => 20110622140038) do
 
   add_index "accounts", ["email"], :name => "index_accounts_on_email", :unique => true
   add_index "accounts", ["login"], :name => "index_accounts_on_login", :unique => true
-
-  create_table "countries", :force => true do |t|
-    t.string "name", :limit => 60, :null => false
-    t.string "code", :limit => 5,  :null => false
-  end
-
-  add_index "countries", ["code"], :name => "index_countries_on_code", :unique => true
-
-  create_table "languages", :force => true do |t|
-    t.string "name", :limit => 60, :null => false
-    t.string "code", :limit => 5,  :null => false
-  end
 
   create_table "open_id_associations", :force => true do |t|
     t.binary  "server_url"
@@ -135,11 +124,5 @@ ActiveRecord::Schema.define(:version => 20110622140038) do
   end
 
   add_index "sites", ["account_id", "url"], :name => "index_sites_on_account_id_and_url", :unique => true
-
-  create_table "timezones", :force => true do |t|
-    t.string "name", :limit => 60, :null => false
-  end
-
-  add_index "timezones", ["name"], :name => "index_timezones_on_name", :unique => true
 
 end
