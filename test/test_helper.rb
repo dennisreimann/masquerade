@@ -52,18 +52,6 @@ class ActiveSupport::TestCase
     { :url => "http://dennisbloete.de/" }
   end
   
-  def valid_country_attributes
-    { :name => 'Germany', :code => 'DE' }
-  end
-
-  def valid_language_attributes
-    { :name => 'German', :code => 'DE' }
-  end
-
-  def valid_timezone_attributes
-    { :name => 'Europe/Berlin' }
-  end
-  
   def checkid_request_params
     { 'openid.ns' => OpenID::OPENID2_NS,
       'openid.mode' => 'checkid_setup',
