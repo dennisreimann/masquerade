@@ -52,10 +52,6 @@ class ActiveSupport::TestCase
     { :url => "http://dennisbloete.de/" }
   end
   
-   def valid_language_attributes
-    { :name => 'German', :code => 'DE' }
-  end
-  
   def checkid_request_params
     { 'openid.ns' => OpenID::OPENID2_NS,
       'openid.mode' => 'checkid_setup',
