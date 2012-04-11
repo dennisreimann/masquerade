@@ -1,3 +1,9 @@
+# PLEASE NOTE
+
+masquerade is the predecessor of [masq](https://github.com/dbloete/masq) - please consider using masq from now on, as it is the more modular approach.
+
+
+
 # masquerade OpenID Server
 
 masquerade is an OpenID server released under the MIT-license.
