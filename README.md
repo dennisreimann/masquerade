@@ -8,9 +8,9 @@ masquerade is the predecessor of [masq](https://github.com/dbloete/masq) - pleas
 
 masquerade is an OpenID server released under the MIT-license.
 
-For updates and further information see the [project website](http://github.com/dbloete/masquerade/).
+For updates and further information see the [project website](http://github.com/dennisreimann/masquerade/).
 
-The source code is available at [github](http://github.com/dbloete/masquerade/) - feel free to fork and submit patches :)
+The source code is available at [github](http://github.com/dennisreimann/masquerade/) - feel free to fork and submit patches :)
 
 ## Installation
 
@@ -66,9 +66,9 @@ handy methods to access and answer OpenID requests.
 
 Inspiration derived from:
 
-* The [ruby-openid gem](http://openidenabled.com/ruby-openid/) server example
+* The [ruby-openid gem](https://github.com/openid/ruby-openid/) server example
 * James Y Stewart: [A Ruby on Rails OpenID Server](http://jystewart.net/process/2007/10/a-ruby-on-rails-openid-server/)
 
 ## Contact
 
-Dennis Blöte: [mail@dennisbloete.de](mailto:mail@dennisbloete.de)
+[Dennis Reimann](mailto:mail@dennisreimann.de)
