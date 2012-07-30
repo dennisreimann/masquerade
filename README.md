@@ -1,6 +1,6 @@
 # PLEASE NOTE
 
-masquerade is the predecessor of [masq](https://github.com/dbloete/masq) - please consider using masq from now on, as it is the more modular approach.
+masquerade is the predecessor of [masq](https://github.com/dennisreimann/masq) - please consider using masq from now on, as it is the more modular approach.
 
 
 
