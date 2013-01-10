@@ -14,5 +14,4 @@ end
 
 group :test do
   gem 'mocha'
-  gem 'infinity_test'
 end
